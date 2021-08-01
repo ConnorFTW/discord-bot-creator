@@ -1,0 +1,15 @@
+{
+  "name": "Check Member Data",
+  "section": "Data",
+  "fields": [
+    "member",
+    "varName",
+    "dataName",
+    "comparison",
+    "value",
+    "iftrue",
+    "iftrueVal",
+    "iffalse",
+    "iffalseVal"
+  ]
+}

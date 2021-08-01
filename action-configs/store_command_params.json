@@ -1,0 +1,11 @@
+{
+  "commandOnly": true,
+  "name": "Store Command Params",
+  "section": "Other Stuff",
+  "fields": [
+    "info",
+    "infoIndex",
+    "storage",
+    "varName"
+  ]
+}

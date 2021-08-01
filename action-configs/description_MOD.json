@@ -1,0 +1,8 @@
+{
+  "name": "Command Description",
+  "section": "Other Stuff",
+  "fields": [
+    "description",
+    "restrictedTo"
+  ]
+}

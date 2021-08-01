@@ -1,0 +1,9 @@
+{
+  "name": "Unban Member",
+  "section": "Member Control",
+  "fields": [
+    "member",
+    "varName",
+    "reason"
+  ]
+}

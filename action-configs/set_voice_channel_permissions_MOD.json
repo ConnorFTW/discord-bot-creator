@@ -1,0 +1,10 @@
+{
+  "name": "Set Voice Channel Perms",
+  "section": "Channel Control",
+  "fields": [
+    "storage",
+    "varName",
+    "permission",
+    "state"
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "name": "Remove Reaction",
+  "section": "Reaction Control",
+  "fields": [
+    "reaction",
+    "varName",
+    "member",
+    "varName2"
+  ]
+}

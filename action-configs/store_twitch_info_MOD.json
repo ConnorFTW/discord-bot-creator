@@ -1,0 +1,27 @@
+{
+  "name": "Store Twitch Info",
+  "section": "Other Stuff",
+  "fields": [
+    "wrexdiv",
+    "type",
+    "divinputtype",
+    "inputtype",
+    "divinput",
+    "input",
+    "divinfo1",
+    "info1",
+    "divinfo2",
+    "info2",
+    "divinfo3",
+    "info3",
+    "divinfo4",
+    "info4",
+    "clientid",
+    "token",
+    "results",
+    "divresults",
+    "storage",
+    "varName",
+    "cache"
+  ]
+}

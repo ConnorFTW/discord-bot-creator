@@ -1,0 +1,12 @@
+{
+  "name": "Transform List",
+  "section": "Lists and Loops",
+  "fields": [
+    "list",
+    "varName",
+    "transform",
+    "null",
+    "storage",
+    "varName2"
+  ]
+}

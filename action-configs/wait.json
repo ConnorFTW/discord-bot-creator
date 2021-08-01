@@ -1,0 +1,8 @@
+{
+  "name": "Wait",
+  "section": "Other Stuff",
+  "fields": [
+    "time",
+    "measurement"
+  ]
+}

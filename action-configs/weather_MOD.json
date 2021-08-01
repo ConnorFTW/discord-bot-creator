@@ -1,0 +1,11 @@
+{
+  "name": "Weather",
+  "section": "Other Stuff",
+  "fields": [
+    "city",
+    "degreeType",
+    "info",
+    "storage",
+    "varName"
+  ]
+}

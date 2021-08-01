@@ -1,0 +1,14 @@
+{
+  "name": "Check Global Data",
+  "section": "Data",
+  "fields": [
+    "dataName",
+    "comparison",
+    "value",
+    "iftrue",
+    "iftrueVal",
+    "iffalse",
+    "iffalseVal",
+    "Jump to Anchor"
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "name": "Store YouTube Channel Info",
+  "section": "YouTube Tools",
+  "fields": [
+    "query",
+    "info",
+    "storage",
+    "varName"
+  ]
+}

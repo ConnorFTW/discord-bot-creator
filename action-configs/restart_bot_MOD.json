@@ -1,0 +1,7 @@
+{
+  "name": "Restart Bot",
+  "section": "Bot Client Control",
+  "fields": [
+    "filename"
+  ]
+}

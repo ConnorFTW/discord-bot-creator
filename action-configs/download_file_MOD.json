@@ -1,0 +1,10 @@
+{
+  "name": "Download File",
+  "section": "File Stuff",
+  "fields": [
+    "url",
+    "fileName",
+    "fileFormat",
+    "filePath"
+  ]
+}

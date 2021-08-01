@@ -1,0 +1,10 @@
+{
+  "name": "Find Webhook",
+  "section": "Webhook Control",
+  "fields": [
+    "id",
+    "token",
+    "storage",
+    "varName"
+  ]
+}

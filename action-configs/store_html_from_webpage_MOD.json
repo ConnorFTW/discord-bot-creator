@@ -1,0 +1,9 @@
+{
+  "name": "Store HTML From Webpage",
+  "section": "HTML/XML Things",
+  "fields": [
+    "url",
+    "storage",
+    "varName"
+  ]
+}

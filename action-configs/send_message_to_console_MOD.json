@@ -1,0 +1,8 @@
+{
+  "name": "Send Message to Console",
+  "section": "Other Stuff",
+  "fields": [
+    "tosend",
+    "color"
+  ]
+}

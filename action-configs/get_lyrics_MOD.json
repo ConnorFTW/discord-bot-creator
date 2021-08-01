@@ -1,0 +1,11 @@
+{
+  "name": "Get Song Lyrics",
+  "section": "Other Stuff",
+  "fields": [
+    "song",
+    "key",
+    "info",
+    "storage",
+    "varName"
+  ]
+}

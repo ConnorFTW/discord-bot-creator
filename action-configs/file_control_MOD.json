@@ -1,0 +1,14 @@
+{
+  "name": "File Control",
+  "section": "File Stuff",
+  "fields": [
+    "input",
+    "format",
+    "filename",
+    "filepath",
+    "filepath2",
+    "filetask",
+    "input2",
+    "togglestatus"
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "name": "Control Member Data",
+  "section": "Data",
+  "fields": [
+    "member",
+    "varName",
+    "dataName",
+    "changeType",
+    "value"
+  ]
+}

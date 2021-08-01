@@ -1,0 +1,8 @@
+{
+  "name": "Delete Server",
+  "section": "Server Control",
+  "fields": [
+    "server",
+    "varName"
+  ]
+}

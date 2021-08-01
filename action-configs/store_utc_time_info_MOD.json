@@ -1,0 +1,9 @@
+{
+  "name": "Store UTC Time Info",
+  "section": "Other Stuff",
+  "fields": [
+    "type",
+    "storage",
+    "varName"
+  ]
+}

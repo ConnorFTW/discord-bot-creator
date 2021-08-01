@@ -1,0 +1,12 @@
+{
+  "name": "Twitch Authentication",
+  "section": "Other Stuff",
+  "fields": [
+    "client_id",
+    "client_secret",
+    "info",
+    "storage",
+    "varName",
+    "debug"
+  ]
+}

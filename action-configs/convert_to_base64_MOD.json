@@ -1,0 +1,10 @@
+{
+  "name": "Convert to Base64",
+  "section": "Other Stuff",
+  "fields": [
+    "input",
+    "info",
+    "storage",
+    "varName"
+  ]
+}

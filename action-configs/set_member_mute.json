@@ -1,0 +1,10 @@
+{
+  "name": "Set Member Mute",
+  "section": "Member Control",
+  "fields": [
+    "member",
+    "varName",
+    "mute",
+    "reason"
+  ]
+}

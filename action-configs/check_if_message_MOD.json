@@ -1,0 +1,14 @@
+{
+  "name": "Check If Message",
+  "section": "Conditions",
+  "fields": [
+    "message",
+    "varName",
+    "info",
+    "varName2",
+    "iftrue",
+    "iftrueVal",
+    "iffalse",
+    "iffalseVal"
+  ]
+}

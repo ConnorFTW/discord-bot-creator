@@ -1,0 +1,14 @@
+{
+  "name": "Canvas Crop Image",
+  "section": "Image Editing",
+  "fields": [
+    "storage",
+    "varName",
+    "align",
+    "align2",
+    "width",
+    "height",
+    "positionx",
+    "positiony"
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "name": "Create Server",
+  "section": "Server Control",
+  "fields": [
+    "serverName",
+    "serverRegion",
+    "storage",
+    "varName"
+  ]
+}

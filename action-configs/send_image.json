@@ -1,0 +1,15 @@
+{
+  "name": "Send Image MOD",
+  "section": "Image Editing",
+  "fields": [
+    "storage",
+    "varName",
+    "channel",
+    "varName2",
+    "message",
+    "imageName",
+    "imageFormat",
+    "storage2",
+    "varName3"
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "name": "Create Image from Avatar",
+  "section": "Image Editing",
+  "fields": [
+    "member",
+    "varName",
+    "storage",
+    "varName2"
+  ]
+}

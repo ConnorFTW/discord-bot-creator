@@ -1,0 +1,10 @@
+{
+  "name": "Set AFK Channel",
+  "section": "Server Control",
+  "fields": [
+    "server",
+    "varName",
+    "afkchannel",
+    "varNameChannel"
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "name": "Send Stats to BFD",
+  "section": "Other Stuff",
+  "fields": [
+    "BFDToken",
+    "ClientID",
+    "info"
+  ]
+}

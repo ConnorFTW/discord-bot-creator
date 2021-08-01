@@ -1,0 +1,12 @@
+{
+  "name": "Merge Lists",
+  "section": "Lists and Loops",
+  "fields": [
+    "storage",
+    "varName",
+    "storage2",
+    "varName2",
+    "varName3",
+    "storage3"
+  ]
+}

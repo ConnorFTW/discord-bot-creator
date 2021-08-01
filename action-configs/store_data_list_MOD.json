@@ -1,0 +1,20 @@
+{
+  "name": "Store Data List MOD",
+  "displayName": "Store Data List",
+  "section": "Other Stuff",
+  "fields": [
+    "File",
+    "serverType",
+    "dataName",
+    "sort",
+    "numberBoolean",
+    "resultFormat",
+    "resultInfo",
+    "rank",
+    "resultType",
+    "resultFrom",
+    "resultTo",
+    "varName",
+    "storage"
+  ]
+}

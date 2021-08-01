@@ -1,0 +1,11 @@
+{
+  "name": "Store Server Info",
+  "section": "Server Control",
+  "fields": [
+    "server",
+    "varName",
+    "info",
+    "storage",
+    "varName2"
+  ]
+}

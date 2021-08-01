@@ -1,0 +1,10 @@
+{
+  "name": "Set Bot Activity",
+  "section": "Bot Client Control",
+  "fields": [
+    "activity",
+    "nameText",
+    "url",
+    "stat"
+  ]
+}

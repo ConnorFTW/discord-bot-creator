@@ -1,0 +1,11 @@
+{
+  "name": "Google Search",
+  "section": "Other Stuff",
+  "fields": [
+    "string",
+    "info",
+    "resultNo",
+    "storage",
+    "varName"
+  ]
+}

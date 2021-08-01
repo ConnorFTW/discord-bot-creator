@@ -1,0 +1,10 @@
+{
+  "name": "Control Server Prefix",
+  "section": "Server Control",
+  "fields": [
+    "server",
+    "controlType",
+    "varName",
+    "prefix"
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "name": "Set Server Splash Screen",
+  "section": "Server Control",
+  "fields": [
+    "server",
+    "varName",
+    "storage",
+    "varName2",
+    "reason"
+  ]
+}

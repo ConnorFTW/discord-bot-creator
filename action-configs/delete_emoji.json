@@ -1,0 +1,9 @@
+{
+  "name": "Delete Emoji",
+  "section": "Emoji Control",
+  "fields": [
+    "emoji",
+    "varName",
+    "reason"
+  ]
+}

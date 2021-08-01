@@ -1,0 +1,13 @@
+{
+  "name": "Variable Pattern MOD",
+  "section": "Variable Things",
+  "fields": [
+    "storage",
+    "varName",
+    "info",
+    "info2",
+    "value",
+    "storage2",
+    "varName2"
+  ]
+}

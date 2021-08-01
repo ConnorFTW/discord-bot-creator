@@ -1,0 +1,15 @@
+{
+  "name": "Store Channel Permissions",
+  "section": "Permission Control",
+  "fields": [
+    "storage",
+    "varName",
+    "target",
+    "role",
+    "varName2",
+    "member",
+    "varName3",
+    "storage3",
+    "varName4"
+  ]
+}

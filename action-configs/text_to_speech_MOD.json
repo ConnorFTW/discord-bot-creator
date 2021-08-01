@@ -1,0 +1,10 @@
+{
+  "name": "Text To Speech",
+  "section": "Messaging",
+  "fields": [
+    "text",
+    "lang",
+    "storage",
+    "varName"
+  ]
+}

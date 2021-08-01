@@ -1,0 +1,9 @@
+{
+  "name": "Delete Invite",
+  "section": "Invite Control",
+  "fields": [
+    "invite",
+    "storage",
+    "varName"
+  ]
+}

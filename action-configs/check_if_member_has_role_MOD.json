@@ -1,0 +1,15 @@
+{
+  "name": "Check If Member has Role MOD",
+  "displayName": "Check If Member has Role",
+  "section": "Conditions",
+  "fields": [
+    "member",
+    "varName",
+    "role",
+    "varName2",
+    "iftrue",
+    "iftrueVal",
+    "iffalse",
+    "iffalseVal"
+  ]
+}

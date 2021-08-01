@@ -1,0 +1,11 @@
+{
+  "name": "Inspect List/Object",
+  "section": "Lists and Loops",
+  "fields": [
+    "storage",
+    "varName",
+    "depth",
+    "storage2",
+    "varName2"
+  ]
+}

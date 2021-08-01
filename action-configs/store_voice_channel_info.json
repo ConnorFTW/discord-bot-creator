@@ -1,0 +1,11 @@
+{
+  "name": "Store Voice Channel Info",
+  "section": "Channel Control",
+  "fields": [
+    "channel",
+    "varName",
+    "info",
+    "storage",
+    "varName2"
+  ]
+}

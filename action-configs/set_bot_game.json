@@ -1,0 +1,8 @@
+{
+  "name": "Set Bot Game",
+  "section": "Bot Client Control",
+  "fields": [
+    "gameName",
+    "gameLink"
+  ]
+}

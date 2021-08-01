@@ -1,0 +1,9 @@
+{
+  "name": "Delete Message",
+  "section": "Messaging",
+  "fields": [
+    "storage",
+    "varName",
+    "reason"
+  ]
+}

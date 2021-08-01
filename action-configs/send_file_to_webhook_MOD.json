@@ -1,0 +1,9 @@
+{
+  "name": "Send File To Webhook",
+  "section": "Webhook Control",
+  "fields": [
+    "storage",
+    "varName",
+    "file"
+  ]
+}

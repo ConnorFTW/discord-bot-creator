@@ -1,0 +1,10 @@
+{
+  "name": "Remove from Queue MOD",
+  "section": "Audio Control",
+  "fields": [
+    "server",
+    "varName",
+    "position",
+    "amount"
+  ]
+}

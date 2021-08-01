@@ -1,0 +1,12 @@
+{
+  "name": "Set Member Voice Channel Perms",
+  "section": "Channel Control",
+  "fields": [
+    "vchannel",
+    "varName",
+    "member",
+    "varName2",
+    "permission",
+    "state"
+  ]
+}

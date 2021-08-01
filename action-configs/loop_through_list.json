@@ -1,0 +1,11 @@
+{
+  "name": "Loop Through List",
+  "section": "Lists and Loops",
+  "fields": [
+    "source",
+    "list",
+    "varName",
+    "tempVarName",
+    "type"
+  ]
+}

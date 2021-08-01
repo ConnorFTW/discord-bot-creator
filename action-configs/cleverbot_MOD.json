@@ -1,0 +1,13 @@
+{
+  "name": "Cleverbot",
+  "section": "Other Stuff",
+  "fields": [
+    "WhichAPI",
+    "inputVarType",
+    "inputVarName",
+    "APIuser",
+    "APIkey",
+    "storage",
+    "varName2"
+  ]
+}

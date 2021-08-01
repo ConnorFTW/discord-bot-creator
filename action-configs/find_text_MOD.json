@@ -1,0 +1,11 @@
+{
+  "name": "Find Text",
+  "section": "Other Stuff",
+  "fields": [
+    "text",
+    "wordtoFind",
+    "position",
+    "storage",
+    "varName"
+  ]
+}

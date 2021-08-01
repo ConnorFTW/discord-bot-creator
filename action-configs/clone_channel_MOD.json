@@ -1,0 +1,19 @@
+{
+  "name": "Clone Channel MOD",
+  "section": "Channel Control",
+  "fields": [
+    "storage",
+    "varName",
+    "categoryID",
+    "position",
+    "permission",
+    "info",
+    "topic",
+    "slowmode",
+    "nsfw",
+    "bitrate",
+    "userLimit",
+    "storage2",
+    "varName2"
+  ]
+}

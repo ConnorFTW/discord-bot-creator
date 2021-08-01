@@ -1,0 +1,8 @@
+{
+  "name": "Loop Through All Servers",
+  "section": "Lists and Loops",
+  "fields": [
+    "source",
+    "type"
+  ]
+}

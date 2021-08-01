@@ -1,0 +1,10 @@
+{
+  "name": "Set Server Region",
+  "section": "Server Control",
+  "fields": [
+    "server",
+    "varName",
+    "region",
+    "reason"
+  ]
+}

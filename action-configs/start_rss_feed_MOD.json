@@ -1,0 +1,10 @@
+{
+  "name": "RSS Feed Watcher",
+  "section": "Other Stuff",
+  "fields": [
+    "path",
+    "url",
+    "storage",
+    "varName"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "name": "Store Regex Matched Variable",
+  "section": "Variable Things",
+  "fields": [
+    "behavior",
+    "inputStorage",
+    "inputVarName",
+    "theType",
+    "typeVariable",
+    "storage",
+    "varName"
+  ]
+}

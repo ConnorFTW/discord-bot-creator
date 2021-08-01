@@ -1,0 +1,12 @@
+{
+  "name": "Store Member Data",
+  "section": "Data",
+  "fields": [
+    "member",
+    "varName",
+    "dataName",
+    "defaultVal",
+    "storage",
+    "varName2"
+  ]
+}

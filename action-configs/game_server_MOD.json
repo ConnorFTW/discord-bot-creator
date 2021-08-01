@@ -1,0 +1,12 @@
+{
+  "name": "Store Game Server Info",
+  "section": "Other Stuff",
+  "fields": [
+    "serverip",
+    "serverport",
+    "game",
+    "info",
+    "storage",
+    "varName"
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "name": "Delete Member Data",
+  "section": "Data",
+  "fields": [
+    "member",
+    "varName",
+    "dataName"
+  ]
+}

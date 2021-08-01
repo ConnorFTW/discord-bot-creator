@@ -1,0 +1,16 @@
+{
+  "name": "Store Json From WebAPI",
+  "section": "JSON Things",
+  "fields": [
+    "token",
+    "user",
+    "pass",
+    "url",
+    "path",
+    "storage",
+    "varName",
+    "debugMode",
+    "headers",
+    "reUse"
+  ]
+}

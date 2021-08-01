@@ -1,0 +1,11 @@
+{
+  "name": "Slice",
+  "section": "Other Stuff",
+  "fields": [
+    "slice",
+    "startingNumber",
+    "sliceLength",
+    "storage",
+    "varName"
+  ]
+}

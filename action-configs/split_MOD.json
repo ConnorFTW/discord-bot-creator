@@ -1,0 +1,10 @@
+{
+  "name": "Split",
+  "section": "Other Stuff",
+  "fields": [
+    "split",
+    "spliton",
+    "storage",
+    "varName"
+  ]
+}

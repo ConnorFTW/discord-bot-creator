@@ -1,0 +1,9 @@
+{
+  "name": "Color",
+  "section": "Tools",
+  "fields": [
+    "color",
+    "storage",
+    "varName"
+  ]
+}

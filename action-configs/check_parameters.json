@@ -1,0 +1,13 @@
+{
+  "name": "Check Parameters",
+  "section": "Conditions",
+  "fields": [
+    "condition",
+    "comparison",
+    "value",
+    "iftrue",
+    "iftrueVal",
+    "iffalse",
+    "iffalseVal"
+  ]
+}

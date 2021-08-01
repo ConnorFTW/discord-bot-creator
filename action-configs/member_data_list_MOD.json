@@ -1,0 +1,18 @@
+{
+  "name": "Store Member Data List",
+  "section": "Member Control",
+  "fields": [
+    "debu",
+    "numbefst2",
+    "numbefst",
+    "numbefstselect",
+    "sort",
+    "start",
+    "middle",
+    "end",
+    "getresults",
+    "dataName",
+    "varName2",
+    "storage"
+  ]
+}

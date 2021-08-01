@@ -1,0 +1,10 @@
+{
+  "name": "Resize Image",
+  "section": "Image Editing",
+  "fields": [
+    "storage",
+    "varName",
+    "width",
+    "height"
+  ]
+}

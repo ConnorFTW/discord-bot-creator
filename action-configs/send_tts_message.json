@@ -1,0 +1,11 @@
+{
+  "name": "Send TTS Message",
+  "section": "Messaging",
+  "fields": [
+    "channel",
+    "varName",
+    "message",
+    "storage",
+    "varName2"
+  ]
+}

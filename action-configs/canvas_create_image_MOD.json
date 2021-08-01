@@ -1,0 +1,9 @@
+{
+  "name": "Canvas Create Image",
+  "section": "Image Editing",
+  "fields": [
+    "url",
+    "storage",
+    "varName"
+  ]
+}

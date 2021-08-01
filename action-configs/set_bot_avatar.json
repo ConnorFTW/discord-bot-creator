@@ -1,0 +1,8 @@
+{
+  "name": "Set Bot Avatar",
+  "section": "Bot Client Control",
+  "fields": [
+    "storage",
+    "varName"
+  ]
+}

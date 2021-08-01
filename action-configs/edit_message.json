@@ -1,0 +1,11 @@
+{
+  "name": "Edit Message",
+  "section": "Messaging",
+  "fields": [
+    "storage",
+    "varName",
+    "message",
+    "storage2",
+    "varName2"
+  ]
+}

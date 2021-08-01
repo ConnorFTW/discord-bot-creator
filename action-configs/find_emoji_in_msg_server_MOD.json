@@ -1,0 +1,10 @@
+{
+  "name": "Find Custom Emoji in Current Server",
+  "section": "Emoji Control",
+  "fields": [
+    "info",
+    "find",
+    "storage",
+    "varName"
+  ]
+}

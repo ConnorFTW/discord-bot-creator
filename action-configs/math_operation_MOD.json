@@ -1,0 +1,10 @@
+{
+  "name": "Math Operation",
+  "section": "Other Stuff",
+  "fields": [
+    "num",
+    "info",
+    "storage",
+    "varName"
+  ]
+}

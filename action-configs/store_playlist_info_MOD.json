@@ -1,0 +1,10 @@
+{
+  "name": "Store Playlist Info",
+  "section": "YouTube Tools",
+  "fields": [
+    "query",
+    "info",
+    "storage",
+    "varName"
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "name": "Edit Item from List MOD",
+  "displayName": "Edit Item from List",
+  "section": "Lists and Loops",
+  "fields": [
+    "storage",
+    "varName",
+    "position",
+    "value"
+  ]
+}

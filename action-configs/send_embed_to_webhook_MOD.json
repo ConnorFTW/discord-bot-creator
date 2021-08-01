@@ -1,0 +1,10 @@
+{
+  "name": "Send Embed to Webhook",
+  "section": "Webhook Control",
+  "fields": [
+    "storage",
+    "varName",
+    "storage2",
+    "varName2"
+  ]
+}

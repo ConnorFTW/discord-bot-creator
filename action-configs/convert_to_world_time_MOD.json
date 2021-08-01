@@ -1,0 +1,10 @@
+{
+  "name": "Convert To World Time",
+  "section": "Other Stuff",
+  "fields": [
+    "textbox",
+    "info",
+    "storage",
+    "varName"
+  ]
+}

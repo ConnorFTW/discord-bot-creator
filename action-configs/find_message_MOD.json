@@ -1,0 +1,12 @@
+{
+  "name": "Find Message",
+  "section": "Messaging",
+  "fields": [
+    "channel",
+    "varName",
+    "info",
+    "search",
+    "storage",
+    "varName2"
+  ]
+}

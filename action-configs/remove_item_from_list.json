@@ -1,0 +1,12 @@
+{
+  "name": "Remove Item from List",
+  "section": "Lists and Loops",
+  "fields": [
+    "storage",
+    "varName",
+    "removeType",
+    "position",
+    "storage2",
+    "varName2"
+  ]
+}

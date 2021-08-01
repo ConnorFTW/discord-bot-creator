@@ -1,0 +1,10 @@
+{
+  "name": "Canvas Image Filter",
+  "section": "Image Editing",
+  "fields": [
+    "storage",
+    "varName",
+    "info",
+    "value"
+  ]
+}

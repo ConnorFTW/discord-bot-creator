@@ -1,0 +1,20 @@
+{
+  "name": "Set Channel Permissions",
+  "section": "Permission Control",
+  "fields": [
+    "target",
+    "way",
+    "storage",
+    "varName3",
+    "role",
+    "varName",
+    "member",
+    "varName2",
+    "storage3",
+    "varName4",
+    "iftrue",
+    "iftrueVal",
+    "iffalse",
+    "iffalseVal"
+  ]
+}

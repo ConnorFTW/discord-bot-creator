@@ -1,0 +1,11 @@
+{
+  "name": "Store Emoji Info",
+  "section": "Emoji Control",
+  "fields": [
+    "emoji",
+    "varName",
+    "info",
+    "storage",
+    "varName2"
+  ]
+}

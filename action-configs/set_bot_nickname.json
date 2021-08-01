@@ -1,0 +1,10 @@
+{
+  "name": "Set Bot Nickname",
+  "section": "Bot Client Control",
+  "fields": [
+    "server",
+    "varName",
+    "nickname",
+    "reason"
+  ]
+}

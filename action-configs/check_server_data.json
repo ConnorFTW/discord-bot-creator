@@ -1,0 +1,15 @@
+{
+  "name": "Check Server Data",
+  "section": "Data",
+  "fields": [
+    "server",
+    "varName",
+    "dataName",
+    "comparison",
+    "value",
+    "iftrue",
+    "iftrueVal",
+    "iffalse",
+    "iffalseVal"
+  ]
+}

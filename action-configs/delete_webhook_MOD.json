@@ -1,0 +1,8 @@
+{
+  "name": "Delete Webhook",
+  "section": "Webhook Control",
+  "fields": [
+    "webhook",
+    "varName"
+  ]
+}

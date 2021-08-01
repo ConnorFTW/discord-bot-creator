@@ -1,0 +1,10 @@
+{
+  "name": "Sync Channel Permissions",
+  "section": "Permission Control",
+  "fields": [
+    "storage",
+    "varName",
+    "permission",
+    "state"
+  ]
+}

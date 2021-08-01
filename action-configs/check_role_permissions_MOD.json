@@ -1,0 +1,13 @@
+{
+  "name": "Check Role Permissions",
+  "section": "Conditions",
+  "fields": [
+    "role",
+    "varName",
+    "permission",
+    "iftrue",
+    "iftrueVal",
+    "iffalse",
+    "iffalseVal"
+  ]
+}

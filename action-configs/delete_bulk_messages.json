@@ -1,0 +1,11 @@
+{
+  "name": "Delete Bulk Messages",
+  "section": "Messaging",
+  "fields": [
+    "channel",
+    "count",
+    "condition",
+    "custom",
+    "varName"
+  ]
+}

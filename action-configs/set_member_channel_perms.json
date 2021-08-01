@@ -1,0 +1,13 @@
+{
+  "name": "Set Member Channel Perms",
+  "section": "Channel Control",
+  "fields": [
+    "channel",
+    "varName",
+    "member",
+    "varName2",
+    "permission",
+    "state",
+    "reason"
+  ]
+}

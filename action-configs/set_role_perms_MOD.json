@@ -1,0 +1,11 @@
+{
+  "name": "Set Role Permissions",
+  "section": "Role Control",
+  "fields": [
+    "role",
+    "varName",
+    "permission",
+    "state",
+    "reason"
+  ]
+}

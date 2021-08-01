@@ -1,0 +1,8 @@
+{
+  "name": "Save Variable",
+  "section": "Other Stuff",
+  "fields": [
+    "storage",
+    "varName"
+  ]
+}

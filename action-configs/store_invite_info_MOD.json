@@ -1,0 +1,10 @@
+{
+  "name": "Store Invite Info",
+  "section": "Channel Control",
+  "fields": [
+    "invite",
+    "info",
+    "storage",
+    "varName"
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "name": "Change Global Prefix",
+  "section": "Bot Client Control",
+  "fields": [
+    "pprefix"
+  ]
+}

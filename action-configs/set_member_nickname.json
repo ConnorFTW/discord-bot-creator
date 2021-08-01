@@ -1,0 +1,10 @@
+{
+  "name": "Set Member Nickname",
+  "section": "Member Control",
+  "fields": [
+    "member",
+    "varName",
+    "nickname",
+    "reason"
+  ]
+}

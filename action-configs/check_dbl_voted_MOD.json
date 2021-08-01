@@ -1,0 +1,13 @@
+{
+  "name": "Check DBL Voted",
+  "section": "Conditions",
+  "fields": [
+    "member",
+    "apitoken",
+    "varName",
+    "iftrue",
+    "iftrueVal",
+    "iffalse",
+    "iffalseVal"
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "name": "Sends Stats to DBL",
+  "section": "Other Stuff",
+  "fields": [
+    "dblToken",
+    "info"
+  ]
+}

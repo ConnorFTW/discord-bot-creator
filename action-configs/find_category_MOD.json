@@ -1,0 +1,10 @@
+{
+  "name": "Find Category",
+  "section": "Channel Control",
+  "fields": [
+    "info",
+    "find",
+    "storage",
+    "varName"
+  ]
+}

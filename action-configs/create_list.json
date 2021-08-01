@@ -1,0 +1,8 @@
+{
+  "name": "Create List",
+  "section": "Lists and Loops",
+  "fields": [
+    "storage",
+    "varName"
+  ]
+}

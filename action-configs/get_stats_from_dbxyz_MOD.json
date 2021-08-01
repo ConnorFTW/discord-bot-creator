@@ -1,0 +1,11 @@
+{
+  "name": "Get Bot Stats From DBXYZ",
+  "displayName": "Get Bot Stats From Discord Boats",
+  "section": "Other Stuff",
+  "fields": [
+    "botID",
+    "info",
+    "storage",
+    "varName"
+  ]
+}

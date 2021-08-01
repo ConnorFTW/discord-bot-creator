@@ -1,0 +1,12 @@
+{
+  "name": "Local Database",
+  "section": "Database",
+  "fields": [
+    "dbformat",
+    "dboperation",
+    "dbpath",
+    "dbvalue",
+    "storage",
+    "varName"
+  ]
+}

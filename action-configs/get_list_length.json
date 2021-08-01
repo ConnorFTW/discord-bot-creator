@@ -1,0 +1,10 @@
+{
+  "name": "Get List Length",
+  "section": "Lists and Loops",
+  "fields": [
+    "list",
+    "varName",
+    "storage",
+    "varName2"
+  ]
+}

@@ -1,0 +1,14 @@
+
+> my-nextron-app@1.0.0 build
+> nextron build
+
+[nextron] Clearing previous builds
+[nextron] Building renderer process
+info  - Using webpack 5. Reason: Enabled by default https://nextjs.org/docs/messages/webpack5
+info  - Checking validity of types...
+info  - Creating an optimized production build...
+
+
+Cannot build electron packages:
+Error: Command failed with exit code 1: next build /home/michael/Software/MY_APP/renderer
+

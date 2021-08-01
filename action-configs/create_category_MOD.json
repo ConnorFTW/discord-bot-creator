@@ -1,0 +1,10 @@
+{
+  "name": "Create Category Channel",
+  "section": "Channel Control",
+  "fields": [
+    "channelName",
+    "position",
+    "storage",
+    "varName"
+  ]
+}

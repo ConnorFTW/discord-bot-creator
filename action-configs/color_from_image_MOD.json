@@ -1,0 +1,10 @@
+{
+  "name": "Get Dominant Color",
+  "section": "Image Editing",
+  "fields": [
+    "info",
+    "find",
+    "storage",
+    "varName"
+  ]
+}

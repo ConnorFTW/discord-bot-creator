@@ -1,0 +1,14 @@
+{
+  "name": "Create Role",
+  "section": "Role Control",
+  "fields": [
+    "roleName",
+    "hoist",
+    "mentionable",
+    "color",
+    "position",
+    "storage",
+    "varName",
+    "reason"
+  ]
+}

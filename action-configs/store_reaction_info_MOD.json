@@ -1,0 +1,11 @@
+{
+  "name": "Store Reaction Info",
+  "section": "Reaction Control",
+  "fields": [
+    "reaction",
+    "varName",
+    "info",
+    "storage",
+    "varName2"
+  ]
+}

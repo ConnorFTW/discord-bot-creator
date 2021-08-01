@@ -1,0 +1,9 @@
+{
+  "name": "Join Voice Channel",
+  "section": "Audio Control",
+  "fields": [
+    "channel",
+    "varName"
+  ],
+  "requiresAudioLibraries": true
+}

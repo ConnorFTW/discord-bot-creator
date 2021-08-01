@@ -1,0 +1,22 @@
+.command-actions {
+  @media screen and (max-width: map-get($grid-breakpoints, md)) {
+    position: fixed !important;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10;
+    background-color: $body-bg;
+  }
+}
+
+.command-view {
+  @media screen and (max-width: map-get($grid-breakpoints, md)) {
+    max-height: 80vh !important;
+  }
+}
+
+.command-form {
+  @media screen and (max-width: map-get($grid-breakpoints, md)) {
+    margin-bottom: 10vh;
+  }
+}

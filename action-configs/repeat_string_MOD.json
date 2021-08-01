@@ -1,0 +1,10 @@
+{
+  "name": "Repeat String",
+  "section": "Other Stuff",
+  "fields": [
+    "storage",
+    "varName",
+    "girdi",
+    "xtimes"
+  ]
+}

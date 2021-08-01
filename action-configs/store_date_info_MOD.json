@@ -1,0 +1,10 @@
+{
+  "name": "Store Date Info",
+  "section": "Other Stuff",
+  "fields": [
+    "date",
+    "info",
+    "storage",
+    "varName"
+  ]
+}

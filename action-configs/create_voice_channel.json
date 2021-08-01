@@ -1,0 +1,13 @@
+{
+  "name": "Create Voice Channel",
+  "section": "Channel Control",
+  "fields": [
+    "channelName",
+    "bitrate",
+    "userLimit",
+    "storage",
+    "varName",
+    "categoryID",
+    "reason"
+  ]
+}

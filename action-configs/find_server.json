@@ -1,0 +1,10 @@
+{
+  "name": "Find Server",
+  "section": "Server Control",
+  "fields": [
+    "info",
+    "find",
+    "storage",
+    "varName"
+  ]
+}

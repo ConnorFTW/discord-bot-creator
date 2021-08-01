@@ -1,0 +1,9 @@
+{
+  "name": "Delete Channel",
+  "section": "Channel Control",
+  "fields": [
+    "storage",
+    "varName",
+    "reason"
+  ]
+}

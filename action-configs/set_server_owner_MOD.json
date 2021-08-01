@@ -1,0 +1,11 @@
+{
+  "name": "Set Server Owner",
+  "section": "Server Control",
+  "fields": [
+    "server",
+    "varName",
+    "member",
+    "varName2",
+    "reason"
+  ]
+}

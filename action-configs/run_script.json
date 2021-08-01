@@ -1,0 +1,13 @@
+{
+  "name": "Run Script",
+  "section": "Other Stuff",
+  "fields": [
+    "code",
+    "behavior",
+    "interpretation",
+    "storage",
+    "varName",
+    "VTypeSelect",
+    "CVTypeValue"
+  ]
+}

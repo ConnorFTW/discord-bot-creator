@@ -1,0 +1,10 @@
+{
+  "name": "Morse Code",
+  "section": "Other Stuff",
+  "fields": [
+    "input",
+    "info",
+    "storage",
+    "varName"
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "name": "Add Item to List",
+  "section": "Lists and Loops",
+  "fields": [
+    "storage",
+    "varName",
+    "addType",
+    "position",
+    "value"
+  ]
+}

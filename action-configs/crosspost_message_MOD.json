@@ -1,0 +1,10 @@
+{
+  "name": "Crosspost Message",
+  "section": "Messaging",
+  "fields": [
+    "message",
+    "varName",
+    "storage",
+    "varName2"
+  ]
+}

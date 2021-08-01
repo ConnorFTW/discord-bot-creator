@@ -1,0 +1,12 @@
+{
+  "name": "Store Server Data",
+  "section": "Data",
+  "fields": [
+    "server",
+    "varName",
+    "dataName",
+    "defaultVal",
+    "storage",
+    "varName2"
+  ]
+}

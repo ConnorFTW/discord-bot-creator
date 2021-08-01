@@ -1,0 +1,7 @@
+{
+  "name": "Skip Queue",
+  "section": "Audio Control",
+  "fields": [
+    "amount"
+  ]
+}

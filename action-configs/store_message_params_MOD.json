@@ -1,0 +1,14 @@
+{
+  "name": "Store Message Params",
+  "section": "Messaging",
+  "fields": [
+    "message",
+    "varName",
+    "info",
+    "ParamN",
+    "separator",
+    "storage",
+    "varName2",
+    "count"
+  ]
+}

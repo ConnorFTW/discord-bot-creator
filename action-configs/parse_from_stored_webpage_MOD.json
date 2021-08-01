@@ -1,0 +1,12 @@
+{
+  "name": "Parse From Stored Webpage",
+  "section": "HTML/XML Things",
+  "fields": [
+    "debugMode",
+    "xpath",
+    "source",
+    "sourceVarName",
+    "storage",
+    "varName"
+  ]
+}

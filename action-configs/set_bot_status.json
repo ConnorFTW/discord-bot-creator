@@ -1,0 +1,7 @@
+{
+  "name": "Set Bot Status",
+  "section": "Bot Client Control",
+  "fields": [
+    "status"
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "name": "Set Embed Footer",
+  "section": "Embed Message",
+  "fields": [
+    "storage",
+    "varName",
+    "message",
+    "footerIcon"
+  ]
+}

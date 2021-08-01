@@ -1,0 +1,17 @@
+{
+  "name": "Send Mail",
+  "section": "Other Stuff",
+  "fields": [
+    "username",
+    "password",
+    "mailto",
+    "subject",
+    "type",
+    "text",
+    "iffalse",
+    "iffalseVal",
+    "hostname",
+    "portname",
+    "sec"
+  ]
+}

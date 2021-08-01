@@ -1,0 +1,13 @@
+{
+  "name": "Find Member",
+  "section": "Member Control",
+  "fields": [
+    "info",
+    "find",
+    "storage",
+    "varName",
+    "find2",
+    "iffalse",
+    "iffalseVal"
+  ]
+}

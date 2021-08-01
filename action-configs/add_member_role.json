@@ -1,0 +1,11 @@
+{
+  "name": "Add Member Role",
+  "section": "Member Control",
+  "fields": [
+    "member",
+    "varName2",
+    "role",
+    "varName",
+    "reason"
+  ]
+}

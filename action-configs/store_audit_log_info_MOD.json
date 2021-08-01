@@ -1,0 +1,13 @@
+{
+  "name": "Store Audit Log Info MOD",
+  "displayName": "Store Audit Log Info",
+  "section": "Server Control",
+  "fields": [
+    "storage",
+    "varName",
+    "info",
+    "position",
+    "storage2",
+    "varName2"
+  ]
+}

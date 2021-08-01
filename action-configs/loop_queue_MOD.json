@@ -1,0 +1,8 @@
+{
+  "name": "Loop Queue",
+  "section": "Audio Control",
+  "fields": [
+    "status",
+    "loop"
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "name": "Find Voice Channel",
+  "section": "Channel Control",
+  "fields": [
+    "info",
+    "find",
+    "storage",
+    "varName"
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "name": "Urban Dictionary Search",
+  "section": "Other Stuff",
+  "fields": [
+    "string",
+    "info",
+    "storage",
+    "varName"
+  ]
+}

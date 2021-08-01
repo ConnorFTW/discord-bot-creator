@@ -1,0 +1,13 @@
+{
+  "name": "Run Script Too",
+  "section": "Other Stuff",
+  "fields": [
+    "behavior",
+    "interpretation",
+    "code",
+    "file",
+    "storage",
+    "varName",
+    "title"
+  ]
+}

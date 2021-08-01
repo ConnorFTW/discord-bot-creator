@@ -1,0 +1,104 @@
+@font-face {
+  font-family: "Open Sans";
+  src: url(../public/fonts/Poppins-Medium.ttf) format("truetype");
+}
+
+$font-family-sans-serif: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto,
+  "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif,
+  "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+$font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas,
+  "Liberation Mono", "Courier New", monospace;
+
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+
+$primary: #5865f2;
+$secondary: #4e545c;
+$success: #57f287;
+$info: #5865f2;
+$warning: #fee75c;
+$danger: #ed4245;
+$dark: #35393f;
+$light: #dddddd;
+$darker: #2e3136;
+
+$border-width: 1px;
+$border-color: $gray-900;
+$body-bg: $dark;
+$body-color: $light;
+$input-bg: $dark;
+$input-focus-bg: $input-bg;
+$input-border-color: #555;
+$input-focus-color: $light;
+$input-color: $light;
+$input-plaintext-color: $light;
+$input-placeholder-color: $gray-700;
+$input-group-addon-color: $input-color;
+$input-border-color: $border-color;
+$input-border-width: $border-width;
+
+.form-control {
+  color: $input-color !important;
+}
+
+$component-active-bg: #393d42;
+// Link Color
+$headings-color: $light;
+// Contrast
+
+// Navs
+$nav-pills-link-active-bg: $primary;
+$navbar-light-brand-color: $light;
+$nav-pills-link-active-bg: $component-active-bg;
+$nav-link-color: $light;
+
+.nav-link {
+  color: $nav-link-color !important;
+}
+
+.navbar-brand {
+  font-weight: 600;
+}
+
+// Cards
+$card-bg: $dark;
+
+// Modals
+$modal-content-bg: $dark;
+$modal-header-border-color: $border-color;
+$modal-header-border-width: $border-width;
+$model-footer-border-width: $border-width;
+$modal-footer-border-color: $border-color;
+
+// Dropdowns
+$dropdown-bg: $input-bg;
+
+// Hr
+$hr-height: $border-width;
+$hr-color: $border-color;
+$hr-opacity: 1;
+
+// Form Label
+$form-label-font-weight: 700;
+$form-label-font-size: 0.9rem;
+$form-label-color: $gray-500;
+.form-label {
+  text-transform: uppercase;
+  margin-bottom: 0.3rem !important;
+}
+
+// Select
+$form-select-bg: $input-bg;
+$form-select-indicator-color: $light;
+$form-select-indicator: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='none' stroke='#{$form-select-indicator-color}' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/></svg>");
+$form-select-color: $light;
+$form-select-border-width: $border-width;
+$form-select-border-color: $border-color;
+
+@import "./text.scss";
+@import "./input.scss";
+@import "./sidebar.scss";
+@import "./buttons.scss";
+@import "./dashboard.scss";
+@import "~bootstrap/scss/bootstrap";

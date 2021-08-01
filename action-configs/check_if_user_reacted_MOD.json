@@ -1,0 +1,14 @@
+{
+  "name": "Check If User Reacted",
+  "section": "Conditions",
+  "fields": [
+    "member",
+    "varName",
+    "reaction",
+    "varName2",
+    "iftrue",
+    "iftrueVal",
+    "iffalse",
+    "iffalseVal"
+  ]
+}

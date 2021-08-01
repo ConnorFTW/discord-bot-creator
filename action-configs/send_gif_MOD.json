@@ -1,0 +1,11 @@
+{
+  "name": "Send GIF",
+  "section": "Image Editing",
+  "fields": [
+    "storage",
+    "varName",
+    "channel",
+    "varName2",
+    "message"
+  ]
+}

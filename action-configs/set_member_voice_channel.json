@@ -1,0 +1,11 @@
+{
+  "name": "Set Member Voice Channel",
+  "section": "Member Control",
+  "fields": [
+    "member",
+    "varName",
+    "channel",
+    "varName2",
+    "reason"
+  ]
+}

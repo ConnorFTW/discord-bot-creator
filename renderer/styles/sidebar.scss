@@ -1,0 +1,25 @@
+.sidebar {
+  .card-body {
+    background-color: #2e3136;
+
+    a {
+      font-weight: 500;
+      color: $light;
+    }
+  }
+  .card-footer {
+    background-color: #282b2f;
+  }
+
+  .settings-button {
+    cursor: pointer;
+  }
+
+  @media screen and (min-width: map-get($grid-breakpoints, md)) {
+    height: 100vh;
+  }
+
+  max-height: 100vh;
+  margin: 0;
+  box-sizing: border-box;
+}

@@ -1,0 +1,10 @@
+{
+  "name": "Store Global Data",
+  "section": "Data",
+  "fields": [
+    "dataName",
+    "defaultVal",
+    "storage",
+    "varName"
+  ]
+}

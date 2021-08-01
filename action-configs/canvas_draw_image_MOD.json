@@ -1,0 +1,13 @@
+{
+  "name": "Canvas Draw Image on Image",
+  "section": "Image Editing",
+  "fields": [
+    "storage",
+    "varName",
+    "storage2",
+    "varName2",
+    "x",
+    "y",
+    "effect"
+  ]
+}

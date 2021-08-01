@@ -1,0 +1,12 @@
+{
+  "name": "Base Convert MOD",
+  "displayName": "Base Convert",
+  "section": "Other Stuff",
+  "fields": [
+    "num",
+    "basef",
+    "baset",
+    "storage",
+    "varName"
+  ]
+}

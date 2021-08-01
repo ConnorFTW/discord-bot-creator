@@ -1,0 +1,11 @@
+{
+  "name": "Convert Variable",
+  "section": "Variable Things",
+  "fields": [
+    "storage",
+    "varName",
+    "conversion",
+    "storage2",
+    "varName2"
+  ]
+}

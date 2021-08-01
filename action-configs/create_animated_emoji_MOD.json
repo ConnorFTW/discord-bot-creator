@@ -1,0 +1,11 @@
+{
+  "name": "Create Animated Emoji",
+  "section": "Emoji Control",
+  "fields": [
+    "emojiName",
+    "storage",
+    "varName",
+    "storage2",
+    "varName2"
+  ]
+}

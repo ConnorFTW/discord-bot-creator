@@ -1,0 +1,10 @@
+{
+  "name": "Randomize Letters",
+  "section": "Other Stuff",
+  "fields": [
+    "input",
+    "wordLength",
+    "storage",
+    "varName"
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "name": "Control Global Data",
+  "section": "Data",
+  "fields": [
+    "dataName",
+    "changeType",
+    "value"
+  ]
+}

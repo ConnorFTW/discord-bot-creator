@@ -1,0 +1,20 @@
+{
+  "name": "Await Reaction Call Action",
+  "displayName": "Await Reaction",
+  "section": "Messaging",
+  "fields": [
+    "storage",
+    "varName",
+    "filter",
+    "max",
+    "time",
+    "maxEmojis",
+    "maxUsers",
+    "iftrue",
+    "iftrueVal",
+    "iffalse",
+    "iffalseVal",
+    "storage2",
+    "varName2"
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "name": "Set AFK Timeout",
+  "section": "Server Control",
+  "fields": [
+    "server",
+    "varName",
+    "serverAfkTime"
+  ]
+}

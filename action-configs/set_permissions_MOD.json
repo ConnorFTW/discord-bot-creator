@@ -1,0 +1,12 @@
+{
+  "name": "Set Permissions",
+  "section": "Permission Control",
+  "fields": [
+    "way",
+    "storage",
+    "varName",
+    "storage2",
+    "varName2",
+    "reason"
+  ]
+}

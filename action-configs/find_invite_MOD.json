@@ -1,0 +1,9 @@
+{
+  "name": "Find Invite",
+  "section": "Invite Control",
+  "fields": [
+    "invite",
+    "storage",
+    "varName"
+  ]
+}

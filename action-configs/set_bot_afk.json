@@ -1,0 +1,7 @@
+{
+  "name": "Set Bot AFK Status",
+  "section": "Bot Client Control",
+  "fields": [
+    "afk"
+  ]
+}

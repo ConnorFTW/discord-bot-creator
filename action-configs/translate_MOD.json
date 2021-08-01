@@ -1,0 +1,10 @@
+{
+  "name": "Translate",
+  "section": "Other Stuff",
+  "fields": [
+    "translateTo",
+    "translateMessage",
+    "storage",
+    "varName"
+  ]
+}

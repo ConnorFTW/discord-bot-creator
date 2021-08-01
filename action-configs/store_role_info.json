@@ -1,0 +1,11 @@
+{
+  "name": "Store Role Info",
+  "section": "Role Control",
+  "fields": [
+    "role",
+    "varName",
+    "info",
+    "storage",
+    "varName2"
+  ]
+}

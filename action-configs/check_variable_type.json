@@ -1,0 +1,13 @@
+{
+  "name": "Check Variable Type",
+  "section": "Conditions",
+  "fields": [
+    "storage",
+    "varName",
+    "comparison",
+    "iftrue",
+    "iftrueVal",
+    "iffalse",
+    "iffalseVal"
+  ]
+}

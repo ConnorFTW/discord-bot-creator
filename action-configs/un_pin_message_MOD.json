@@ -1,0 +1,8 @@
+{
+  "name": "Un-Pin Message",
+  "section": "Messaging",
+  "fields": [
+    "storage",
+    "varName"
+  ]
+}

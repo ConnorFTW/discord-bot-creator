@@ -1,0 +1,9 @@
+{
+  "name": "Jump to Anchor",
+  "section": "Other Stuff",
+  "fields": [
+    "description",
+    "jump_to_anchor",
+    "color"
+  ]
+}

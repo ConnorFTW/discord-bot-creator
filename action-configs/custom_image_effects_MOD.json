@@ -1,0 +1,10 @@
+{
+  "name": "Custom Image Effects",
+  "section": "Image Editing",
+  "fields": [
+    "storage",
+    "varName",
+    "effect",
+    "intensity"
+  ]
+}

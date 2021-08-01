@@ -1,0 +1,10 @@
+{
+  "name": "Speed Test",
+  "section": "Other Stuff",
+  "fields": [
+    "info",
+    "type",
+    "storage",
+    "varName"
+  ]
+}

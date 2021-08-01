@@ -1,0 +1,11 @@
+{
+  "name": "Edit Channel",
+  "section": "Channel Control",
+  "fields": [
+    "storage",
+    "varName",
+    "channelType",
+    "toChange",
+    "newState"
+  ]
+}

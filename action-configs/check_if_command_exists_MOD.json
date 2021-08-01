@@ -1,0 +1,11 @@
+{
+  "name": "Check If Command Exists",
+  "section": "Conditions",
+  "fields": [
+    "commandName",
+    "iftrue",
+    "iftrueVal",
+    "iffalse",
+    "iffalseVal"
+  ]
+}

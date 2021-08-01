@@ -1,0 +1,23 @@
+{
+  "name": "Delete Bulk Messages MOD",
+  "displayName": "Delete Bulk Messages",
+  "section": "Messaging",
+  "fields": [
+    "channel",
+    "varName",
+    "count",
+    "type",
+    "option",
+    "msgid",
+    "Con0",
+    "Con1",
+    "Con2",
+    "Con3",
+    "Con4",
+    "Con5",
+    "iffalse",
+    "iffalseVal",
+    "storage",
+    "varName2"
+  ]
+}

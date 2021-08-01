@@ -1,0 +1,9 @@
+{
+  "name": "Bot Typing",
+  "section": "Bot Client Control",
+  "fields": [
+    "storage",
+    "varName",
+    "typing"
+  ]
+}

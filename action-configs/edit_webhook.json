@@ -1,0 +1,10 @@
+{
+  "name": "Edit Webhook",
+  "section": "Webhook Control",
+  "fields": [
+    "webhookName",
+    "webhookIcon",
+    "webhook",
+    "varName"
+  ]
+}

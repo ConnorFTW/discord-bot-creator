@@ -1,0 +1,11 @@
+{
+  "name": "Control Server Data",
+  "section": "Data",
+  "fields": [
+    "server",
+    "varName",
+    "dataName",
+    "changeType",
+    "value"
+  ]
+}

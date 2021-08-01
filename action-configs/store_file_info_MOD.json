@@ -1,0 +1,10 @@
+{
+  "name": "Store File Info",
+  "section": "File Stuff",
+  "fields": [
+    "filePath",
+    "info",
+    "storage",
+    "varName"
+  ]
+}

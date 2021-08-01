@@ -1,0 +1,11 @@
+{
+  "name": "Store Member Info",
+  "section": "Member Control",
+  "fields": [
+    "member",
+    "varName",
+    "info",
+    "storage",
+    "varName2"
+  ]
+}

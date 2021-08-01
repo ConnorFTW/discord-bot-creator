@@ -1,0 +1,12 @@
+{
+  "name": "Find Reaction",
+  "section": "Reaction Control",
+  "fields": [
+    "message",
+    "varName",
+    "info",
+    "find",
+    "storage",
+    "varName2"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "name": "Store Date Info Plus",
+  "section": "Other Stuff",
+  "fields": [
+    "sourceDate",
+    "dateLanguage",
+    "modeStorage",
+    "info",
+    "buildInput",
+    "storage",
+    "varName"
+  ]
+}

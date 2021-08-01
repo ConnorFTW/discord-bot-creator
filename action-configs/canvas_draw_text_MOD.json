@@ -1,0 +1,15 @@
+{
+  "name": "Canvas Draw Text on Image",
+  "section": "Image Editing",
+  "fields": [
+    "storage",
+    "varName",
+    "x",
+    "y",
+    "fontPath",
+    "fontColor",
+    "fontSize",
+    "align",
+    "text"
+  ]
+}

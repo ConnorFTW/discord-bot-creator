@@ -1,0 +1,13 @@
+{
+  "name": "Check Member Permissions",
+  "section": "Conditions",
+  "fields": [
+    "member",
+    "varName",
+    "permission",
+    "iftrue",
+    "iftrueVal",
+    "iffalse",
+    "iffalseVal"
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "name": "Set Member Deafen",
+  "section": "Member Control",
+  "fields": [
+    "member",
+    "varName",
+    "deafen",
+    "reason"
+  ]
+}

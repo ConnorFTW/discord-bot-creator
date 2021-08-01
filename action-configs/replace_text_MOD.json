@@ -1,0 +1,12 @@
+{
+  "name": "Replace Text",
+  "section": "Other Stuff",
+  "fields": [
+    "text",
+    "text2",
+    "text3",
+    "info",
+    "storage",
+    "varName"
+  ]
+}

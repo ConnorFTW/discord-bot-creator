@@ -1,0 +1,13 @@
+{
+  "name": "Draw Text on Image",
+  "section": "Image Editing",
+  "fields": [
+    "storage",
+    "varName",
+    "x",
+    "y",
+    "font",
+    "width",
+    "text"
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "name": "Set slowmode MOD",
+  "section": "Channel Control",
+  "fields": [
+    "storage",
+    "varName",
+    "varName2",
+    "amount",
+    "reason"
+  ]
+}

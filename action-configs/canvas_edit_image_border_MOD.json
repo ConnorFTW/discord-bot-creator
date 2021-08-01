@@ -1,0 +1,10 @@
+{
+  "name": "Canvas Edit Image Border",
+  "section": "Image Editing",
+  "fields": [
+    "storage",
+    "varName",
+    "circleinfo",
+    "radius"
+  ]
+}

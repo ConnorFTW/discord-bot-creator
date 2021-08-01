@@ -1,0 +1,14 @@
+{
+  "name": "Check If Member",
+  "section": "Conditions",
+  "fields": [
+    "member",
+    "varName",
+    "info",
+    "varName2",
+    "iftrue",
+    "iftrueVal",
+    "iffalse",
+    "iffalseVal"
+  ]
+}

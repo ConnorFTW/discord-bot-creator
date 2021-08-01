@@ -1,0 +1,10 @@
+{
+  "name": "Get Bot as Member",
+  "section": "Bot Client Control",
+  "fields": [
+    "server",
+    "varName",
+    "storage",
+    "varName2"
+  ]
+}
