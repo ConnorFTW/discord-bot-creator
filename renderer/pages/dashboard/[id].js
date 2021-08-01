@@ -17,19 +17,25 @@ export default function Dashboard() {
   const [isLoading, setIsLoading] = useState(true);
   const [settings, setSettings] = useState({});
   const [selected, setSelected] = useState("");
+  const [mode, setMode] = useState("command");
+  const [actions, setActions] = useState([]);
 
   useEffect(() => {
     ipcRenderer.on("getCommands", (_event, commands) => {
-      setCommands(commands);
-      setIsLoading(commands && events);
+      setCommands(JSON.parse(commands));
+      setIsLoading(!commands || !events);
     });
+    ipcRenderer.on("getActions", (_event, actions) => {
+      setActions(JSON.parse(actions));
+    });
+    ipcRenderer.send("getActions");
     ipcRenderer.send("getCommands");
   }, []);
 
   useEffect(() => {
     ipcRenderer.on("getEvents", (_event, events) => {
-      setEvents(events);
-      setIsLoading(commands && events);
+      setEvents(JSON.parse(events));
+      setIsLoading(!commands || !events);
     });
     ipcRenderer.send("getEvents");
   }, []);
@@ -48,6 +54,9 @@ export default function Dashboard() {
     commands[index] = command;
   }
 
+  const optionList = (commands || [])?.concat(
+    events?.map((c) => ({ c: true, ...c })) || []
+  );
   return (
     <>
       <Head>
@@ -64,6 +73,8 @@ export default function Dashboard() {
             data={commands}
             setModalShow={setModalShow}
             setSettingsShow={setSettingsShow}
+            setMode={setMode}
+            mode={mode}
           />
           <Col
             md={9}
@@ -71,37 +82,37 @@ export default function Dashboard() {
             style={{ overflowY: "auto", maxHeight: "100vh" }}
           >
             <Tab.Content>
-              {(commands || [])
-                .concat(events?.map((c) => ({ c: true, ...c })) || [])
-                ?.map((command, i) => (
-                  <Tab.Pane
-                    eventKey={command.name}
-                    key={command.name}
-                    active={(!selected && i === 0) || selected === command.name}
-                  >
-                    {command.c ? (
-                      <CustomCommandView
-                        command={command}
-                        onChange={onChange}
-                        botId={query.id}
-                        prefix={settings?.prefix}
-                        autoRestart={settings?.autoRestart}
-                        toggleHints={settings?.toggleHints}
-                      />
-                    ) : (
-                      <CommandView
-                        command={command}
-                        onChange={onChange}
-                        botId={query.id}
-                        prefix={settings?.prefix}
-                        autoRestart={settings?.autoRestart}
-                        toggleHints={settings?.toggleHints}
-                      />
-                    )}
-                  </Tab.Pane>
-                ))}
+              {optionList?.map((command, i) => (
+                <Tab.Pane
+                  eventKey={command?.name}
+                  key={command?.name}
+                  active={(!selected && i === 0) || selected === command?.name}
+                >
+                  {command?.c ? (
+                    <CustomCommandView
+                      command={command}
+                      onChange={onChange}
+                      botId={query.id}
+                      prefix={settings?.prefix}
+                      autoRestart={settings?.autoRestart}
+                      toggleHints={settings?.toggleHints}
+                      actions={actions}
+                    />
+                  ) : (
+                    <CommandView
+                      command={command}
+                      onChange={onChange}
+                      botId={query.id}
+                      prefix={settings?.prefix}
+                      autoRestart={settings?.autoRestart}
+                      toggleHints={settings?.toggleHints}
+                    />
+                  )}
+                </Tab.Pane>
+              ))}
             </Tab.Content>
           </Col>
+          <pre>{JSON.stringify(optionList, null, 2)}</pre>
         </Row>
       </Tab.Container>
       <SettingsModal

@@ -17,21 +17,16 @@ const ipcRenderer = electron.ipcRenderer || false;
 
 export default function Dashboard() {
   const [folder, setFolder] = useState("");
-  const [settings, setSettings] = useState("{}");
-  const [actions, setActions] = useState("{}");
   const isValidating = false;
   const bots = [];
   const router = useRouter();
 
-  async function createNewBot(e) {
+  // Can be used to create a bot
+  async function setSettings(e) {
     e.preventDefault();
     const slug = generateAlphaNumericString();
-    ipcRenderer.send("createBot", { folder, slug });
+    ipcRenderer.send("setSettings", { folder, slug });
     router.push(`/dashboard/${slug}`);
-  }
-
-  function onBotChange(changes) {
-    setBot(changes);
   }
 
   function pickFolder() {
@@ -42,15 +37,6 @@ export default function Dashboard() {
     return Math.random().toString(36).substr(2, 10);
   }
 
-  function getSettings(e) {
-    e.preventDefault();
-    ipcRenderer.send("getSettings");
-  }
-
-  function getActions() {
-    ipcRenderer.send("getActions");
-  }
-
   useEffect(() => {
     ipcRenderer.on("directoryDialog", (event, data) => {
       console.log(data);
@@ -58,11 +44,9 @@ export default function Dashboard() {
     });
 
     ipcRenderer.on("getSettings", (event, data) => {
-      setSettings(data);
-    });
-
-    ipcRenderer.on("getActions", (event, data) => {
-      setActions(data);
+      if (data?.slug) {
+        router.push(`/dashboard/${data.slug}`);
+      }
     });
 
     ipcRenderer.on("getLastDirectory", (event, data) => {
@@ -72,6 +56,7 @@ export default function Dashboard() {
     });
 
     ipcRenderer.send("getLastDirectory");
+    ipcRenderer.send("getSettings");
     return () => {
       ipcRenderer.removeAllListeners("directoryDialog");
       ipcRenderer.removeAllListeners("getSettings");
@@ -114,22 +99,17 @@ export default function Dashboard() {
                     it later.
                   </Form.Text>
                 </Form.Group>
-                {folder || (
-                  <Button onClick={pickFolder} className="mt-3">
-                    Pick a folder
-                  </Button>
-                )}
+                <Button onClick={pickFolder} className="mt-3">
+                  Pick a folder
+                </Button>
                 {folder && (
                   <>
                     <Button
                       type="submit"
-                      onClick={createNewBot}
+                      onClick={setSettings}
                       className="mt-3 mx-3"
                     >
                       Create new bot
-                    </Button>
-                    <Button onClick={getActions} className="mt-3 mx-3">
-                      Get Actions
                     </Button>
                   </>
                 )}

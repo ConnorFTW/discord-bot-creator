@@ -7,11 +7,10 @@ export default function CustomCommandView({
   command: commandSchema,
   botId,
   autoRestart,
+  actions,
 }) {
   const [command, setCommand] = useState(commandSchema);
   const [status, setStatus] = useState({});
-  const { data: actions, error } = useSWR("/api/action");
-  if (error) console.error(error);
 
   const enable = () => {
     setCommand({ ...command, enabled: true });

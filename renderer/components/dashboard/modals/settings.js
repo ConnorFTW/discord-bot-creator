@@ -100,15 +100,6 @@ export default function SettingsModal(props) {
               setSettings({ ...settings, toggleHints: e.target.checked })
             }
           />
-          <Form.Group>
-            <Button
-              className="mt-3"
-              onClick={() => signOut({ callbackUrl: "/" })}
-              variant="secondary"
-            >
-              Sign Out
-            </Button>
-          </Form.Group>
         </Form>
       </Modal.Body>
       <Modal.Footer className="d-flex flex-row justify-content-between">

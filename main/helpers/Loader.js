@@ -24,12 +24,14 @@ export default class Loader {
     return JSON.stringify(actions);
   }
   async getCommands() {
+    console.log(path.resolve(this.filePath, "./data/commands.json"));
     return fs.readFileSync(
       path.resolve(this.filePath, "./data/commands.json"),
       "utf8"
     );
   }
   async getEvents() {
+    console.log(path.resolve(this.filePath, "./data/events.json"));
     return fs.readFileSync(
       path.resolve(this.filePath, "./data/events.json"),
       "utf8"

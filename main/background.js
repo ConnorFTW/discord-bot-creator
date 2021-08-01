@@ -51,10 +51,9 @@ ipcMain.on("directoryDialog", async (event, arg) => {
 });
 
 ipcMain.on("getLastDirectory", (event, arg) => {
-  event.sender.send(
-    "getLastDirectory",
-    (store.get("lastDirectories") || [])[0]
-  );
+  const lastDirectories = store.get("lastDirectories") || [];
+  event.sender.send("getLastDirectory", lastDirectories[0]);
+  loader = new Loader({ filePath: lastDirectories[0] });
 });
 
 ipcMain.on("getSettings", async (event, args) => {
@@ -75,6 +74,7 @@ ipcMain.on("getConfig", async (event, args) => {
 
 ipcMain.on("getCommands", async (event, args) => {
   const commands = await loader?.getCommands();
+  console.log(commands);
   event.sender.send("getCommands", commands);
 });
 

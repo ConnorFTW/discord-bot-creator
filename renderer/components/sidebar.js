@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { Button, Card, Form, Nav, Spinner } from "react-bootstrap";
+import { Button, ButtonGroup, Card, Form, Nav, Spinner } from "react-bootstrap";
 import SettingsIcon from "./icons/settings";
 
 export default function Sidebar({
@@ -12,6 +12,8 @@ export default function Sidebar({
   data,
   setModalShow,
   setSettingsShow,
+  setMode,
+  mode,
 }) {
   const { query } = useRouter();
   const [state, setState] = useState({});
@@ -57,48 +59,43 @@ export default function Sidebar({
   return (
     <>
       <Card md={3} className="col px-0 sidebar">
+        <Card.Header className="d-none d-md-block">
+          <ButtonGroup className="d-flex">
+            <Button variant="secondary" onClick={() => setMode("command")}>
+              Commands
+            </Button>
+            <Button variant="secondary" onClick={() => setMode("event")}>
+              Events
+            </Button>
+          </ButtonGroup>
+        </Card.Header>
         <Card.Body className="px-2">
           {isValidating ? (
             <Spinner animation="border" />
           ) : (
             <Nav variant="pills" className="flex-column d-md-block d-none ">
-              {data?.map(({ name }, i) => (
-                <Nav.Item key={name}>
+              {(mode === "command" ? data : customCommand)?.map((d, i) => (
+                <Nav.Item key={d?.name}>
                   <Nav.Link
-                    eventKey={name}
-                    active={(!selected && i === 0) || selected === name}
-                    onClick={() => setSelected(name)}
+                    eventKey={d?.name}
+                    active={(!selected && i === 0) || selected === d?.name}
+                    onClick={() => setSelected(d?.name)}
                   >
-                    {name}
+                    {d?.name}
                   </Nav.Link>
                 </Nav.Item>
               ))}
             </Nav>
           )}
-          <hr className="d-none d-md-block" />
-          <Nav variant="pills" className="flex-column d-md-block d-none ">
-            {customCommand?.map(({ name }, i) => (
-              <Nav.Item key={name}>
-                <Nav.Link
-                  eventKey={name}
-                  active={selected === name}
-                  onClick={() => setSelected(name)}
-                >
-                  {name}
-                </Nav.Link>
-              </Nav.Item>
-            ))}
-          </Nav>
-
           <Form.Group className="d-md-none">
             <Form.Select
               id="command"
               value={selected}
               onChange={(e) => setSelected(e.target.value)}
             >
-              {(data || [])?.concat(customCommand || [])?.map(({ name }, i) => (
-                <option key={name} onClick={() => setSelected(name)}>
-                  {name}
+              {(data || [])?.concat(customCommand || [])?.map((c, i) => (
+                <option key={c?.name} onClick={() => setSelected(c?.name)}>
+                  {c?.name}
                 </option>
               ))}
             </Form.Select>
