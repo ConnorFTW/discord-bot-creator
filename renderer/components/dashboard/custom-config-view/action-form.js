@@ -1,29 +1,50 @@
 import { Button, Form, Col } from "react-bootstrap";
-import FieldForm from "./field-form";
+import _eval from "eval";
+import { useEffect, useState } from "react";
+import parseFnString from "parse-function-string";
 
 export default function ActionForm({
   action,
-  actions: actionsSchema,
+  actions,
   update,
   remove,
   actionIndex,
   command,
+  actionSchema,
+  actionSchemas,
 }) {
   const { type } = action;
-  const actionNames = actionsSchema?.map(({ name }) => name);
-  const actionSchema = actionsSchema?.find(({ name }) => name === type);
-
-  const updateOption = (fieldName, value) => {
-    if (!action.config) action.config = {};
-
-    action.config[fieldName] = value;
-    update(actionIndex, action);
-  };
+  const actionNames = actionSchemas?.map(({ name }) => name);
+  const [state, setState] = useState({});
 
   const updateType = (type) => {
     action.type = type;
     update(actionIndex, action);
   };
+
+  useEffect(() => {
+    if (!actionSchema) return;
+
+    const data = {};
+    data.messages = [];
+    data.variables = [];
+    data.sendTargets = [];
+    data.members = [];
+    data.conditions = [];
+    const isEvent = 0;
+
+    console.log("------------------------------------");
+
+    let htmlFunction = new Function(
+      "isEvent",
+      "data",
+      parseFnString(actionSchema.html).body
+    );
+
+    console.log("------------------------------------");
+
+    setState({ ...state, html: htmlFunction(false, data) });
+  }, [actionSchema?.name]);
 
   return (
     <Form.Group className="border p-2 my-3">
@@ -38,29 +59,17 @@ export default function ActionForm({
         </Form.Select>
         <Form.Text>{actionSchema?.description}</Form.Text>
       </Form.Group>
-      {actionSchema?.config &&
-        Object.keys(actionSchema.config).map((fieldName, i) => (
-          <FieldForm
-            key={`${command?.trigger}_${action.type
-              ?.split(" ")
-              ?.join("_")
-              ?.toLowerCase()}_${fieldName}`}
-            field={action?.config?.[fieldName]}
-            fieldName={fieldName}
-            fieldSchema={actionSchema.config[fieldName]}
-            update={updateOption}
-            actionIndex={actionIndex}
-            actionsSchema={actionsSchema}
-            isLoading={!action}
-            command={command}
-          />
-        ))}
+      <div
+        dangerouslySetInnerHTML={{
+          __html: state.html,
+        }}
+      ></div>
       <Col className="mt-2">
         <Button className="btn-danger btn-sm" onClick={remove}>
           Remove
         </Button>
       </Col>
-      <pre>{JSON.stringify(action, null, 2)}</pre>
+      <pre className="d-none">{JSON.stringify(action, null, 2)}</pre>
     </Form.Group>
   );
 }

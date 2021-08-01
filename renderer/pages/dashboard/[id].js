@@ -29,30 +29,33 @@ export default function Dashboard({}) {
       console.log(actions);
       setActionsSchemas(actions);
     });
-    ipcRenderer.send("getActions");
-    ipcRenderer.send("getCommands");
-  }, []);
-
-  useEffect(() => {
+    ipcRenderer.on("getSettings", (event, settings) => {
+      setSettings(settings);
+    });
     ipcRenderer.on("getEvents", (_event, events) => {
       setEvents(JSON.parse(events).filter((e) => e));
       setIsLoading(!commands || !events);
     });
+
+    ipcRenderer.send("getCommands");
+    ipcRenderer.send("getActions");
+    ipcRenderer.send("getSettings");
     ipcRenderer.send("getEvents");
   }, []);
 
-  useEffect(() => {
-    ipcRenderer.on("getSettings", (event, settings) => {
-      setSettings(settings);
-    });
-  }, []);
   const [modalShow, setModalShow] = useState(false);
   const [settingsShow, setSettingsShow] = useState(false);
 
-  function onChange(command) {
-    const commands = command || [];
-    const index = commands.findIndex((elem) => elem.name === command.name);
-    commands[index] = command;
+  function onChange({ command, event }) {
+    if (command) {
+      const commands = command || [];
+      const index = commands.findIndex((elem) => elem.name === command.name);
+      commands[index] = command;
+    } else if (event) {
+      const events = event || [];
+      const index = events.findIndex((elem) => elem.name === event.name);
+      events[index] = event;
+    }
   }
 
   const optionList = (commands || [])?.concat(

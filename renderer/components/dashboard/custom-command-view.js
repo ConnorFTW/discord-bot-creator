@@ -98,6 +98,7 @@ export default function CustomCommandView({
               actionSchema={actionSchemas.find(
                 (schema) => schema.name === action.name
               )}
+              actionSchemas={actionSchemas}
               key={i}
               update={updateAction}
               actionIndex={i}
@@ -133,9 +134,9 @@ export default function CustomCommandView({
           </>
         )}
       </Col>
-      <pre>{JSON.stringify(command, null, 2)}</pre>
-      <pre>{JSON.stringify(actions, null, 2)}</pre>
-      <pre>{JSON.stringify(actionSchemas, null, 2)}</pre>
+      <pre className="d-none">{JSON.stringify(command, null, 2)}</pre>
+      <pre className="d-none">{JSON.stringify(actions, null, 2)}</pre>
+      <pre className="d-none">{JSON.stringify(actionSchemas, null, 2)}</pre>
     </Row>
   );
 }
