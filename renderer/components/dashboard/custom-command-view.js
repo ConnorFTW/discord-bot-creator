@@ -49,16 +49,9 @@ export default function CustomCommandView({
   const save = (e) => {
     if (e) e.preventDefault();
     setStatus({ ...status, isSaving: true });
-    fetch(`/api/bot/${botId}/custom-config`, {
-      body: JSON.stringify(command),
-      method: "PUT",
-    })
-      .then(() => autoRestart && startBot(botId))
-      .then(() => {
-        setStatus({ ...status, isSaving: false });
-        mutate(`/api/bot/${botId}/custom-config`);
-      })
-      .catch(console.error);
+    setTimeout(() => {
+      setStatus({ ...status, isSaving: false });
+    }, 1000);
   };
 
   return (
@@ -71,20 +64,28 @@ export default function CustomCommandView({
           <Col md="auto"></Col>
         </Row>
         <Form>
-          <Form.Group>
-            <Form.Label>Trigger</Form.Label>
-            <Form.Select
-              value={command.trigger}
-              onChange={(e) =>
-                setCommand({ ...command, trigger: e.target.value })
-              }
-            >
-              <option value="message">Message</option>
-              <option value="guildMemberAdd">New Member</option>
-              <option value="guildMemberRemove">Member Left</option>
-              <option value="clickButton">Button Click</option>
-            </Form.Select>
-          </Form.Group>
+          {command.c && (
+            <Form.Group>
+              <Form.Label>Trigger</Form.Label>
+              <Form.Select
+                value={command.trigger}
+                onChange={(e) =>
+                  setCommand({ ...command, trigger: e.target.value })
+                }
+              >
+                <option value="message">Message</option>
+                <option value="guildMemberAdd">New Member</option>
+                <option value="guildMemberRemove">Member Left</option>
+                <option value="clickButton">Button Click</option>
+              </Form.Select>
+            </Form.Group>
+          )}
+          {!command.c && (
+            <Form.Group>
+              <Form.Label>Permissions</Form.Label>
+              <Form.Select value={command.permissions} />
+            </Form.Group>
+          )}
           <Form.Group className="mt-3">
             <Form.Label>Actions</Form.Label>
             <br />
@@ -129,6 +130,7 @@ export default function CustomCommandView({
           </>
         )}
       </Col>
+      <pre>{JSON.stringify(command, null, 2)}</pre>
     </Row>
   );
 }

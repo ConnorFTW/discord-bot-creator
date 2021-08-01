@@ -1,5 +1,4 @@
 import { Col, Row, Tab } from "react-bootstrap";
-import CommandView from "../../components/dashboard/command-view";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/dist/client/router";
 import Head from "next/head";
@@ -22,11 +21,11 @@ export default function Dashboard() {
 
   useEffect(() => {
     ipcRenderer.on("getCommands", (_event, commands) => {
-      setCommands(JSON.parse(commands));
+      setCommands(JSON.parse(commands).filter((c) => c));
       setIsLoading(!commands || !events);
     });
     ipcRenderer.on("getActions", (_event, actions) => {
-      setActions(JSON.parse(actions));
+      setActions(JSON.parse(actions).filter((a) => a));
     });
     ipcRenderer.send("getActions");
     ipcRenderer.send("getCommands");
@@ -34,7 +33,7 @@ export default function Dashboard() {
 
   useEffect(() => {
     ipcRenderer.on("getEvents", (_event, events) => {
-      setEvents(JSON.parse(events));
+      setEvents(JSON.parse(events).filter((e) => e));
       setIsLoading(!commands || !events);
     });
     ipcRenderer.send("getEvents");
@@ -88,31 +87,19 @@ export default function Dashboard() {
                   key={command?.name}
                   active={(!selected && i === 0) || selected === command?.name}
                 >
-                  {command?.c ? (
-                    <CustomCommandView
-                      command={command}
-                      onChange={onChange}
-                      botId={query.id}
-                      prefix={settings?.prefix}
-                      autoRestart={settings?.autoRestart}
-                      toggleHints={settings?.toggleHints}
-                      actions={actions}
-                    />
-                  ) : (
-                    <CommandView
-                      command={command}
-                      onChange={onChange}
-                      botId={query.id}
-                      prefix={settings?.prefix}
-                      autoRestart={settings?.autoRestart}
-                      toggleHints={settings?.toggleHints}
-                    />
-                  )}
+                  <CustomCommandView
+                    command={command}
+                    onChange={onChange}
+                    botId={query.id}
+                    prefix={settings?.prefix}
+                    autoRestart={settings?.autoRestart}
+                    toggleHints={settings?.toggleHints}
+                    actions={actions}
+                  />
                 </Tab.Pane>
               ))}
             </Tab.Content>
           </Col>
-          <pre>{JSON.stringify(optionList, null, 2)}</pre>
         </Row>
       </Tab.Container>
       <SettingsModal

@@ -15,8 +15,11 @@ export default class Loader {
     );
   }
   async getLocalActions() {
-    const files = await fg(path.resolve(__dirname, "../action-configs/*.json"));
+    const files = await fg(
+      path.resolve(__dirname, "../../public/resources/action-configs/*.json")
+    );
 
+    console.log(files);
     const actions = files.map((file) =>
       JSON.parse(fs.readFileSync(file, "utf-8"))
     );

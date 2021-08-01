@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Form, Row } from "react-bootstrap";
+import types from "../../../lib/fieldSchema.js";
 
 export default function FieldForm({
   fieldSchema,
@@ -11,14 +12,9 @@ export default function FieldForm({
   command,
   actionsSchema,
 }) {
-  const options = [...(fieldSchema.options || [])];
+  const options = [];
   if (fieldSchema.variableOption) {
-    options.push(
-      ...findVariables(command, actionsSchema, {
-        type: fieldSchema.type || "string",
-        actionIndex,
-      })
-    );
+    options.concat(types[fieldSchema.type]);
   }
   const [isDropdown, setIsDropdown] = useState(!!field?.isDropdown);
 
@@ -104,30 +100,22 @@ export default function FieldForm({
             />
           )}
       </Row>
-      {!fieldSchema.options ||
-      (!isDropdown && fieldSchema.type === "string") ? (
-        <>
-          <Form.Control
-            type="text"
-            onChange={(e) => update(fieldName, { value: e.target.value })}
-            value={field?.value || ""}
-          />
-          <Form.Text>{fieldSchema.description}</Form.Text>
-        </>
+      {!field.options[0] ? (
+        <Form.Control
+          type="text"
+          onChange={(e) => update(fieldName, { value: e.target.value })}
+          value={field?.value || ""}
+        />
       ) : (
-        <>
-          <Form.Select
-            value={field?.value || ""}
-            onChange={(e) =>
-              update(fieldName, { value: e.target.value, isDropdown: true })
-            }
-          >
-            <OptionsList field={fieldSchema} />
-          </Form.Select>
-          <Form.Text>{fieldSchema.description}</Form.Text>
-        </>
+        <Form.Select>
+          {options.map(({ key, name }) => (
+            <option key={key}>{name}</option>
+          ))}
+        </Form.Select>
       )}
-      <pre className="d-none">{JSON.stringify(field, null, 2)}</pre>
+      <pre className="d-none">
+        {JSON.stringify({ field, fieldSchema }, null, 2)}
+      </pre>
     </Form.Group>
   );
 }

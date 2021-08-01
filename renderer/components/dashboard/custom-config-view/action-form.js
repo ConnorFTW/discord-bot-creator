@@ -60,6 +60,7 @@ export default function ActionForm({
           Remove
         </Button>
       </Col>
+      <pre>{JSON.stringify(action, null, 2)}</pre>
     </Form.Group>
   );
 }

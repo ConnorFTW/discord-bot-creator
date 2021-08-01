@@ -54,7 +54,7 @@ export default function CommandView({
               <span style={{ color: "grey" }}>{prefix || "!"}</span>
               {name || "Untitled"}
             </h1>
-            <p>{description || "No description"}</p>
+            <p>{description}</p>
           </Col>
           <Col md="auto"></Col>
         </Row>
@@ -102,6 +102,7 @@ export default function CommandView({
           </>
         )}
       </Col>
+      <pre>{JSON.stringify(command, null, 2)}</pre>
     </Row>
   );
 }
