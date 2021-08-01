@@ -1,12 +1,12 @@
 module.exports = {
-  name: 'Skip Queue',
-  section: 'Audio Control',
+  name: "Skip Queue",
+  section: "Audio Control",
 
   subtitle(data) {
     return `Skip ${data.amount} Items`;
   },
 
-  fields: ['amount'],
+  fields: ["amount"],
 
   html() {
     return `

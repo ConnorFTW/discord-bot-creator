@@ -1,6 +1,6 @@
 module.exports = {
-  name: 'Run Script Too',
-  section: 'Other Stuff',
+  name: "Run Script Too",
+  section: "Other Stuff",
 
   subtitle(data) {
     if (data.title) return `${data.title}`;
@@ -9,10 +9,18 @@ module.exports = {
 
   variableStorage(data, varType) {
     if (parseInt(data.storage, 10) !== varType) return;
-    return [data.varName, 'Unknown Type'];
+    return [data.varName, "Unknown Type"];
   },
 
-  fields: ['behavior', 'interpretation', 'code', 'file', 'storage', 'varName', 'title'],
+  fields: [
+    "behavior",
+    "interpretation",
+    "code",
+    "file",
+    "storage",
+    "varName",
+    "title",
+  ],
 
   html(_isEvent, data) {
     return `
@@ -116,14 +124,14 @@ module.exports = {
 
     let code;
 
-    const fs = require('fs');
+    const fs = require("fs");
     if (file && fs.existsSync(file)) {
       try {
-        code = fs.readFileSync(file, 'utf8');
+        code = fs.readFileSync(file, "utf8");
       } catch (error) {
         console.error(error.stack ? error.stack : error);
       }
-    } else if (data.interpretation === '0') {
+    } else if (data.interpretation === "0") {
       code = this.evalMessage(data.code, cache);
     } else {
       code = data.code;
@@ -134,7 +142,7 @@ module.exports = {
     const storage = parseInt(data.storage, 10);
     this.storeValue(result, storage, varName, cache);
 
-    if (data.behavior === '0') this.callNextAction(cache);
+    if (data.behavior === "0") this.callNextAction(cache);
   },
 
   mod() {},

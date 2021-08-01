@@ -1,19 +1,19 @@
 module.exports = {
-  name: 'Store YouTube Channel Info',
-  section: 'YouTube Tools',
+  name: "Store YouTube Channel Info",
+  section: "YouTube Tools",
 
   subtitle() {
-    return 'Store information about a YouTube channel.';
+    return "Store information about a YouTube channel.";
   },
 
   variableStorage(data, varType) {
     const type = parseInt(data.storage, 10);
     if (type !== varType) return;
-    const dataType = 'YouTube Channel Info';
+    const dataType = "YouTube Channel Info";
     return [data.varName, dataType];
   },
 
-  fields: ['query', 'info', 'storage', 'varName'],
+  fields: ["query", "info", "storage", "varName"],
 
   html(_isEvent, data) {
     return `
@@ -59,7 +59,7 @@ module.exports = {
     const channelId = this.evalMessage(data.query, cache);
     const info = parseInt(data.info, 10);
     const Mods = this.getMods();
-    const ytch = Mods.require('yt-channel-info');
+    const ytch = Mods.require("yt-channel-info");
     let result;
 
     const channel = await ytch.getChannelInfo(channelId);

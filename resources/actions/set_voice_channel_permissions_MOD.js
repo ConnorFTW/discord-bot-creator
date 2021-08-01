@@ -1,21 +1,21 @@
 module.exports = {
-  name: 'Set Voice Channel Perms',
-  section: 'Channel Control',
+  name: "Set Voice Channel Perms",
+  section: "Channel Control",
 
   subtitle(data) {
     const names = [
       "Command Author's Voice Ch.",
       "Mentioned User's Voice Ch.",
-      'Default Voice Channel',
-      'Temp Variable',
-      'Server Variable',
-      'Global Variable',
+      "Default Voice Channel",
+      "Temp Variable",
+      "Server Variable",
+      "Global Variable",
     ];
     const index = parseInt(data.storage, 10);
     return index < 3 ? `${names[index]}` : `${names[index]} - ${data.varName}`;
   },
 
-  fields: ['storage', 'varName', 'permission', 'state'],
+  fields: ["storage", "varName", "permission", "state"],
 
   html(isEvent, data) {
     return `
@@ -50,7 +50,7 @@ module.exports = {
 
   init() {
     const { glob, document } = this;
-    glob.channelChange(document.getElementById('storage'), 'varNameContainer');
+    glob.channelChange(document.getElementById("storage"), "varNameContainer");
   },
 
   action(cache) {
@@ -63,11 +63,13 @@ module.exports = {
     if (!server) return this.callNextAction(cache);
 
     const options = {};
-    options[data.permission] = Boolean(data.state === '0');
+    options[data.permission] = Boolean(data.state === "0");
     if (Array.isArray(channel)) {
-      this.callListFunc(channel, 'updateOverwrite', [server.id, options]).then(() => {
-        this.callNextAction(cache);
-      });
+      this.callListFunc(channel, "updateOverwrite", [server.id, options]).then(
+        () => {
+          this.callNextAction(cache);
+        }
+      );
     } else if (channel && channel.updateOverwrite) {
       channel
         .updateOverwrite(server.id, options)

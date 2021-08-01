@@ -1,65 +1,67 @@
 module.exports = {
-  name: 'Store Voice Channel Info',
-  section: 'Channel Control',
+  name: "Store Voice Channel Info",
+  section: "Channel Control",
 
   subtitle(data) {
     const channels = [
       "Command Author's Voice Ch.",
       "Mentioned User's Voice Ch.",
-      'Default Voice Channel',
-      'Temp Variable',
-      'Server Variable',
-      'Global Variable',
+      "Default Voice Channel",
+      "Temp Variable",
+      "Server Variable",
+      "Global Variable",
     ];
     const info = [
-      'Voice Channel Object',
-      'Voice Channel ID',
-      'Voice Channel Name',
-      'Voice Channel Position',
-      'Voice Channel User Limit',
-      'Voice Channel Bitrate',
-      'Bot can speak?',
-      'Bot can join?',
-      'Bot can delete VC?',
-      'Members connected',
-      'Is VC Full',
-      'VC Guild',
-      'Can Bot Manage',
-      'VC Parent',
+      "Voice Channel Object",
+      "Voice Channel ID",
+      "Voice Channel Name",
+      "Voice Channel Position",
+      "Voice Channel User Limit",
+      "Voice Channel Bitrate",
+      "Bot can speak?",
+      "Bot can join?",
+      "Bot can delete VC?",
+      "Members connected",
+      "Is VC Full",
+      "VC Guild",
+      "Can Bot Manage",
+      "VC Parent",
     ];
-    return `${channels[parseInt(data.channel, 10)]} - ${info[parseInt(data.info, 10)]}`;
+    return `${channels[parseInt(data.channel, 10)]} - ${
+      info[parseInt(data.info, 10)]
+    }`;
   },
 
   variableStorage(data, varType) {
     if (parseInt(data.storage, 10) !== varType) return;
-    let dataType = 'Unknown Type';
+    let dataType = "Unknown Type";
     switch (parseInt(data.info, 10)) {
       case 0:
-        dataType = 'Voice Channel';
+        dataType = "Voice Channel";
         break;
       case 1:
-        dataType = 'Voice Channel ID';
+        dataType = "Voice Channel ID";
         break;
       case 2:
-        dataType = 'Text';
+        dataType = "Text";
         break;
       case 3:
       case 4:
       case 5:
-        dataType = 'Number';
+        dataType = "Number";
         break;
       case 6:
       case 7:
       case 8:
       case 10:
       case 12:
-        dataType = 'Boolean';
+        dataType = "Boolean";
         break;
       case 9:
-        dataType = 'Array';
+        dataType = "Array";
         break;
       case 11:
-        dataType = 'Guild Object';
+        dataType = "Guild Object";
         break;
       default:
         break;
@@ -67,7 +69,7 @@ module.exports = {
     return [data.varName2, dataType];
   },
 
-  fields: ['channel', 'varName', 'info', 'storage', 'varName2'],
+  fields: ["channel", "varName", "info", "storage", "varName2"],
 
   html(isEvent, data) {
     return `
@@ -121,7 +123,10 @@ module.exports = {
 
   init() {
     const { glob, document } = this;
-    glob.voiceChannelChange(document.getElementById('channel'), 'varNameContainer');
+    glob.voiceChannelChange(
+      document.getElementById("channel"),
+      "varNameContainer"
+    );
   },
 
   action(cache) {

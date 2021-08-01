@@ -1,17 +1,17 @@
 module.exports = {
-  name: 'Morse Code',
-  section: 'Other Stuff',
+  name: "Morse Code",
+  section: "Other Stuff",
 
   subtitle() {
-    return 'Convert To Morse Code';
+    return "Convert To Morse Code";
   },
 
   variableStorage(data, varType) {
     if (parseInt(data.storage, 10) !== varType) return;
-    return [data.varName, 'Morse Code'];
+    return [data.varName, "Morse Code"];
   },
 
-  fields: ['input', 'info', 'storage', 'varName'],
+  fields: ["input", "info", "storage", "varName"],
 
   html(_isEvent, data) {
     return `
@@ -45,7 +45,7 @@ module.exports = {
   action(cache) {
     const data = cache.actions[cache.index];
     const Mods = this.getMods();
-    const morsify = Mods.require('morsify');
+    const morsify = Mods.require("morsify");
     const storage = parseInt(data.storage, 10);
     const info = parseInt(data.info, 10);
     const varName = this.evalMessage(data.varName, cache);

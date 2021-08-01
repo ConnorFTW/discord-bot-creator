@@ -6,8 +6,8 @@ import RemoveCommandButton from "./remove-command-button";
 export default function CustomCommandView({
   command: commandSchema,
   botId,
-  autoRestart,
   actions,
+  actionSchemas,
 }) {
   const [command, setCommand] = useState(commandSchema);
   const [status, setStatus] = useState({});
@@ -95,6 +95,9 @@ export default function CustomCommandView({
             <ActionForm
               action={action}
               actions={actions}
+              actionSchema={actionSchemas.find(
+                (schema) => schema.name === action.name
+              )}
               key={i}
               update={updateAction}
               actionIndex={i}
@@ -131,6 +134,8 @@ export default function CustomCommandView({
         )}
       </Col>
       <pre>{JSON.stringify(command, null, 2)}</pre>
+      <pre>{JSON.stringify(actions, null, 2)}</pre>
+      <pre>{JSON.stringify(actionSchemas, null, 2)}</pre>
     </Row>
   );
 }

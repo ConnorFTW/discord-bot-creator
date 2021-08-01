@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 module.exports = {
-  name: 'Call Command/Event',
-  section: 'Other Stuff',
+  name: "Call Command/Event",
+  section: "Other Stuff",
 
   subtitle(data) {
     let source;
@@ -13,7 +13,7 @@ module.exports = {
     return `Call Command/Event ID "${source}"`;
   },
 
-  fields: ['sourcetype', 'source', 'source2', 'type'],
+  fields: ["sourcetype", "source", "source2", "type"],
 
   html() {
     return `
@@ -51,8 +51,8 @@ module.exports = {
     const { glob, document } = this;
 
     const { $cmds } = glob;
-    const coms = document.getElementById('commands');
-    coms.innerHTML = '';
+    const coms = document.getElementById("commands");
+    coms.innerHTML = "";
     for (let i = 0; i < $cmds.length; i++) {
       if ($cmds[i]) {
         coms.innerHTML += `<option value="${$cmds[i]._id}">${$cmds[i].name}</option>\n`;
@@ -60,8 +60,8 @@ module.exports = {
     }
 
     const { $evts } = glob;
-    const evet = document.getElementById('events');
-    evet.innerHTML = '';
+    const evet = document.getElementById("events");
+    evet.innerHTML = "";
     for (let i = 0; i < $evts.length; i++) {
       if ($evts[i]) {
         evet.innerHTML += `<option value="${$evts[i]._id}">${$evts[i].name}</option>\n`;
@@ -69,17 +69,20 @@ module.exports = {
     }
 
     glob.onChange1 = function onChange1(event) {
-      const sourceType = parseInt(document.getElementById('sourcetype').value, 10);
-      const info1 = document.getElementById('info1');
-      const info2 = document.getElementById('info2');
+      const sourceType = parseInt(
+        document.getElementById("sourcetype").value,
+        10
+      );
+      const info1 = document.getElementById("info1");
+      const info2 = document.getElementById("info2");
 
       switch (sourceType) {
         case 0:
           info1.style.display = null;
-          info2.style.display = 'none';
+          info2.style.display = "none";
           break;
         case 1:
-          info1.style.display = 'none';
+          info1.style.display = "none";
           info2.style.display = null;
           break;
         default:
@@ -87,7 +90,7 @@ module.exports = {
       }
     };
 
-    glob.onChange1(document.getElementById('sourcetype'));
+    glob.onChange1(document.getElementById("sourcetype"));
   },
 
   action(cache) {
@@ -100,7 +103,7 @@ module.exports = {
     } else {
       id = data.source;
     }
-    if (!id) return console.log('Please insert a Command/Event ID!');
+    if (!id) return console.log("Please insert a Command/Event ID!");
 
     let actions;
     const allData = Files.data.commands.concat(Files.data.events);
@@ -124,7 +127,7 @@ module.exports = {
         server: cache.server,
         msg: cache.msg || null,
       };
-      if (data.type === 'true') {
+      if (data.type === "true") {
         cache2.callback = function callback() {
           this.callNextAction(cache);
         }.bind(this);

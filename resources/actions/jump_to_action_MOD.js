@@ -1,12 +1,14 @@
 module.exports = {
-  name: 'Jump to Action',
-  section: 'Other Stuff',
+  name: "Jump to Action",
+  section: "Other Stuff",
 
   subtitle(data) {
-    return `Jump to action ${typeof data.call === 'number' ? '#' : `${data.call}`}`;
+    return `Jump to action ${
+      typeof data.call === "number" ? "#" : `${data.call}`
+    }`;
   },
 
-  fields: ['call'],
+  fields: ["call"],
 
   html() {
     return `

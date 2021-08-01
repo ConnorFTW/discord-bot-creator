@@ -1,7 +1,7 @@
 module.exports = {
-  name: 'Store Attachment Info',
-  section: 'Messaging',
-  fields: ['storage', 'varName', 'info', 'storage2', 'varName2'],
+  name: "Store Attachment Info",
+  section: "Messaging",
+  fields: ["storage", "varName", "info", "storage2", "varName2"],
 
   subtitle({ info }) {
     const names = [
@@ -9,7 +9,7 @@ module.exports = {
       "Attachment File's Name",
       "Attachment's Height",
       "Attachment's Width",
-      'This option has been removed',
+      "This option has been removed",
       "Attachment File's Size",
     ];
     return `${names[parseInt(info, 10)]}`;
@@ -19,7 +19,9 @@ module.exports = {
     if (parseInt(data.storage2, 10) !== varType) return;
     return [
       data.varName2,
-      ['URL', 'File Name', 'Number', null, 'File Size'][parseInt(data.info, 10)] || 'Message Attachment (Unknown) Info',
+      ["URL", "File Name", "Number", null, "File Size"][
+        parseInt(data.info, 10)
+      ] || "Message Attachment (Unknown) Info",
     ];
   },
 
@@ -59,8 +61,11 @@ module.exports = {
 
   init() {
     const { document, glob } = this;
-    glob.messageChange(document.getElementById('storage'), 'varNameContainer');
-    glob.variableChange(document.getElementById('storage2'), 'varNameContainer2');
+    glob.messageChange(document.getElementById("storage"), "varNameContainer");
+    glob.variableChange(
+      document.getElementById("storage2"),
+      "varNameContainer2"
+    );
   },
 
   action(cache) {

@@ -1,17 +1,17 @@
 module.exports = {
-  name: 'Convert To World Time',
-  section: 'Other Stuff',
+  name: "Convert To World Time",
+  section: "Other Stuff",
 
   subtitle() {
-    return 'Input a timezone and retrieve its current time.';
+    return "Input a timezone and retrieve its current time.";
   },
 
   variableStorage(data, varType) {
     if (parseInt(data.storage, 10) !== varType) return;
-    return [data.varName, 'Time'];
+    return [data.varName, "Time"];
   },
 
-  fields: ['textbox', 'info', 'storage', 'varName'],
+  fields: ["textbox", "info", "storage", "varName"],
 
   html(_isEvent, data) {
     return `
@@ -40,10 +40,10 @@ module.exports = {
   action(cache) {
     const data = cache.actions[cache.index];
     const Mods = this.getMods();
-    const moment = Mods.require('moment-timezone');
+    const moment = Mods.require("moment-timezone");
     const str = this.evalMessage(data.textbox, cache);
 
-    const timec = moment().tz(str).format('dddd, MMMM Do YYYY, h:mm:ss a');
+    const timec = moment().tz(str).format("dddd, MMMM Do YYYY, h:mm:ss a");
 
     const storage = parseInt(data.storage, 10);
     const varName = this.evalMessage(data.varName, cache);

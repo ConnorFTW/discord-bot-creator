@@ -1,12 +1,12 @@
 module.exports = {
-  name: 'Send Message To Webhook',
-  section: 'Webhook Control',
+  name: "Send Message To Webhook",
+  section: "Webhook Control",
 
   subtitle(data) {
     return `${data.message}`;
   },
 
-  fields: ['webhook', 'varName', 'message'],
+  fields: ["webhook", "varName", "message"],
 
   html(_isEvent, data) {
     return `
@@ -30,7 +30,7 @@ module.exports = {
 
   init() {
     const { glob, document } = this;
-    glob.refreshVariableList(document.getElementById('webhook'));
+    glob.refreshVariableList(document.getElementById("webhook"));
   },
 
   action(cache) {

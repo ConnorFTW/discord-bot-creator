@@ -1,20 +1,25 @@
 module.exports = {
-  name: 'Convert Text to List',
-  section: 'Lists and Loops',
+  name: "Convert Text to List",
+  section: "Lists and Loops",
 
   subtitle(data) {
-    const storeTypes = ['', 'Temp Variable', 'Server Variable', 'Global Variable'];
-    return `Convert Text ${storeTypes[parseInt(data.storage, 10)]} (${data.varName}) to List ${
-      storeTypes[parseInt(data.storage2, 10)]
-    } (${data.varName2})`;
+    const storeTypes = [
+      "",
+      "Temp Variable",
+      "Server Variable",
+      "Global Variable",
+    ];
+    return `Convert Text ${storeTypes[parseInt(data.storage, 10)]} (${
+      data.varName
+    }) to List ${storeTypes[parseInt(data.storage2, 10)]} (${data.varName2})`;
   },
 
   variableStorage(data, varType) {
     if (parseInt(data.storage, 10) !== varType) return;
-    return [data.varName2, 'List'];
+    return [data.varName2, "List"];
   },
 
-  fields: ['storage', 'varName', 'separator', 'storage2', 'varName2'],
+  fields: ["storage", "varName", "separator", "storage2", "varName2"],
 
   html(isEvent, data) {
     return `
@@ -52,7 +57,7 @@ module.exports = {
 
   init() {
     const { glob, document } = this;
-    glob.refreshVariableList(document.getElementById('storage'));
+    glob.refreshVariableList(document.getElementById("storage"));
   },
 
   action(cache) {

@@ -1,54 +1,56 @@
 module.exports = {
-  name: 'Store Audit Log Info MOD',
-  displayName: 'Store Audit Log Info',
-  section: 'Server Control',
+  name: "Store Audit Log Info MOD",
+  displayName: "Store Audit Log Info",
+  section: "Server Control",
 
   subtitle(data) {
-    const storage = ['', 'Temp Variable', 'Server Variable', 'Global Variable'];
+    const storage = ["", "Temp Variable", "Server Variable", "Global Variable"];
     const info = [
-      'Audit Log Id',
-      'Action',
-      'Executor',
-      'Target',
-      'Target Type',
-      'Creation Date',
-      'Creation Timestamp',
-      'Total Key Change',
-      'Key Change',
-      'Old Value',
-      'New Value',
-      'Reason',
-      'Extra Data',
+      "Audit Log Id",
+      "Action",
+      "Executor",
+      "Target",
+      "Target Type",
+      "Creation Date",
+      "Creation Timestamp",
+      "Total Key Change",
+      "Key Change",
+      "Old Value",
+      "New Value",
+      "Reason",
+      "Extra Data",
     ];
-    return `${storage[parseInt(data.storage, 10)]} ${data.varName} - ${info[parseInt(data.info, 10)]}`;
+    return `${storage[parseInt(data.storage, 10)]} ${data.varName} - ${
+      info[parseInt(data.info, 10)]
+    }`;
   },
 
   variableStorage(data, varType) {
     if (parseInt(data.storage2, 10) !== varType) return;
-    let dataType = 'Unknown Type';
+    let dataType = "Unknown Type";
     switch (parseInt(data.info, 10)) {
       case 0:
       case 6:
       case 7:
-        dataType = 'Number';
+        dataType = "Number";
         break;
       case 1:
-        dataType = 'Audit Log Action';
+        dataType = "Audit Log Action";
         break;
       case 2:
       case 3:
       case 12:
-        dataType = 'Object';
+        dataType = "Object";
         break;
       case 4:
       case 8:
       case 9:
       case 10:
       case 11:
-        dataType = 'Text';
+        dataType = "Text";
         break;
       case 5:
-        dataType = 'Date';
+        dataType = "Date";
         break;
       default:
         break;
@@ -56,7 +58,7 @@ module.exports = {
     return [data.varName2, dataType];
   },
 
-  fields: ['storage', 'varName', 'info', 'position', 'storage2', 'varName2'],
+  fields: ["storage", "varName", "info", "position", "storage2", "varName2"],
 
   html(_isEvent, data) {
     return `
@@ -114,7 +116,7 @@ module.exports = {
 
   init() {
     const { glob, document } = this;
-    const keyholder = document.getElementById('keyholder');
+    const keyholder = document.getElementById("keyholder");
 
     glob.onChange0 = function onChange0(info) {
       switch (parseInt(info.value, 10)) {
@@ -124,13 +126,13 @@ module.exports = {
           keyholder.style.display = null;
           break;
         default:
-          keyholder.style.display = 'none';
+          keyholder.style.display = "none";
           break;
       }
     };
 
-    glob.onChange0(document.getElementById('info'));
-    glob.refreshVariableList(document.getElementById('storage'));
+    glob.onChange0(document.getElementById("info"));
+    glob.refreshVariableList(document.getElementById("storage"));
   },
 
   action(cache) {
@@ -151,11 +153,11 @@ module.exports = {
         break;
       case 1:
         result = auditLog.action;
-        if (!result || typeof result === 'undefined') {
-          if (auditLog.target.bot && auditLog.targetType === 'USER') {
-            result = 'ADD_BOT';
-          } else if (auditLog.targetType === 'MESSAGE') {
-            result = 'CHANNEL_MESSAGE_UPDATE';
+        if (!result || typeof result === "undefined") {
+          if (auditLog.target.bot && auditLog.targetType === "USER") {
+            result = "ADD_BOT";
+          } else if (auditLog.targetType === "MESSAGE") {
+            result = "CHANNEL_MESSAGE_UPDATE";
           }
         }
         break;
@@ -163,7 +165,7 @@ module.exports = {
         result = server.members.cache.get(auditLog.executor.id);
         break;
       case 3:
-        if (auditLog.target.constructor.name === 'User') {
+        if (auditLog.target.constructor.name === "User") {
           result = server.members.cache.get(auditLog.executor.id);
         } else {
           result = auditLog.target;
@@ -187,19 +189,31 @@ module.exports = {
         break;
       case 8:
         position = parseInt(this.evalMessage(data.position, cache), 10);
-        if (!isNaN(position) && auditLog.changes !== null && position <= auditLog.changes.length) {
+        if (
+          !isNaN(position) &&
+          auditLog.changes !== null &&
+          position <= auditLog.changes.length
+        ) {
           result = auditLog.changes[position].key;
         }
         break;
       case 9:
         position = parseInt(this.evalMessage(data.position, cache), 10);
-        if (!isNaN(position) && auditLog.changes !== null && position <= auditLog.changes.length) {
+        if (
+          !isNaN(position) &&
+          auditLog.changes !== null &&
+          position <= auditLog.changes.length
+        ) {
           result = auditLog.changes[position].old;
         }
         break;
       case 10:
         position = parseInt(this.evalMessage(data.position, cache), 10);
-        if (!isNaN(position) && auditLog.changes !== null && position <= auditLog.changes.length) {
+        if (
+          !isNaN(position) &&
+          auditLog.changes !== null &&
+          position <= auditLog.changes.length
+        ) {
           result = auditLog.changes[position].new;
         }
         break;
@@ -223,7 +237,8 @@ module.exports = {
 
     const storage2 = parseInt(data.storage2, 10);
     const varName2 = this.evalMessage(data.varName2, cache);
-    if (result && result !== undefined) this.storeValue(result, storage2, varName2, cache);
+    if (result && result !== undefined)
+      this.storeValue(result, storage2, varName2, cache);
     this.callNextAction(cache);
   },
   mod() {},

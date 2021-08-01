@@ -1,15 +1,20 @@
 module.exports = {
-  name: 'Canvas Draw Image on Image',
-  section: 'Image Editing',
+  name: "Canvas Draw Image on Image",
+  section: "Image Editing",
 
   subtitle(data) {
-    const storeTypes = ['', 'Temp Variable', 'Server Variable', 'Global Variable'];
+    const storeTypes = [
+      "",
+      "Temp Variable",
+      "Server Variable",
+      "Global Variable",
+    ];
     return `${storeTypes[parseInt(data.storage2, 10)]} (${data.varName2}) -> ${
       storeTypes[parseInt(data.storage, 10)]
     } (${data.varName})`;
   },
 
-  fields: ['storage', 'varName', 'storage2', 'varName2', 'x', 'y', 'effect'],
+  fields: ["storage", "varName", "storage2", "varName2", "x", "y", "effect"],
 
   html(_isEvent, data) {
     return `
@@ -61,11 +66,11 @@ module.exports = {
   init() {
     const { glob, document } = this;
 
-    glob.refreshVariableList(document.getElementById('storage'));
+    glob.refreshVariableList(document.getElementById("storage"));
   },
 
   action(cache) {
-    const Canvas = require('canvas');
+    const Canvas = require("canvas");
     const data = cache.actions[cache.index];
     const storage = parseInt(data.storage, 10);
     const varName = this.evalMessage(data.varName, cache);
@@ -89,13 +94,15 @@ module.exports = {
     const image2 = new Canvas.Image();
     image2.src = imagedata2;
     const canvas = Canvas.createCanvas(image.width, image.height);
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext("2d");
 
     ctx.drawImage(image, 0, 0, image.width, image.height);
-    if (effect === 1) ctx.globalCompositeOperation = 'destination-out';
+    if (effect === 1) ctx.globalCompositeOperation = "destination-out";
     ctx.drawImage(image2, x, y, image2.width, image2.height);
 
-    const result = canvas.toDataURL('image/png').replace('image/png', 'image/octet-stream');
+    const result = canvas
+      .toDataURL("image/png")
+      .replace("image/png", "image/octet-stream");
     this.storeValue(result, storage, varName, cache);
     this.callNextAction(cache);
   },

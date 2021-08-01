@@ -1,34 +1,39 @@
 /* eslint-disable no-unused-vars */
 
 module.exports = {
-  name: 'Await Reaction Call Action',
-  displayName: 'Await Reaction',
-  section: 'Messaging',
+  name: "Await Reaction Call Action",
+  displayName: "Await Reaction",
+  section: "Messaging",
 
   subtitle({ max, time }) {
-    const getPlural = (n) => (n !== '1' ? 's' : '');
-    return `Await ${max} reaction${getPlural(max)} for ${time} millisecond${getPlural(time)}`;
+    const getPlural = (n) => (n !== "1" ? "s" : "");
+    return `Await ${max} reaction${getPlural(
+      max
+    )} for ${time} millisecond${getPlural(time)}`;
   },
 
   variableStorage(data, varType) {
     if (parseInt(data.storage2, 10) !== varType) return;
-    return [data.varName2, `Reaction${parseInt(data.max, 10) === 1 ? '' : ' List'}`];
+    return [
+      data.varName2,
+      `Reaction${parseInt(data.max, 10) === 1 ? "" : " List"}`,
+    ];
   },
 
   fields: [
-    'storage',
-    'varName',
-    'filter',
-    'max',
-    'time',
-    'maxEmojis',
-    'maxUsers',
-    'iftrue',
-    'iftrueVal',
-    'iffalse',
-    'iffalseVal',
-    'storage2',
-    'varName2',
+    "storage",
+    "varName",
+    "filter",
+    "max",
+    "time",
+    "maxEmojis",
+    "maxUsers",
+    "iftrue",
+    "iftrueVal",
+    "iffalse",
+    "iffalseVal",
+    "storage2",
+    "varName2",
   ],
 
   html(isEvent, data) {
@@ -159,26 +164,30 @@ module.exports = {
   init() {
     const { glob, document } = this;
 
-    glob.messageChange(document.getElementById('storage'), 'varNameContainer');
+    glob.messageChange(document.getElementById("storage"), "varNameContainer");
 
-    glob.variableChange(document.getElementById('storage2'), 'varNameContainer2');
+    glob.variableChange(
+      document.getElementById("storage2"),
+      "varNameContainer2"
+    );
     glob.onChangeTrue = function onChangeTrue(event) {
       switch (parseInt(event.value, 10)) {
         case 0:
         case 1:
-          document.getElementById('iftrueContainer').style.display = 'none';
+          document.getElementById("iftrueContainer").style.display = "none";
           break;
         case 2:
-          document.getElementById('iftrueName').innerHTML = 'Action Number';
-          document.getElementById('iftrueContainer').style.display = null;
+          document.getElementById("iftrueName").innerHTML = "Action Number";
+          document.getElementById("iftrueContainer").style.display = null;
           break;
         case 3:
-          document.getElementById('iftrueName').innerHTML = 'Number of Actions to Skip';
-          document.getElementById('iftrueContainer').style.display = null;
+          document.getElementById("iftrueName").innerHTML =
+            "Number of Actions to Skip";
+          document.getElementById("iftrueContainer").style.display = null;
           break;
         case 4:
-          document.getElementById('iftrueName').innerHTML = 'Anchor ID';
-          document.getElementById('iftrueContainer').style.display = null;
+          document.getElementById("iftrueName").innerHTML = "Anchor ID";
+          document.getElementById("iftrueContainer").style.display = null;
           break;
         default:
           break;
@@ -188,26 +197,27 @@ module.exports = {
       switch (parseInt(event.value, 10)) {
         case 0:
         case 1:
-          document.getElementById('iffalseContainer').style.display = 'none';
+          document.getElementById("iffalseContainer").style.display = "none";
           break;
         case 2:
-          document.getElementById('iffalseName').innerHTML = 'Action Number';
-          document.getElementById('iffalseContainer').style.display = null;
+          document.getElementById("iffalseName").innerHTML = "Action Number";
+          document.getElementById("iffalseContainer").style.display = null;
           break;
         case 3:
-          document.getElementById('iffalseName').innerHTML = 'Number of Actions to Skip';
-          document.getElementById('iffalseContainer').style.display = null;
+          document.getElementById("iffalseName").innerHTML =
+            "Number of Actions to Skip";
+          document.getElementById("iffalseContainer").style.display = null;
           break;
         case 4:
-          document.getElementById('iffalseName').innerHTML = 'Anchor ID';
-          document.getElementById('iffalseContainer').style.display = null;
+          document.getElementById("iffalseName").innerHTML = "Anchor ID";
+          document.getElementById("iffalseContainer").style.display = null;
           break;
         default:
           break;
       }
     };
-    glob.onChangeTrue(document.getElementById('iftrue'));
-    glob.onChangeFalse(document.getElementById('iffalse'));
+    glob.onChangeTrue(document.getElementById("iftrue"));
+    glob.onChangeFalse(document.getElementById("iffalse"));
   },
 
   action(cache) {
@@ -243,7 +253,10 @@ module.exports = {
               member = message.member;
               author = message.author;
             }
-            if (server) serverVars = Actions.getActionVariable.bind(Actions.server[server.id]);
+            if (server)
+              serverVars = Actions.getActionVariable.bind(
+                Actions.server[server.id]
+              );
 
             try {
               return Boolean(eval(js));
@@ -256,11 +269,16 @@ module.exports = {
             maxEmojis,
             maxUsers,
             time,
-            errors: ['time'],
-          },
+            errors: ["time"],
+          }
         )
         .then((c) => {
-          this.storeValue(c.size === 1 ? c.first() : c.array(), storage, varName2, cache);
+          this.storeValue(
+            c.size === 1 ? c.first() : c.array(),
+            storage,
+            varName2,
+            cache
+          );
           this.executeResults(true, data, cache);
         })
         .catch(() => this.executeResults(false, data, cache));

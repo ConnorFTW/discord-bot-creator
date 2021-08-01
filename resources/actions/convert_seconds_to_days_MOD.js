@@ -1,6 +1,6 @@
 module.exports = {
-  name: 'Convert Seconds To D/H/M/S',
-  section: 'Other Stuff',
+  name: "Convert Seconds To D/H/M/S",
+  section: "Other Stuff",
 
   subtitle(data) {
     return `Convert ${data.time}`;
@@ -8,10 +8,10 @@ module.exports = {
 
   variableStorage(data, varType) {
     if (parseInt(data.storage, 10) !== varType) return;
-    return [data.varName, 'Date'];
+    return [data.varName, "Date"];
   },
 
-  fields: ['time', 'storage', 'varName'],
+  fields: ["time", "storage", "varName"],
 
   html(_isEvent, data) {
     return `
@@ -33,7 +33,7 @@ module.exports = {
 
   init() {
     const { glob, document } = this;
-    glob.variableChange(document.getElementById('storage'), 'varNameContainer');
+    glob.variableChange(document.getElementById("storage"), "varNameContainer");
   },
 
   action(cache) {
@@ -52,7 +52,7 @@ module.exports = {
 
     let result = `${d}d ${h}h ${m}m ${s}s`;
 
-    if (result.toString() === 'Invalid Date') result = undefined;
+    if (result.toString() === "Invalid Date") result = undefined;
 
     if (result !== undefined) {
       const storage = parseInt(data.storage, 10);

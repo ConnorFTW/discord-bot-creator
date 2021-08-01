@@ -1,17 +1,17 @@
 module.exports = {
-  name: 'Loop through Folder',
-  section: 'Lists and Loops',
+  name: "Loop through Folder",
+  section: "Lists and Loops",
 
   subtitle() {
-    return 'Loops through folder, and turns filenames into array';
+    return "Loops through folder, and turns filenames into array";
   },
 
   variableStorage(data, varType) {
     if (parseInt(data.storage, 10) !== varType) return;
-    return [data.varName2, 'Array'];
+    return [data.varName2, "Array"];
   },
 
-  fields: ['filename', 'storage', 'varName2'],
+  fields: ["filename", "storage", "varName2"],
 
   html(_isEvent, data) {
     return `
@@ -46,15 +46,20 @@ module.exports = {
   action(cache) {
     const data = cache.actions[cache.index];
     const path = this.evalMessage(data.filename, cache);
-    const { readdirSync } = require('fs');
+    const { readdirSync } = require("fs");
     let output = {};
 
     try {
       if (path) {
         output = readdirSync(path);
-        this.storeValue(output, parseInt(data.storage, 10), this.evalMessage(data.varName2, cache), cache);
+        this.storeValue(
+          output,
+          parseInt(data.storage, 10),
+          this.evalMessage(data.varName2, cache),
+          cache
+        );
       } else {
-        console.log('Loop Through Folder: Path is missing.');
+        console.log("Loop Through Folder: Path is missing.");
       }
     } catch (err) {
       console.error(`Error: ${err.stack || err}`);

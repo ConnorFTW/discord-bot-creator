@@ -1,17 +1,17 @@
 module.exports = {
-  name: 'Split',
-  section: 'Other Stuff',
+  name: "Split",
+  section: "Other Stuff",
 
   subtitle() {
-    return 'Split anything!';
+    return "Split anything!";
   },
 
   variableStorage(data, varType) {
     if (parseInt(data.storage, 10) !== varType) return;
-    return [data.varName, 'String'];
+    return [data.varName, "String"];
   },
 
-  fields: ['split', 'spliton', 'storage', 'varName'],
+  fields: ["split", "spliton", "storage", "varName"],
 
   html(_isEvent, data) {
     return `
@@ -39,7 +39,7 @@ module.exports = {
 
   init() {
     const { glob, document } = this;
-    glob.variableChange(document.getElementById('storage'), 'varNameContainer');
+    glob.variableChange(document.getElementById("storage"), "varNameContainer");
   },
 
   action(cache) {

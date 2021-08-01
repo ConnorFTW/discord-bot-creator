@@ -1,6 +1,6 @@
 module.exports = {
-  name: 'Canvas Save Image',
-  section: 'Image Editing',
+  name: "Canvas Save Image",
+  section: "Image Editing",
 
   subtitle(data) {
     return `Save to "${data.Path}"`;
@@ -8,10 +8,10 @@ module.exports = {
 
   variableStorage(data, varType) {
     if (parseInt(data.storage2, 10) !== varType) return;
-    return [data.varName2, 'Image URL'];
+    return [data.varName2, "Image URL"];
   },
 
-  fields: ['storage', 'varName', 'Path', 'storage2', 'varName2'],
+  fields: ["storage", "varName", "Path", "storage2", "varName2"],
 
   html(_isEvent, data) {
     return `
@@ -50,13 +50,13 @@ module.exports = {
   init() {
     const { document, glob } = this;
 
-    glob.refreshVariableList(document.getElementById('storage'));
+    glob.refreshVariableList(document.getElementById("storage"));
   },
 
   action(cache) {
     const data = cache.actions[cache.index];
-    const fs = require('fs');
-    const Canvas = require('canvas');
+    const fs = require("fs");
+    const Canvas = require("canvas");
     const storage = parseInt(data.storage, 10);
     const varName = this.evalMessage(data.varName, cache);
     const imagedata = this.getVariable(storage, varName, cache);
@@ -67,7 +67,7 @@ module.exports = {
     const image = new Canvas.Image();
     image.src = imagedata;
     const canvas = Canvas.createCanvas(image.width, image.height);
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext("2d");
     ctx.drawImage(image, 0, 0, image.width, image.height);
     const buffer = canvas.toBuffer();
     const Path = this.evalMessage(data.Path, cache);

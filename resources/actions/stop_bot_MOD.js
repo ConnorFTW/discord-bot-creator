@@ -1,9 +1,9 @@
 module.exports = {
-  name: 'Stop Bot',
-  section: 'Bot Client Control',
+  name: "Stop Bot",
+  section: "Bot Client Control",
 
   subtitle() {
-    return 'Stops bot';
+    return "Stops bot";
   },
 
   fields: [],
@@ -22,7 +22,7 @@ module.exports = {
   init() {},
 
   action() {
-    console.log('Stopped bot!');
+    console.log("Stopped bot!");
     this.getDBM().Bot.bot.destroy();
     process.exit();
   },

@@ -1,18 +1,18 @@
 module.exports = {
-  name: 'Replace Text',
-  section: 'Other Stuff',
+  name: "Replace Text",
+  section: "Other Stuff",
 
   subtitle(data) {
-    const info = ['Replace the first result', 'Replace all results'];
+    const info = ["Replace the first result", "Replace all results"];
     return `${info[data.info]}`;
   },
 
   variableStorage(data, varType) {
     if (parseInt(data.storage, 10) !== varType) return;
-    return [data.varName, 'String'];
+    return [data.varName, "String"];
   },
 
-  fields: ['text', 'text2', 'text3', 'info', 'storage', 'varName'],
+  fields: ["text", "text2", "text3", "info", "storage", "varName"],
 
   html(isEvent, data) {
     return `

@@ -1,23 +1,35 @@
 module.exports = {
-  name: 'Canvas Create Background',
-  section: 'Image Editing',
+  name: "Canvas Create Background",
+  section: "Image Editing",
 
   subtitle(data) {
     const info = parseInt(data.info, 10);
     if (info === 0) {
-      return data.color ? `Create with Color ${data.color}` : 'No color background has create';
+      return data.color
+        ? `Create with Color ${data.color}`
+        : "No color background has create";
     }
     if (info === 1) {
-      return data.gradient ? `Create with Gradient ${data.gradient}` : 'No gradient background has create';
+      return data.gradient
+        ? `Create with Gradient ${data.gradient}`
+        : "No gradient background has create";
     }
   },
 
   variableStorage(data, varType) {
     if (parseInt(data.storage, 10) !== varType) return;
-    return [data.varName, 'Image'];
+    return [data.varName, "Image"];
   },
 
-  fields: ['width', 'height', 'info', 'gradient', 'color', 'storage', 'varName'],
+  fields: [
+    "width",
+    "height",
+    "info",
+    "gradient",
+    "color",
+    "storage",
+    "varName",
+  ],
 
   html(_isEvent, data) {
     return `
@@ -66,38 +78,38 @@ module.exports = {
   init() {
     const { glob, document } = this;
 
-    const gradient = document.getElementById('Gradient');
-    const solid = document.getElementById('Solid');
+    const gradient = document.getElementById("Gradient");
+    const solid = document.getElementById("Solid");
 
     glob.onChange0 = function onChange0(event) {
       switch (parseInt(event.value, 10)) {
         case 0:
-          gradient.style.display = 'none';
+          gradient.style.display = "none";
           solid.style.display = null;
           break;
         case 1:
           gradient.style.display = null;
-          solid.style.display = 'none';
+          solid.style.display = "none";
           break;
         default:
           break;
       }
     };
-    glob.onChange0(document.getElementById('info'));
+    glob.onChange0(document.getElementById("info"));
   },
 
   action(cache) {
     const data = cache.actions[cache.index];
-    const Canvas = require('canvas');
+    const Canvas = require("canvas");
     const width = parseInt(this.evalMessage(data.width, cache), 10);
     const height = parseInt(this.evalMessage(data.height, cache), 10);
     const info = parseInt(data.info, 10);
     const canvas = Canvas.createCanvas(width, height);
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext("2d");
     let color = this.evalMessage(data.color, cache);
     switch (info) {
       case 0:
-        if (!color.startsWith('#')) {
+        if (!color.startsWith("#")) {
           color = color.slice(1);
         }
         ctx.fillStyle = color;
@@ -110,7 +122,9 @@ module.exports = {
       default:
         break;
     }
-    const result = canvas.toDataURL('image/png').replace('image/png', 'image/octet-stream');
+    const result = canvas
+      .toDataURL("image/png")
+      .replace("image/png", "image/octet-stream");
     const varName = this.evalMessage(data.varName, cache);
     const storage = parseInt(data.storage, 10);
     this.storeValue(result, storage, varName, cache);

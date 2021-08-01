@@ -1,6 +1,6 @@
 module.exports = {
-  name: 'Store Json From WebAPI',
-  section: 'JSON Things',
+  name: "Store Json From WebAPI",
+  section: "JSON Things",
 
   subtitle(data) {
     return `${data.varName}`;
@@ -8,10 +8,21 @@ module.exports = {
 
   variableStorage(data, varType) {
     if (parseInt(data.storage, 10) !== varType) return;
-    return [data.varName, 'JSON Object'];
+    return [data.varName, "JSON Object"];
   },
 
-  fields: ['token', 'user', 'pass', 'url', 'path', 'storage', 'varName', 'debugMode', 'headers', 'reUse'],
+  fields: [
+    "token",
+    "user",
+    "pass",
+    "url",
+    "path",
+    "storage",
+    "varName",
+    "debugMode",
+    "headers",
+    "reUse",
+  ],
 
   html(_isEvent, data) {
     return `
@@ -79,29 +90,33 @@ module.exports = {
 
   init() {
     const { glob, document } = this;
-    glob.variableChange(document.getElementById('storage'), 'varNameContainer');
+    glob.variableChange(document.getElementById("storage"), "varNameContainer");
 
     glob.checkBox = function checkBox(element, type) {
-      if (type === 'auth') {
-        document.getElementById('authSection').style.display = element.checked ? '' : 'none';
-        document.getElementById('showAuth').value = element.checked ? '1' : '0';
+      if (type === "auth") {
+        document.getElementById("authSection").style.display = element.checked
+          ? ""
+          : "none";
+        document.getElementById("showAuth").value = element.checked ? "1" : "0";
       }
     };
 
     glob.disallowAlert = function disallowAlert(element) {
-      if (element.value === '0') {
-        alert('Disabling this could lead to you being banned or rate limited by APIs, please be careful.');
+      if (element.value === "0") {
+        alert(
+          "Disabling this could lead to you being banned or rate limited by APIs, please be careful."
+        );
       }
     };
 
-    glob.checkBox(document.getElementById('toggleAuth'), 'auth');
+    glob.checkBox(document.getElementById("toggleAuth"), "auth");
   },
 
   async action(cache) {
     const data = cache.actions[cache.index];
     const { Actions } = this.getDBM();
     const Mods = this.getMods();
-    const fetch = Mods.require('node-fetch');
+    const fetch = Mods.require("node-fetch");
     const debugMode = parseInt(data.debugMode, 10);
     const storage = parseInt(data.storage, 10);
     const varName = this.evalMessage(data.varName, cache);
@@ -129,7 +144,9 @@ module.exports = {
             Actions.storeValue(errorJson, storage, varName, cache);
 
             if (debugMode) {
-              console.error(`WebAPI: Error: ${errorJson} stored to: [${varName}]`);
+              console.error(
+                `WebAPI: Error: ${errorJson} stored to: [${varName}]`
+              );
             }
           } else if (path) {
             const outData = Mods.jsonPath(jsonData, path);
@@ -148,33 +165,41 @@ module.exports = {
 
             if (!outData) {
               errorJson = JSON.stringify({
-                error: 'No JSON Data Returned',
+                error: "No JSON Data Returned",
                 statusCode: 0,
               });
               Actions.storeValue(errorJson, storage, varName, cache);
               if (debugMode) {
-                console.error(`WebAPI: Error: ${errorJson} NO JSON data returned. Check the URL: ${url}`);
+                console.error(
+                  `WebAPI: Error: ${errorJson} NO JSON data returned. Check the URL: ${url}`
+                );
               }
               // eslint-disable-next-line no-eq-null
             } else if (outData.success != null) {
               errorJson = JSON.stringify({ error, statusCode, success: false });
               Actions.storeValue(errorJson, storage, varName, cache);
               if (debugMode) {
-                console.log(`WebAPI: Error Invalid JSON, is the Path and/or URL set correctly? [${path}]`);
+                console.log(
+                  `WebAPI: Error Invalid JSON, is the Path and/or URL set correctly? [${path}]`
+                );
               }
               // eslint-disable-next-line no-eq-null
             } else if (outValue.success != null || !outValue) {
               errorJson = JSON.stringify({ error, statusCode, success: false });
               Actions.storeValue(errorJson, storage, varName, cache);
               if (debugMode) {
-                console.log(`WebAPI: Error Invalid JSON, is the Path and/or URL set correctly? [${path}]`);
+                console.log(
+                  `WebAPI: Error Invalid JSON, is the Path and/or URL set correctly? [${path}]`
+                );
               }
             } else {
               Actions.storeValue(outValue, storage, varName, cache);
               Actions.storeValue(jsonData, 1, url, cache);
               Actions.storeValue(url, 1, `${url}_URL`, cache);
               if (debugMode) {
-                console.log(`WebAPI: JSON Data values starting from [${path}] stored to: [${varName}]`);
+                console.log(
+                  `WebAPI: JSON Data values starting from [${path}] stored to: [${varName}]`
+                );
               }
             }
           } else {
@@ -204,7 +229,7 @@ module.exports = {
 
           if (debugMode) {
             console.log(
-              'WebAPI: Using previously stored json data from the initial store json action within this command.',
+              "WebAPI: Using previously stored json data from the initial store json action within this command."
             );
           }
 
@@ -213,36 +238,38 @@ module.exports = {
           const setHeaders = {};
 
           // set default required header
-          setHeaders['User-Agent'] = 'Other';
+          setHeaders["User-Agent"] = "Other";
 
           // Because headers are a dictionary ;)
           if (headers) {
-            const lines = String(headers).split('\n');
+            const lines = String(headers).split("\n");
             for (let i = 0; i < lines.length; i++) {
-              const header = lines[i].split(':');
+              const header = lines[i].split(":");
 
-              if (lines[i].includes(':') && header.length > 0) {
-                const key = header[0] || 'Unknown';
-                const value = header[1] || 'Unknown';
+              if (lines[i].includes(":") && header.length > 0) {
+                const key = header[0] || "Unknown";
+                const value = header[1] || "Unknown";
                 setHeaders[key] = value;
 
                 if (debugMode) console.log(`Applied Header: ${lines[i]}`);
               } else if (debugMode) {
                 console.error(
-                  `WebAPI: Error: Custom Header line ${lines[i]} is wrongly formatted. You must split the key from the value with a colon (:)`,
+                  `WebAPI: Error: Custom Header line ${lines[i]} is wrongly formatted. You must split the key from the value with a colon (:)`
                 );
               }
             }
           }
           if (token) setHeaders.Authorization = `Bearer ${token}`;
           if (user && pass) {
-            setHeaders.Authorization = `Basic ${Buffer.from(`${user}:${pass}`).toString('base64')}`;
+            setHeaders.Authorization = `Basic ${Buffer.from(
+              `${user}:${pass}`
+            ).toString("base64")}`;
           }
 
           try {
             const response = await fetch(url, { headers: setHeaders });
             const json = await response.json();
-            storeData('', response, json);
+            storeData("", response, json);
           } catch (err) {
             if (debugMode) console.error(err.stack || err);
           }

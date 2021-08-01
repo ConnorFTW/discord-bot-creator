@@ -1,76 +1,80 @@
 module.exports = {
-  name: 'Spotify Search',
-  section: 'Other Stuff',
+  name: "Spotify Search",
+  section: "Other Stuff",
 
   subtitle(data) {
     const info1 = [
-      'Track Name',
-      'Track Artists Name',
-      'Track Artists ID',
-      'Track Album Name',
-      'Track Album ID',
-      'Track ID',
-      'Track URL',
-      'Track Available Markets List',
-      'Track Duration',
-      'Track Popularity',
-      'Is Explicit?',
-      'Is Local?',
-      'Total Tracks Results',
-      'Track Data',
+      "Track Name",
+      "Track Artists Name",
+      "Track Artists ID",
+      "Track Album Name",
+      "Track Album ID",
+      "Track ID",
+      "Track URL",
+      "Track Available Markets List",
+      "Track Duration",
+      "Track Popularity",
+      "Is Explicit?",
+      "Is Local?",
+      "Total Tracks Results",
+      "Track Data",
     ];
     const info2 = [
-      'Artist Name',
-      'Artist ID',
-      'Artist URL',
-      'Artist Followers Number',
-      'Artist Genres',
-      'Artist Popularity',
-      'Artist Image (H)',
-      'Artist Image (M)',
-      'Artist Image (L)',
-      'Total Artists Results',
-      'Artist Data',
+      "Artist Name",
+      "Artist ID",
+      "Artist URL",
+      "Artist Followers Number",
+      "Artist Genres",
+      "Artist Popularity",
+      "Artist Image (H)",
+      "Artist Image (M)",
+      "Artist Image (L)",
+      "Total Artists Results",
+      "Artist Data",
     ];
     const info3 = [
-      'Playlist Name',
-      'Playlist ID',
-      'Playlist URL',
-      'Playlist Owner Name',
-      'Playlist Owner ID',
-      'Playlist Owner URL',
-      'Playlist Snapshot ID',
-      'Playlist Tracks Total',
-      'Playlist Image (H)',
-      'Playlist Image (M)',
-      'Playlist Image (L)',
-      'Is Collaborative?',
-      'Total Playlists Results',
-      'Playlist Data',
+      "Playlist Name",
+      "Playlist ID",
+      "Playlist URL",
+      "Playlist Owner Name",
+      "Playlist Owner ID",
+      "Playlist Owner URL",
+      "Playlist Snapshot ID",
+      "Playlist Tracks Total",
+      "Playlist Image (H)",
+      "Playlist Image (M)",
+      "Playlist Image (L)",
+      "Is Collaborative?",
+      "Total Playlists Results",
+      "Playlist Data",
     ];
     const info4 = [
-      'Album Name',
-      'Album Artists Name',
-      'Album Artists ID',
-      'Album ID',
-      'Album Release Date',
-      'Album Type',
-      'Album URL',
-      'Album Total Tracks',
-      'Album Available Markets List',
-      'Album Image (H)',
-      'Album Image (M)',
-      'Album Image (L)',
-      'Total Albums Results',
-      'Album Data',
+      "Album Name",
+      "Album Artists Name",
+      "Album Artists ID",
+      "Album ID",
+      "Album Release Date",
+      "Album Type",
+      "Album URL",
+      "Album Total Tracks",
+      "Album Available Markets List",
+      "Album Image (H)",
+      "Album Image (M)",
+      "Album Image (L)",
+      "Total Albums Results",
+      "Album Data",
     ];
     return `${data.varName} - ${
-      data.search === '0'
+      data.search === "0"
         ? `${info1[data.info1]}`
         : `${
-            data.search === '1'
+            data.search === "1"
               ? `${info2[data.info2]}`
-              : `${data.search === '2' ? `${info3[data.info3]}` : `${info4[data.info4]}`}`
+              : `${
+                  data.search === "2"
+                    ? `${info3[data.info3]}`
+                    : `${info4[data.info4]}`
+                }`
           }`
     }`;
   },
@@ -82,176 +86,176 @@ module.exports = {
     const info3 = parseInt(data.info3, 10);
     const info4 = parseInt(data.info4, 10);
     const searchtype = parseInt(data.search, 10);
-    let dataType = 'Unknown Spotify Type';
+    let dataType = "Unknown Spotify Type";
     if (searchtype === 0) {
       switch (info1) {
         case 0:
-          dataType = 'Spotify Track Name';
+          dataType = "Spotify Track Name";
           break;
         case 1:
-          dataType = 'Spotify Track Artists Name';
+          dataType = "Spotify Track Artists Name";
           break;
         case 2:
-          dataType = 'Spotify Track Artists ID';
+          dataType = "Spotify Track Artists ID";
           break;
         case 3:
-          dataType = 'Spotify Track Album Name';
+          dataType = "Spotify Track Album Name";
           break;
         case 4:
-          dataType = 'Spotify Track Album ID';
+          dataType = "Spotify Track Album ID";
           break;
         case 5:
-          dataType = 'Spotify Track ID';
+          dataType = "Spotify Track ID";
           break;
         case 6:
-          dataType = 'Spotify Track URL';
+          dataType = "Spotify Track URL";
           break;
         case 7:
-          dataType = 'Spotify Track Available Markets List';
+          dataType = "Spotify Track Available Markets List";
           break;
         case 8:
-          dataType = 'Spotify Track Duration';
+          dataType = "Spotify Track Duration";
           break;
         case 9:
-          dataType = 'Spotify Track Popularity';
+          dataType = "Spotify Track Popularity";
           break;
         case 10:
-          dataType = 'Boolean';
+          dataType = "Boolean";
           break;
         case 11:
-          dataType = 'Boolean';
+          dataType = "Boolean";
           break;
         case 12:
-          dataType = 'Spotify Total Tracks Results';
+          dataType = "Spotify Total Tracks Results";
           break;
         case 13:
-          dataType = 'Spotify Track Data';
+          dataType = "Spotify Track Data";
           break;
       }
     } else if (searchtype === 1) {
       switch (info2) {
         case 0:
-          dataType = 'Spotify Artist Name';
+          dataType = "Spotify Artist Name";
           break;
         case 1:
-          dataType = 'Spotify Artist ID';
+          dataType = "Spotify Artist ID";
           break;
         case 2:
-          dataType = 'Spotify Artist URL';
+          dataType = "Spotify Artist URL";
           break;
         case 3:
-          dataType = 'Spotify Artist Followers Number';
+          dataType = "Spotify Artist Followers Number";
           break;
         case 4:
-          dataType = 'Spotify Artist Genres';
+          dataType = "Spotify Artist Genres";
           break;
         case 5:
-          dataType = 'Spotify Artist Popularity';
+          dataType = "Spotify Artist Popularity";
           break;
         case 6:
-          dataType = 'Spotify Artist Image (H)';
+          dataType = "Spotify Artist Image (H)";
           break;
         case 7:
-          dataType = 'Spotify Artist Image (M)';
+          dataType = "Spotify Artist Image (M)";
           break;
         case 8:
-          dataType = 'Spotify Artist Image (L)';
+          dataType = "Spotify Artist Image (L)";
           break;
         case 9:
-          dataType = 'Spotify Total Artists Results';
+          dataType = "Spotify Total Artists Results";
           break;
         case 10:
-          dataType = 'Spotify Artist Data';
+          dataType = "Spotify Artist Data";
           break;
       }
     } else if (searchtype === 2) {
       switch (info3) {
         case 0:
-          dataType = 'Spotify Playlist Name';
+          dataType = "Spotify Playlist Name";
           break;
         case 1:
-          dataType = 'Spotify Playlist ID';
+          dataType = "Spotify Playlist ID";
           break;
         case 2:
-          dataType = 'Spotify Playlist URL';
+          dataType = "Spotify Playlist URL";
           break;
         case 3:
-          dataType = 'Spotify Playlist Owner Name';
+          dataType = "Spotify Playlist Owner Name";
           break;
         case 4:
-          dataType = 'Spotify Playlist Owner ID';
+          dataType = "Spotify Playlist Owner ID";
           break;
         case 5:
-          dataType = 'Spotify Playlist Owner URL';
+          dataType = "Spotify Playlist Owner URL";
           break;
         case 6:
-          dataType = 'Spotify Playlist Snapshot ID';
+          dataType = "Spotify Playlist Snapshot ID";
           break;
         case 7:
-          dataType = 'Spotify Playlist Tracks Total';
+          dataType = "Spotify Playlist Tracks Total";
           break;
         case 8:
-          dataType = 'Spotify Playlist Image (H)';
+          dataType = "Spotify Playlist Image (H)";
           break;
         case 9:
-          dataType = 'Spotify Playlist Image (M)';
+          dataType = "Spotify Playlist Image (M)";
           break;
         case 10:
-          dataType = 'Spotify Playlist Image (L)';
+          dataType = "Spotify Playlist Image (L)";
           break;
         case 11:
-          dataType = 'Boolean';
+          dataType = "Boolean";
           break;
         case 12:
-          dataType = 'Spotify Total Playlists Results';
+          dataType = "Spotify Total Playlists Results";
           break;
         case 13:
-          dataType = 'Spotify Playlist Data';
+          dataType = "Spotify Playlist Data";
           break;
       }
     } else if (searchtype === 3) {
       switch (info4) {
         case 0:
-          dataType = 'Spotify Album Name';
+          dataType = "Spotify Album Name";
           break;
         case 1:
-          dataType = 'Spotify Album Artists Name';
+          dataType = "Spotify Album Artists Name";
           break;
         case 2:
-          dataType = 'Spotify Album Artists ID';
+          dataType = "Spotify Album Artists ID";
           break;
         case 3:
-          dataType = 'Spotify Album ID';
+          dataType = "Spotify Album ID";
           break;
         case 4:
-          dataType = 'Spotify Album Release Date';
+          dataType = "Spotify Album Release Date";
           break;
         case 5:
-          dataType = 'Spotify Album Type';
+          dataType = "Spotify Album Type";
           break;
         case 6:
-          dataType = 'Spotify Album URL';
+          dataType = "Spotify Album URL";
           break;
         case 7:
-          dataType = 'Spotify Album Total Tracks';
+          dataType = "Spotify Album Total Tracks";
           break;
         case 8:
-          dataType = 'Spotify Album Available Markets List';
+          dataType = "Spotify Album Available Markets List";
           break;
         case 9:
-          dataType = 'Spotify Album Image (H)';
+          dataType = "Spotify Album Image (H)";
           break;
         case 10:
-          dataType = 'Spotify Album Image (M)';
+          dataType = "Spotify Album Image (M)";
           break;
         case 11:
-          dataType = 'Spotify Album Image (L)';
+          dataType = "Spotify Album Image (L)";
           break;
         case 12:
-          dataType = 'Spotify Total Albums Results';
+          dataType = "Spotify Total Albums Results";
           break;
         case 13:
-          dataType = 'Spotify Album Data';
+          dataType = "Spotify Album Data";
           break;
       }
     }
@@ -259,17 +263,17 @@ module.exports = {
   },
 
   fields: [
-    'clientid',
-    'clientsecret',
-    'search',
-    'varName',
-    'info1',
-    'info2',
-    'info3',
-    'info4',
-    'resultNo',
-    'storage',
-    'varName2',
+    "clientid",
+    "clientsecret",
+    "search",
+    "varName",
+    "info1",
+    "info2",
+    "info3",
+    "info4",
+    "resultNo",
+    "storage",
+    "varName2",
   ],
 
   html(_isEvent, data) {
@@ -406,37 +410,40 @@ module.exports = {
     glob.onChange1 = function onChange1(event) {
       const value = parseInt(event.value, 10);
       if (value === 0) {
-        document.getElementById('info1').style.display = null;
-        document.getElementById('info2').style.display = 'none';
-        document.getElementById('info3').style.display = 'none';
-        document.getElementById('info4').style.display = 'none';
+        document.getElementById("info1").style.display = null;
+        document.getElementById("info2").style.display = "none";
+        document.getElementById("info3").style.display = "none";
+        document.getElementById("info4").style.display = "none";
       } else if (value === 1) {
-        document.getElementById('info1').style.display = 'none';
-        document.getElementById('info2').style.display = null;
-        document.getElementById('info3').style.display = 'none';
-        document.getElementById('info4').style.display = 'none';
+        document.getElementById("info1").style.display = "none";
+        document.getElementById("info2").style.display = null;
+        document.getElementById("info3").style.display = "none";
+        document.getElementById("info4").style.display = "none";
       } else if (value === 2) {
-        document.getElementById('info1').style.display = 'none';
-        document.getElementById('info2').style.display = 'none';
-        document.getElementById('info3').style.display = null;
-        document.getElementById('info4').style.display = 'none';
+        document.getElementById("info1").style.display = "none";
+        document.getElementById("info2").style.display = "none";
+        document.getElementById("info3").style.display = null;
+        document.getElementById("info4").style.display = "none";
       } else {
-        document.getElementById('info1').style.display = 'none';
-        document.getElementById('info2').style.display = 'none';
-        document.getElementById('info3').style.display = 'none';
-        document.getElementById('info4').style.display = null;
+        document.getElementById("info1").style.display = "none";
+        document.getElementById("info2").style.display = "none";
+        document.getElementById("info3").style.display = "none";
+        document.getElementById("info4").style.display = null;
       }
     };
 
-    glob.onChange1(document.getElementById('search'));
-    glob.variableChange(document.getElementById('storage'), 'varNameContainer2');
+    glob.onChange1(document.getElementById("search"));
+    glob.variableChange(
+      document.getElementById("storage"),
+      "varNameContainer2"
+    );
   },
 
   action(cache) {
     const data = cache.actions[cache.index];
     const { Actions } = this.getDBM();
     const Mods = this.getMods();
-    const SpotifyWebApi = Mods.require('spotify-web-api-node');
+    const SpotifyWebApi = Mods.require("spotify-web-api-node");
 
     const clientId = this.evalMessage(data.clientid, cache);
     const clientSecret = this.evalMessage(data.clientsecret, cache);
@@ -455,7 +462,10 @@ module.exports = {
     const storage = parseInt(data.storage, 10);
     const varName2 = this.evalMessage(data.varName2, cache);
 
-    if (!clientId && !clientSecret) return console.log('Please input your client credentials in Spotify Search Mod!');
+    if (!clientId && !clientSecret)
+      return console.log(
+        "Please input your client credentials in Spotify Search Mod!"
+      );
 
     const spotifyApi = new SpotifyWebApi({
       clientId,
@@ -476,10 +486,14 @@ module.exports = {
                   result = data.body.tracks.items[results2].name; // Track Name
                   break;
                 case 1:
-                  result = data.body.tracks.items[results2].artists.map((a) => a.name); // Track Artists Name
+                  result = data.body.tracks.items[results2].artists.map(
+                    (a) => a.name
+                  ); // Track Artists Name
                   break;
                 case 2:
-                  result = data.body.tracks.items[results2].artists.map((a) => a.id); // Track Artists ID
+                  result = data.body.tracks.items[results2].artists.map(
+                    (a) => a.id
+                  ); // Track Artists ID
                   break;
                 case 3:
                   result = data.body.tracks.items[results2].album.name; // Track Album Name
@@ -491,7 +505,8 @@ module.exports = {
                   result = data.body.tracks.items[results2].id; // Track ID
                   break;
                 case 6:
-                  result = data.body.tracks.items[results2].external_urls.spotify; // Track URL
+                  result =
+                    data.body.tracks.items[results2].external_urls.spotify; // Track URL
                   break;
                 case 7:
                   result = data.body.tracks.items[results2].available_markets; // Album Available Markets List
@@ -523,7 +538,7 @@ module.exports = {
             (err) => {
               console.log(err);
               Actions.callNextAction(cache);
-            },
+            }
           );
         } else if (searchtype === 1) {
           spotifyApi.searchArtists(value, { limit: results }).then(
@@ -538,7 +553,8 @@ module.exports = {
                   result = data.body.artists.items[results2].id; // Artist ID
                   break;
                 case 2:
-                  result = data.body.artists.items[results2].external_urls.spotify; // Artist URL
+                  result =
+                    data.body.artists.items[results2].external_urls.spotify; // Artist URL
                   break;
                 case 3:
                   result = data.body.artists.items[results2].followers.total; // Artist Followers Number
@@ -573,7 +589,7 @@ module.exports = {
             (err) => {
               console.log(err);
               Actions.callNextAction(cache);
-            },
+            }
           );
         } else if (searchtype === 2) {
           spotifyApi.searchPlaylists(value, { limit: results }).then(
@@ -588,16 +604,20 @@ module.exports = {
                   result = data.body.playlists.items[results2].id; // Playlist ID
                   break;
                 case 2:
-                  result = data.body.playlists.items[results2].external_urls.spotify; // Playlist URL
+                  result =
+                    data.body.playlists.items[results2].external_urls.spotify; // Playlist URL
                   break;
                 case 3:
-                  result = data.body.playlists.items[results2].owner.display_name; // Playlist Owner Name
+                  result =
+                    data.body.playlists.items[results2].owner.display_name; // Playlist Owner Name
                   break;
                 case 4:
                   result = data.body.playlists.items[results2].owner.id; // Playlist Owner ID
                   break;
                 case 5:
-                  result = data.body.playlists.items[results2].owner.external_urls.spotify; // Playlist Owner URL
+                  result =
+                    data.body.playlists.items[results2].owner.external_urls
+                      .spotify; // Playlist Owner URL
                   break;
                 case 6:
                   result = data.body.playlists.items[results2].snapshot_id; // Playlist Snapshot ID
@@ -632,7 +652,7 @@ module.exports = {
             (err) => {
               console.log(err);
               Actions.callNextAction(cache);
-            },
+            }
           );
         } else if (searchtype === 3) {
           spotifyApi.searchAlbums(value, { limit: results }).then(
@@ -644,10 +664,14 @@ module.exports = {
                   result = data.body.albums.items[results2].name; // Album Name
                   break;
                 case 1:
-                  result = data.body.albums.items[results2].artists.map((a) => a.name); // Album Artists Name
+                  result = data.body.albums.items[results2].artists.map(
+                    (a) => a.name
+                  ); // Album Artists Name
                   break;
                 case 2:
-                  result = data.body.albums.items[results2].artists.map((a) => a.id); // Album Artists ID
+                  result = data.body.albums.items[results2].artists.map(
+                    (a) => a.id
+                  ); // Album Artists ID
                   break;
                 case 3:
                   result = data.body.albums.items[results2].id; // Album ID
@@ -659,7 +683,8 @@ module.exports = {
                   result = data.body.albums.items[results2].album_type; // Album Type
                   break;
                 case 6:
-                  result = data.body.albums.items[results2].external_urls.spotify; // Album URL
+                  result =
+                    data.body.albums.items[results2].external_urls.spotify; // Album URL
                   break;
                 case 7:
                   result = data.body.albums.items[results2].total_tracks; // Album Total Tracks
@@ -691,15 +716,18 @@ module.exports = {
             (err) => {
               console.log(err);
               Actions.callNextAction(cache);
-            },
+            }
           );
         } else {
           this.callNextAction(cache);
         }
       },
       (err) => {
-        console.log('Something went wrong when retrieving an access token', err.message);
-      },
+        console.log(
+          "Something went wrong when retrieving an access token",
+          err.message
+        );
+      }
     );
   },
 

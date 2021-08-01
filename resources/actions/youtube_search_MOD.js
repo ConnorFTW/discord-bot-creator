@@ -1,51 +1,51 @@
 module.exports = {
-  name: 'YouTube Search',
-  section: 'Audio Control',
+  name: "YouTube Search",
+  section: "Audio Control",
 
   subtitle(data) {
     const videoInfo = [
-      'Video ID',
-      'Video URL',
-      'Video Title',
-      'Video Description',
-      'Video Channel ID',
-      'Video Channel URL',
-      'Video Channel Name',
-      'Video Thumbnail URL',
-      'Video Duration',
-      'Video Publish Data',
-      'Video Views',
-      'Video is live?',
+      "Video ID",
+      "Video URL",
+      "Video Title",
+      "Video Description",
+      "Video Channel ID",
+      "Video Channel URL",
+      "Video Channel Name",
+      "Video Thumbnail URL",
+      "Video Duration",
+      "Video Publish Data",
+      "Video Views",
+      "Video is live?",
     ];
     const playlistInfo = [
-      'Playlist ID',
-      'Playlist URL',
-      'Playlist Name',
-      'Playlist Description',
-      'Playlist Thumbnail URL (Default)',
-      'Playlist Thumbnail URL (Medium)',
-      'Playlist Thumbnail URL (High)',
-      'Playlist Channel ID',
-      'Playlist Channel URL',
-      'Playlist Channel Name',
-      'Playlist Channel Thumbnail URL (Default)',
-      'Playlist Channel Thumbnail URL (Medium)',
-      'Playlist Channel Thumbnail URL (High)',
-      'Video IDs',
-      'Video URLs',
-      'Video Titles',
-      'Video Descriptions',
-      'Video Channel IDs',
-      'Video Channel URls',
-      'Video Channel Names',
-      'Video Channel Thumbnail URLs (Default)',
-      'Video Channel Thumbnail URLs (Medium)',
-      'Video Channel Thumbnail URLs (High)',
-      'Video Thumbnail URLs (Default)',
-      'Video Thumbnail URLs (Medium)',
-      'Video Thumbnail URLs (High)',
-      'Video Positions',
-      'Video Publish Dates',
+      "Playlist ID",
+      "Playlist URL",
+      "Playlist Name",
+      "Playlist Description",
+      "Playlist Thumbnail URL (Default)",
+      "Playlist Thumbnail URL (Medium)",
+      "Playlist Thumbnail URL (High)",
+      "Playlist Channel ID",
+      "Playlist Channel URL",
+      "Playlist Channel Name",
+      "Playlist Channel Thumbnail URL (Default)",
+      "Playlist Channel Thumbnail URL (Medium)",
+      "Playlist Channel Thumbnail URL (High)",
+      "Video IDs",
+      "Video URLs",
+      "Video Titles",
+      "Video Descriptions",
+      "Video Channel IDs",
+      "Video Channel URls",
+      "Video Channel Names",
+      "Video Channel Thumbnail URLs (Default)",
+      "Video Channel Thumbnail URLs (Medium)",
+      "Video Channel Thumbnail URLs (High)",
+      "Video Thumbnail URLs (Default)",
+      "Video Thumbnail URLs (Medium)",
+      "Video Thumbnail URLs (High)",
+      "Video Positions",
+      "Video Publish Dates",
     ];
     if (parseInt(data.type, 10) === 1) {
       return `${playlistInfo[parseInt(data.info1, 10)]}`;
@@ -55,7 +55,7 @@ module.exports = {
 
   variableStorage(data, varType) {
     if (parseInt(data.storage, 10) !== varType) return;
-    let dataType = 'Unknown Type';
+    let dataType = "Unknown Type";
     switch (parseInt(data.type, 10)) {
       case 0: // Video
         // ----------------------------
@@ -67,20 +67,20 @@ module.exports = {
           case 6: // Video Channel Name
           case 17: // Video Duration
           case 18: // Video Publish Date
-            dataType = 'Text';
+            dataType = "Text";
             break;
           case 1: // Video URL
           case 5: // Video Channel URL
-            dataType = 'URL';
+            dataType = "URL";
             break;
           case 7: // Video Thumbnail URL
-            dataType = 'Image URL';
+            dataType = "Image URL";
             break;
           case 24: // Video is live?
-            dataType = 'Boolean';
+            dataType = "Boolean";
             break;
           case 19: // Video Views
-            dataType = 'Number';
+            dataType = "Number";
             break;
         }
         break;
@@ -92,11 +92,11 @@ module.exports = {
           case 3: // Playlist Description
           case 7: // Playlist Channel ID
           case 9: // Playlist Channel Name
-            dataType = 'Text';
+            dataType = "Text";
             break;
           case 1: // Playlist URL
           case 8: // Playlist Channel URL
-            dataType = 'URL';
+            dataType = "URL";
             break;
           case 4: // Playlist Thumbnail URL (Default)
           case 5: // Playlist Thumbnail URL (Medium)
@@ -104,7 +104,7 @@ module.exports = {
           case 10: // Playlist Channel Thumbnail URL (Default)
           case 11: // Playlist Channel Thumbnail URL (Medium)
           case 12: // Playlist Channel Thumbnail URL (High)
-            dataType = 'Image URL';
+            dataType = "Image URL";
             break;
           case 13: // Video IDs
           case 14: // Video URLs
@@ -121,7 +121,7 @@ module.exports = {
           case 25: // Video Thumbnail URLs (High)
           case 26: // Video Positions
           case 27: // Video Publish Dates
-            dataType = 'List';
+            dataType = "List";
             break;
         }
         break;
@@ -129,7 +129,16 @@ module.exports = {
     return [data.varName, dataType];
   },
 
-  fields: ['type', 'input', 'info0', 'info1', 'apikey', 'results', 'storage', 'varName'],
+  fields: [
+    "type",
+    "input",
+    "info0",
+    "info1",
+    "apikey",
+    "results",
+    "storage",
+    "varName",
+  ],
 
   html(_isEvent, data) {
     return `
@@ -243,37 +252,37 @@ module.exports = {
   init() {
     const { glob, document } = this;
 
-    glob.variableChange(document.getElementById('storage'), 'varNameContainer');
+    glob.variableChange(document.getElementById("storage"), "varNameContainer");
     glob.onChange1 = function onChange1(event) {
       const id = parseInt(event.value, 10);
       // Load [Source Video Info], [Source Playlist Info], [API Key], [Max Results]
-      const videoDiv = document.getElementById('divinfo0');
-      const video = document.getElementById('info0');
-      const playlistDiv = document.getElementById('divinfo1');
-      const playlist = document.getElementById('info1');
-      let result = '';
+      const videoDiv = document.getElementById("divinfo0");
+      const video = document.getElementById("info0");
+      const playlistDiv = document.getElementById("divinfo1");
+      const playlist = document.getElementById("info1");
+      let result = "";
       switch (
         id // Show: [Source Video Info] Hide: [Source Playlist Info], [Max Results]
       ) {
         case 0:
-          result = 'Video';
+          result = "Video";
           video.style.display = null;
           videoDiv.style.display = null;
-          playlist.style.display = 'none';
-          playlistDiv.style.display = 'none';
+          playlist.style.display = "none";
+          playlistDiv.style.display = "none";
           break;
         case 1: // Show: [Source Playlist Info], [Max Results] Hide: [Source Video Info]
-          result = 'Playlist';
-          video.style.display = 'none';
-          videoDiv.style.display = 'none';
+          result = "Playlist";
+          video.style.display = "none";
+          videoDiv.style.display = "none";
           playlist.style.display = null;
           playlistDiv.style.display = null;
           break;
       }
       // Replace text with [Video/Playlist]
-      document.getElementById('tempName').innerHTML = result;
+      document.getElementById("tempName").innerHTML = result;
     };
-    glob.onChange1(document.getElementById('type'));
+    glob.onChange1(document.getElementById("type"));
   },
 
   async action(cache) {
@@ -286,19 +295,19 @@ module.exports = {
     const info0 = parseInt(data.info0, 10); // Video
     const info1 = parseInt(data.info1, 10); // Playlist
     const results = parseInt(data.results, 10);
-    const { Client } = Mods.require('youtubei');
+    const { Client } = Mods.require("youtubei");
     const youtubei = new Client();
-    const YTapi = Mods.require('simple-youtube-api');
+    const YTapi = Mods.require("simple-youtube-api");
 
     if (!input) {
-      console.error('Please provide a url or some keywords to search for.');
+      console.error("Please provide a url or some keywords to search for.");
       return this.callNextAction(cache);
     }
 
     switch (type) {
       case 0: {
         // Video
-        const searchResults = await youtubei.search(input, { type: 'video' });
+        const searchResults = await youtubei.search(input, { type: "video" });
         if (!searchResults) return this.callNextAction(cache);
         const compact = searchResults[results - 1]; // Video Compact from search results
         if (!compact) return this.callNextAction(cache);
@@ -329,7 +338,8 @@ module.exports = {
             result = video.channel.name;
             break;
           case 7: // Video Channel Avatar
-            result = video.channel.thumbnails[video.channel.thumbnails.length - 1].url;
+            result =
+              video.channel.thumbnails[video.channel.thumbnails.length - 1].url;
             break;
           case 8: // Thumbnail URL
             result = video.thumbnails[video.thumbnails.length - 1].url;
@@ -359,8 +369,10 @@ module.exports = {
       }
       case 1: {
         // Playlist
-        if (apikey === undefined || apikey === '')
-          return console.error('Please provide a valid api key for YouTube Search Playlist.');
+        if (apikey === undefined || apikey === "")
+          return console.error(
+            "Please provide a valid api key for YouTube Search Playlist."
+          );
 
         const YouTube = new YTapi(apikey);
         const playlists = await YouTube.searchPlaylists(input, results);
@@ -379,13 +391,13 @@ module.exports = {
           case 2: // Playlist Name
             result = playlist.title
               .replace(/&quot;/g, '"')
-              .replace(/&amp;/g, '&')
+              .replace(/&amp;/g, "&")
               .replace(/&#39;/g, "'");
             break;
           case 3: // Playlist Description
             result = playlist.description
               .replace(/&quot;/g, '"')
-              .replace(/&amp;/g, '&')
+              .replace(/&amp;/g, "&")
               .replace(/&#39;/g, "'");
             break;
           case 4: // Playlist Thumbnail URL (Default)
@@ -430,29 +442,33 @@ module.exports = {
                   result2.push(
                     video.title
                       .replace(/&quot;/g, '"')
-                      .replace(/&amp;/g, '&')
-                      .replace(/&#39;/g, "'"),
+                      .replace(/&amp;/g, "&")
+                      .replace(/&#39;/g, "'")
                   );
                   break;
                 case 16: // Video Descriptions
                   result2.push(
                     video.description
                       .replace(/&quot;/g, '"')
-                      .replace(/&amp;/g, '&')
-                      .replace(/&#39;/g, "'"),
+                      .replace(/&amp;/g, "&")
+                      .replace(/&#39;/g, "'")
                   );
                   break;
                 case 17: // Video Channel IDs
                   result2.push(video.channel.id);
                   break;
                 case 18: // Video Channel URLs
-                  result2.push(`https://www.youtube.com/channel/${video.channel.id}`);
+                  result2.push(
+                    `https://www.youtube.com/channel/${video.channel.id}`
+                  );
                   break;
                 case 19: // Video Channel Names
                   result2.push(video.channel.title);
                   break;
                 case 20: // Video Channel Thumbnail URLs (Default)
-                  result2.push(video.channel.raw.snippet.thumbnails.default.url);
+                  result2.push(
+                    video.channel.raw.snippet.thumbnails.default.url
+                  );
                   break;
                 case 21: // Video Channel Thumbnail URLs (Medium)
                   result2.push(video.channel.raw.snippet.thumbnails.medium.url);
@@ -476,7 +492,9 @@ module.exports = {
                   result2.push(video.publishedAt);
                   break;
                 default:
-                  console.error('Please check your YouTube Search action... There is something wrong.');
+                  console.error(
+                    "Please check your YouTube Search action... There is something wrong."
+                  );
                   break;
               }
             });

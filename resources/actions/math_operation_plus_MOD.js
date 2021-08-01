@@ -1,31 +1,31 @@
 module.exports = {
-  name: 'Math Operation Plus',
-  section: 'Other Stuff',
+  name: "Math Operation Plus",
+  section: "Other Stuff",
 
   subtitle(data) {
     const info = [
-      'Addition',
-      'Subtraction',
-      'Multiplication',
-      'Division',
-      'Round',
-      'Round to S.F.',
-      'Absolute',
-      'Ceil',
-      'Floor',
-      'Factorial',
-      'Raised by (Exponents)',
-      'Rooted by (Roots)',
-      'Sine',
-      'Cosine',
-      'Tangent',
-      'Arc Sine',
-      'Arc Cosine',
-      'Arc Tangent',
-      '% Of Number',
-      'Increase By %',
-      'Decrease By %',
-      'Value of Pi',
+      "Addition",
+      "Subtraction",
+      "Multiplication",
+      "Division",
+      "Round",
+      "Round to S.F.",
+      "Absolute",
+      "Ceil",
+      "Floor",
+      "Factorial",
+      "Raised by (Exponents)",
+      "Rooted by (Roots)",
+      "Sine",
+      "Cosine",
+      "Tangent",
+      "Arc Sine",
+      "Arc Cosine",
+      "Arc Tangent",
+      "% Of Number",
+      "Increase By %",
+      "Decrease By %",
+      "Value of Pi",
       "Value of Euler's number",
     ];
     return `${info[data.info]}`;
@@ -33,10 +33,10 @@ module.exports = {
 
   variableStorage(data, varType) {
     if (parseInt(data.storage, 10) !== varType) return;
-    return [data.varName, 'Number'];
+    return [data.varName, "Number"];
   },
 
-  fields: ['FirstNumber', 'info', 'SecondNumber', 'storage', 'varName'],
+  fields: ["FirstNumber", "info", "SecondNumber", "storage", "varName"],
 
   html(_isEvent, data) {
     return `
@@ -95,28 +95,36 @@ module.exports = {
 
     glob.onChange1 = function onChange1(event) {
       const value = parseInt(event.value, 10);
-      const dom = document.getElementById('SecondNum');
-      const dom2 = document.getElementById('FirstNum');
+      const dom = document.getElementById("SecondNum");
+      const dom2 = document.getElementById("FirstNum");
 
-      if ((value >= 0 && value <= 3) || [5, 10, 11].includes(value) || (value >= 18 && value <= 20)) {
+      if (
+        (value >= 0 && value <= 3) ||
+        [5, 10, 11].includes(value) ||
+        (value >= 18 && value <= 20)
+      ) {
         dom.style.display = null;
       } else {
-        dom.style.display = 'none';
+        dom.style.display = "none";
       }
 
       if (value < 21) {
         dom2.style.display = null;
       } else {
-        dom2.style.display = 'none';
+        dom2.style.display = "none";
       }
     };
-    glob.onChange1(document.getElementById('info'));
+    glob.onChange1(document.getElementById("info"));
   },
 
   action(cache) {
     const data = cache.actions[cache.index];
-    let FN = parseFloat(this.evalMessage(data.FirstNumber, cache).replace(/,/g, ''));
-    const SN = parseFloat(this.evalMessage(data.SecondNumber, cache).replace(/,/g, ''));
+    let FN = parseFloat(
+      this.evalMessage(data.FirstNumber, cache).replace(/,/g, "")
+    );
+    const SN = parseFloat(
+      this.evalMessage(data.SecondNumber, cache).replace(/,/g, "")
+    );
     const info = parseInt(data.info, 10);
 
     let result;

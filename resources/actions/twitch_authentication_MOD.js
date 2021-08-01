@@ -1,12 +1,12 @@
 module.exports = {
-  name: 'Twitch Authentication',
-  section: 'Other Stuff',
+  name: "Twitch Authentication",
+  section: "Other Stuff",
 
   subtitle(data) {
     if (data.client_id) {
       return `Authentication for client id : ${data.client_id}`;
     }
-    return 'Authentication';
+    return "Authentication";
   },
 
   variableStorage(data, varType) {
@@ -14,19 +14,19 @@ module.exports = {
     let dataType;
     switch (parseInt(data.info, 10)) {
       case 0:
-        dataType = 'Access Token';
+        dataType = "Access Token";
         break;
       case 1:
-        dataType = 'Expires in Seconds';
+        dataType = "Expires in Seconds";
         break;
       case 2:
-        dataType = 'Authentication Object';
+        dataType = "Authentication Object";
         break;
     }
     return [data.varName, dataType];
   },
 
-  fields: ['client_id', 'client_secret', 'info', 'storage', 'varName', 'debug'],
+  fields: ["client_id", "client_secret", "info", "storage", "varName", "debug"],
 
   html(_isEvent, data) {
     return `
@@ -72,7 +72,7 @@ module.exports = {
   async action(cache) {
     const data = cache.actions[cache.index];
     const Mods = this.getMods();
-    const fetch = Mods.require('node-fetch');
+    const fetch = Mods.require("node-fetch");
     const clientID = this.evalMessage(data.client_id, cache);
     const clientSecret = this.evalMessage(data.client_secret, cache);
     const info = parseInt(data.info, 10);
@@ -101,7 +101,7 @@ module.exports = {
         this.storeValue(result, storage, varName, cache);
         if (data.debug)
           console.log(
-            "Twitch Authentication: Reminder: Please do save variable, don't request access token too many times",
+            "Twitch Authentication: Reminder: Please do save variable, don't request access token too many times"
           );
       }
       this.callNextAction(cache);
@@ -111,7 +111,7 @@ module.exports = {
       const json = this.getVariable(1, url, cache);
       getInfo.call(this, json);
     } else {
-      const res = await fetch(url, { method: 'POST' });
+      const res = await fetch(url, { method: "POST" });
       if (res.ok) {
         const json = await res.json();
         if (json.error) {
@@ -122,7 +122,9 @@ module.exports = {
           getInfo.call(this, json);
         }
       } else {
-        console.error('Twitch Authentication: something wrong, please try again.');
+        console.error(
+          "Twitch Authentication: something wrong, please try again."
+        );
       }
     }
   },

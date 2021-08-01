@@ -1,6 +1,6 @@
 module.exports = {
-  name: 'Randomize Letters',
-  section: 'Other Stuff',
+  name: "Randomize Letters",
+  section: "Other Stuff",
 
   subtitle(data) {
     return `Randomize [${data.input}]`;
@@ -8,9 +8,9 @@ module.exports = {
 
   variableStorage(data, varType) {
     if (parseInt(data.storage, 10) !== varType) return;
-    return [data.varName, 'Text'];
+    return [data.varName, "Text"];
   },
-  fields: ['input', 'wordLength', 'storage', 'varName'],
+  fields: ["input", "wordLength", "storage", "varName"],
 
   html(isEvent, data) {
     return `
@@ -49,7 +49,7 @@ module.exports = {
 
   init() {
     const { glob, document } = this;
-    glob.variableChange(document.getElementById('storage'), 'varNameContainer');
+    glob.variableChange(document.getElementById("storage"), "varNameContainer");
   },
 
   action(cache) {
@@ -57,10 +57,11 @@ module.exports = {
     const Input = this.evalMessage(data.input, cache);
     const wordLength = this.evalMessage(data.wordLength, cache);
 
-    if (!Input) return console.log('Please specify letters to randomize.');
-    if (!wordLength) return console.log('Please specify amount of randomized letters.');
+    if (!Input) return console.log("Please specify letters to randomize.");
+    if (!wordLength)
+      return console.log("Please specify amount of randomized letters.");
 
-    const randomize = this.getMods().require('randomatic');
+    const randomize = this.getMods().require("randomatic");
     const random = randomize(Input, wordLength);
 
     const storage = parseInt(data.storage, 10);

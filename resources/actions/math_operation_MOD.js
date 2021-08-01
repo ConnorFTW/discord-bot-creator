@@ -1,29 +1,29 @@
 module.exports = {
-  name: 'Math Operation',
-  section: 'Other Stuff',
+  name: "Math Operation",
+  section: "Other Stuff",
 
   subtitle(data) {
     const info = [
-      'Round',
-      'Absolute',
-      'Ceil',
-      'Floor',
-      'Sine',
-      'Cosine',
-      'Tangent',
-      'Arc Sine',
-      'Arc Cosine',
-      'Arc Tangent',
+      "Round",
+      "Absolute",
+      "Ceil",
+      "Floor",
+      "Sine",
+      "Cosine",
+      "Tangent",
+      "Arc Sine",
+      "Arc Cosine",
+      "Arc Tangent",
     ];
     return `${info[data.info]}`;
   },
 
   variableStorage(data, varType) {
     if (parseInt(data.storage, 10) !== varType) return;
-    return [data.varName, 'Number'];
+    return [data.varName, "Number"];
   },
 
-  fields: ['num', 'info', 'storage', 'varName'],
+  fields: ["num", "info", "storage", "varName"],
 
   html(isEvent, data) {
     return `
@@ -70,7 +70,9 @@ module.exports = {
 
   action(cache) {
     const data = cache.actions[cache.index];
-    const num = parseFloat(this.evalMessage(data.math, cache).replace(/,/g, ''));
+    const num = parseFloat(
+      this.evalMessage(data.math, cache).replace(/,/g, "")
+    );
     const info = parseInt(data.info, 10);
 
     if (!num) return this.callNextAction(cache);

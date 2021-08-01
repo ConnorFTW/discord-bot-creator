@@ -1,27 +1,27 @@
 module.exports = {
-  name: 'Set AFK Timeout',
-  section: 'Server Control',
+  name: "Set AFK Timeout",
+  section: "Server Control",
 
   subtitle(data) {
-    if (data.serverAfkTime === '60') {
-      return '1 Minutes';
+    if (data.serverAfkTime === "60") {
+      return "1 Minutes";
     }
-    if (data.serverAfkTime === '300') {
-      return '5 Minutes';
+    if (data.serverAfkTime === "300") {
+      return "5 Minutes";
     }
-    if (data.serverAfkTime === '900') {
-      return '15 Minutes';
+    if (data.serverAfkTime === "900") {
+      return "15 Minutes";
     }
-    if (data.serverAfkTime === '1800') {
-      return '30 Minutes';
+    if (data.serverAfkTime === "1800") {
+      return "30 Minutes";
     }
-    if (data.serverAfkTime === '3600') {
-      return '1 Hours';
+    if (data.serverAfkTime === "3600") {
+      return "1 Hours";
     }
     return `${data.serverAfkTime} Seconds`;
   },
 
-  fields: ['server', 'varName', 'serverAfkTime'],
+  fields: ["server", "varName", "serverAfkTime"],
 
   html(isEvent, data) {
     return `
@@ -86,7 +86,7 @@ module.exports = {
 
   init() {
     const { glob, document } = this;
-    glob.serverChange(document.getElementById('server'), 'varNameContainer');
+    glob.serverChange(document.getElementById("server"), "varNameContainer");
   },
 
   action(cache) {
@@ -96,7 +96,9 @@ module.exports = {
     const server = this.getServer(type, varName, cache);
 
     if (Array.isArray(server)) {
-      this.callListFunc(server, 'setAFKTimeout', [this.evalMessage(data.serverAfkTime, cache)]).then(() => {
+      this.callListFunc(server, "setAFKTimeout", [
+        this.evalMessage(data.serverAfkTime, cache),
+      ]).then(() => {
         this.callNextAction(cache);
       });
     } else if (server && server.setAFKTimeout) {

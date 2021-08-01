@@ -1,6 +1,6 @@
 module.exports = {
-  name: 'Parse From Stored Json',
-  section: 'JSON Things',
+  name: "Parse From Stored Json",
+  section: "JSON Things",
 
   subtitle(data) {
     return `${data.varName}`;
@@ -8,11 +8,18 @@ module.exports = {
 
   variableStorage(data, varType) {
     if (parseInt(data.storage, 10) !== varType) return;
-    if (varType === 'object') return [data.varName, 'JSON Object'];
+    if (varType === "object") return [data.varName, "JSON Object"];
     return [data.varName, `JSON ${varType} Value`];
   },
 
-  fields: ['behavior', 'varStorage', 'jsonObjectVarName', 'path', 'storage', 'varName'],
+  fields: [
+    "behavior",
+    "varStorage",
+    "jsonObjectVarName",
+    "path",
+    "storage",
+    "varName",
+  ],
 
   html(_isEvent, data) {
     return `
@@ -83,8 +90,8 @@ module.exports = {
 
   init() {
     const { glob, document } = this;
-    glob.variableChange(document.getElementById('storage'), 'varNameContainer');
-    glob.refreshVariableList(document.getElementById('storage'));
+    glob.variableChange(document.getElementById("storage"), "varNameContainer");
+    glob.refreshVariableList(document.getElementById("storage"));
   },
 
   action(cache) {
@@ -99,7 +106,7 @@ module.exports = {
     const DEBUG = parseInt(data.debugMode, 10);
 
     let jsonData = jsonRaw;
-    if (typeof jsonRaw !== 'object') {
+    if (typeof jsonRaw !== "object") {
       jsonData = JSON.parse(jsonRaw);
     }
 
@@ -131,24 +138,30 @@ module.exports = {
 
         if (outData.success !== null || outValue.success !== null) {
           const errorJson = JSON.stringify({
-            error: 'error',
+            error: "error",
             statusCode: 0,
             success: false,
           });
           this.storeValue(errorJson, storage, varName, cache);
-          console.log(`WebAPI Parser: Error Invalid JSON, is the Path set correctly? [${path}]`);
+          console.log(
+            `WebAPI Parser: Error Invalid JSON, is the Path set correctly? [${path}]`
+          );
         } else if (outValue.success !== null || !outValue) {
           const errorJson = JSON.stringify({
-            error: 'error',
+            error: "error",
             statusCode: 0,
             success: false,
           });
           this.storeValue(errorJson, storage, varName, cache);
-          console.log(`WebAPI Parser: Error Invalid JSON, is the Path set correctly? [${path}]`);
+          console.log(
+            `WebAPI Parser: Error Invalid JSON, is the Path set correctly? [${path}]`
+          );
         } else {
           this.storeValue(outValue, storage, varName, cache);
           if (DEBUG) {
-            console.log(`WebAPI Parser: JSON Data values starting from [${path}] stored to: [${varName}]`);
+            console.log(
+              `WebAPI Parser: JSON Data values starting from [${path}] stored to: [${varName}]`
+            );
           }
         }
       }
@@ -159,10 +172,12 @@ module.exports = {
         success: false,
       });
       this.storeValue(errorJson, storage, varName, cache);
-      console.error(`WebAPI Parser: Error: ${errorJson} stored to: [${varName}]`);
+      console.error(
+        `WebAPI Parser: Error: ${errorJson} stored to: [${varName}]`
+      );
     }
 
-    if (data.behavior === '0') {
+    if (data.behavior === "0") {
       this.callNextAction(cache);
     }
   },

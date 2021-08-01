@@ -1,12 +1,12 @@
 module.exports = {
-  name: 'Comment',
-  section: 'Other Stuff',
+  name: "Comment",
+  section: "Other Stuff",
 
   subtitle(data) {
     return `<font color="${data.color}">${data.comment}</font>`;
   },
 
-  fields: ['comment', 'color'],
+  fields: ["comment", "color"],
 
   html() {
     return `

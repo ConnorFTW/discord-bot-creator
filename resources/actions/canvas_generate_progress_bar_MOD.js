@@ -1,20 +1,37 @@
 module.exports = {
-  name: 'Canvas Generate Progress Bar',
-  section: 'Image Editing',
+  name: "Canvas Generate Progress Bar",
+  section: "Image Editing",
 
   subtitle(data) {
-    const storeTypes = ['', 'Temp Variable', 'Server Variable', 'Global Variable'];
-    const type = ['Basic', 'Circle'];
+    const storeTypes = [
+      "",
+      "Temp Variable",
+      "Server Variable",
+      "Global Variable",
+    ];
+    const type = ["Basic", "Circle"];
     const index = parseInt(data.type, 10);
-    return `Generate ${type[index]} Progress Bar ${storeTypes[parseInt(data.storage, 10)]} (${data.varName})`;
+    return `Generate ${type[index]} Progress Bar ${
+      storeTypes[parseInt(data.storage, 10)]
+    } (${data.varName})`;
   },
 
   variableStorage(data, varType) {
     if (parseInt(data.storage, 10) !== varType) return;
-    return [data.varName, 'Image'];
+    return [data.varName, "Image"];
   },
 
-  fields: ['storage', 'varName', 'type', 'width', 'height', 'lineWidth', 'lineCap', 'percent', 'color'],
+  fields: [
+    "storage",
+    "varName",
+    "type",
+    "width",
+    "height",
+    "lineWidth",
+    "lineCap",
+    "percent",
+    "color",
+  ],
 
   html(_isEvent, data) {
     return `
@@ -78,21 +95,21 @@ module.exports = {
     const { glob, document } = this;
 
     glob.onChange1 = function onChange1(event) {
-      const Change1text = document.getElementById('Change1text');
-      const Change2text = document.getElementById('Change2text');
-      if (event.value === '0') {
-        Change1text.innerHTML = 'Width:';
-        Change2text.innerHTML = 'Height:';
-      } else if (event.value === '1') {
-        Change1text.innerHTML = 'Radius:';
-        Change2text.innerHTML = 'Size:';
+      const Change1text = document.getElementById("Change1text");
+      const Change2text = document.getElementById("Change2text");
+      if (event.value === "0") {
+        Change1text.innerHTML = "Width:";
+        Change2text.innerHTML = "Height:";
+      } else if (event.value === "1") {
+        Change1text.innerHTML = "Radius:";
+        Change2text.innerHTML = "Size:";
       }
     };
-    glob.onChange1(document.getElementById('type'));
+    glob.onChange1(document.getElementById("type"));
   },
 
   action(cache) {
-    const Canvas = require('canvas');
+    const Canvas = require("canvas");
     const data = cache.actions[cache.index];
     const storage = parseInt(data.storage, 10);
     const varName = this.evalMessage(data.varName, cache);
@@ -105,10 +122,10 @@ module.exports = {
     let Cap;
     switch (lineCap) {
       case 0:
-        Cap = 'square';
+        Cap = "square";
         break;
       case 1:
-        Cap = 'round';
+        Cap = "round";
         break;
       default:
         break;
@@ -120,8 +137,8 @@ module.exports = {
     } else if (type === 1) {
       canvas = Canvas.createCanvas(height, height);
     }
-    const ctx = canvas.getContext('2d');
-    if (color.startsWith('#')) {
+    const ctx = canvas.getContext("2d");
+    if (color.startsWith("#")) {
       ctx.strokeStyle = color;
     } else {
       ctx.strokeStyle = `#${color}`;
@@ -163,7 +180,9 @@ module.exports = {
     }
     ctx.lineCap = Cap;
     ctx.stroke();
-    const result = canvas.toDataURL('image/png').replace('image/png', 'image/octet-stream');
+    const result = canvas
+      .toDataURL("image/png")
+      .replace("image/png", "image/octet-stream");
     this.storeValue(result, storage, varName, cache);
     this.callNextAction(cache);
   },

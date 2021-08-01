@@ -1,26 +1,28 @@
 module.exports = {
-  name: 'Find Message',
-  section: 'Messaging',
+  name: "Find Message",
+  section: "Messaging",
 
   subtitle(data) {
     const channels = [
-      'Same Channel',
-      'Mentioned Channel',
-      '1st Server Channel',
-      'Temp Variable',
-      'Server Variable',
-      'Global Variable',
+      "Same Channel",
+      "Mentioned Channel",
+      "1st Server Channel",
+      "Temp Variable",
+      "Server Variable",
+      "Global Variable",
     ];
-    const info = ['Find by Content', 'Find by ID'];
-    return `${channels[parseInt(data.channel, 10)]} - ${info[parseInt(data.info, 10)]}`;
+    const info = ["Find by Content", "Find by ID"];
+    return `${channels[parseInt(data.channel, 10)]} - ${
+      info[parseInt(data.info, 10)]
+    }`;
   },
 
   variableStorage(data, varType) {
     if (parseInt(data.storage, 10) !== varType) return;
-    return [data.varName2, 'Message'];
+    return [data.varName2, "Message"];
   },
 
-  fields: ['channel', 'varName', 'info', 'search', 'storage', 'varName2'],
+  fields: ["channel", "varName", "info", "search", "storage", "varName2"],
 
   html(isEvent, data) {
     return `
@@ -72,7 +74,7 @@ module.exports = {
 
   init() {
     const { glob, document } = this;
-    glob.channelChange(document.getElementById('channel'), 'varNameContainer');
+    glob.channelChange(document.getElementById("channel"), "varNameContainer");
   },
 
   action(cache) {
@@ -87,7 +89,9 @@ module.exports = {
 
     if (!targetChannel) return this.callNextAction(cache);
     if (!search) {
-      console.error('Error: Please input something to search for in the Find Message action.');
+      console.error(
+        "Error: Please input something to search for in the Find Message action."
+      );
       return this.callNextAction(cache);
     }
 

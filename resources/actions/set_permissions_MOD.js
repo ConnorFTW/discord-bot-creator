@@ -1,22 +1,24 @@
 module.exports = {
-  name: 'Set Permissions',
+  name: "Set Permissions",
 
-  section: 'Permission Control',
+  section: "Permission Control",
 
   subtitle(data) {
     const roles = [
-      'Mentioned Role',
-      '1st Author Role',
-      '1st Server Role',
-      'Temp Variable',
-      'Server Variable',
-      'Global Variable',
+      "Mentioned Role",
+      "1st Author Role",
+      "1st Server Role",
+      "Temp Variable",
+      "Server Variable",
+      "Global Variable",
     ];
-    const way = ['Update', 'Set'];
-    return `${way[data.way]} ${roles[data.storage]} ${!data.reason ? '' : `with Reason: <i>${data.reason}<i>`}`;
+    const way = ["Update", "Set"];
+    return `${way[data.way]} ${roles[data.storage]} ${
+      !data.reason ? "" : `with Reason: <i>${data.reason}<i>`
+    }`;
   },
 
-  fields: ['way', 'storage', 'varName', 'storage2', 'varName2', 'reason'],
+  fields: ["way", "storage", "varName", "storage2", "varName2", "reason"],
 
   html(isEvent, data) {
     return `
@@ -62,8 +64,8 @@ module.exports = {
   init() {
     const { glob, document } = this;
 
-    glob.roleChange(document.getElementById('storage'), 'varNameContainer');
-    glob.refreshVariableList(document.getElementById('storage2'));
+    glob.roleChange(document.getElementById("storage"), "varNameContainer");
+    glob.refreshVariableList(document.getElementById("storage2"));
   },
 
   action(cache) {

@@ -1,6 +1,6 @@
 module.exports = {
-  name: 'Play YouTube Video',
-  section: 'Audio Control',
+  name: "Play YouTube Video",
+  section: "Audio Control",
 
   requiresAudioLibraries: true,
 
@@ -8,7 +8,7 @@ module.exports = {
     return `${data.url}`;
   },
 
-  fields: ['url', 'seek', 'volume', 'passes', 'bitrate', 'type'],
+  fields: ["url", "seek", "volume", "passes", "bitrate", "type"],
 
   html() {
     return `
@@ -46,7 +46,7 @@ module.exports = {
     const data = cache.actions[cache.index];
     const { Audio } = this.getDBM();
     const Mods = this.getMods();
-    const { Client } = Mods.require('youtubei');
+    const { Client } = Mods.require("youtubei");
     const youtube = new Client();
     const url = this.evalMessage(data.url, cache);
     const { msg } = cache;
@@ -57,7 +57,8 @@ module.exports = {
         options.seek = parseInt(this.evalMessage(data.seek, cache), 10);
       }
       if (data.volume) {
-        options.volume = parseInt(this.evalMessage(data.volume, cache), 10) / 100;
+        options.volume =
+          parseInt(this.evalMessage(data.volume, cache), 10) / 100;
       } else if (cache.server) {
         options.volume = Audio.volumes[cache.server.id] || 0.5;
       } else {
@@ -69,7 +70,7 @@ module.exports = {
       if (data.bitrate) {
         options.bitrate = parseInt(this.evalMessage(data.bitrate, cache), 10);
       } else {
-        options.bitrate = 'auto';
+        options.bitrate = "auto";
       }
       if (msg) options.requester = msg.author;
 
@@ -80,8 +81,8 @@ module.exports = {
         options.duration = video.duration;
         options.thumbnail = video.thumbnails[video.thumbnails.length - 1].url;
 
-        const info = ['yt', options, url];
-        if (data.type === '0') {
+        const info = ["yt", options, url];
+        if (data.type === "0") {
           Audio.addToQueue(info, cache);
         } else if (cache.server && cache.server.id !== undefined) {
           Audio.playItem(info, cache.server.id);

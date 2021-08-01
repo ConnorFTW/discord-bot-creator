@@ -1,21 +1,21 @@
 module.exports = {
-  name: 'Sync Channel Permissions',
-  section: 'Permission Control',
+  name: "Sync Channel Permissions",
+  section: "Permission Control",
 
   subtitle(data) {
     const names = [
-      'Same Channel',
-      'Mentioned Channel',
-      'Default Channel',
-      'Temp Variable',
-      'Server Variable',
-      'Global Variable',
+      "Same Channel",
+      "Mentioned Channel",
+      "Default Channel",
+      "Temp Variable",
+      "Server Variable",
+      "Global Variable",
     ];
     const index = parseInt(data.storage, 10);
     return index < 3 ? `${names[index]}` : `${names[index]} - ${data.varName}`;
   },
 
-  fields: ['storage', 'varName', 'permission', 'state'],
+  fields: ["storage", "varName", "permission", "state"],
 
   html(isEvent, data) {
     return `
@@ -35,7 +35,7 @@ module.exports = {
 
   init() {
     const { glob, document } = this;
-    glob.channelChange(document.getElementById('storage'), 'varNameContainer');
+    glob.channelChange(document.getElementById("storage"), "varNameContainer");
   },
 
   action(cache) {

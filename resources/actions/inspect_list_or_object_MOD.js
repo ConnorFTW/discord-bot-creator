@@ -1,18 +1,23 @@
 module.exports = {
-  name: 'Inspect List/Object',
-  section: 'Lists and Loops',
+  name: "Inspect List/Object",
+  section: "Lists and Loops",
 
   subtitle(data) {
-    const storages = ['', 'Temp Variable', 'Server Variable', 'Global Variable'];
+    const storages = [
+      "",
+      "Temp Variable",
+      "Server Variable",
+      "Global Variable",
+    ];
     return `Inspect ${storages[parseInt(data.storage, 10)]} "${data.varName}"`;
   },
 
   variableStorage(data, varType) {
     if (parseInt(data.storage2, 10) !== varType) return;
-    return [data.varName2, 'Text'];
+    return [data.varName2, "Text"];
   },
 
-  fields: ['storage', 'varName', 'depth', 'storage2', 'varName2'],
+  fields: ["storage", "varName", "depth", "storage2", "varName2"],
 
   html(_isEvent, data) {
     return `
@@ -92,21 +97,22 @@ module.exports = {
 
   init() {
     const { glob, document } = this;
-    glob.variableChange(document.getElementById('storage'), 'varNameContainer');
+    glob.variableChange(document.getElementById("storage"), "varNameContainer");
   },
 
   action(cache) {
     const data = cache.actions[cache.index];
 
     const Mods = this.getMods();
-    const util = Mods.require('util');
+    const util = Mods.require("util");
     const depth = parseInt(data.depth, 10);
     const storage = parseInt(data.storage, 10);
     const varName = this.evalMessage(data.varName, cache);
     const variable = this.getVariable(storage, varName, cache);
     let result;
 
-    if (typeof variable !== 'object') return console.log('Please choose a valid list or object to inspect!');
+    if (typeof variable !== "object")
+      return console.log("Please choose a valid list or object to inspect!");
 
     try {
       result = util.inspect(variable, { depth: depth > 0 ? depth : 0 });

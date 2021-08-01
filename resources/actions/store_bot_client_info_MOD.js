@@ -1,65 +1,65 @@
 module.exports = {
-  name: 'Store Bot Client Info',
-  section: 'Bot Client Control',
+  name: "Store Bot Client Info",
+  section: "Bot Client Control",
 
   subtitle(data) {
     const info = [
-      'Uptime in Milliseconds',
-      'Ready At?',
-      'Ping',
-      'Guild Amount',
-      'User Amount',
-      'Rounded Ping',
-      'Uptime in Seconds',
-      'Uptime in Minutes',
+      "Uptime in Milliseconds",
+      "Ready At?",
+      "Ping",
+      "Guild Amount",
+      "User Amount",
+      "Rounded Ping",
+      "Uptime in Seconds",
+      "Uptime in Minutes",
       "Bots' Token",
-      'Voice Connections Amount',
-      'Total Amount of Channels',
-      'Total Amount of Emojis',
-      'This option has been removed',
-      'Uptime in Days',
-      'Uptime in Days (Rounded)',
-      'Memory (RAM) Usage',
-      'Bot Guilds Objects',
-      'Bot Guilds Names',
-      'Bot Guilds IDs',
-      'Bot Current Prefix',
-      'Bot Client ID',
-      'Discord JS Version',
-      'Uptime in Hours',
-      'Refreshing Uptime in Days',
-      'Refreshing Uptime in Hours',
-      'Refreshing Uptime in Minutes',
-      'Refreshing Uptime in Seconds',
-      'Memory (RAM) Usage in MB',
+      "Voice Connections Amount",
+      "Total Amount of Channels",
+      "Total Amount of Emojis",
+      "This option has been removed",
+      "Uptime in Days",
+      "Uptime in Days (Rounded)",
+      "Memory (RAM) Usage",
+      "Bot Guilds Objects",
+      "Bot Guilds Names",
+      "Bot Guilds IDs",
+      "Bot Current Prefix",
+      "Bot Client ID",
+      "Discord JS Version",
+      "Uptime in Hours",
+      "Refreshing Uptime in Days",
+      "Refreshing Uptime in Hours",
+      "Refreshing Uptime in Minutes",
+      "Refreshing Uptime in Seconds",
+      "Memory (RAM) Usage in MB",
       "Bots' OS (Process Platform)",
-      'CPU Usage in MB',
-      'Average CPU Usage (%)',
-      'CPU Usage (%)',
+      "CPU Usage in MB",
+      "Average CPU Usage (%)",
+      "CPU Usage (%)",
       "Bots' Directory",
-      'Node JS Version',
-      'Amount of Commands',
-      'Amount of Events',
-      'Ready At ? [timestamp]',
-      'CPU Core Count',
-      'Total Memory (GB)',
-      'Total Memory (MB)',
-      'Available Memory (GB)',
-      'Available Memory (MB)',
-      'Available Memory (%)',
-      'Used Memory (GB)',
-      'Used Memory (MB)',
-      'Used Memory (%)',
-      'Bot Owner ID',
-      'Are Commands Case Sensitive?',
-      'Last Message ID',
+      "Node JS Version",
+      "Amount of Commands",
+      "Amount of Events",
+      "Ready At ? [timestamp]",
+      "CPU Core Count",
+      "Total Memory (GB)",
+      "Total Memory (MB)",
+      "Available Memory (GB)",
+      "Available Memory (MB)",
+      "Available Memory (%)",
+      "Used Memory (GB)",
+      "Used Memory (MB)",
+      "Used Memory (%)",
+      "Bot Owner ID",
+      "Are Commands Case Sensitive?",
+      "Last Message ID",
     ];
     return `Bot Client - ${info[parseInt(data.info, 10)]}`;
   },
 
   variableStorage(data, varType) {
     if (parseInt(data.storage, 10) !== varType) return;
-    let dataType = 'Unknown Type';
+    let dataType = "Unknown Type";
     switch (parseInt(data.info, 10)) {
       case 0: // Uptime in Milliseconds
       case 22: // Uptime in Hours
@@ -88,28 +88,28 @@ module.exports = {
       case 10: // Total Amount of Channels
       case 11: // Total Amount of Emojis
       case 15: // Memory (Ram) Usage
-        dataType = 'Number';
+        dataType = "Number";
         break;
       case 1: // Ready At
-        dataType = 'Date';
+        dataType = "Date";
         break;
       case 8: // Bots' Token
-        dataType = 'Token';
+        dataType = "Token";
         break;
       case 16: // Bot Guilds Objects
-        dataType = 'Guild';
+        dataType = "Guild";
         break;
       case 17: // Bot Guilds Names
-        dataType = 'Guild Name';
+        dataType = "Guild Name";
         break;
       case 18: // Bot Guilds IDs
-        dataType = 'Guild ID';
+        dataType = "Guild ID";
         break;
       case 19: // Bot Current Prefix
-        dataType = 'Bot Tag';
+        dataType = "Bot Tag";
         break;
       case 20: // Bot Client ID
-        dataType = 'Bot ID';
+        dataType = "Bot ID";
         break;
       case 13: // Uptime in Days
       case 14: // Uptime in Days (Rounded)
@@ -117,35 +117,35 @@ module.exports = {
       case 24: // Refreshing Uptime in Hours
       case 25: // Refreshing Uptime in Minutes
       case 26: // Refreshing Uptime in Seconds
-        dataType = 'Time';
+        dataType = "Time";
         break;
       case 28: // Bots' OS (Process Platform)
-        dataType = 'OS Name';
+        dataType = "OS Name";
         break;
       case 30: // Bots' Directory
-        dataType = 'Directory';
+        dataType = "Directory";
         break;
       case 21: // Discord JS Version
       case 31: // Node JS Version
-        dataType = 'Version Number';
+        dataType = "Version Number";
         break;
       case 44: // Bot Owner ID
-        dataType = 'Bot Owner ID';
+        dataType = "Bot Owner ID";
         break;
       case 45: // Are Commands Case Sensitive?
-        dataType = 'Boolean';
+        dataType = "Boolean";
         break;
       case 46: // Last Message ID
-        dataType = 'Last Message ID';
+        dataType = "Last Message ID";
         break;
       case 47: // CPU Load Average
-        dataType = 'Average CPU Usage Array';
+        dataType = "Average CPU Usage Array";
         break;
     }
     return [data.varName2, dataType];
   },
 
-  fields: ['info', 'storage', 'varName2'],
+  fields: ["info", "storage", "varName2"],
 
   html(_isEvent, data) {
     return `
@@ -227,8 +227,8 @@ module.exports = {
   action(cache) {
     const botClient = this.getDBM().Bot.bot;
     const { Bot } = this.getDBM();
-    const os = require('os');
-    if (process.platform === 'win32') this.getMods().require('loadavg-windows'); // Make loadavg work on windows.
+    const os = require("os");
+    if (process.platform === "win32") this.getMods().require("loadavg-windows"); // Make loadavg work on windows.
     const DBM = this.getDBM();
     const data = cache.actions[cache.index];
     const info = parseInt(data.info, 10);
@@ -281,7 +281,9 @@ module.exports = {
         result = Math.floor(botClient.uptime / msToDay);
         break;
       case 15: // Memory (Ram) Usage // Deprecated in 1.8.8
-        result = `${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)}%`;
+        result = `${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(
+          2
+        )}%`;
         break;
       case 16: // Bot Guilds Objects
         result = botClient.guilds.cache.array();
@@ -322,13 +324,13 @@ module.exports = {
       case 28: // Bots' OS (Process Platform)
         if (process.platform) {
           const { platform } = process;
-          if (platform === 'win32') result = 'Windows';
-          else if (platform === 'aix') result = 'Aix';
-          else if (platform === 'linux') result = 'Linux';
-          else if (platform === 'darwin') result = 'Darwin';
-          else if (platform === 'openbsd') result = 'OpenBSD';
-          else if (platform === 'sunos') result = 'Solaris';
-          else if (platform === 'freebsd') result = 'FreeBSD';
+          if (platform === "win32") result = "Windows";
+          else if (platform === "aix") result = "Aix";
+          else if (platform === "linux") result = "Linux";
+          else if (platform === "darwin") result = "Darwin";
+          else if (platform === "openbsd") result = "OpenBSD";
+          else if (platform === "sunos") result = "Solaris";
+          else if (platform === "freebsd") result = "FreeBSD";
         }
         break;
       case 29: // CPU Usage in MB
@@ -368,13 +370,17 @@ module.exports = {
         result = Math.floor((os.freemem() / os.totalmem()) * 100);
         break;
       case 41: // Used Memory (GB)
-        result = ((os.totalmem() - os.freemem() / 1024) / 1024 / 1024).toFixed(2);
+        result = ((os.totalmem() - os.freemem() / 1024) / 1024 / 1024).toFixed(
+          2
+        );
         break;
       case 42: // Used Memory (MB)
         result = ((os.totalmem() - os.freemem()) / 1024 / 1024).toFixed(0);
         break;
       case 43: // Used Memory (%)
-        result = Math.floor(((os.totalmem() - os.freemem()) / os.totalmem()) * 100);
+        result = Math.floor(
+          ((os.totalmem() - os.freemem()) / os.totalmem()) * 100
+        );
         break;
       case 44: // Bot Owner ID
         result = DBM.Files.data.settings.ownerId;

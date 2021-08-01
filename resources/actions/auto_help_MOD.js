@@ -1,12 +1,12 @@
 module.exports = {
-  name: 'Auto Help',
-  section: 'Other Stuff',
+  name: "Auto Help",
+  section: "Other Stuff",
 
   subtitle(data) {
     return `Included? ${data.Include} | ${data.Category}: ${data.Description}`;
   },
 
-  fields: ['Category', 'Description', 'Include'],
+  fields: ["Category", "Description", "Include"],
 
   html() {
     return `
@@ -33,9 +33,18 @@ module.exports = {
   init() {
     const { glob, document } = this;
 
-    glob.sendTargetChange(document.getElementById('Category'), 'varNameContainer');
-    glob.sendTargetChange(document.getElementById('Description'), 'varNameContainer');
-    glob.sendTargetChange(document.getElementById('Include'), 'varNameContainer');
+    glob.sendTargetChange(
+      document.getElementById("Category"),
+      "varNameContainer"
+    );
+    glob.sendTargetChange(
+      document.getElementById("Description"),
+      "varNameContainer"
+    );
+    glob.sendTargetChange(
+      document.getElementById("Include"),
+      "varNameContainer"
+    );
   },
 
   action(cache) {

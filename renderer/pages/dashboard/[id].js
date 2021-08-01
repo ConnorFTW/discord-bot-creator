@@ -6,7 +6,6 @@ import CustomCommandView from "../../components/dashboard/custom-command-view";
 import Sidebar from "../../components/sidebar";
 import SettingsModal from "../../components/dashboard/modals/settings";
 import electron from "electron";
-import { deserialize } from "v8";
 import _eval from "eval";
 
 const ipcRenderer = electron.ipcRenderer || false;
@@ -27,8 +26,7 @@ export default function Dashboard({}) {
       setIsLoading(!commands || !events);
     });
     ipcRenderer.on("getActions", (_event, actions) => {
-      actions = actions.map((action) => _eval(action, "actions-eval.js"));
-      const actions = await window.loader.getActions();
+      console.log(actions);
       setActionsSchemas(actions);
     });
     ipcRenderer.send("getActions");

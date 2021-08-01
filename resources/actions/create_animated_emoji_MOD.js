@@ -1,6 +1,6 @@
 module.exports = {
-  name: 'Create Animated Emoji',
-  section: 'Emoji Control',
+  name: "Create Animated Emoji",
+  section: "Emoji Control",
 
   subtitle(data) {
     return `${data.emojiName}`;
@@ -8,10 +8,10 @@ module.exports = {
 
   variableStorage(data, varType) {
     if (parseInt(data.storage2, 10) !== varType) return;
-    return [data.varName2, 'Animated Emoji'];
+    return [data.varName2, "Animated Emoji"];
   },
 
-  fields: ['emojiName', 'storage', 'varName', 'storage2', 'varName2'],
+  fields: ["emojiName", "storage", "varName", "storage2", "varName2"],
 
   html(_isEvent, data) {
     return `
@@ -50,23 +50,24 @@ module.exports = {
 
     glob.onChange1 = function onChange1(event) {
       const value = parseInt(event.value, 10);
-      const varNameInput = document.getElementById('varNameContainer2');
+      const varNameInput = document.getElementById("varNameContainer2");
       if (value === 0) {
-        varNameInput.style.display = 'none';
+        varNameInput.style.display = "none";
       } else {
         varNameInput.style.display = null;
       }
     };
 
-    glob.refreshVariableList(document.getElementById('storage'));
-    glob.onChange1(document.getElementById('storage2'));
+    glob.refreshVariableList(document.getElementById("storage"));
+    glob.onChange1(document.getElementById("storage2"));
   },
 
   action(cache) {
     const data = cache.actions[cache.index];
     const { server } = cache;
 
-    if (!this.dest(server, 'emojis', 'create')) return this.callnextAction(cache);
+    if (!this.dest(server, "emojis", "create"))
+      return this.callnextAction(cache);
 
     const type = parseInt(data.storage, 10);
     const varName = this.evalMessage(data.varName, cache);

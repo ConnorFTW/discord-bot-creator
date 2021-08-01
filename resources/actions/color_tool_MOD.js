@@ -1,6 +1,6 @@
 module.exports = {
-  name: 'Color',
-  section: 'Tools',
+  name: "Color",
+  section: "Tools",
 
   subtitle(data) {
     return `${data.color}`;
@@ -8,10 +8,10 @@ module.exports = {
 
   variableStorage(data, varType) {
     if (parseInt(data.storage, 10) !== varType) return;
-    return [data.varName, 'Color'];
+    return [data.varName, "Color"];
   },
 
-  fields: ['color', 'storage', 'varName'],
+  fields: ["color", "storage", "varName"],
 
   html(isEvent, data) {
     return `

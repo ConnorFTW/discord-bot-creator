@@ -1,18 +1,18 @@
 module.exports = {
-  name: 'Find Custom Emoji in Current Server',
-  section: 'Emoji Control',
+  name: "Find Custom Emoji in Current Server",
+  section: "Emoji Control",
 
   subtitle(data) {
-    const info = ['Emoji ID', 'Emoji Name'];
+    const info = ["Emoji ID", "Emoji Name"];
     return `Find Emoji by ${info[parseInt(data.info, 10)]}`;
   },
 
   variableStorage(data, varType) {
     if (parseInt(data.storage, 10) !== varType) return;
-    return [data.varName, 'Emoji'];
+    return [data.varName, "Emoji"];
   },
 
-  fields: ['info', 'find', 'storage', 'varName'],
+  fields: ["info", "find", "storage", "varName"],
 
   html(_isEvent, data) {
     return `

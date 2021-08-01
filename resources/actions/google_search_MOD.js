@@ -1,30 +1,30 @@
 module.exports = {
-  name: 'Google Search',
-  section: 'Other Stuff',
+  name: "Google Search",
+  section: "Other Stuff",
 
   subtitle(data) {
-    const info = ['Title', 'URL', 'Snippet'];
+    const info = ["Title", "URL", "Snippet"];
     return `Google Result ${info[parseInt(data.info, 10)]}`;
   },
 
   variableStorage(data, varType) {
     if (parseInt(data.storage, 10) !== varType) return;
-    let dataType = 'Unknown Google Type';
+    let dataType = "Unknown Google Type";
     switch (parseInt(data.info, 10)) {
       case 0:
-        dataType = 'Google Result Title';
+        dataType = "Google Result Title";
         break;
       case 1:
-        dataType = 'Google Result URL';
+        dataType = "Google Result URL";
         break;
       case 2:
-        dataType = 'Google Result Snippet';
+        dataType = "Google Result Snippet";
         break;
     }
     return [data.varName, dataType];
   },
 
-  fields: ['string', 'info', 'resultNo', 'storage', 'varName'],
+  fields: ["string", "info", "resultNo", "storage", "varName"],
 
   html(isEvent, data) {
     return `
@@ -69,21 +69,24 @@ module.exports = {
 
   init() {
     const { glob, document } = this;
-    glob.variableChange(document.getElementById('storage'), 'varNameContainer');
+    glob.variableChange(document.getElementById("storage"), "varNameContainer");
   },
 
   action(cache) {
     const data = cache.actions[cache.index];
     const info = parseInt(data.info, 10);
-    const string = this.evalMessage(data.string, cache).replace(/[\u{0080}-\u{FFFF}]/gu, ''); // The replace thing is very new, it's just replacing the invalid characters so command won't stuck when you use other languages.
+    const string = this.evalMessage(data.string, cache).replace(
+      /[\u{0080}-\u{FFFF}]/gu,
+      ""
+    ); // The replace thing is very new, it's just replacing the invalid characters so command won't stuck when you use other languages.
     const resultNumber = parseInt(data.resultNo, 10);
 
-    if (!string) return console.log('Please write something to Google it!');
+    if (!string) return console.log("Please write something to Google it!");
 
     const Mods = this.getMods();
-    const googleIt = Mods.require('google-it');
+    const googleIt = Mods.require("google-it");
 
-    googleIt({ query: `${string}`, 'no-display': 1, limit: 10 })
+    googleIt({ query: `${string}`, "no-display": 1, limit: 10 })
       .then((results) => {
         let result;
         switch (info) {

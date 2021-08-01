@@ -1,12 +1,12 @@
 module.exports = {
-  name: 'Remove from Queue MOD',
-  section: 'Audio Control',
+  name: "Remove from Queue MOD",
+  section: "Audio Control",
 
   subtitle(data) {
     return `Remove ${data.amount} Song`;
   },
 
-  fields: ['server', 'varName', 'position', 'amount'],
+  fields: ["server", "varName", "position", "amount"],
 
   html(isEvent, data) {
     return `
@@ -36,7 +36,7 @@ module.exports = {
 
   init() {
     const { glob, document } = this;
-    glob.serverChange(document.getElementById('server'), 'varNameContainer');
+    glob.serverChange(document.getElementById("server"), "varNameContainer");
   },
 
   action(cache) {

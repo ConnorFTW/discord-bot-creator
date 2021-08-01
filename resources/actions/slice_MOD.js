@@ -1,17 +1,17 @@
 module.exports = {
-  name: 'Slice',
-  section: 'Other Stuff',
+  name: "Slice",
+  section: "Other Stuff",
 
   subtitle() {
-    return 'Slice anything!';
+    return "Slice anything!";
   },
 
   variableStorage(data, varType) {
     if (parseInt(data.storage, 10) !== varType) return;
-    return [data.varName, 'Sliced Result'];
+    return [data.varName, "Sliced Result"];
   },
 
-  fields: ['slice', 'startingNumber', 'sliceLength', 'storage', 'varName'],
+  fields: ["slice", "startingNumber", "sliceLength", "storage", "varName"],
 
   html(_isEvent, data) {
     return `
@@ -48,7 +48,7 @@ module.exports = {
   init() {
     const { glob, document } = this;
 
-    glob.variableChange(document.getElementById('storage'), 'varNameContainer');
+    glob.variableChange(document.getElementById("storage"), "varNameContainer");
   },
 
   action(cache) {
@@ -56,16 +56,24 @@ module.exports = {
     const type = parseInt(data.storage, 10);
     const varName = this.evalMessage(data.varName, cache);
     const sliceText = this.evalMessage(data.slice, cache);
-    const startingFrom = parseInt(this.evalMessage(data.startingNumber, cache), 10);
+    const startingFrom = parseInt(
+      this.evalMessage(data.startingNumber, cache),
+      10
+    );
     const sliceLength = parseInt(this.evalMessage(data.sliceLength, cache), 10);
 
-    if (startingFrom < 0) return console.log('Your number can not be less than 0.');
-    if (sliceLength === 0) return console.log('Slice length can not be 0.');
-    if (!sliceText) return console.log('Please write something to slice.');
-    if (!startingFrom && startingFrom !== 0) return console.log('Please write a starting number.');
-    if (!sliceLength) return console.log('Slice length can not be empty');
+    if (startingFrom < 0)
+      return console.log("Your number can not be less than 0.");
+    if (sliceLength === 0) return console.log("Slice length can not be 0.");
+    if (!sliceText) return console.log("Please write something to slice.");
+    if (!startingFrom && startingFrom !== 0)
+      return console.log("Please write a starting number.");
+    if (!sliceLength) return console.log("Slice length can not be empty");
 
-    const result = `${sliceText}`.slice(`${startingFrom}`, `${sliceLength + startingFrom}`);
+    const result = `${sliceText}`.slice(
+      `${startingFrom}`,
+      `${sliceLength + startingFrom}`
+    );
 
     this.storeValue(result, type, varName, cache);
     this.callNextAction(cache);

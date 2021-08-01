@@ -1,6 +1,6 @@
 module.exports = {
-  name: 'Create Anchor',
-  section: 'Other Stuff',
+  name: "Create Anchor",
+  section: "Other Stuff",
 
   subtitle(data) {
     return data.description
@@ -8,11 +8,11 @@ module.exports = {
       : `Create ${
           data.anchor_id
             ? `the "<font color="${data.color}">${data.anchor_id}</font>" anchor at the current position!`
-            : 'an anchor!'
+            : "an anchor!"
         }`;
   },
 
-  fields: ['anchor_id', 'color', 'description'],
+  fields: ["anchor_id", "color", "description"],
 
   html() {
     return `

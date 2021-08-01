@@ -1,18 +1,18 @@
 module.exports = {
-  name: 'Basic Math Operation',
-  section: 'Other Stuff',
+  name: "Basic Math Operation",
+  section: "Other Stuff",
 
   subtitle(data) {
-    const info = ['Addition', 'Subtraction', 'Multiplication', 'Division'];
+    const info = ["Addition", "Subtraction", "Multiplication", "Division"];
     return `${info[data.info]}`;
   },
 
   variableStorage(data, varType) {
     if (parseInt(data.storage, 10) !== varType) return;
-    return [data.varName, 'Number'];
+    return [data.varName, "Number"];
   },
 
-  fields: ['FirstNumber', 'info', 'SecondNumber', 'storage', 'varName'],
+  fields: ["FirstNumber", "info", "SecondNumber", "storage", "varName"],
 
   html(_isEvent, data) {
     return `
@@ -51,8 +51,12 @@ module.exports = {
 
   action(cache) {
     const data = cache.actions[cache.index];
-    const FN = parseFloat(this.evalMessage(data.FirstNumber, cache).replace(/,/g, ''));
-    const SN = parseFloat(this.evalMessage(data.SecondNumber, cache).replace(/,/g, ''));
+    const FN = parseFloat(
+      this.evalMessage(data.FirstNumber, cache).replace(/,/g, "")
+    );
+    const SN = parseFloat(
+      this.evalMessage(data.SecondNumber, cache).replace(/,/g, "")
+    );
     const info = parseInt(data.info, 10);
 
     let result;

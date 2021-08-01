@@ -1,6 +1,6 @@
 module.exports = {
-  name: 'Store Twitch Info',
-  section: 'Other Stuff',
+  name: "Store Twitch Info",
+  section: "Other Stuff",
 
   subtitle(data) {
     const sourceType = parseInt(data.type, 10); // "Channel", "Stream", "Video" or "Game"
@@ -12,65 +12,65 @@ module.exports = {
     const info4 = parseInt(data.info4, 10);
 
     const list1 = [
-      'User ID',
-      'User Login Name',
-      'User Display Name',
-      'User Type',
-      'Broadcaster Type',
-      'Channel Description',
-      'Channel Profile Picture',
-      'Channel Offline Picture',
-      'Channel View Count',
-      'Channel Follower Count',
-      'Channel Following Count',
+      "User ID",
+      "User Login Name",
+      "User Display Name",
+      "User Type",
+      "Broadcaster Type",
+      "Channel Description",
+      "Channel Profile Picture",
+      "Channel Offline Picture",
+      "Channel View Count",
+      "Channel Follower Count",
+      "Channel Following Count",
     ]; // User & Channel Info
     const list2 = [
-      'Stream ID',
-      'User ID',
-      'User Display Name',
-      'Game ID',
-      'REMOVED OPTION',
-      'Live Status',
-      'Stream Title',
-      'Viewer Count',
-      'Started At Time',
-      'Language Code',
-      'Thumbnail URL',
-      'Tag IDs',
-      'Game Name',
+      "Stream ID",
+      "User ID",
+      "User Display Name",
+      "Game ID",
+      "REMOVED OPTION",
+      "Live Status",
+      "Stream Title",
+      "Viewer Count",
+      "Started At Time",
+      "Language Code",
+      "Thumbnail URL",
+      "Tag IDs",
+      "Game Name",
     ]; // Stream Info
     const list3 = [
-      'Video IDs',
-      'User IDs',
-      'User Display Names',
-      'Video Titles',
-      'Video Descriptions',
-      'Video Creation Dates',
-      'Video Publish Dates',
-      'Video URLs',
-      'Video Thumbnail URLs',
-      'Videos Viewable?',
-      'Video Viewcounts',
-      'Video Languages',
-      'Video Types',
-      'Video Durations',
-      'Video Durations in Seconds',
+      "Video IDs",
+      "User IDs",
+      "User Display Names",
+      "Video Titles",
+      "Video Descriptions",
+      "Video Creation Dates",
+      "Video Publish Dates",
+      "Video URLs",
+      "Video Thumbnail URLs",
+      "Videos Viewable?",
+      "Video Viewcounts",
+      "Video Languages",
+      "Video Types",
+      "Video Durations",
+      "Video Durations in Seconds",
     ]; // Video Info
     const list4 = [
-      'Game ID',
-      'Game Name',
-      'Game Box Art URL',
-      'Popular Games List (Game IDs)',
-      'Popular Games List (Game Names)',
-      'Popular Games List (Game Box Art URLs)',
+      "Game ID",
+      "Game Name",
+      "Game Box Art URL",
+      "Popular Games List (Game IDs)",
+      "Popular Games List (Game Names)",
+      "Popular Games List (Game Box Art URLs)",
     ]; // Game Info
 
     let infoNum1 = 0;
     let infoNum2;
     let infoList1 = [];
     const infoList2 = [];
-    let infoName1 = '';
-    let infoName2 = '';
+    let infoName1 = "";
+    let infoName2 = "";
 
     switch (
       sourceType // "Channel", "Stream", "Video" or "Game"
@@ -78,18 +78,18 @@ module.exports = {
       case 0:
         infoList1 = list1; // Channel
         infoNum1 = info1;
-        infoName2 = 'Channel';
+        infoName2 = "Channel";
         switch (inputType) {
           case 0: // User ID
-            infoName1 = 'ID';
+            infoName1 = "ID";
             break;
           case 1: // User Login Name
             if (sourceType > 0) {
-              infoName1 = 'ID';
+              infoName1 = "ID";
             } else if (info1 < 9) {
-              infoName1 = 'Login Name';
+              infoName1 = "Login Name";
             } else {
-              infoName1 = 'ID';
+              infoName1 = "ID";
             }
             break;
           default:
@@ -99,23 +99,23 @@ module.exports = {
       case 1:
         infoList1 = list2; // Stream
         infoNum1 = info2;
-        infoName2 = 'User';
+        infoName2 = "User";
         break;
       case 2:
         infoList1 = list3; // Video
         infoNum1 = info3;
-        infoName2 = 'Video';
+        infoName2 = "Video";
         break;
       case 3:
         infoList1 = list4; // Game
         infoNum1 = info4;
-        infoName2 = 'Game';
+        infoName2 = "Game";
         switch (inputType) {
           case 0:
-            infoName1 = 'ID';
+            infoName1 = "ID";
             break;
           case 1:
-            infoName1 = 'Name';
+            infoName1 = "Name";
             break;
         }
         break;
@@ -124,7 +124,7 @@ module.exports = {
     }
 
     infoList2.push(`from ${infoName2} ${infoName1} "${data.input.toString()}"`);
-    infoList2.push('');
+    infoList2.push("");
 
     if (info4 > 2 && sourceType === 3) {
       infoNum2 = 1;
@@ -132,13 +132,15 @@ module.exports = {
       infoNum2 = 0;
     }
 
-    return `Get "${infoList1[parseInt(infoNum1, 10)]}" ${infoList2[parseInt(infoNum2, 10)]}`;
+    return `Get "${infoList1[parseInt(infoNum1, 10)]}" ${
+      infoList2[parseInt(infoNum2, 10)]
+    }`;
   },
 
   variableStorage(data, varType) {
     const sourceType = parseInt(data.type, 10); // "Channel", "Stream", "Video" or "Game"
     if (parseInt(data.storage, 10) !== varType) return;
-    let dataType = 'Unknown Type';
+    let dataType = "Unknown Type";
 
     if (sourceType === 0) {
       // Source Type: Channel
@@ -148,18 +150,18 @@ module.exports = {
         case 8:
         case 9:
         case 10:
-          dataType = 'Number';
+          dataType = "Number";
           break;
         case 1:
         case 2:
         case 3:
         case 4:
         case 5:
-          dataType = 'Text';
+          dataType = "Text";
           break;
         case 6:
         case 7:
-          dataType = 'Image URL';
+          dataType = "Image URL";
           break;
         default:
           break;
@@ -173,23 +175,23 @@ module.exports = {
         case 7:
         case 12:
         case 8:
-          dataType = 'Number';
+          dataType = "Number";
           break;
         case 2:
         case 6:
         case 3:
         case 9:
-          dataType = 'Text';
+          dataType = "Text";
           break;
         case 5:
-          dataType = 'Boolean';
+          dataType = "Boolean";
           break;
         case 10:
-          dataType = 'Image URL';
+          dataType = "Image URL";
           break;
         case 4:
         case 11:
-          dataType = 'List';
+          dataType = "List";
           break;
         default:
           break;
@@ -197,24 +199,24 @@ module.exports = {
     } else if (sourceType === 2) {
       // Source Type: Video
       /* var info3 = parseInt(data.info3, 10) */
-      dataType = 'List';
+      dataType = "List";
     } else if (sourceType === 3) {
       // Source Type: Game
       const info4 = parseInt(data.info4, 10);
       switch (info4) {
         case 0:
-          dataType = 'Number';
+          dataType = "Number";
           break;
         case 1:
-          dataType = 'Text';
+          dataType = "Text";
           break;
         case 2:
-          dataType = 'Image URL';
+          dataType = "Image URL";
           break;
         case 3:
         case 4:
         case 5:
-          dataType = 'List';
+          dataType = "List";
           break;
         default:
           break;
@@ -225,27 +227,27 @@ module.exports = {
   },
 
   fields: [
-    'wrexdiv',
-    'type',
-    'divinputtype',
-    'inputtype',
-    'divinput',
-    'input',
-    'divinfo1',
-    'info1',
-    'divinfo2',
-    'info2',
-    'divinfo3',
-    'info3',
-    'divinfo4',
-    'info4',
-    'clientid',
-    'token',
-    'results',
-    'divresults',
-    'storage',
-    'varName',
-    'cache',
+    "wrexdiv",
+    "type",
+    "divinputtype",
+    "inputtype",
+    "divinput",
+    "input",
+    "divinfo1",
+    "info1",
+    "divinfo2",
+    "info2",
+    "divinfo3",
+    "info3",
+    "divinfo4",
+    "info4",
+    "clientid",
+    "token",
+    "results",
+    "divresults",
+    "storage",
+    "varName",
+    "cache",
   ],
 
   html(isEvent, data) {
@@ -414,163 +416,166 @@ module.exports = {
     const { glob, document } = this;
 
     try {
-      const wrexlinks = document.getElementsByClassName('wrexlink');
+      const wrexlinks = document.getElementsByClassName("wrexlink");
       for (let x = 0; x < wrexlinks.length; x++) {
         const wrexlink = wrexlinks[x];
-        const url = wrexlink.getAttribute('data-url');
+        const url = wrexlink.getAttribute("data-url");
         if (url) {
-          wrexlink.setAttribute('title', url);
-          wrexlink.addEventListener('click', (e) => {
+          wrexlink.setAttribute("title", url);
+          wrexlink.addEventListener("click", (e) => {
             e.stopImmediatePropagation();
             console.log(`Launching URL: [${url}] in your default browser.`);
-            require('child_process').execSync(`start ${url}`);
+            require("child_process").execSync(`start ${url}`);
           });
         }
       }
 
-      const wrexlinks2 = document.getElementsByClassName('wrexlink2');
+      const wrexlinks2 = document.getElementsByClassName("wrexlink2");
       for (let x2 = 0; x2 < wrexlinks2.length; x2++) {
         const wrexlink2 = wrexlinks2[x2];
-        const url2 = wrexlink2.getAttribute('data-url2');
+        const url2 = wrexlink2.getAttribute("data-url2");
         if (url2) {
-          wrexlink2.setAttribute('title', url2);
-          wrexlink2.addEventListener('click', (e2) => {
+          wrexlink2.setAttribute("title", url2);
+          wrexlink2.addEventListener("click", (e2) => {
             e2.stopImmediatePropagation();
             console.log(`Launching URL: [${url2}] in your default browser.`);
-            require('child_process').execSync(`start ${url2}`);
+            require("child_process").execSync(`start ${url2}`);
           });
         }
       }
     } catch (error) {
       // Write any init errors to errors.txt in dbms' main directory
-      require('fs').appendFile('errors.txt', error.stack ? error.stack : `${error}\r\n`);
+      require("fs").appendFile(
+        "errors.txt",
+        error.stack ? error.stack : `${error}\r\n`
+      );
     }
 
     glob.onChange1 = function onChange1() {
       // "Channel", "Stream", "Video" or "Game"
-      const id1 = parseInt(document.getElementById('type').value, 10); // Source Type: "Channel", "Stream", "Video" or "Game"
-      const infoDiv1 = document.getElementById('divinfo1'); // Source Channel Info
-      const info1 = document.getElementById('info1'); // Source Channel Info
-      const infoDiv2 = document.getElementById('divinfo2'); // Source Stream Info
-      const info2 = document.getElementById('info2'); // Source Stream Info
-      const infoDiv3 = document.getElementById('divinfo3'); // Source Video Info
-      const info3 = document.getElementById('info3'); // Source Video Info
-      const infoDiv4 = document.getElementById('divinfo4'); // Source Game Info
-      const info4 = document.getElementById('info4'); // Source Game Info
-      const inputType = document.getElementById('inputtype'); // InputType: "ID" or "Name"
-      const inputTypeDiv = document.getElementById('divinputtype'); // Div of InputType
-      const results = document.getElementById('results'); // Max Results
-      const resultsDiv = document.getElementById('divresults'); // Max Results
-      const inputList1 = ['ID', 'Login Name']; // List for "switch": "case 0"
-      const inputList2 = ['ID', 'Name']; // List for "switch": "case 3"
+      const id1 = parseInt(document.getElementById("type").value, 10); // Source Type: "Channel", "Stream", "Video" or "Game"
+      const infoDiv1 = document.getElementById("divinfo1"); // Source Channel Info
+      const info1 = document.getElementById("info1"); // Source Channel Info
+      const infoDiv2 = document.getElementById("divinfo2"); // Source Stream Info
+      const info2 = document.getElementById("info2"); // Source Stream Info
+      const infoDiv3 = document.getElementById("divinfo3"); // Source Video Info
+      const info3 = document.getElementById("info3"); // Source Video Info
+      const infoDiv4 = document.getElementById("divinfo4"); // Source Game Info
+      const info4 = document.getElementById("info4"); // Source Game Info
+      const inputType = document.getElementById("inputtype"); // InputType: "ID" or "Name"
+      const inputTypeDiv = document.getElementById("divinputtype"); // Div of InputType
+      const results = document.getElementById("results"); // Max Results
+      const resultsDiv = document.getElementById("divresults"); // Max Results
+      const inputList1 = ["ID", "Login Name"]; // List for "switch": "case 0"
+      const inputList2 = ["ID", "Name"]; // List for "switch": "case 3"
 
       // Change HTML Stuff
-      let result1 = '';
-      let result2 = '';
+      let result1 = "";
+      let result2 = "";
       switch (id1) {
         case 0: // User & Channel
-          result1 = 'User';
+          result1 = "User";
           if (parseInt(info1.value, 10) < 9) {
             result2 = inputList1[parseInt(inputType.value, 10)];
             inputType.style.display = null;
             inputTypeDiv.style.display = null;
           } else {
-            result2 = 'ID';
-            inputType.style.display = 'none';
-            inputTypeDiv.style.display = 'none';
+            result2 = "ID";
+            inputType.style.display = "none";
+            inputTypeDiv.style.display = "none";
           }
           infoDiv1.style.display = null;
           info1.style.display = null;
-          infoDiv2.style.display = 'none';
-          info2.style.display = 'none';
-          infoDiv3.style.display = 'none';
-          info3.style.display = 'none';
-          infoDiv4.style.display = 'none';
-          info4.style.display = 'none';
+          infoDiv2.style.display = "none";
+          info2.style.display = "none";
+          infoDiv3.style.display = "none";
+          info3.style.display = "none";
+          infoDiv4.style.display = "none";
+          info4.style.display = "none";
           /* inputType.style.display = null
           inputTypeDiv.style.display = null */
-          results.style.display = 'none';
-          resultsDiv.style.display = 'none';
+          results.style.display = "none";
+          resultsDiv.style.display = "none";
           break;
         case 1: // Stream
-          result1 = 'User';
+          result1 = "User";
           result2 = inputList2[parseInt(inputType.value, 10)];
-          infoDiv1.style.display = 'none';
-          info1.style.display = 'none';
+          infoDiv1.style.display = "none";
+          info1.style.display = "none";
           infoDiv2.style.display = null;
           info2.style.display = null;
-          infoDiv3.style.display = 'none';
-          info3.style.display = 'none';
-          infoDiv4.style.display = 'none';
-          info4.style.display = 'none';
+          infoDiv3.style.display = "none";
+          info3.style.display = "none";
+          infoDiv4.style.display = "none";
+          info4.style.display = "none";
           inputType.style.display = null;
           inputTypeDiv.style.display = null;
-          results.style.display = 'none';
-          resultsDiv.style.display = 'none';
+          results.style.display = "none";
+          resultsDiv.style.display = "none";
           break;
         case 2: // Video
-          result1 = 'User';
-          result2 = 'ID';
-          infoDiv1.style.display = 'none';
-          info1.style.display = 'none';
-          infoDiv2.style.display = 'none';
-          info2.style.display = 'none';
+          result1 = "User";
+          result2 = "ID";
+          infoDiv1.style.display = "none";
+          info1.style.display = "none";
+          infoDiv2.style.display = "none";
+          info2.style.display = "none";
           infoDiv3.style.display = null;
           info3.style.display = null;
-          infoDiv4.style.display = 'none';
-          info4.style.display = 'none';
-          inputType.style.display = 'none';
-          inputTypeDiv.style.display = 'none';
+          infoDiv4.style.display = "none";
+          info4.style.display = "none";
+          inputType.style.display = "none";
+          inputTypeDiv.style.display = "none";
           results.style.display = null;
           resultsDiv.style.display = null;
           break;
         case 3: // Game
-          result1 = 'Game';
+          result1 = "Game";
           result2 = inputList2[parseInt(inputType.value, 10)];
           if (parseInt(info4.value, 10) < 3) {
             inputType.style.display = null;
             inputTypeDiv.style.display = null;
           } else {
-            inputType.style.display = 'none';
-            inputTypeDiv.style.display = 'none';
+            inputType.style.display = "none";
+            inputTypeDiv.style.display = "none";
           }
-          infoDiv1.style.display = 'none';
-          info1.style.display = 'none';
-          infoDiv2.style.display = 'none';
-          info2.style.display = 'none';
-          infoDiv3.style.display = 'none';
-          info3.style.display = 'none';
+          infoDiv1.style.display = "none";
+          info1.style.display = "none";
+          infoDiv2.style.display = "none";
+          info2.style.display = "none";
+          infoDiv3.style.display = "none";
+          info3.style.display = "none";
           infoDiv4.style.display = null;
           info4.style.display = null;
           /* inputType.style.display = null
           inputTypeDiv.style.display = null */
-          results.style.display = 'none';
-          resultsDiv.style.display = 'none';
+          results.style.display = "none";
+          resultsDiv.style.display = "none";
           break;
         default:
           break;
       }
 
-      document.getElementById('tempName1').innerHTML = result1;
-      document.getElementById('tempName2').innerHTML = result2;
+      document.getElementById("tempName1").innerHTML = result1;
+      document.getElementById("tempName2").innerHTML = result2;
     };
 
     glob.onChange2 = function onChange2() {
       // "ID" or "Login Name"
-      const id1 = parseInt(document.getElementById('type').value, 10); // Source Type: "Channel", "Stream", "Video" or "Game"
-      const id2 = parseInt(document.getElementById('inputtype').value, 10); // Input Type
+      const id1 = parseInt(document.getElementById("type").value, 10); // Source Type: "Channel", "Stream", "Video" or "Game"
+      const id2 = parseInt(document.getElementById("inputtype").value, 10); // Input Type
 
-      let result = '';
+      let result = "";
       if (id1 === 0) {
         switch (id2) {
           case 0:
-            result = 'ID';
+            result = "ID";
             break;
           case 1:
             if (id2 > 0) {
-              result = 'Login Name';
+              result = "Login Name";
             } else {
-              result = 'ID';
+              result = "ID";
             }
             break;
           default:
@@ -579,60 +584,60 @@ module.exports = {
       } else if ([1, 3].includes(id1)) {
         switch (id2) {
           case 0:
-            result = 'ID';
+            result = "ID";
             break;
           case 1:
-            result = 'Name';
+            result = "Name";
             break;
           default:
             break;
         }
       } else {
-        result = 'ID';
+        result = "ID";
       }
 
-      document.getElementById('tempName2').innerHTML = result;
+      document.getElementById("tempName2").innerHTML = result;
     };
 
     glob.onChange3 = function onChange3() {
       // Source Channel Info
-      const id4 = parseInt(document.getElementById('info1').value, 10); // Source Channel Info
-      const inputType = document.getElementById('inputtype'); // InputType: "ID" or "Login Name"
-      const inputTypeDiv = document.getElementById('divinputtype'); // Div of InputType
-      const inputList1 = ['ID', 'Login Name']; // List for "case 0"
+      const id4 = parseInt(document.getElementById("info1").value, 10); // Source Channel Info
+      const inputType = document.getElementById("inputtype"); // InputType: "ID" or "Login Name"
+      const inputTypeDiv = document.getElementById("divinputtype"); // Div of InputType
+      const inputList1 = ["ID", "Login Name"]; // List for "case 0"
 
-      let result2 = '';
+      let result2 = "";
       if (id4 < 9) {
         inputType.style.display = null;
         inputTypeDiv.style.display = null;
         result2 = inputList1[parseInt(inputType.value, 10)];
       } else {
-        inputType.style.display = 'none';
-        inputTypeDiv.style.display = 'none';
-        result2 = 'ID';
+        inputType.style.display = "none";
+        inputTypeDiv.style.display = "none";
+        result2 = "ID";
       }
 
-      document.getElementById('tempName2').innerHTML = result2;
+      document.getElementById("tempName2").innerHTML = result2;
     };
 
     glob.onChange4 = function onChange4() {
       // Source Game Info
-      const id1 = parseInt(document.getElementById('type').value, 10); // Source Type: "Channel", "Stream", "Video" or "Game"
-      const id5 = parseInt(document.getElementById('info4').value, 10); // Source Game Info
-      const inputType = document.getElementById('inputtype'); // InputType: "ID" or "Login Name"
-      const inputTypeDiv = document.getElementById('divinputtype'); // Div of InputType
+      const id1 = parseInt(document.getElementById("type").value, 10); // Source Type: "Channel", "Stream", "Video" or "Game"
+      const id5 = parseInt(document.getElementById("info4").value, 10); // Source Game Info
+      const inputType = document.getElementById("inputtype"); // InputType: "ID" or "Login Name"
+      const inputTypeDiv = document.getElementById("divinputtype"); // Div of InputType
 
       if (id1 === 3) {
         if (parseInt(id5, 10) < 3) {
           inputType.style.display = null;
           inputTypeDiv.style.display = null;
         } else {
-          inputType.style.display = 'none';
-          inputTypeDiv.style.display = 'none';
+          inputType.style.display = "none";
+          inputTypeDiv.style.display = "none";
         }
       } else if (id1 === 1 || id1 === 2) {
-        inputType.style.display = 'none';
-        inputTypeDiv.style.display = 'none';
+        inputType.style.display = "none";
+        inputTypeDiv.style.display = "none";
       } else {
         inputType.style.display = null;
         inputTypeDiv.style.display = null;
@@ -640,36 +645,41 @@ module.exports = {
     };
 
     // Load HTML Stuff if a user opens the action in DBM
-    document.getElementById('type');
-    document.getElementById('inputtype').style.display = null;
-    document.getElementById('divinputtype').style.display = null;
-    document.getElementById('info1');
-    document.getElementById('info4');
+    document.getElementById("type");
+    document.getElementById("inputtype").style.display = null;
+    document.getElementById("divinputtype").style.display = null;
+    document.getElementById("info1");
+    document.getElementById("info4");
 
     // On Type Change
-    glob.onChange1(document.getElementById('type')); // For the "Source Type"
-    glob.onChange2(document.getElementById('inputtype')); // For the "Input Type"
-    glob.onChange3(document.getElementById('info1')); // For Source Info: Channel
-    glob.onChange4(document.getElementById('info4')); // For Source Info: Game
-    glob.variableChange(document.getElementById('storage'), 'varNameContainer');
+    glob.onChange1(document.getElementById("type")); // For the "Source Type"
+    glob.onChange2(document.getElementById("inputtype")); // For the "Input Type"
+    glob.onChange3(document.getElementById("info1")); // For Source Info: Channel
+    glob.onChange4(document.getElementById("info4")); // For Source Info: Game
+    glob.variableChange(document.getElementById("storage"), "varNameContainer");
   },
 
   async action(cache) {
     const data = cache.actions[cache.index];
     const Mods = this.getMods();
-    const fetch = Mods.require('node-fetch');
+    const fetch = Mods.require("node-fetch");
 
     const input = this.evalMessage(data.input, cache);
     const clientID = this.evalMessage(data.clientid, cache);
     const token = this.evalMessage(data.token, cache);
     const storage = parseInt(data.storage, 10);
     const varName = this.evalMessage(data.varName, cache);
-    const cacheBoolean = data.cache === 'true';
-    if (!token) return console.log('Store Twitch Info: Please insert access token!');
-    if (!clientID) return console.log('Store Twitch Info: Please insert a client id!');
-    if (!input) return console.log('Store Twitch Info: Please insert something to search for!');
-    const api = 'https://api.twitch.tv/helix/';
-    const headers = { 'Client-ID': clientID, Authorization: `Bearer ${token}` };
+    const cacheBoolean = data.cache === "true";
+    if (!token)
+      return console.log("Store Twitch Info: Please insert access token!");
+    if (!clientID)
+      return console.log("Store Twitch Info: Please insert a client id!");
+    if (!input)
+      return console.log(
+        "Store Twitch Info: Please insert something to search for!"
+      );
+    const api = "https://api.twitch.tv/helix/";
+    const headers = { "Client-ID": clientID, Authorization: `Bearer ${token}` };
 
     let searchResults = parseInt(data.results, 10); // Default: 20 | Max: 100 (Because of API limitation!)
     if (searchResults && !isNaN(searchResults)) {
@@ -789,191 +799,194 @@ module.exports = {
         if (json && json.data.length !== 0) {
           let result;
           const iso2 = [
-            { code: 'ab', name: 'Abkhaz' },
-            { code: 'aa', name: 'Afar' },
-            { code: 'af', name: 'Afrikaans' },
-            { code: 'ak', name: 'Akan' },
-            { code: 'sq', name: 'Albanian' },
-            { code: 'am', name: 'Amharic' },
-            { code: 'ar', name: 'Arabic' },
-            { code: 'an', name: 'Aragonese' },
-            { code: 'hy', name: 'Armenian' },
-            { code: 'as', name: 'Assamese' },
-            { code: 'av', name: 'Avaric' },
-            { code: 'ae', name: 'Avestan' },
-            { code: 'ay', name: 'Aymara' },
-            { code: 'az', name: 'Azerbaijani' },
-            { code: 'bm', name: 'Bambara' },
-            { code: 'ba', name: 'Bashkir' },
-            { code: 'eu', name: 'Basque' },
-            { code: 'be', name: 'Belarusian' },
-            { code: 'bn', name: 'Bengali Bangla' },
-            { code: 'bh', name: 'Bihari' },
-            { code: 'bi', name: 'Bislama' },
-            { code: 'bs', name: 'Bosnian' },
-            { code: 'br', name: 'Breton' },
-            { code: 'bg', name: 'Bulgarian' },
-            { code: 'my', name: 'Burmese' },
-            { code: 'ca', name: 'Catalan Valencian' },
-            { code: 'ch', name: 'Chamorro' },
-            { code: 'ce', name: 'Chechen' },
-            { code: 'ny', name: 'Chichewa Chewa Nyanja' },
-            { code: 'zh', name: 'Chinese' },
-            { code: 'cv', name: 'Chuvash' },
-            { code: 'kw', name: 'Cornish' },
-            { code: 'co', name: 'Corsican' },
-            { code: 'cr', name: 'Cree' },
-            { code: 'hr', name: 'Croatian' },
-            { code: 'cs', name: 'Czech' },
-            { code: 'da', name: 'Danish' },
-            { code: 'dv', name: 'Divehi Dhivehi Maldivian' },
-            { code: 'nl', name: 'Dutch' },
-            { code: 'dz', name: 'Dzongkha' },
-            { code: 'en', name: 'English' },
-            { code: 'eo', name: 'Esperanto' },
-            { code: 'et', name: 'Estonian' },
-            { code: 'ee', name: 'Ewe' },
-            { code: 'fo', name: 'Faroese' },
-            { code: 'fj', name: 'Fijian' },
-            { code: 'fi', name: 'Finnish' },
-            { code: 'fr', name: 'French' },
-            { code: 'ff', name: 'Fula Fulah Pulaar Pular' },
-            { code: 'gl', name: 'Galician' },
-            { code: 'ka', name: 'Georgian' },
-            { code: 'de', name: 'German' },
-            { code: 'el', name: 'Greek, Modern' },
-            { code: 'gn', name: 'GuaranÃ­' },
-            { code: 'gu', name: 'Gujarati' },
-            { code: 'ht', name: 'Haitian Haitian Creole' },
-            { code: 'ha', name: 'Hausa' },
-            { code: 'he', name: 'Hebrew (modern)' },
-            { code: 'hz', name: 'Herero' },
-            { code: 'hi', name: 'Hindi' },
-            { code: 'ho', name: 'Hiri Motu' },
-            { code: 'hu', name: 'Hungarian' },
-            { code: 'ia', name: 'Interlingua' },
-            { code: 'id', name: 'Indonesian' },
-            { code: 'ie', name: 'Interlingue' },
-            { code: 'ga', name: 'Irish' },
-            { code: 'ig', name: 'Igbo' },
-            { code: 'ik', name: 'Inupiaq' },
-            { code: 'io', name: 'Ido' },
-            { code: 'is', name: 'Icelandic' },
-            { code: 'it', name: 'Italian' },
-            { code: 'iu', name: 'Inuktitut' },
-            { code: 'ja', name: 'Japanese' },
-            { code: 'jv', name: 'Javanese' },
-            { code: 'kl', name: 'Kalaallisut, Greenlandic' },
-            { code: 'kn', name: 'Kannada' },
-            { code: 'kr', name: 'Kanuri' },
-            { code: 'ks', name: 'Kashmiri' },
-            { code: 'kk', name: 'Kazakh' },
-            { code: 'km', name: 'Khmer' },
-            { code: 'ki', name: 'Kikuyu, Gikuyu' },
-            { code: 'rw', name: 'Kinyarwanda' },
-            { code: 'ky', name: 'Kyrgyz' },
-            { code: 'kv', name: 'Komi' },
-            { code: 'kg', name: 'Kongo' },
-            { code: 'ko', name: 'Korean' },
-            { code: 'ku', name: 'Kurdish' },
-            { code: 'kj', name: 'Kwanyama, Kuanyama' },
-            { code: 'la', name: 'Latin' },
-            { code: 'lb', name: 'Luxembourgish, Letzeburgesch' },
-            { code: 'lg', name: 'Ganda' },
-            { code: 'li', name: 'Limburgish, Limburgan, Limburger' },
-            { code: 'ln', name: 'Lingala' },
-            { code: 'lo', name: 'Lao' },
-            { code: 'lt', name: 'Lithuanian' },
-            { code: 'lu', name: 'Luba-Katanga' },
-            { code: 'lv', name: 'Latvian' },
-            { code: 'gv', name: 'Manx' },
-            { code: 'mk', name: 'Macedonian' },
-            { code: 'mg', name: 'Malagasy' },
-            { code: 'ms', name: 'Malay' },
-            { code: 'ml', name: 'Malayalam' },
-            { code: 'mt', name: 'Maltese' },
-            { code: 'mi', name: 'MÄori' },
-            { code: 'mr', name: 'Marathi (MarÄá¹­hÄ«)' },
-            { code: 'mh', name: 'Marshallese' },
-            { code: 'mn', name: 'Mongolian' },
-            { code: 'na', name: 'Nauru' },
-            { code: 'nv', name: 'Navajo, Navaho' },
-            { code: 'nb', name: 'Norwegian BokmÃ¥l' },
-            { code: 'nd', name: 'North Ndebele' },
-            { code: 'ne', name: 'Nepali' },
-            { code: 'ng', name: 'Ndonga' },
-            { code: 'nn', name: 'Norwegian Nynorsk' },
-            { code: 'no', name: 'Norwegian' },
-            { code: 'ii', name: 'Nuosu' },
-            { code: 'nr', name: 'South Ndebele' },
-            { code: 'oc', name: 'Occitan' },
-            { code: 'oj', name: 'Ojibwe, Ojibwa' },
-            { code: 'cu', name: 'Old Church Slavonic, Church Slavic, Church Slavonic, Old Bulgarian, Old Slavonic' },
-            { code: 'om', name: 'Oromo' },
-            { code: 'or', name: 'Oriya' },
-            { code: 'os', name: 'Ossetian, Ossetic' },
-            { code: 'pa', name: 'Panjabi, Punjabi' },
-            { code: 'pi', name: 'PÄli' },
-            { code: 'fa', name: 'Persian (Farsi)' },
-            { code: 'pl', name: 'Polish' },
-            { code: 'ps', name: 'Pashto, Pushto' },
-            { code: 'pt', name: 'Portuguese' },
-            { code: 'qu', name: 'Quechua' },
-            { code: 'rm', name: 'Romansh' },
-            { code: 'rn', name: 'Kirundi' },
-            { code: 'ro', name: 'Romanian, [])' },
-            { code: 'ru', name: 'Russian' },
-            { code: 'sa', name: 'Sanskrit (Saá¹ská¹›ta)' },
-            { code: 'sc', name: 'Sardinian' },
-            { code: 'sd', name: 'Sindhi' },
-            { code: 'se', name: 'Northern Sami' },
-            { code: 'sm', name: 'Samoan' },
-            { code: 'sg', name: 'Sango' },
-            { code: 'sr', name: 'Serbian' },
-            { code: 'gd', name: 'Scottish Gaelic Gaelic' },
-            { code: 'sn', name: 'Shona' },
-            { code: 'si', name: 'Sinhala, Sinhalese' },
-            { code: 'sk', name: 'Slovak' },
-            { code: 'sl', name: 'Slovene' },
-            { code: 'so', name: 'Somali' },
-            { code: 'st', name: 'Southern Sotho' },
-            { code: 'az', name: 'South Azerbaijani' },
-            { code: 'es', name: 'Spanish Castilian' },
-            { code: 'su', name: 'Sundanese' },
-            { code: 'sw', name: 'Swahili' },
-            { code: 'ss', name: 'Swati' },
-            { code: 'sv', name: 'Swedish' },
-            { code: 'ta', name: 'Tamil' },
-            { code: 'te', name: 'Telugu' },
-            { code: 'tg', name: 'Tajik' },
-            { code: 'th', name: 'Thai' },
-            { code: 'ti', name: 'Tigrinya' },
-            { code: 'bo', name: 'Tibetan Standard, Tibetan, Central' },
-            { code: 'tk', name: 'Turkmen' },
-            { code: 'tl', name: 'Tagalog' },
-            { code: 'tn', name: 'Tswana' },
-            { code: 'to', name: 'Tonga (Tonga Islands)' },
-            { code: 'tr', name: 'Turkish' },
-            { code: 'ts', name: 'Tsonga' },
-            { code: 'tt', name: 'Tatar' },
-            { code: 'tw', name: 'Twi' },
-            { code: 'ty', name: 'Tahitian' },
-            { code: 'ug', name: 'Uyghur, Uighur' },
-            { code: 'uk', name: 'Ukrainian' },
-            { code: 'ur', name: 'Urdu' },
-            { code: 'uz', name: 'Uzbek' },
-            { code: 've', name: 'Venda' },
-            { code: 'vi', name: 'Vietnamese' },
-            { code: 'vo', name: 'VolapÃ¼k' },
-            { code: 'wa', name: 'Walloon' },
-            { code: 'cy', name: 'Welsh' },
-            { code: 'wo', name: 'Wolof' },
-            { code: 'fy', name: 'Western Frisian' },
-            { code: 'xh', name: 'Xhosa' },
-            { code: 'yi', name: 'Yiddish' },
-            { code: 'yo', name: 'Yoruba' },
-            { code: 'za', name: 'Zhuang, Chuang' },
-            { code: 'zu', name: 'Zulu' },
+            { code: "ab", name: "Abkhaz" },
+            { code: "aa", name: "Afar" },
+            { code: "af", name: "Afrikaans" },
+            { code: "ak", name: "Akan" },
+            { code: "sq", name: "Albanian" },
+            { code: "am", name: "Amharic" },
+            { code: "ar", name: "Arabic" },
+            { code: "an", name: "Aragonese" },
+            { code: "hy", name: "Armenian" },
+            { code: "as", name: "Assamese" },
+            { code: "av", name: "Avaric" },
+            { code: "ae", name: "Avestan" },
+            { code: "ay", name: "Aymara" },
+            { code: "az", name: "Azerbaijani" },
+            { code: "bm", name: "Bambara" },
+            { code: "ba", name: "Bashkir" },
+            { code: "eu", name: "Basque" },
+            { code: "be", name: "Belarusian" },
+            { code: "bn", name: "Bengali Bangla" },
+            { code: "bh", name: "Bihari" },
+            { code: "bi", name: "Bislama" },
+            { code: "bs", name: "Bosnian" },
+            { code: "br", name: "Breton" },
+            { code: "bg", name: "Bulgarian" },
+            { code: "my", name: "Burmese" },
+            { code: "ca", name: "Catalan Valencian" },
+            { code: "ch", name: "Chamorro" },
+            { code: "ce", name: "Chechen" },
+            { code: "ny", name: "Chichewa Chewa Nyanja" },
+            { code: "zh", name: "Chinese" },
+            { code: "cv", name: "Chuvash" },
+            { code: "kw", name: "Cornish" },
+            { code: "co", name: "Corsican" },
+            { code: "cr", name: "Cree" },
+            { code: "hr", name: "Croatian" },
+            { code: "cs", name: "Czech" },
+            { code: "da", name: "Danish" },
+            { code: "dv", name: "Divehi Dhivehi Maldivian" },
+            { code: "nl", name: "Dutch" },
+            { code: "dz", name: "Dzongkha" },
+            { code: "en", name: "English" },
+            { code: "eo", name: "Esperanto" },
+            { code: "et", name: "Estonian" },
+            { code: "ee", name: "Ewe" },
+            { code: "fo", name: "Faroese" },
+            { code: "fj", name: "Fijian" },
+            { code: "fi", name: "Finnish" },
+            { code: "fr", name: "French" },
+            { code: "ff", name: "Fula Fulah Pulaar Pular" },
+            { code: "gl", name: "Galician" },
+            { code: "ka", name: "Georgian" },
+            { code: "de", name: "German" },
+            { code: "el", name: "Greek, Modern" },
+            { code: "gn", name: "GuaranÃ­" },
+            { code: "gu", name: "Gujarati" },
+            { code: "ht", name: "Haitian Haitian Creole" },
+            { code: "ha", name: "Hausa" },
+            { code: "he", name: "Hebrew (modern)" },
+            { code: "hz", name: "Herero" },
+            { code: "hi", name: "Hindi" },
+            { code: "ho", name: "Hiri Motu" },
+            { code: "hu", name: "Hungarian" },
+            { code: "ia", name: "Interlingua" },
+            { code: "id", name: "Indonesian" },
+            { code: "ie", name: "Interlingue" },
+            { code: "ga", name: "Irish" },
+            { code: "ig", name: "Igbo" },
+            { code: "ik", name: "Inupiaq" },
+            { code: "io", name: "Ido" },
+            { code: "is", name: "Icelandic" },
+            { code: "it", name: "Italian" },
+            { code: "iu", name: "Inuktitut" },
+            { code: "ja", name: "Japanese" },
+            { code: "jv", name: "Javanese" },
+            { code: "kl", name: "Kalaallisut, Greenlandic" },
+            { code: "kn", name: "Kannada" },
+            { code: "kr", name: "Kanuri" },
+            { code: "ks", name: "Kashmiri" },
+            { code: "kk", name: "Kazakh" },
+            { code: "km", name: "Khmer" },
+            { code: "ki", name: "Kikuyu, Gikuyu" },
+            { code: "rw", name: "Kinyarwanda" },
+            { code: "ky", name: "Kyrgyz" },
+            { code: "kv", name: "Komi" },
+            { code: "kg", name: "Kongo" },
+            { code: "ko", name: "Korean" },
+            { code: "ku", name: "Kurdish" },
+            { code: "kj", name: "Kwanyama, Kuanyama" },
+            { code: "la", name: "Latin" },
+            { code: "lb", name: "Luxembourgish, Letzeburgesch" },
+            { code: "lg", name: "Ganda" },
+            { code: "li", name: "Limburgish, Limburgan, Limburger" },
+            { code: "ln", name: "Lingala" },
+            { code: "lo", name: "Lao" },
+            { code: "lt", name: "Lithuanian" },
+            { code: "lu", name: "Luba-Katanga" },
+            { code: "lv", name: "Latvian" },
+            { code: "gv", name: "Manx" },
+            { code: "mk", name: "Macedonian" },
+            { code: "mg", name: "Malagasy" },
+            { code: "ms", name: "Malay" },
+            { code: "ml", name: "Malayalam" },
+            { code: "mt", name: "Maltese" },
+            { code: "mi", name: "MÄori" },
+            { code: "mr", name: "Marathi (MarÄá¹­hÄ«)" },
+            { code: "mh", name: "Marshallese" },
+            { code: "mn", name: "Mongolian" },
+            { code: "na", name: "Nauru" },
+            { code: "nv", name: "Navajo, Navaho" },
+            { code: "nb", name: "Norwegian BokmÃ¥l" },
+            { code: "nd", name: "North Ndebele" },
+            { code: "ne", name: "Nepali" },
+            { code: "ng", name: "Ndonga" },
+            { code: "nn", name: "Norwegian Nynorsk" },
+            { code: "no", name: "Norwegian" },
+            { code: "ii", name: "Nuosu" },
+            { code: "nr", name: "South Ndebele" },
+            { code: "oc", name: "Occitan" },
+            { code: "oj", name: "Ojibwe, Ojibwa" },
+            {
+              code: "cu",
+              name: "Old Church Slavonic, Church Slavic, Church Slavonic, Old Bulgarian, Old Slavonic",
+            },
+            { code: "om", name: "Oromo" },
+            { code: "or", name: "Oriya" },
+            { code: "os", name: "Ossetian, Ossetic" },
+            { code: "pa", name: "Panjabi, Punjabi" },
+            { code: "pi", name: "PÄli" },
+            { code: "fa", name: "Persian (Farsi)" },
+            { code: "pl", name: "Polish" },
+            { code: "ps", name: "Pashto, Pushto" },
+            { code: "pt", name: "Portuguese" },
+            { code: "qu", name: "Quechua" },
+            { code: "rm", name: "Romansh" },
+            { code: "rn", name: "Kirundi" },
+            { code: "ro", name: "Romanian, [])" },
+            { code: "ru", name: "Russian" },
+            { code: "sa", name: "Sanskrit (Saá¹ská¹›ta)" },
+            { code: "sc", name: "Sardinian" },
+            { code: "sd", name: "Sindhi" },
+            { code: "se", name: "Northern Sami" },
+            { code: "sm", name: "Samoan" },
+            { code: "sg", name: "Sango" },
+            { code: "sr", name: "Serbian" },
+            { code: "gd", name: "Scottish Gaelic Gaelic" },
+            { code: "sn", name: "Shona" },
+            { code: "si", name: "Sinhala, Sinhalese" },
+            { code: "sk", name: "Slovak" },
+            { code: "sl", name: "Slovene" },
+            { code: "so", name: "Somali" },
+            { code: "st", name: "Southern Sotho" },
+            { code: "az", name: "South Azerbaijani" },
+            { code: "es", name: "Spanish Castilian" },
+            { code: "su", name: "Sundanese" },
+            { code: "sw", name: "Swahili" },
+            { code: "ss", name: "Swati" },
+            { code: "sv", name: "Swedish" },
+            { code: "ta", name: "Tamil" },
+            { code: "te", name: "Telugu" },
+            { code: "tg", name: "Tajik" },
+            { code: "th", name: "Thai" },
+            { code: "ti", name: "Tigrinya" },
+            { code: "bo", name: "Tibetan Standard, Tibetan, Central" },
+            { code: "tk", name: "Turkmen" },
+            { code: "tl", name: "Tagalog" },
+            { code: "tn", name: "Tswana" },
+            { code: "to", name: "Tonga (Tonga Islands)" },
+            { code: "tr", name: "Turkish" },
+            { code: "ts", name: "Tsonga" },
+            { code: "tt", name: "Tatar" },
+            { code: "tw", name: "Twi" },
+            { code: "ty", name: "Tahitian" },
+            { code: "ug", name: "Uyghur, Uighur" },
+            { code: "uk", name: "Ukrainian" },
+            { code: "ur", name: "Urdu" },
+            { code: "uz", name: "Uzbek" },
+            { code: "ve", name: "Venda" },
+            { code: "vi", name: "Vietnamese" },
+            { code: "vo", name: "VolapÃ¼k" },
+            { code: "wa", name: "Walloon" },
+            { code: "cy", name: "Welsh" },
+            { code: "wo", name: "Wolof" },
+            { code: "fy", name: "Western Frisian" },
+            { code: "xh", name: "Xhosa" },
+            { code: "yi", name: "Yiddish" },
+            { code: "yo", name: "Yoruba" },
+            { code: "za", name: "Zhuang, Chuang" },
+            { code: "zu", name: "Zulu" },
           ];
           switch (infoType) {
             case 0:
@@ -1002,16 +1015,22 @@ module.exports = {
               result = json.data[0].started_at;
               break;
             case 9:
-              result = iso2.find((lang) => lang.code === json.data[0].language).name;
+              result = iso2.find(
+                (lang) => lang.code === json.data[0].language
+              ).name;
               break;
             case 10:
-              result = json.data[0].thumbnail_url.replace('{width}', '1920').replace('{height}', '1280');
+              result = json.data[0].thumbnail_url
+                .replace("{width}", "1920")
+                .replace("{height}", "1280");
               break;
             case 11: {
               url = `${api}streams/tags?broadcaster_id=${json.data[0].user_id}`;
               const respond = await getApi.call(this, url);
               if (respond && respond.data) {
-                result = respond.data.map((tag) => tag.localization_names['en-us']);
+                result = respond.data.map(
+                  (tag) => tag.localization_names["en-us"]
+                );
               } else if (respond && respond.message) {
                 console.error(respond);
               } else {
@@ -1032,7 +1051,7 @@ module.exports = {
               break;
             }
             default:
-              console.log('Please update mod or the input from dbm!!!');
+              console.log("Please update mod or the input from dbm!!!");
           }
           this.storeValue(result, storage, varName, cache);
         } else if (json && json.message) {
@@ -1047,191 +1066,194 @@ module.exports = {
         if (json && json.data.length !== 0) {
           let result;
           const iso2 = [
-            { code: 'ab', name: 'Abkhaz' },
-            { code: 'aa', name: 'Afar' },
-            { code: 'af', name: 'Afrikaans' },
-            { code: 'ak', name: 'Akan' },
-            { code: 'sq', name: 'Albanian' },
-            { code: 'am', name: 'Amharic' },
-            { code: 'ar', name: 'Arabic' },
-            { code: 'an', name: 'Aragonese' },
-            { code: 'hy', name: 'Armenian' },
-            { code: 'as', name: 'Assamese' },
-            { code: 'av', name: 'Avaric' },
-            { code: 'ae', name: 'Avestan' },
-            { code: 'ay', name: 'Aymara' },
-            { code: 'az', name: 'Azerbaijani' },
-            { code: 'bm', name: 'Bambara' },
-            { code: 'ba', name: 'Bashkir' },
-            { code: 'eu', name: 'Basque' },
-            { code: 'be', name: 'Belarusian' },
-            { code: 'bn', name: 'Bengali Bangla' },
-            { code: 'bh', name: 'Bihari' },
-            { code: 'bi', name: 'Bislama' },
-            { code: 'bs', name: 'Bosnian' },
-            { code: 'br', name: 'Breton' },
-            { code: 'bg', name: 'Bulgarian' },
-            { code: 'my', name: 'Burmese' },
-            { code: 'ca', name: 'Catalan Valencian' },
-            { code: 'ch', name: 'Chamorro' },
-            { code: 'ce', name: 'Chechen' },
-            { code: 'ny', name: 'Chichewa Chewa Nyanja' },
-            { code: 'zh', name: 'Chinese' },
-            { code: 'cv', name: 'Chuvash' },
-            { code: 'kw', name: 'Cornish' },
-            { code: 'co', name: 'Corsican' },
-            { code: 'cr', name: 'Cree' },
-            { code: 'hr', name: 'Croatian' },
-            { code: 'cs', name: 'Czech' },
-            { code: 'da', name: 'Danish' },
-            { code: 'dv', name: 'Divehi Dhivehi Maldivian' },
-            { code: 'nl', name: 'Dutch' },
-            { code: 'dz', name: 'Dzongkha' },
-            { code: 'en', name: 'English' },
-            { code: 'eo', name: 'Esperanto' },
-            { code: 'et', name: 'Estonian' },
-            { code: 'ee', name: 'Ewe' },
-            { code: 'fo', name: 'Faroese' },
-            { code: 'fj', name: 'Fijian' },
-            { code: 'fi', name: 'Finnish' },
-            { code: 'fr', name: 'French' },
-            { code: 'ff', name: 'Fula Fulah Pulaar Pular' },
-            { code: 'gl', name: 'Galician' },
-            { code: 'ka', name: 'Georgian' },
-            { code: 'de', name: 'German' },
-            { code: 'el', name: 'Greek, Modern' },
-            { code: 'gn', name: 'GuaranÃ­' },
-            { code: 'gu', name: 'Gujarati' },
-            { code: 'ht', name: 'Haitian Haitian Creole' },
-            { code: 'ha', name: 'Hausa' },
-            { code: 'he', name: 'Hebrew (modern)' },
-            { code: 'hz', name: 'Herero' },
-            { code: 'hi', name: 'Hindi' },
-            { code: 'ho', name: 'Hiri Motu' },
-            { code: 'hu', name: 'Hungarian' },
-            { code: 'ia', name: 'Interlingua' },
-            { code: 'id', name: 'Indonesian' },
-            { code: 'ie', name: 'Interlingue' },
-            { code: 'ga', name: 'Irish' },
-            { code: 'ig', name: 'Igbo' },
-            { code: 'ik', name: 'Inupiaq' },
-            { code: 'io', name: 'Ido' },
-            { code: 'is', name: 'Icelandic' },
-            { code: 'it', name: 'Italian' },
-            { code: 'iu', name: 'Inuktitut' },
-            { code: 'ja', name: 'Japanese' },
-            { code: 'jv', name: 'Javanese' },
-            { code: 'kl', name: 'Kalaallisut, Greenlandic' },
-            { code: 'kn', name: 'Kannada' },
-            { code: 'kr', name: 'Kanuri' },
-            { code: 'ks', name: 'Kashmiri' },
-            { code: 'kk', name: 'Kazakh' },
-            { code: 'km', name: 'Khmer' },
-            { code: 'ki', name: 'Kikuyu, Gikuyu' },
-            { code: 'rw', name: 'Kinyarwanda' },
-            { code: 'ky', name: 'Kyrgyz' },
-            { code: 'kv', name: 'Komi' },
-            { code: 'kg', name: 'Kongo' },
-            { code: 'ko', name: 'Korean' },
-            { code: 'ku', name: 'Kurdish' },
-            { code: 'kj', name: 'Kwanyama, Kuanyama' },
-            { code: 'la', name: 'Latin' },
-            { code: 'lb', name: 'Luxembourgish, Letzeburgesch' },
-            { code: 'lg', name: 'Ganda' },
-            { code: 'li', name: 'Limburgish, Limburgan, Limburger' },
-            { code: 'ln', name: 'Lingala' },
-            { code: 'lo', name: 'Lao' },
-            { code: 'lt', name: 'Lithuanian' },
-            { code: 'lu', name: 'Luba-Katanga' },
-            { code: 'lv', name: 'Latvian' },
-            { code: 'gv', name: 'Manx' },
-            { code: 'mk', name: 'Macedonian' },
-            { code: 'mg', name: 'Malagasy' },
-            { code: 'ms', name: 'Malay' },
-            { code: 'ml', name: 'Malayalam' },
-            { code: 'mt', name: 'Maltese' },
-            { code: 'mi', name: 'MÄori' },
-            { code: 'mr', name: 'Marathi (MarÄá¹­hÄ«)' },
-            { code: 'mh', name: 'Marshallese' },
-            { code: 'mn', name: 'Mongolian' },
-            { code: 'na', name: 'Nauru' },
-            { code: 'nv', name: 'Navajo, Navaho' },
-            { code: 'nb', name: 'Norwegian BokmÃ¥l' },
-            { code: 'nd', name: 'North Ndebele' },
-            { code: 'ne', name: 'Nepali' },
-            { code: 'ng', name: 'Ndonga' },
-            { code: 'nn', name: 'Norwegian Nynorsk' },
-            { code: 'no', name: 'Norwegian' },
-            { code: 'ii', name: 'Nuosu' },
-            { code: 'nr', name: 'South Ndebele' },
-            { code: 'oc', name: 'Occitan' },
-            { code: 'oj', name: 'Ojibwe, Ojibwa' },
-            { code: 'cu', name: 'Old Church Slavonic, Church Slavic, Church Slavonic, Old Bulgarian, Old Slavonic' },
-            { code: 'om', name: 'Oromo' },
-            { code: 'or', name: 'Oriya' },
-            { code: 'os', name: 'Ossetian, Ossetic' },
-            { code: 'pa', name: 'Panjabi, Punjabi' },
-            { code: 'pi', name: 'PÄli' },
-            { code: 'fa', name: 'Persian (Farsi)' },
-            { code: 'pl', name: 'Polish' },
-            { code: 'ps', name: 'Pashto, Pushto' },
-            { code: 'pt', name: 'Portuguese' },
-            { code: 'qu', name: 'Quechua' },
-            { code: 'rm', name: 'Romansh' },
-            { code: 'rn', name: 'Kirundi' },
-            { code: 'ro', name: 'Romanian, [])' },
-            { code: 'ru', name: 'Russian' },
-            { code: 'sa', name: 'Sanskrit (Saá¹ská¹›ta)' },
-            { code: 'sc', name: 'Sardinian' },
-            { code: 'sd', name: 'Sindhi' },
-            { code: 'se', name: 'Northern Sami' },
-            { code: 'sm', name: 'Samoan' },
-            { code: 'sg', name: 'Sango' },
-            { code: 'sr', name: 'Serbian' },
-            { code: 'gd', name: 'Scottish Gaelic Gaelic' },
-            { code: 'sn', name: 'Shona' },
-            { code: 'si', name: 'Sinhala, Sinhalese' },
-            { code: 'sk', name: 'Slovak' },
-            { code: 'sl', name: 'Slovene' },
-            { code: 'so', name: 'Somali' },
-            { code: 'st', name: 'Southern Sotho' },
-            { code: 'az', name: 'South Azerbaijani' },
-            { code: 'es', name: 'Spanish Castilian' },
-            { code: 'su', name: 'Sundanese' },
-            { code: 'sw', name: 'Swahili' },
-            { code: 'ss', name: 'Swati' },
-            { code: 'sv', name: 'Swedish' },
-            { code: 'ta', name: 'Tamil' },
-            { code: 'te', name: 'Telugu' },
-            { code: 'tg', name: 'Tajik' },
-            { code: 'th', name: 'Thai' },
-            { code: 'ti', name: 'Tigrinya' },
-            { code: 'bo', name: 'Tibetan Standard, Tibetan, Central' },
-            { code: 'tk', name: 'Turkmen' },
-            { code: 'tl', name: 'Tagalog' },
-            { code: 'tn', name: 'Tswana' },
-            { code: 'to', name: 'Tonga (Tonga Islands)' },
-            { code: 'tr', name: 'Turkish' },
-            { code: 'ts', name: 'Tsonga' },
-            { code: 'tt', name: 'Tatar' },
-            { code: 'tw', name: 'Twi' },
-            { code: 'ty', name: 'Tahitian' },
-            { code: 'ug', name: 'Uyghur, Uighur' },
-            { code: 'uk', name: 'Ukrainian' },
-            { code: 'ur', name: 'Urdu' },
-            { code: 'uz', name: 'Uzbek' },
-            { code: 've', name: 'Venda' },
-            { code: 'vi', name: 'Vietnamese' },
-            { code: 'vo', name: 'VolapÃ¼k' },
-            { code: 'wa', name: 'Walloon' },
-            { code: 'cy', name: 'Welsh' },
-            { code: 'wo', name: 'Wolof' },
-            { code: 'fy', name: 'Western Frisian' },
-            { code: 'xh', name: 'Xhosa' },
-            { code: 'yi', name: 'Yiddish' },
-            { code: 'yo', name: 'Yoruba' },
-            { code: 'za', name: 'Zhuang, Chuang' },
-            { code: 'zu', name: 'Zulu' },
+            { code: "ab", name: "Abkhaz" },
+            { code: "aa", name: "Afar" },
+            { code: "af", name: "Afrikaans" },
+            { code: "ak", name: "Akan" },
+            { code: "sq", name: "Albanian" },
+            { code: "am", name: "Amharic" },
+            { code: "ar", name: "Arabic" },
+            { code: "an", name: "Aragonese" },
+            { code: "hy", name: "Armenian" },
+            { code: "as", name: "Assamese" },
+            { code: "av", name: "Avaric" },
+            { code: "ae", name: "Avestan" },
+            { code: "ay", name: "Aymara" },
+            { code: "az", name: "Azerbaijani" },
+            { code: "bm", name: "Bambara" },
+            { code: "ba", name: "Bashkir" },
+            { code: "eu", name: "Basque" },
+            { code: "be", name: "Belarusian" },
+            { code: "bn", name: "Bengali Bangla" },
+            { code: "bh", name: "Bihari" },
+            { code: "bi", name: "Bislama" },
+            { code: "bs", name: "Bosnian" },
+            { code: "br", name: "Breton" },
+            { code: "bg", name: "Bulgarian" },
+            { code: "my", name: "Burmese" },
+            { code: "ca", name: "Catalan Valencian" },
+            { code: "ch", name: "Chamorro" },
+            { code: "ce", name: "Chechen" },
+            { code: "ny", name: "Chichewa Chewa Nyanja" },
+            { code: "zh", name: "Chinese" },
+            { code: "cv", name: "Chuvash" },
+            { code: "kw", name: "Cornish" },
+            { code: "co", name: "Corsican" },
+            { code: "cr", name: "Cree" },
+            { code: "hr", name: "Croatian" },
+            { code: "cs", name: "Czech" },
+            { code: "da", name: "Danish" },
+            { code: "dv", name: "Divehi Dhivehi Maldivian" },
+            { code: "nl", name: "Dutch" },
+            { code: "dz", name: "Dzongkha" },
+            { code: "en", name: "English" },
+            { code: "eo", name: "Esperanto" },
+            { code: "et", name: "Estonian" },
+            { code: "ee", name: "Ewe" },
+            { code: "fo", name: "Faroese" },
+            { code: "fj", name: "Fijian" },
+            { code: "fi", name: "Finnish" },
+            { code: "fr", name: "French" },
+            { code: "ff", name: "Fula Fulah Pulaar Pular" },
+            { code: "gl", name: "Galician" },
+            { code: "ka", name: "Georgian" },
+            { code: "de", name: "German" },
+            { code: "el", name: "Greek, Modern" },
+            { code: "gn", name: "GuaranÃ­" },
+            { code: "gu", name: "Gujarati" },
+            { code: "ht", name: "Haitian Haitian Creole" },
+            { code: "ha", name: "Hausa" },
+            { code: "he", name: "Hebrew (modern)" },
+            { code: "hz", name: "Herero" },
+            { code: "hi", name: "Hindi" },
+            { code: "ho", name: "Hiri Motu" },
+            { code: "hu", name: "Hungarian" },
+            { code: "ia", name: "Interlingua" },
+            { code: "id", name: "Indonesian" },
+            { code: "ie", name: "Interlingue" },
+            { code: "ga", name: "Irish" },
+            { code: "ig", name: "Igbo" },
+            { code: "ik", name: "Inupiaq" },
+            { code: "io", name: "Ido" },
+            { code: "is", name: "Icelandic" },
+            { code: "it", name: "Italian" },
+            { code: "iu", name: "Inuktitut" },
+            { code: "ja", name: "Japanese" },
+            { code: "jv", name: "Javanese" },
+            { code: "kl", name: "Kalaallisut, Greenlandic" },
+            { code: "kn", name: "Kannada" },
+            { code: "kr", name: "Kanuri" },
+            { code: "ks", name: "Kashmiri" },
+            { code: "kk", name: "Kazakh" },
+            { code: "km", name: "Khmer" },
+            { code: "ki", name: "Kikuyu, Gikuyu" },
+            { code: "rw", name: "Kinyarwanda" },
+            { code: "ky", name: "Kyrgyz" },
+            { code: "kv", name: "Komi" },
+            { code: "kg", name: "Kongo" },
+            { code: "ko", name: "Korean" },
+            { code: "ku", name: "Kurdish" },
+            { code: "kj", name: "Kwanyama, Kuanyama" },
+            { code: "la", name: "Latin" },
+            { code: "lb", name: "Luxembourgish, Letzeburgesch" },
+            { code: "lg", name: "Ganda" },
+            { code: "li", name: "Limburgish, Limburgan, Limburger" },
+            { code: "ln", name: "Lingala" },
+            { code: "lo", name: "Lao" },
+            { code: "lt", name: "Lithuanian" },
+            { code: "lu", name: "Luba-Katanga" },
+            { code: "lv", name: "Latvian" },
+            { code: "gv", name: "Manx" },
+            { code: "mk", name: "Macedonian" },
+            { code: "mg", name: "Malagasy" },
+            { code: "ms", name: "Malay" },
+            { code: "ml", name: "Malayalam" },
+            { code: "mt", name: "Maltese" },
+            { code: "mi", name: "MÄori" },
+            { code: "mr", name: "Marathi (MarÄá¹­hÄ«)" },
+            { code: "mh", name: "Marshallese" },
+            { code: "mn", name: "Mongolian" },
+            { code: "na", name: "Nauru" },
+            { code: "nv", name: "Navajo, Navaho" },
+            { code: "nb", name: "Norwegian BokmÃ¥l" },
+            { code: "nd", name: "North Ndebele" },
+            { code: "ne", name: "Nepali" },
+            { code: "ng", name: "Ndonga" },
+            { code: "nn", name: "Norwegian Nynorsk" },
+            { code: "no", name: "Norwegian" },
+            { code: "ii", name: "Nuosu" },
+            { code: "nr", name: "South Ndebele" },
+            { code: "oc", name: "Occitan" },
+            { code: "oj", name: "Ojibwe, Ojibwa" },
+            {
+              code: "cu",
+              name: "Old Church Slavonic, Church Slavic, Church Slavonic, Old Bulgarian, Old Slavonic",
+            },
+            { code: "om", name: "Oromo" },
+            { code: "or", name: "Oriya" },
+            { code: "os", name: "Ossetian, Ossetic" },
+            { code: "pa", name: "Panjabi, Punjabi" },
+            { code: "pi", name: "PÄli" },
+            { code: "fa", name: "Persian (Farsi)" },
+            { code: "pl", name: "Polish" },
+            { code: "ps", name: "Pashto, Pushto" },
+            { code: "pt", name: "Portuguese" },
+            { code: "qu", name: "Quechua" },
+            { code: "rm", name: "Romansh" },
+            { code: "rn", name: "Kirundi" },
+            { code: "ro", name: "Romanian, [])" },
+            { code: "ru", name: "Russian" },
+            { code: "sa", name: "Sanskrit (Saá¹ská¹›ta)" },
+            { code: "sc", name: "Sardinian" },
+            { code: "sd", name: "Sindhi" },
+            { code: "se", name: "Northern Sami" },
+            { code: "sm", name: "Samoan" },
+            { code: "sg", name: "Sango" },
+            { code: "sr", name: "Serbian" },
+            { code: "gd", name: "Scottish Gaelic Gaelic" },
+            { code: "sn", name: "Shona" },
+            { code: "si", name: "Sinhala, Sinhalese" },
+            { code: "sk", name: "Slovak" },
+            { code: "sl", name: "Slovene" },
+            { code: "so", name: "Somali" },
+            { code: "st", name: "Southern Sotho" },
+            { code: "az", name: "South Azerbaijani" },
+            { code: "es", name: "Spanish Castilian" },
+            { code: "su", name: "Sundanese" },
+            { code: "sw", name: "Swahili" },
+            { code: "ss", name: "Swati" },
+            { code: "sv", name: "Swedish" },
+            { code: "ta", name: "Tamil" },
+            { code: "te", name: "Telugu" },
+            { code: "tg", name: "Tajik" },
+            { code: "th", name: "Thai" },
+            { code: "ti", name: "Tigrinya" },
+            { code: "bo", name: "Tibetan Standard, Tibetan, Central" },
+            { code: "tk", name: "Turkmen" },
+            { code: "tl", name: "Tagalog" },
+            { code: "tn", name: "Tswana" },
+            { code: "to", name: "Tonga (Tonga Islands)" },
+            { code: "tr", name: "Turkish" },
+            { code: "ts", name: "Tsonga" },
+            { code: "tt", name: "Tatar" },
+            { code: "tw", name: "Twi" },
+            { code: "ty", name: "Tahitian" },
+            { code: "ug", name: "Uyghur, Uighur" },
+            { code: "uk", name: "Ukrainian" },
+            { code: "ur", name: "Urdu" },
+            { code: "uz", name: "Uzbek" },
+            { code: "ve", name: "Venda" },
+            { code: "vi", name: "Vietnamese" },
+            { code: "vo", name: "VolapÃ¼k" },
+            { code: "wa", name: "Walloon" },
+            { code: "cy", name: "Welsh" },
+            { code: "wo", name: "Wolof" },
+            { code: "fy", name: "Western Frisian" },
+            { code: "xh", name: "Xhosa" },
+            { code: "yi", name: "Yiddish" },
+            { code: "yo", name: "Yoruba" },
+            { code: "za", name: "Zhuang, Chuang" },
+            { code: "zu", name: "Zulu" },
           ];
           switch (infoType) {
             case 0:
@@ -1260,17 +1282,22 @@ module.exports = {
               break;
             case 8:
               result = json.data.map((video) =>
-                video.thumbnail_url.replace('%{width}', '1920').replace('%{height}', '1280'),
+                video.thumbnail_url
+                  .replace("%{width}", "1920")
+                  .replace("%{height}", "1280")
               );
               break;
             case 9: // "public" or "private"
-              result = json.data.map((video) => video.viewable === 'public');
+              result = json.data.map((video) => video.viewable === "public");
               break;
             case 10:
               result = json.data.map((video) => video.view_count);
               break;
             case 11:
-              result = json.data.map((video) => iso2.find((lang) => lang.code === video.language).name);
+              result = json.data.map(
+                (video) =>
+                  iso2.find((lang) => lang.code === video.language).name
+              );
               break;
             case 12: // "upload", "archive" or "highlight"
               result = json.data.map((video) => video.type);
@@ -1282,7 +1309,7 @@ module.exports = {
               result = json.data.map((video) => {
                 const input = video.duration.match(/[a-z]/gi);
                 const times = video.duration.match(/[0-9]{1,2}/gi);
-                const moment = Mods.require('moment');
+                const moment = Mods.require("moment");
                 const duration = moment.duration();
                 input.forEach((t, index) => duration.add(times[index], t));
                 return duration.asSeconds();
@@ -1300,7 +1327,9 @@ module.exports = {
         break;
       case 3: // Game
         if (infoType < 3) {
-          inputType === 0 ? (url += `games?id=${input}`) : (url += `games?name=${input}`);
+          inputType === 0
+            ? (url += `games?id=${input}`)
+            : (url += `games?name=${input}`);
         } else {
           url += `games/top?limit=${searchResults}`;
         }
@@ -1315,7 +1344,9 @@ module.exports = {
               result = json.data[0].name;
               break;
             case 2:
-              result = json.data[0].box_art_url.replace('{width}', '1300').replace('{height}', '1730');
+              result = json.data[0].box_art_url
+                .replace("{width}", "1300")
+                .replace("{height}", "1730");
               break;
             case 3:
               result = json.data.map((game) => game.id);
@@ -1324,7 +1355,11 @@ module.exports = {
               result = json.data.map((game) => game.name);
               break;
             case 5:
-              result = json.data.map((game) => game.box_art_url.replace('{width}', '1300').replace('{height}', '1730'));
+              result = json.data.map((game) =>
+                game.box_art_url
+                  .replace("{width}", "1300")
+                  .replace("{height}", "1730")
+              );
               break;
             default:
               break;

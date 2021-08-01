@@ -1,13 +1,19 @@
 module.exports = {
-  name: 'Remove Reaction',
-  section: 'Reaction Control',
+  name: "Remove Reaction",
+  section: "Reaction Control",
 
   subtitle(data) {
-    const names = ['Mentioned User', 'Command Author', 'Temp Variable', 'Server Variable', 'Global Variable'];
+    const names = [
+      "Mentioned User",
+      "Command Author",
+      "Temp Variable",
+      "Server Variable",
+      "Global Variable",
+    ];
     return `${names[parseInt(data.member, 10)]}`;
   },
 
-  fields: ['reaction', 'varName', 'member', 'varName2'],
+  fields: ["reaction", "varName", "member", "varName2"],
 
   html(isEvent, data) {
     return `
@@ -40,8 +46,8 @@ module.exports = {
   init() {
     const { glob, document } = this;
 
-    glob.refreshVariableList(document.getElementById('reaction'));
-    glob.memberChange(document.getElementById('member'), 'varNameContainer2');
+    glob.refreshVariableList(document.getElementById("reaction"));
+    glob.memberChange(document.getElementById("member"), "varNameContainer2");
   },
 
   action(cache) {

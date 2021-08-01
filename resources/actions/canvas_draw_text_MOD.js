@@ -1,12 +1,22 @@
 module.exports = {
-  name: 'Canvas Draw Text on Image',
-  section: 'Image Editing',
+  name: "Canvas Draw Text on Image",
+  section: "Image Editing",
 
   subtitle(data) {
     return `${data.text}`;
   },
 
-  fields: ['storage', 'varName', 'x', 'y', 'fontPath', 'fontColor', 'fontSize', 'align', 'text'],
+  fields: [
+    "storage",
+    "varName",
+    "x",
+    "y",
+    "fontPath",
+    "fontColor",
+    "fontSize",
+    "align",
+    "text",
+  ],
 
   html(_isEvent, data) {
     return `
@@ -51,12 +61,12 @@ module.exports = {
   init() {
     const { glob, document } = this;
 
-    glob.refreshVariableList(document.getElementById('storage'));
+    glob.refreshVariableList(document.getElementById("storage"));
   },
 
   action(cache) {
-    const Canvas = require('canvas');
-    const opentype = require('opentype.js');
+    const Canvas = require("canvas");
+    const opentype = require("opentype.js");
     const data = cache.actions[cache.index];
     const storage = parseInt(data.storage, 10);
     const varName = this.evalMessage(data.varName, cache);
@@ -67,7 +77,7 @@ module.exports = {
     }
     const fontPath = this.evalMessage(data.fontPath, cache);
     let fontColor = this.evalMessage(data.fontColor, cache);
-    if (!fontColor.startsWith('#')) {
+    if (!fontColor.startsWith("#")) {
       fontColor = `#${fontColor}`;
     }
     let fontSize = parseInt(this.evalMessage(data.fontSize, cache), 10);
@@ -81,7 +91,7 @@ module.exports = {
     const image = new Canvas.Image();
     image.src = imagedata;
     const canvas = Canvas.createCanvas(image.width, image.height);
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext("2d");
     ctx.drawImage(image, 0, 0, image.width, image.height);
     const font = opentype.loadSync(fontPath);
     const textpath = font.getPath(text, 0, 0, fontSize);
@@ -125,7 +135,9 @@ module.exports = {
     const Path = font.getPath(text, x, y, fontSize);
     Path.fill = fontColor;
     Path.draw(ctx);
-    const result = canvas.toDataURL('image/png').replace('image/png', 'image/octet-stream');
+    const result = canvas
+      .toDataURL("image/png")
+      .replace("image/png", "image/octet-stream");
     this.storeValue(result, storage, varName, cache);
     this.callNextAction(cache);
   },

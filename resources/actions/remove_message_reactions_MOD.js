@@ -1,12 +1,12 @@
 module.exports = {
-  name: 'Clear reactions from message',
-  section: 'Reaction Control',
+  name: "Clear reactions from message",
+  section: "Reaction Control",
 
   subtitle() {
-    return 'Remove reactions from Message';
+    return "Remove reactions from Message";
   },
 
-  fields: ['storage', 'varName'],
+  fields: ["storage", "varName"],
 
   html(isEvent, data) {
     return `
@@ -26,7 +26,7 @@ module.exports = {
 
   init() {
     const { glob, document } = this;
-    glob.messageChange(document.getElementById('storage'), 'varNameContainer');
+    glob.messageChange(document.getElementById("storage"), "varNameContainer");
   },
 
   action(cache) {
@@ -38,12 +38,12 @@ module.exports = {
     if (Array.isArray(message)) {
       this.callListFunc(
         message.map((m) => m.reactions),
-        'removeAll',
-        [],
+        "removeAll",
+        []
       ).then(() => {
         this.callNextAction(cache);
       });
-    } else if (this.dest(message, 'reactions', 'removeAll')) {
+    } else if (this.dest(message, "reactions", "removeAll")) {
       message.reactions
         .removeAll()
         .then(() => {

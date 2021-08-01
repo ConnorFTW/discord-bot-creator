@@ -1,13 +1,13 @@
 /* eslint-disable no-undef, no-unused-vars */
 module.exports = {
-  name: 'Delete Global Data',
-  section: 'Data',
+  name: "Delete Global Data",
+  section: "Data",
 
   subtitle(data) {
-    return `Data : ${data.dataName ? data.dataName : 'All Data'}`;
+    return `Data : ${data.dataName ? data.dataName : "All Data"}`;
   },
 
-  fields: ['dataName'],
+  fields: ["dataName"],
 
   html() {
     return `
@@ -30,27 +30,29 @@ module.exports = {
   },
 
   mod(DBM) {
-    const fs = require('fs');
-    const path = require('path');
-    const filePath = path.join(process.cwd(), 'data', 'globals.json');
+    const fs = require("fs");
+    const path = require("path");
+    const filePath = path.join(process.cwd(), "data", "globals.json");
     if (!fs.existsSync(filePath)) {
-      fs.writeFileSync(filePath, '{}');
+      fs.writeFileSync(filePath, "{}");
     }
     DBM.Files.data.globals = JSON.parse(fs.readFileSync(filePath));
     class GlobalData {
       delData(name) {
         if (name && DBM.Files.data.globals[name]) {
           delete DBM.Files.data.globals[name];
-          DBM.Files.saveData('globals');
+          DBM.Files.saveData("globals");
         } else if (!name) {
           DBM.Files.data.globals = {};
-          DBM.Files.saveData('globals');
+          DBM.Files.saveData("globals");
         }
       }
 
       data(name, defaultValue) {
         if (DBM.Files.data.globals[name] || defaultValue !== undefined) {
-          const data = DBM.Files.data.globals[name] ? DBM.Files.data.globals[name] : defaultValue;
+          const data = DBM.Files.data.globals[name]
+            ? DBM.Files.data.globals[name]
+            : defaultValue;
           return data;
         }
         return null;
@@ -59,7 +61,7 @@ module.exports = {
       setData(name, value) {
         if (value !== undefined) {
           DBM.Files.data.globals[name] = value;
-          DBM.Files.saveData('globals');
+          DBM.Files.saveData("globals");
         }
       }
 

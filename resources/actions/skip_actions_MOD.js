@@ -1,12 +1,12 @@
 module.exports = {
-  name: 'Skip Actions',
-  section: 'Other Stuff',
+  name: "Skip Actions",
+  section: "Other Stuff",
 
   subtitle(data) {
     return `Skip ${data.count}`;
   },
 
-  fields: ['count'],
+  fields: ["count"],
 
   html() {
     return `

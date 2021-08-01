@@ -1,13 +1,18 @@
 module.exports = {
-  name: 'Shuffle Queue MOD',
-  section: 'Audio Control',
+  name: "Shuffle Queue MOD",
+  section: "Audio Control",
 
   subtitle(data) {
-    const servers = ['Current Server', 'Temp Variable', 'Server Variable', 'Global Variable'];
+    const servers = [
+      "Current Server",
+      "Temp Variable",
+      "Server Variable",
+      "Global Variable",
+    ];
     return `Shuffle Queue of ${servers[parseInt(data.server, 10)]}`;
   },
 
-  fields: ['server', 'varName'],
+  fields: ["server", "varName"],
 
   html(isEvent, data) {
     return `
@@ -27,7 +32,7 @@ module.exports = {
 
   init() {
     const { glob, document } = this;
-    glob.serverChange(document.getElementById('server'), 'varNameContainer');
+    glob.serverChange(document.getElementById("server"), "varNameContainer");
   },
 
   action(cache) {

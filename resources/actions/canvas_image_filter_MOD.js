@@ -1,26 +1,31 @@
 module.exports = {
-  name: 'Canvas Image Filter',
-  section: 'Image Editing',
+  name: "Canvas Image Filter",
+  section: "Image Editing",
 
   subtitle(data) {
-    const storeTypes = ['', 'Temp Variable', 'Server Variable', 'Global Variable'];
-    const filter = [
-      'Blur',
-      'Hue Rotate',
-      'Brightness',
-      'Contrast',
-      'Grayscale',
-      'Invert',
-      'Opacity',
-      'Saturate',
-      'Sepia',
+    const storeTypes = [
+      "",
+      "Temp Variable",
+      "Server Variable",
+      "Global Variable",
     ];
-    return `${storeTypes[parseInt(data.storage, 10)]} (${data.varName}) -> ${filter[parseInt(data.info, 10)]} (${
-      data.value
-    })`;
+    const filter = [
+      "Blur",
+      "Hue Rotate",
+      "Brightness",
+      "Contrast",
+      "Grayscale",
+      "Invert",
+      "Opacity",
+      "Saturate",
+      "Sepia",
+    ];
+    return `${storeTypes[parseInt(data.storage, 10)]} (${data.varName}) -> ${
+      filter[parseInt(data.info, 10)]
+    } (${data.value})`;
   },
 
-  fields: ['storage', 'varName', 'info', 'value'],
+  fields: ["storage", "varName", "info", "value"],
 
   html(_isEvent, data) {
     return `
@@ -61,24 +66,24 @@ module.exports = {
   init() {
     const { glob, document } = this;
 
-    glob.refreshVariableList(document.getElementById('storage'));
+    glob.refreshVariableList(document.getElementById("storage"));
 
     glob.onChange1 = function onChange1(event) {
       const value = parseInt(event.value, 10);
-      const valuetext = document.getElementById('valuetext');
+      const valuetext = document.getElementById("valuetext");
       if (value === 1) {
-        valuetext.innerHTML = 'Value (Degree):';
+        valuetext.innerHTML = "Value (Degree):";
       } else {
-        valuetext.innerHTML = 'Value (Percent):';
+        valuetext.innerHTML = "Value (Percent):";
       }
     };
 
-    glob.onChange1(document.getElementById('info'));
+    glob.onChange1(document.getElementById("info"));
   },
 
   action(cache) {
-    const Canvas = require('canvas');
-    const Filter = require('imagedata-filters');
+    const Canvas = require("canvas");
+    const Filter = require("imagedata-filters");
     const data = cache.actions[cache.index];
     const storage = parseInt(data.storage, 10);
     const varName = this.evalMessage(data.varName, cache);
@@ -92,7 +97,7 @@ module.exports = {
     const info = parseInt(data.info, 10);
     let value = this.evalMessage(data.value, cache);
     const canvas = Canvas.createCanvas(image.width, image.height);
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext("2d");
     ctx.drawImage(image, 0, 0);
     const imgdata = ctx.getImageData(0, 0, image.width, image.height);
     let imagedata2;
@@ -137,7 +142,9 @@ module.exports = {
         break;
     }
     ctx.putImageData(imagedata2, 0, 0);
-    const result = canvas.toDataURL('image/png').replace('image/png', 'image/octet-stream');
+    const result = canvas
+      .toDataURL("image/png")
+      .replace("image/png", "image/octet-stream");
     this.storeValue(result, storage, varName, cache);
     this.callNextAction(cache);
   },

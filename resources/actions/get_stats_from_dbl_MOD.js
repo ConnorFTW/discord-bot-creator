@@ -1,107 +1,107 @@
 module.exports = {
-  name: 'Get Bot Stats From DBL',
-  section: 'Other Stuff',
+  name: "Get Bot Stats From DBL",
+  section: "Other Stuff",
 
   subtitle(data) {
     const info = [
-      'Invite URL',
-      'GitHub Repository URL',
-      'Website URL',
-      'Long Description',
-      'Short Description',
-      'Prefix',
-      'Library',
-      'Avatar URL',
-      'Approved On',
-      'Support Server Invite URL',
-      'Server Count',
-      'Shard Count',
-      'Vanity URL',
-      'Guild ID(s)',
-      'Servers on Shards',
-      'Monthly Vote Count',
-      'Total Vote Count',
-      'Owner ID(s)',
-      'Tag(s)',
-      'Username',
-      'Discriminator',
+      "Invite URL",
+      "GitHub Repository URL",
+      "Website URL",
+      "Long Description",
+      "Short Description",
+      "Prefix",
+      "Library",
+      "Avatar URL",
+      "Approved On",
+      "Support Server Invite URL",
+      "Server Count",
+      "Shard Count",
+      "Vanity URL",
+      "Guild ID(s)",
+      "Servers on Shards",
+      "Monthly Vote Count",
+      "Total Vote Count",
+      "Owner ID(s)",
+      "Tag(s)",
+      "Username",
+      "Discriminator",
     ];
     return `Get Bots' ${info[parseInt(data.info, 10)]}`;
   },
 
   variableStorage(data, varType) {
     if (parseInt(data.storage, 10) !== varType) return;
-    let dataType = 'A DBL Stat';
+    let dataType = "A DBL Stat";
     switch (parseInt(data.info, 10)) {
       case 0:
-        dataType = 'Invite URL';
+        dataType = "Invite URL";
         break;
       case 1:
-        dataType = 'GitHub Repository URL';
+        dataType = "GitHub Repository URL";
         break;
       case 2:
-        dataType = 'Website URL';
+        dataType = "Website URL";
         break;
       case 3:
-        dataType = 'Long Description';
+        dataType = "Long Description";
         break;
       case 4:
-        dataType = 'Short Description';
+        dataType = "Short Description";
         break;
       case 5:
-        dataType = 'Prefix';
+        dataType = "Prefix";
         break;
       case 6:
-        dataType = 'Library';
+        dataType = "Library";
         break;
       case 7:
-        dataType = 'Avatar URL';
+        dataType = "Avatar URL";
         break;
       case 8:
-        dataType = 'Approved On';
+        dataType = "Approved On";
         break;
       case 9:
-        dataType = 'Support Server Invite URL';
+        dataType = "Support Server Invite URL";
         break;
       case 10:
-        dataType = 'Server Count';
+        dataType = "Server Count";
         break;
       case 11:
-        dataType = 'Shard Count';
+        dataType = "Shard Count";
         break;
       case 12:
-        dataType = 'Vanity URL';
+        dataType = "Vanity URL";
         break;
       case 13:
-        dataType = 'Guild ID(s)';
+        dataType = "Guild ID(s)";
         break;
       case 14:
-        dataType = 'Servers on Shards';
+        dataType = "Servers on Shards";
         break;
       case 15:
-        dataType = 'Monthly Vote Count';
+        dataType = "Monthly Vote Count";
         break;
       case 16:
-        dataType = 'Total Vote Count';
+        dataType = "Total Vote Count";
         break;
       case 17:
-        dataType = 'Owner ID(s)';
+        dataType = "Owner ID(s)";
         break;
       case 18:
-        dataType = 'Tag(s)';
+        dataType = "Tag(s)";
         break;
       case 19:
-        dataType = 'Username';
+        dataType = "Username";
         break;
       case 20:
-        dataType = 'Discriminator';
+        dataType = "Discriminator";
         break;
       default:
         break;
     }
     return [data.varName, dataType];
   },
-  fields: ['botID', 'token', 'info', 'storage', 'varName'],
+  fields: ["botID", "token", "info", "storage", "varName"],
 
   html(_isEvent, data) {
     return `
@@ -162,7 +162,7 @@ module.exports = {
   init() {
     const { glob, document } = this;
 
-    glob.variableChange(document.getElementById('storage'), 'varNameContainer');
+    glob.variableChange(document.getElementById("storage"), "varNameContainer");
   },
 
   action(cache) {
@@ -172,11 +172,11 @@ module.exports = {
     const dblToken = this.evalMessage(data.token, cache);
 
     const Mods = this.getMods();
-    const fetch = Mods.require('node-fetch');
+    const fetch = Mods.require("node-fetch");
 
     fetch(`https://top.gg/api/bots/${botID}`, {
-      method: 'GET',
-      headers: { Authorization: dblToken || '' },
+      method: "GET",
+      headers: { Authorization: dblToken || "" },
     })
       .then((res) => res.json())
       .then((r) => {

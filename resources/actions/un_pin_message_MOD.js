@@ -1,14 +1,21 @@
 module.exports = {
-  name: 'Un-Pin Message',
-  section: 'Messaging',
+  name: "Un-Pin Message",
+  section: "Messaging",
 
   subtitle(data) {
-    const names = ['Command Message', 'Temp Variable', 'Server Variable', 'Global Variable'];
+    const names = [
+      "Command Message",
+      "Temp Variable",
+      "Server Variable",
+      "Global Variable",
+    ];
     const index = parseInt(data.storage, 10);
-    return data.storage === '0' ? `Un-Pin ${names[index]}` : `Un-Pin ${names[index]} (${data.varName})`;
+    return data.storage === "0"
+      ? `Un-Pin ${names[index]}`
+      : `Un-Pin ${names[index]} (${data.varName})`;
   },
 
-  fields: ['storage', 'varName'],
+  fields: ["storage", "varName"],
 
   html(isEvent, data) {
     return `
@@ -28,7 +35,7 @@ module.exports = {
 
   init() {
     const { glob, document } = this;
-    glob.messageChange(document.getElementById('storage'), 'varNameContainer');
+    glob.messageChange(document.getElementById("storage"), "varNameContainer");
   },
 
   action(cache) {
@@ -38,7 +45,7 @@ module.exports = {
     const message = this.getMessage(storage, varName, cache);
 
     if (Array.isArray(message)) {
-      this.callListFunc(message, 'unpin', []).then(() => {
+      this.callListFunc(message, "unpin", []).then(() => {
         this.callNextAction(cache);
       });
     } else if (message && message.unpin) {

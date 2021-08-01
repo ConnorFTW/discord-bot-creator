@@ -1,6 +1,6 @@
 module.exports = {
-  name: 'Find Text',
-  section: 'Other Stuff',
+  name: "Find Text",
+  section: "Other Stuff",
 
   subtitle(data) {
     return `Find "${data.wordtoFind}"`;
@@ -8,9 +8,9 @@ module.exports = {
 
   variableStorage(data, varType) {
     if (parseInt(data.storage, 10) !== varType) return;
-    return [data.varName, 'Number'];
+    return [data.varName, "Number"];
   },
-  fields: ['text', 'wordtoFind', 'position', 'storage', 'varName'],
+  fields: ["text", "wordtoFind", "position", "storage", "varName"],
 
   html(_isEvent, data) {
     return `
@@ -51,7 +51,7 @@ module.exports = {
 
   init() {
     const { glob, document } = this;
-    glob.variableChange(document.getElementById('storage'), 'varNameContainer');
+    glob.variableChange(document.getElementById("storage"), "varNameContainer");
   },
 
   action(cache) {
@@ -60,11 +60,12 @@ module.exports = {
     const wordToFind = this.evalMessage(data.wordtoFind, cache);
     const position = parseInt(data.position, 10);
 
-    if (!wordToFind) return console.log('Find Text MOD: Text to find is missing!');
-    if (!text) return console.log('Find Text MOD: Source text is missing!');
+    if (!wordToFind)
+      return console.log("Find Text MOD: Text to find is missing!");
+    if (!text) return console.log("Find Text MOD: Source text is missing!");
     if (!text.includes(wordToFind))
       console.log(
-        `Find Text MOD: The requested text wasn't found in the source text!\nSource text: ${text}\nText to find: ${wordToFind}`,
+        `Find Text MOD: The requested text wasn't found in the source text!\nSource text: ${text}\nText to find: ${wordToFind}`
       );
 
     let result;

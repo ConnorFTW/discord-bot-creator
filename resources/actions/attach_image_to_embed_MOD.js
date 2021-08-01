@@ -1,15 +1,23 @@
 module.exports = {
-  name: 'Attach Image To Embed',
-  section: 'Embed Message',
+  name: "Attach Image To Embed",
+  section: "Embed Message",
 
   subtitle(data) {
-    const array = ['Temp Variable', 'Server Variable', 'Global Variable'];
-    return `Attach (${array[data.imagestorage - 1]} ${data.imagevarName}) to Embed (${array[data.embedstorage - 1]} ${
-      data.embedvarName
-    }) (${data.filename || 'image.png'})`;
+    const array = ["Temp Variable", "Server Variable", "Global Variable"];
+    return `Attach (${array[data.imagestorage - 1]} ${
+      data.imagevarName
+    }) to Embed (${array[data.embedstorage - 1]} ${data.embedvarName}) (${
+      data.filename || "image.png"
+    })`;
   },
 
-  fields: ['embedstorage', 'embedvarName', 'imagestorage', 'imagevarName', 'filename'],
+  fields: [
+    "embedstorage",
+    "embedvarName",
+    "imagestorage",
+    "imagevarName",
+    "filename",
+  ],
 
   html(_isEvent, data) {
     return `
@@ -56,7 +64,7 @@ module.exports = {
     const imagevarName = this.evalMessage(data.imagevarName, cache);
     const image = this.getVariable(imagestorage, imagevarName, cache);
 
-    const filename = data.filename || 'image.png';
+    const filename = data.filename || "image.png";
 
     const DBM = this.getDBM();
     const { Images } = DBM;

@@ -1,17 +1,17 @@
 module.exports = {
-  name: 'Generate Random Hex Color',
-  section: 'Other Stuff',
+  name: "Generate Random Hex Color",
+  section: "Other Stuff",
 
   subtitle() {
-    return 'Generates random hex color code';
+    return "Generates random hex color code";
   },
 
   variableStorage(data, varType) {
     if (parseInt(data.storage, 10) !== varType) return;
-    return [data.varName, 'Color Code'];
+    return [data.varName, "Color Code"];
   },
 
-  fields: ['storage', 'varName'],
+  fields: ["storage", "varName"],
 
   html(_isEvent, data) {
     return `
@@ -32,7 +32,7 @@ module.exports = {
   init() {
     const { glob, document } = this;
 
-    glob.variableChange(document.getElementById('storage'), 'varNameContainer');
+    glob.variableChange(document.getElementById("storage"), "varNameContainer");
   },
 
   action(cache) {
@@ -40,7 +40,9 @@ module.exports = {
     const type = parseInt(data.storage, 10);
     const varName = this.evalMessage(data.varName, cache);
 
-    const code = '000000'.replace(/0/g, () => (~~(Math.random() * 16)).toString(16));
+    const code = "000000".replace(/0/g, () =>
+      (~~(Math.random() * 16)).toString(16)
+    );
     this.storeValue(`#${code}`, type, varName, cache);
     this.callNextAction(cache);
   },

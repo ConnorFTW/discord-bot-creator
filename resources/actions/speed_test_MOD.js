@@ -1,29 +1,29 @@
 module.exports = {
-  name: 'Speed Test',
-  section: 'Other Stuff',
+  name: "Speed Test",
+  section: "Other Stuff",
 
   subtitle(data) {
-    if (data.info === 'downloadspeed') {
-      return 'Speed Test - Download Speed';
+    if (data.info === "downloadspeed") {
+      return "Speed Test - Download Speed";
     }
-    if (data.info === 'uploadspeed') {
-      return 'Speed Test - Upload Speed';
+    if (data.info === "uploadspeed") {
+      return "Speed Test - Upload Speed";
     }
-    return 'Error in subtitles.';
+    return "Error in subtitles.";
   },
 
   variableStorage(data, varType) {
     if (parseInt(data.storage, 10) !== varType) return;
-    let dataType = 'Unknown Data Type';
-    if (data.info === 'downloadspeed') {
-      dataType = 'Download Speed';
-    } else if (data.info === 'uploadspeed') {
-      dataType = 'Upload Speed';
+    let dataType = "Unknown Data Type";
+    if (data.info === "downloadspeed") {
+      dataType = "Download Speed";
+    } else if (data.info === "uploadspeed") {
+      dataType = "Upload Speed";
     }
     return [data.varName, dataType];
   },
 
-  fields: ['info', 'type', 'storage', 'varName'],
+  fields: ["info", "type", "storage", "varName"],
 
   html(_isEvent, data) {
     return `
@@ -93,19 +93,22 @@ module.exports = {
 
   init() {
     const { glob, document } = this;
-    glob.variableChange(document.getElementById('storage'), 'varNameContainer');
+    glob.variableChange(document.getElementById("storage"), "varNameContainer");
   },
 
   async action(cache) {
     const data = cache.actions[cache.index];
     const type = parseInt(data.type, 10);
     const Mods = this.getMods();
-    const speedTest = Mods.require('speedtest-net');
+    const speedTest = Mods.require("speedtest-net");
 
     try {
       const test = await speedTest({ maxTime: 5000, acceptLicense: true });
 
-      let result = data.info === 'downloadspeed' ? test.download.bandwidth : test.upload.bandwidth;
+      let result =
+        data.info === "downloadspeed"
+          ? test.download.bandwidth
+          : test.upload.bandwidth;
       if (type === 0) result /= 125000;
       else if (type === 1) result /= 1000;
 

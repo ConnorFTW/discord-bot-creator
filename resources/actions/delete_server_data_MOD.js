@@ -1,13 +1,18 @@
 module.exports = {
-  name: 'Delete Server Data',
-  section: 'Data',
+  name: "Delete Server Data",
+  section: "Data",
 
   subtitle(data) {
-    const servers = ['Current Server', 'Temp Variable', 'Server Variable', 'Global Variable'];
+    const servers = [
+      "Current Server",
+      "Temp Variable",
+      "Server Variable",
+      "Global Variable",
+    ];
     return `${servers[parseInt(data.server, 10)]} - ${data.dataName}`;
   },
 
-  fields: ['server', 'varName', 'dataName'],
+  fields: ["server", "varName", "dataName"],
 
   html(isEvent, data) {
     return `
@@ -33,7 +38,7 @@ module.exports = {
 
   init() {
     const { glob, document } = this;
-    glob.serverChange(document.getElementById('server'), 'varNameContainer');
+    glob.serverChange(document.getElementById("server"), "varNameContainer");
   },
 
   action(cache) {
@@ -50,22 +55,22 @@ module.exports = {
   },
 
   mod(DBM) {
-    DBM.Actions['Delete Server Data MOD'] = DBM.Actions['Delete Server Data'];
+    DBM.Actions["Delete Server Data MOD"] = DBM.Actions["Delete Server Data"];
     DBM.DiscordJS.Structures.extend(
-      'Guild',
+      "Guild",
       (Guild) =>
         class extends Guild {
           delData(name) {
             const { servers } = DBM.Files.data;
             if (servers[this.id] && name && servers[this.id][name]) {
               delete servers[this.id][name];
-              DBM.Files.saveData('servers');
+              DBM.Files.saveData("servers");
             } else if (!name) {
               delete servers[this.id];
-              DBM.Files.saveData('servers');
+              DBM.Files.saveData("servers");
             }
           }
-        },
+        }
     );
   },
 };

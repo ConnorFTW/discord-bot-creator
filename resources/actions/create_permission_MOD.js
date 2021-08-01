@@ -1,18 +1,25 @@
 /* eslint-disable no-unused-vars */
 
 module.exports = {
-  name: 'Create Permissions',
-  section: 'Permission Control',
+  name: "Create Permissions",
+  section: "Permission Control",
 
   subtitle(data) {
     const target = [
-      'Role Permissions',
-      'Category Channel Permissions',
-      'Text Channel Permissions',
-      'Voice Channel Permissions',
+      "Role Permissions",
+      "Category Channel Permissions",
+      "Text Channel Permissions",
+      "Voice Channel Permissions",
     ];
-    const variables = ['', 'Temp Variable', 'Server Variable', 'Global Variable'];
-    return `For ${target[parseInt(data.targetType, 10)]} ${variables[parseInt(data.storage, 10)]} (${data.varName})`;
+    const variables = [
+      "",
+      "Temp Variable",
+      "Server Variable",
+      "Global Variable",
+    ];
+    return `For ${target[parseInt(data.targetType, 10)]} ${
+      variables[parseInt(data.storage, 10)]
+    } (${data.varName})`;
   },
 
   variableStorage(data, varType) {
@@ -20,58 +27,58 @@ module.exports = {
     let dataType;
     switch (parseInt(data.targetType, 10)) {
       case 0:
-        dataType = 'Role Permissions';
+        dataType = "Role Permissions";
         break;
       case 1:
-        dataType = 'Category Channel Permissions';
+        dataType = "Category Channel Permissions";
         break;
       case 2:
-        dataType = 'Text Channel Permissions';
+        dataType = "Text Channel Permissions";
         break;
       case 3:
-        dataType = 'Voice Channel Permissions';
+        dataType = "Voice Channel Permissions";
         break;
     }
     return [data.varName, dataType];
   },
 
   fields: [
-    'type',
-    'targetType',
-    'bitFields',
-    'storage',
-    'varName',
-    'ADMINISTRATOR',
-    'CREATE_INSTANT_INVITE',
-    'KICK_MEMBERS',
-    'BAN_MEMBERS',
-    'MANAGE_CHANNELS',
-    'MANAGE_GUILD',
-    'ADD_REACTIONS',
-    'VIEW_AUDIT_LOG',
-    'PRIORITY_SPEAKER',
-    'STREAM',
-    'VIEW_CHANNEL',
-    'SEND_MESSAGES',
-    'SEND_TTS_MESSAGES',
-    'MANAGE_MESSAGES',
-    'EMBED_LINKS',
-    'ATTACH_FILES',
-    'READ_MESSAGE_HISTORY',
-    'MENTION_EVERYONE',
-    'USE_EXTERNAL_EMOJIS',
-    'VIEW_GUILD_INSIGHT',
-    'CONNECT',
-    'SPEAK',
-    'MUTE_MEMBERS',
-    'DEAFEN_MEMBERS',
-    'MOVE_MEMBERS',
-    'USE_VAD',
-    'CHANGE_NICKNAME',
-    'MANAGE_NICKNAMES',
-    'MANAGE_ROLES',
-    'MANAGE_WEBHOOKS',
-    'MANAGE_EMOJIS',
+    "type",
+    "targetType",
+    "bitFields",
+    "storage",
+    "varName",
+    "ADMINISTRATOR",
+    "CREATE_INSTANT_INVITE",
+    "KICK_MEMBERS",
+    "BAN_MEMBERS",
+    "MANAGE_CHANNELS",
+    "MANAGE_GUILD",
+    "ADD_REACTIONS",
+    "VIEW_AUDIT_LOG",
+    "PRIORITY_SPEAKER",
+    "STREAM",
+    "VIEW_CHANNEL",
+    "SEND_MESSAGES",
+    "SEND_TTS_MESSAGES",
+    "MANAGE_MESSAGES",
+    "EMBED_LINKS",
+    "ATTACH_FILES",
+    "READ_MESSAGE_HISTORY",
+    "MENTION_EVERYONE",
+    "USE_EXTERNAL_EMOJIS",
+    "VIEW_GUILD_INSIGHT",
+    "CONNECT",
+    "SPEAK",
+    "MUTE_MEMBERS",
+    "DEAFEN_MEMBERS",
+    "MOVE_MEMBERS",
+    "USE_VAD",
+    "CHANGE_NICKNAME",
+    "MANAGE_NICKNAMES",
+    "MANAGE_ROLES",
+    "MANAGE_WEBHOOKS",
+    "MANAGE_EMOJIS",
   ],
 
   html(_isEvent, data) {
@@ -122,136 +129,136 @@ module.exports = {
 
   init() {
     const { glob, document } = this;
-    const bitField = document.getElementById('bitfield');
-    const checkbox = document.getElementById('checkbox');
+    const bitField = document.getElementById("bitfield");
+    const checkbox = document.getElementById("checkbox");
 
     const permissionsName = {
-      ADMINISTRATOR: 'Administrator',
-      CREATE_INSTANT_INVITE: 'Create Invite',
-      KICK_MEMBERS: 'Kick Members',
-      BAN_MEMBERS: 'Ban Members',
-      MANAGE_CHANNELS: 'Manage Channels',
-      MANAGE_GUILD: 'Manage Server',
-      ADD_REACTIONS: 'Add Reactions',
-      VIEW_AUDIT_LOG: 'View Audit Log',
-      PRIORITY_SPEAKER: 'Priority Speaker',
-      STREAM: 'Video',
-      VIEW_CHANNEL: 'View Channel',
-      SEND_MESSAGES: 'Send Messages',
-      SEND_TTS_MESSAGES: 'Send TTS Messages',
-      MANAGE_MESSAGES: 'Manage Messages',
-      EMBED_LINKS: 'Embed Links',
-      ATTACH_FILES: 'Attach Files',
-      READ_MESSAGE_HISTORY: 'Read Mesage History',
-      MENTION_EVERYONE: 'Mention Everyone',
-      USE_EXTERNAL_EMOJIS: 'Use External Emojis',
-      CONNECT: 'Connect',
-      SPEAK: 'Speak',
-      MUTE_MEMBERS: 'Mute Members',
-      DEAFEN_MEMBERS: 'Deafen Members',
-      MOVE_MEMBERS: 'Move Members',
-      USE_VAD: 'User Voice Activity',
-      CHANGE_NICKNAME: 'Change Nickname',
-      MANAGE_NICKNAMES: 'Manage Nicknames',
-      MANAGE_ROLES: 'Manage Roles',
-      MANAGE_WEBHOOKS: 'Manage Webhooks',
-      MANAGE_EMOJIS: 'Manage Emojis',
+      ADMINISTRATOR: "Administrator",
+      CREATE_INSTANT_INVITE: "Create Invite",
+      KICK_MEMBERS: "Kick Members",
+      BAN_MEMBERS: "Ban Members",
+      MANAGE_CHANNELS: "Manage Channels",
+      MANAGE_GUILD: "Manage Server",
+      ADD_REACTIONS: "Add Reactions",
+      VIEW_AUDIT_LOG: "View Audit Log",
+      PRIORITY_SPEAKER: "Priority Speaker",
+      STREAM: "Video",
+      VIEW_CHANNEL: "View Channel",
+      SEND_MESSAGES: "Send Messages",
+      SEND_TTS_MESSAGES: "Send TTS Messages",
+      MANAGE_MESSAGES: "Manage Messages",
+      EMBED_LINKS: "Embed Links",
+      ATTACH_FILES: "Attach Files",
+      READ_MESSAGE_HISTORY: "Read Mesage History",
+      MENTION_EVERYONE: "Mention Everyone",
+      USE_EXTERNAL_EMOJIS: "Use External Emojis",
+      CONNECT: "Connect",
+      SPEAK: "Speak",
+      MUTE_MEMBERS: "Mute Members",
+      DEAFEN_MEMBERS: "Deafen Members",
+      MOVE_MEMBERS: "Move Members",
+      USE_VAD: "User Voice Activity",
+      CHANGE_NICKNAME: "Change Nickname",
+      MANAGE_NICKNAMES: "Manage Nicknames",
+      MANAGE_ROLES: "Manage Roles",
+      MANAGE_WEBHOOKS: "Manage Webhooks",
+      MANAGE_EMOJIS: "Manage Emojis",
     };
-    const option1 = ['Default', 'Disallow', 'Allow'];
-    const option2 = ['Default', 'Inherit', 'Allow', 'Disallow'];
+    const option1 = ["Default", "Disallow", "Allow"];
+    const option2 = ["Default", "Inherit", "Allow", "Disallow"];
 
     const rolePermissions = [
-      'ADMINISTRATOR',
-      'VIEW_AUDIT_LOG',
-      'MANAGE_GUILD',
-      'MANAGE_ROLES',
-      'MANAGE_CHANNELS',
-      'KICK_MEMBERS',
-      'BAN_MEMBERS',
-      'CREATE_INSTANT_INVITE',
-      'CHANGE_NICKNAME',
-      'MANAGE_NICKNAMES',
-      'MANAGE_EMOJIS',
-      'MANAGE_WEBHOOKS',
-      'VIEW_CHANNEL',
-      'SEND_MESSAGES',
-      'SEND_TTS_MESSAGES',
-      'MANAGE_MESSAGES',
-      'EMBED_LINKS',
-      'ATTACH_FILES',
-      'READ_MESSAGE_HISTORY',
-      'MENTION_EVERYONE',
-      'USE_EXTERNAL_EMOJIS',
-      'ADD_REACTIONS',
-      'CONNECT',
-      'SPEAK',
-      'STREAM',
-      'MUTE_MEMBERS',
-      'DEAFEN_MEMBERS',
-      'MOVE_MEMBERS',
-      'USE_VAD',
-      'PRIORITY_SPEAKER',
+      "ADMINISTRATOR",
+      "VIEW_AUDIT_LOG",
+      "MANAGE_GUILD",
+      "MANAGE_ROLES",
+      "MANAGE_CHANNELS",
+      "KICK_MEMBERS",
+      "BAN_MEMBERS",
+      "CREATE_INSTANT_INVITE",
+      "CHANGE_NICKNAME",
+      "MANAGE_NICKNAMES",
+      "MANAGE_EMOJIS",
+      "MANAGE_WEBHOOKS",
+      "VIEW_CHANNEL",
+      "SEND_MESSAGES",
+      "SEND_TTS_MESSAGES",
+      "MANAGE_MESSAGES",
+      "EMBED_LINKS",
+      "ATTACH_FILES",
+      "READ_MESSAGE_HISTORY",
+      "MENTION_EVERYONE",
+      "USE_EXTERNAL_EMOJIS",
+      "ADD_REACTIONS",
+      "CONNECT",
+      "SPEAK",
+      "STREAM",
+      "MUTE_MEMBERS",
+      "DEAFEN_MEMBERS",
+      "MOVE_MEMBERS",
+      "USE_VAD",
+      "PRIORITY_SPEAKER",
     ];
     const textPermissions = [
-      'CREATE_INSTANT_INVITE',
-      'MANAGE_CHANNELS',
-      'MANAGE_WEBHOOKS',
-      'VIEW_CHANNEL',
-      'SEND_MESSAGES',
-      'SEND_TTS_MESSAGES',
-      'MANAGE_MESSAGES',
-      'EMBED_LINKS',
-      'ATTACH_FILES',
-      'READ_MESSAGE_HISTORY',
-      'MENTION_EVERYONE',
-      'USE_EXTERNAL_EMOJIS',
-      'ADD_REACTIONS',
+      "CREATE_INSTANT_INVITE",
+      "MANAGE_CHANNELS",
+      "MANAGE_WEBHOOKS",
+      "VIEW_CHANNEL",
+      "SEND_MESSAGES",
+      "SEND_TTS_MESSAGES",
+      "MANAGE_MESSAGES",
+      "EMBED_LINKS",
+      "ATTACH_FILES",
+      "READ_MESSAGE_HISTORY",
+      "MENTION_EVERYONE",
+      "USE_EXTERNAL_EMOJIS",
+      "ADD_REACTIONS",
     ];
     const voicePermissions = [
-      'CREATE_INSTANT_INVITE',
-      'MANAGE_CHANNELS',
-      'MANAGE_WEBHOOKS',
-      'VIEW_CHANNEL',
-      'CONNECT',
-      'SPEAK',
-      'STREAM',
-      'MUTE_MEMBERS',
-      'DEAFEN_MEMBERS',
-      'MOVE_MEMBERS',
-      'USE_VAD',
-      'PRIORITY_SPEAKER',
+      "CREATE_INSTANT_INVITE",
+      "MANAGE_CHANNELS",
+      "MANAGE_WEBHOOKS",
+      "VIEW_CHANNEL",
+      "CONNECT",
+      "SPEAK",
+      "STREAM",
+      "MUTE_MEMBERS",
+      "DEAFEN_MEMBERS",
+      "MOVE_MEMBERS",
+      "USE_VAD",
+      "PRIORITY_SPEAKER",
     ];
     const categoryPermissions = [
-      'CREATE_INSTANT_INVITE',
-      'MANAGE_CHANNELS',
-      'MANAGE_WEBHOOKS',
-      'VIEW_CHANNEL',
-      'SEND_MESSAGES',
-      'SEND_TTS_MESSAGES',
-      'MANAGE_MESSAGES',
-      'EMBED_LINKS',
-      'ATTACH_FILES',
-      'READ_MESSAGE_HISTORY',
-      'MENTION_EVERYONE',
-      'USE_EXTERNAL_EMOJIS',
-      'ADD_REACTIONS',
-      'CONNECT',
-      'SPEAK',
-      'STREAM',
-      'MUTE_MEMBERS',
-      'DEAFEN_MEMBERS',
-      'MOVE_MEMBERS',
-      'USE_VAD',
-      'PRIORITY_SPEAKER',
+      "CREATE_INSTANT_INVITE",
+      "MANAGE_CHANNELS",
+      "MANAGE_WEBHOOKS",
+      "VIEW_CHANNEL",
+      "SEND_MESSAGES",
+      "SEND_TTS_MESSAGES",
+      "MANAGE_MESSAGES",
+      "EMBED_LINKS",
+      "ATTACH_FILES",
+      "READ_MESSAGE_HISTORY",
+      "MENTION_EVERYONE",
+      "USE_EXTERNAL_EMOJIS",
+      "ADD_REACTIONS",
+      "CONNECT",
+      "SPEAK",
+      "STREAM",
+      "MUTE_MEMBERS",
+      "DEAFEN_MEMBERS",
+      "MOVE_MEMBERS",
+      "USE_VAD",
+      "PRIORITY_SPEAKER",
     ];
     glob.typeChange = function typeChange(type) {
       switch (parseInt(type.value, 10)) {
         case 0:
           bitField.style.display = null;
-          checkbox.style.display = 'none';
+          checkbox.style.display = "none";
           break;
         case 1:
-          bitField.style.display = 'none';
+          bitField.style.display = "none";
           checkbox.style.display = null;
           break;
       }
@@ -263,86 +270,86 @@ module.exports = {
           while (checkbox.firstChild) {
             checkbox.removeChild(checkbox.lastChild);
           }
-          checkbox.innerHTML = '';
+          checkbox.innerHTML = "";
           rolePermissions.forEach((Permission) => {
-            const dom = document.createElement('select');
+            const dom = document.createElement("select");
             checkbox.innerHTML += `${permissionsName[Permission]}:<br>`;
             dom.id = Permission;
-            dom.className = 'round';
+            dom.className = "round";
             option1.forEach((option, index) => {
-              const op = document.createElement('option');
+              const op = document.createElement("option");
               op.innerHTML = option;
               op.value = option;
               dom.add(op);
             });
             checkbox.appendChild(dom);
-            checkbox.innerHTML += '<br>';
+            checkbox.innerHTML += "<br>";
           });
           break;
         case 1:
           while (checkbox.firstChild) {
             checkbox.removeChild(checkbox.lastChild);
           }
-          checkbox.innerHTML = '';
+          checkbox.innerHTML = "";
           categoryPermissions.forEach((Permission) => {
-            const dom = document.createElement('select');
+            const dom = document.createElement("select");
             checkbox.innerHTML += `${permissionsName[Permission]}:<br>`;
             dom.id = Permission;
-            dom.className = 'round';
+            dom.className = "round";
             option2.forEach((option, index) => {
-              const op = document.createElement('option');
+              const op = document.createElement("option");
               op.innerHTML = option;
               op.value = option;
               dom.add(op);
             });
             checkbox.appendChild(dom);
-            checkbox.innerHTML += '<br>';
+            checkbox.innerHTML += "<br>";
           });
           break;
         case 2:
           while (checkbox.firstChild) {
             checkbox.removeChild(checkbox.lastChild);
           }
-          checkbox.innerHTML = '';
+          checkbox.innerHTML = "";
           textPermissions.forEach((Permission) => {
-            const dom = document.createElement('select');
+            const dom = document.createElement("select");
             checkbox.innerHTML += `${permissionsName[Permission]}:<br>`;
             dom.id = Permission;
-            dom.className = 'round';
+            dom.className = "round";
             option2.forEach((option, index) => {
-              const op = document.createElement('option');
+              const op = document.createElement("option");
               op.innerHTML = option;
               op.value = option;
               dom.add(op);
             });
             checkbox.appendChild(dom);
-            checkbox.innerHTML += '<br>';
+            checkbox.innerHTML += "<br>";
           });
           break;
         case 3:
           while (checkbox.firstChild) {
             checkbox.removeChild(checkbox.lastChild);
           }
-          checkbox.innerHTML = '';
+          checkbox.innerHTML = "";
           voicePermissions.forEach((Permission) => {
-            const dom = document.createElement('select');
+            const dom = document.createElement("select");
             checkbox.innerHTML += `${permissionsName[Permission]}:<br>`;
             dom.id = Permission;
-            dom.className = 'round';
+            dom.className = "round";
             option2.forEach((option, index) => {
-              const op = document.createElement('option');
+              const op = document.createElement("option");
               op.innerHTML = option;
               op.value = option;
               dom.add(op);
             });
             checkbox.appendChild(dom);
-            checkbox.innerHTML += '<br>';
+            checkbox.innerHTML += "<br>";
           });
           break;
       }
     };
-    glob.targetChange(document.getElementById('targetType'));
-    glob.typeChange(document.getElementById('type'));
+    glob.targetChange(document.getElementById("targetType"));
+    glob.typeChange(document.getElementById("type"));
   },
 
   action(cache) {
@@ -357,51 +364,52 @@ module.exports = {
       }
       case 1: {
         const permsArray = [
-          'ADMINISTRATOR',
-          'CREATE_INSTANT_INVITE',
-          'KICK_MEMBERS',
-          'BAN_MEMBERS',
-          'MANAGE_CHANNELS',
-          'MANAGE_GUILD',
-          'ADD_REACTIONS',
-          'VIEW_AUDIT_LOG',
-          'PRIORITY_SPEAKER',
-          'STREAM',
-          'VIEW_CHANNEL',
-          'SEND_MESSAGES',
-          'SEND_TTS_MESSAGES',
-          'MANAGE_MESSAGES',
-          'EMBED_LINKS',
-          'ATTACH_FILES',
-          'READ_MESSAGE_HISTORY',
-          'MENTION_EVERYONE',
-          'USE_EXTERNAL_EMOJIS',
-          'CONNECT',
-          'SPEAK',
-          'MUTE_MEMBERS',
-          'DEAFEN_MEMBERS',
-          'MOVE_MEMBERS',
-          'USE_VAD',
-          'CHANGE_NICKNAME',
-          'MANAGE_NICKNAMES',
-          'MANAGE_ROLES',
-          'MANAGE_WEBHOOKS',
-          'MANAGE_EMOJIS',
+          "ADMINISTRATOR",
+          "CREATE_INSTANT_INVITE",
+          "KICK_MEMBERS",
+          "BAN_MEMBERS",
+          "MANAGE_CHANNELS",
+          "MANAGE_GUILD",
+          "ADD_REACTIONS",
+          "VIEW_AUDIT_LOG",
+          "PRIORITY_SPEAKER",
+          "STREAM",
+          "VIEW_CHANNEL",
+          "SEND_MESSAGES",
+          "SEND_TTS_MESSAGES",
+          "MANAGE_MESSAGES",
+          "EMBED_LINKS",
+          "ATTACH_FILES",
+          "READ_MESSAGE_HISTORY",
+          "MENTION_EVERYONE",
+          "USE_EXTERNAL_EMOJIS",
+          "CONNECT",
+          "SPEAK",
+          "MUTE_MEMBERS",
+          "DEAFEN_MEMBERS",
+          "MOVE_MEMBERS",
+          "USE_VAD",
+          "CHANGE_NICKNAME",
+          "MANAGE_NICKNAMES",
+          "MANAGE_ROLES",
+          "MANAGE_WEBHOOKS",
+          "MANAGE_EMOJIS",
         ];
         const allow = [];
         const disallow = [];
         const inherit = [];
         permsArray.forEach((perms) => {
-          if (data[perms] === 'Allow') {
+          if (data[perms] === "Allow") {
             allow.push(perms);
-          } else if (data[perms] === 'Disallow') {
+          } else if (data[perms] === "Disallow") {
             disallow.push(perms);
-          } else if (data[perms] === 'Inherit') {
+          } else if (data[perms] === "Inherit") {
             inherit.push(perms);
           }
         });
         if (allow.length !== 0) permissions.allow = new Permissions(allow);
-        if (disallow.length !== 0) permissions.disallow = new Permissions(disallow);
+        if (disallow.length !== 0)
+          permissions.disallow = new Permissions(disallow);
         if (inherit.length !== 0) permissions.inherit = inherit;
         break;
       }

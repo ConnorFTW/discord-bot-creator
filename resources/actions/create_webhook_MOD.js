@@ -1,6 +1,6 @@
 module.exports = {
-  name: 'Create Webhook',
-  section: 'Webhook Control',
+  name: "Create Webhook",
+  section: "Webhook Control",
 
   subtitle(data) {
     return `${data.webhookName}`;
@@ -8,10 +8,17 @@ module.exports = {
 
   variableStorage(data, varType) {
     if (parseInt(data.storage2, 10) !== varType) return;
-    return [data.varName2, 'Webhook'];
+    return [data.varName2, "Webhook"];
   },
 
-  fields: ['webhookName', 'webhookIcon', 'storage', 'varName', 'storage2', 'varName2'],
+  fields: [
+    "webhookName",
+    "webhookIcon",
+    "storage",
+    "varName",
+    "storage2",
+    "varName2",
+  ],
 
   html(_isEvent, data) {
     return `
@@ -52,8 +59,11 @@ module.exports = {
   init() {
     const { glob, document } = this;
 
-    glob.channelChange(document.getElementById('storage'), 'varNameContainer');
-    glob.variableChange(document.getElementById('storage2'), 'varNameContainer2');
+    glob.channelChange(document.getElementById("storage"), "varNameContainer");
+    glob.variableChange(
+      document.getElementById("storage2"),
+      "varNameContainer2"
+    );
   },
 
   action(cache) {

@@ -1,17 +1,24 @@
 module.exports = {
-  name: 'Merge Lists',
-  section: 'Lists and Loops',
+  name: "Merge Lists",
+  section: "Lists and Loops",
 
   subtitle() {
-    return 'Merge two lists together';
+    return "Merge two lists together";
   },
 
   variableStorage(data, varType) {
     if (parseInt(data.storage3, 10) !== varType) return;
-    return [data.varName3, 'Unknown Type'];
+    return [data.varName3, "Unknown Type"];
   },
 
-  fields: ['storage', 'varName', 'storage2', 'varName2', 'varName3', 'storage3'],
+  fields: [
+    "storage",
+    "varName",
+    "storage2",
+    "varName2",
+    "varName3",
+    "storage3",
+  ],
 
   html(isEvent, data) {
     return `
@@ -57,9 +64,12 @@ module.exports = {
   init() {
     const { glob, document } = this;
 
-    glob.listChange(document.getElementById('storage'), 'varNameContainer');
-    glob.listChange(document.getElementById('storage2'), 'varNameContainer');
-    glob.variableChange(document.getElementById('storage3'), 'varNameContainer3');
+    glob.listChange(document.getElementById("storage"), "varNameContainer");
+    glob.listChange(document.getElementById("storage2"), "varNameContainer");
+    glob.variableChange(
+      document.getElementById("storage3"),
+      "varNameContainer3"
+    );
   },
 
   action(cache) {

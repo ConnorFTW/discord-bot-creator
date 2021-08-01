@@ -1,6 +1,6 @@
 module.exports = {
-  name: 'Create Embed Message',
-  section: 'Embed Message',
+  name: "Create Embed Message",
+  section: "Embed Message",
 
   subtitle(data) {
     return `${data.title}`;
@@ -8,33 +8,33 @@ module.exports = {
 
   variableStorage(data, varType) {
     if (parseInt(data.storage, 10) !== varType) return;
-    return [data.varName, 'Embed Object'];
+    return [data.varName, "Embed Object"];
   },
 
   fields: [
-    'title',
-    'author',
-    'color',
-    'url',
-    'authorIcon',
-    'authorUrl',
-    'imageUrl',
-    'thumbUrl',
-    'timestamp',
-    'debug',
-    'timestamp1',
-    'timestamp2',
-    'text',
-    'year',
-    'month',
-    'day',
-    'hour',
-    'minute',
-    'second',
-    'note1',
-    'note2',
-    'storage',
-    'varName',
+    "title",
+    "author",
+    "color",
+    "url",
+    "authorIcon",
+    "authorUrl",
+    "imageUrl",
+    "thumbUrl",
+    "timestamp",
+    "debug",
+    "timestamp1",
+    "timestamp2",
+    "text",
+    "year",
+    "month",
+    "day",
+    "hour",
+    "minute",
+    "second",
+    "note1",
+    "note2",
+    "storage",
+    "varName",
   ],
 
   html(_isEvent, data) {
@@ -154,37 +154,37 @@ module.exports = {
 
   init() {
     const { glob, document } = this;
-    const timestampDiv = document.getElementById('timestampDiv');
-    const timestamp = document.getElementById('timestamp');
-    const timestampDivDebug = document.getElementById('timestampDivDebug');
-    const debug = document.getElementById('debug');
-    const timestamp1 = document.getElementById('timestamp1');
-    const timestamp2 = document.getElementById('timestamp2');
-    const note = document.getElementById('note1');
-    const note2 = document.getElementById('note2');
-    const authorUrl = document.getElementById('authorUrl');
+    const timestampDiv = document.getElementById("timestampDiv");
+    const timestamp = document.getElementById("timestamp");
+    const timestampDivDebug = document.getElementById("timestampDivDebug");
+    const debug = document.getElementById("debug");
+    const timestamp1 = document.getElementById("timestamp1");
+    const timestamp2 = document.getElementById("timestamp2");
+    const note = document.getElementById("note1");
+    const note2 = document.getElementById("note2");
+    const authorUrl = document.getElementById("authorUrl");
 
     glob.onChange1 = function onChange1() {
-      if (debug.value === 'false') {
-        authorUrl.placeholder = 'Leave blank for none!';
+      if (debug.value === "false") {
+        authorUrl.placeholder = "Leave blank for none!";
         switch (timestamp.value) {
-          case 'false':
-          case 'true':
-            timestamp1.style.display = 'none';
-            timestamp2.style.display = 'none';
-            note.style.display = 'none';
-            note2.style.display = 'none';
+          case "false":
+          case "true":
+            timestamp1.style.display = "none";
+            timestamp2.style.display = "none";
+            note.style.display = "none";
+            note2.style.display = "none";
             break;
-          case 'string':
-            timestamp1.style.display = 'table';
-            timestamp2.style.display = 'none';
+          case "string":
+            timestamp1.style.display = "table";
+            timestamp2.style.display = "none";
             note.style.display = null;
-            note2.style.display = 'none';
+            note2.style.display = "none";
             break;
-          case 'custom':
-            timestamp1.style.display = 'none';
-            timestamp2.style.display = 'table';
-            note.style.display = 'none';
+          case "custom":
+            timestamp1.style.display = "none";
+            timestamp2.style.display = "table";
+            note.style.display = "none";
             note2.style.display = null;
             break;
         }
@@ -193,28 +193,28 @@ module.exports = {
 
     glob.onChange2 = function onChange2() {
       switch (debug.value) {
-        case 'false':
+        case "false":
           timestampDiv.style.display = null;
-          timestampDivDebug.style.display = 'none';
+          timestampDivDebug.style.display = "none";
           break;
-        case 'true':
-          timestampDiv.style.display = 'none';
+        case "true":
+          timestampDiv.style.display = "none";
           timestampDivDebug.style.display = null;
-          timestamp1.style.display = 'none';
-          timestamp2.style.display = 'none';
-          note.style.display = 'none';
-          note2.style.display = 'none';
-          authorUrl.placeholder = 'Unavailable!';
+          timestamp1.style.display = "none";
+          timestamp2.style.display = "none";
+          note.style.display = "none";
+          note2.style.display = "none";
+          authorUrl.placeholder = "Unavailable!";
           break;
       }
       glob.onChange1();
     };
 
-    document.getElementById('timestamp');
-    document.getElementById('debug');
+    document.getElementById("timestamp");
+    document.getElementById("debug");
 
-    glob.onChange1(document.getElementById('timestamp'));
-    glob.onChange2(document.getElementById('debug'));
+    glob.onChange1(document.getElementById("timestamp"));
+    glob.onChange2(document.getElementById("debug"));
   },
 
   action(cache) {
@@ -236,7 +236,7 @@ module.exports = {
 
     if (!varName) return this.callNextAction(cache);
 
-    if (debug !== 'true') {
+    if (debug !== "true") {
       // Title
       if (data.title) {
         embed.setTitle(this.evalMessage(data.title, cache));
@@ -250,7 +250,7 @@ module.exports = {
         embed.setAuthor(
           this.evalMessage(data.author, cache),
           this.evalMessage(data.authorIcon, cache),
-          this.evalMessage(data.authorUrl, cache),
+          this.evalMessage(data.authorUrl, cache)
         );
       }
       // Color
@@ -267,22 +267,31 @@ module.exports = {
       }
       // Timestamp
       switch (timestamp) {
-        case 'false':
+        case "false":
           break;
-        case 'true':
+        case "true":
           embed.setTimestamp();
           break;
-        case 'string':
+        case "string":
           if (text.length > 0) {
             embed.setTimestamp(new Date(`${text}`));
           } else {
             embed.setTimestamp();
-            console.log('Invalid UTC timestamp! Changed from [String Timestamp] to [Current Timestamp].');
+            console.log(
+              "Invalid UTC timestamp! Changed from [String Timestamp] to [Current Timestamp]."
+            );
           }
           break;
-        case 'custom':
+        case "custom":
           embed.setTimestamp(
-            new Date(year || null, month || null, day || null, hour || null, minute || null, second || null),
+            new Date(
+              year || null,
+              month || null,
+              day || null,
+              hour || null,
+              minute || null,
+              second || null
+            )
           );
           break;
         default:
@@ -300,7 +309,10 @@ module.exports = {
         embed.setURL(this.evalMessage(data.url, cache));
       }
       if (data.author && data.authorIcon) {
-        embed.setAuthor(this.evalMessage(data.author, cache), this.evalMessage(data.authorIcon, cache));
+        embed.setAuthor(
+          this.evalMessage(data.author, cache),
+          this.evalMessage(data.authorIcon, cache)
+        );
       }
       if (data.color) {
         embed.setColor(this.evalMessage(data.color, cache));
@@ -311,7 +323,7 @@ module.exports = {
       if (data.thumbUrl) {
         embed.setThumbnail(this.evalMessage(data.thumbUrl, cache));
       }
-      if (timestampDebug === 'true') {
+      if (timestampDebug === "true") {
         embed.setTimestamp();
       }
       this.storeValue(embed, storage, varName, cache);

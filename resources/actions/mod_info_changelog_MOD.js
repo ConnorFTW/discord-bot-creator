@@ -1,6 +1,6 @@
 module.exports = {
-  name: 'Changelog',
-  section: '#Mod Information',
+  name: "Changelog",
+  section: "#Mod Information",
 
   subtitle() {
     return 'Does nothing - Click "Edit" for more information';

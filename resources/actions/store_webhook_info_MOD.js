@@ -1,37 +1,46 @@
 module.exports = {
-  name: 'Store Webhook Info',
-  section: 'Webhook Control',
+  name: "Store Webhook Info",
+  section: "Webhook Control",
 
   subtitle(data) {
-    const info = ['Webhook ', 'Webhook ', 'Webhook ', 'Webhook ', 'Webhook ', 'Webhook ', 'Webhook ', 'Webhook '];
+    const info = [
+      "Webhook ",
+      "Webhook ",
+      "Webhook ",
+      "Webhook ",
+      "Webhook ",
+      "Webhook ",
+      "Webhook ",
+      "Webhook ",
+    ];
     return `${info[parseInt(data.info, 10)]}`;
   },
 
   variableStorage(data, varType) {
     if (parseInt(data.storage, 10) !== varType) return;
-    let dataType = 'Webhook Info';
+    let dataType = "Webhook Info";
 
     switch (parseInt(data.info, 10)) {
       case 0:
-        dataType = 'ID';
+        dataType = "ID";
         break;
       case 1:
-        dataType = 'ID';
+        dataType = "ID";
         break;
       case 2:
-        dataType = 'ID';
+        dataType = "ID";
         break;
       case 3:
-        dataType = 'Username';
+        dataType = "Username";
         break;
       case 4:
-        dataType = 'User';
+        dataType = "User";
         break;
       case 5:
-        dataType = 'Token';
+        dataType = "Token";
         break;
       case 6:
-        dataType = 'URL';
+        dataType = "URL";
         break;
       default:
         break;
@@ -39,7 +48,7 @@ module.exports = {
     return [data.varName2, dataType];
   },
 
-  fields: ['webhook', 'varName', 'info', 'storage', 'varName2'],
+  fields: ["webhook", "varName", "info", "storage", "varName2"],
 
   html(_isEvent, data) {
     return `
@@ -83,7 +92,7 @@ module.exports = {
 
   init() {
     const { glob, document } = this;
-    glob.refreshVariableList(document.getElementById('webhook'));
+    glob.refreshVariableList(document.getElementById("webhook"));
   },
 
   action(cache) {

@@ -1,6 +1,6 @@
 module.exports = {
-  name: 'Canvas Create Image',
-  section: 'Image Editing',
+  name: "Canvas Create Image",
+  section: "Image Editing",
 
   subtitle(data) {
     return `${data.url}`;
@@ -8,10 +8,10 @@ module.exports = {
 
   variableStorage(data, varType) {
     if (parseInt(data.storage, 10) !== varType) return;
-    return [data.varName, 'Image'];
+    return [data.varName, "Image"];
   },
 
-  fields: ['url', 'storage', 'varName'],
+  fields: ["url", "storage", "varName"],
 
   html(_isEvent, data) {
     return `
@@ -37,12 +37,14 @@ module.exports = {
 
   action(cache) {
     const data = cache.actions[cache.index];
-    const Canvas = require('canvas');
+    const Canvas = require("canvas");
     Canvas.loadImage(this.evalMessage(data.url, cache)).then((image) => {
       const canvas = Canvas.createCanvas(image.width, image.height);
-      const ctx = canvas.getContext('2d');
+      const ctx = canvas.getContext("2d");
       ctx.drawImage(image, 0, 0, image.width, image.height);
-      const result = canvas.toDataURL('image/png').replace('image/png', 'image/octet-stream');
+      const result = canvas
+        .toDataURL("image/png")
+        .replace("image/png", "image/octet-stream");
       const varName = this.evalMessage(data.varName, cache);
       const storage = parseInt(data.storage, 10);
       this.storeValue(result, storage, varName, cache);

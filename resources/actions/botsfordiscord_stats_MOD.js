@@ -1,12 +1,12 @@
 module.exports = {
-  name: 'Send Stats to BFD',
-  section: 'Other Stuff',
+  name: "Send Stats to BFD",
+  section: "Other Stuff",
 
   subtitle() {
-    return 'Send server count to BFD!';
+    return "Send server count to BFD!";
   },
 
-  fields: ['BFDToken', 'ClientID', 'info'],
+  fields: ["BFDToken", "ClientID", "info"],
 
   html() {
     return `
@@ -33,7 +33,7 @@ module.exports = {
     const token = this.evalMessage(data.BFDToken, cache);
     const clientid = this.evalMessage(data.ClientID, cache);
     const Mods = this.getMods();
-    const BFD = Mods.require('bfd-api');
+    const BFD = Mods.require("bfd-api");
     const bfd = new BFD(token);
     bfd.postCount(this.getDBM().Bot.bot.guilds.cache.size, clientid);
     this.callNextAction(cache);

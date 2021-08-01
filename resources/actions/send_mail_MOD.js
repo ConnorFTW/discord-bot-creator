@@ -1,24 +1,24 @@
 module.exports = {
-  name: 'Send Mail',
+  name: "Send Mail",
 
-  section: 'Other Stuff',
+  section: "Other Stuff",
 
   subtitle(data) {
     return `from:"${data.username}" to: "${data.mailto}"`;
   },
 
   fields: [
-    'username',
-    'password',
-    'mailto',
-    'subject',
-    'type',
-    'text',
-    'iffalse',
-    'iffalseVal',
-    'hostname',
-    'portname',
-    'sec',
+    "username",
+    "password",
+    "mailto",
+    "subject",
+    "type",
+    "text",
+    "iffalse",
+    "iffalseVal",
+    "hostname",
+    "portname",
+    "sec",
   ],
 
   html() {
@@ -93,25 +93,26 @@ module.exports = {
       switch (parseInt(event.value, 10)) {
         case 0:
         case 1:
-          document.getElementById('iffalseContainer').style.display = 'none';
+          document.getElementById("iffalseContainer").style.display = "none";
           break;
         case 2:
-          document.getElementById('iffalseName').innerHTML = 'Action Number';
-          document.getElementById('iffalseContainer').style.display = null;
+          document.getElementById("iffalseName").innerHTML = "Action Number";
+          document.getElementById("iffalseContainer").style.display = null;
           break;
         case 3:
-          document.getElementById('iffalseName').innerHTML = 'Number of Actions to Skip';
-          document.getElementById('iffalseContainer').style.display = null;
+          document.getElementById("iffalseName").innerHTML =
+            "Number of Actions to Skip";
+          document.getElementById("iffalseContainer").style.display = null;
           break;
         case 4:
-          document.getElementById('iffalseName').innerHTML = 'Anchor ID';
-          document.getElementById('iffalseContainer').style.display = null;
+          document.getElementById("iffalseName").innerHTML = "Anchor ID";
+          document.getElementById("iffalseContainer").style.display = null;
           break;
         default:
           break;
       }
     };
-    glob.onChangeFalse(document.getElementById('iffalse'));
+    glob.onChangeFalse(document.getElementById("iffalse"));
   },
 
   action(cache) {
@@ -126,7 +127,7 @@ module.exports = {
     const host = this.evalMessage(data.hostname, cache);
     const port = this.evalMessage(data.portname, cache);
     const secure = this.evalMessage(data.sec, cache);
-    const nodemailer = require('nodemailer');
+    const nodemailer = require("nodemailer");
     const transporter = nodemailer.createTransport({
       host,
       port,

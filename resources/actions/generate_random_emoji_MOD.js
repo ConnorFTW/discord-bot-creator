@@ -1,6 +1,6 @@
 module.exports = {
-  name: 'Generate Random Emoji',
-  section: 'Other Stuff',
+  name: "Generate Random Emoji",
+  section: "Other Stuff",
 
   subtitle() {
     return "Generate emoji's";
@@ -8,10 +8,10 @@ module.exports = {
 
   variableStorage(data, varType) {
     if (parseInt(data.storage, 10) !== varType) return;
-    return [data.varName, 'Text'];
+    return [data.varName, "Text"];
   },
 
-  fields: ['storage', 'varName'],
+  fields: ["storage", "varName"],
 
   html(isEvent, data) {
     return `
@@ -36,7 +36,7 @@ module.exports = {
     const storage = parseInt(data.storage, 10);
     const varName = this.evalMessage(data.varName, cache);
     const Mods = this.getMods();
-    const emoji = Mods.require('node-emoji');
+    const emoji = Mods.require("node-emoji");
 
     const res = emoji.random();
     this.storeValue(res.emoji, storage, varName, cache);

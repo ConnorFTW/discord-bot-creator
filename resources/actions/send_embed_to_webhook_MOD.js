@@ -1,12 +1,12 @@
 module.exports = {
-  name: 'Send Embed to Webhook',
-  section: 'Webhook Control',
+  name: "Send Embed to Webhook",
+  section: "Webhook Control",
 
   subtitle(data) {
     return `${data.varName2}`;
   },
 
-  fields: ['storage', 'varName', 'storage2', 'varName2'],
+  fields: ["storage", "varName", "storage2", "varName2"],
 
   html(_isEvent, data) {
     return `
@@ -38,8 +38,11 @@ module.exports = {
   init() {
     const { glob, document } = this;
 
-    glob.refreshVariableList(document.getElementById('storage'));
-    glob.refreshVariableList(document.getElementById('storage2'), 'varNameContainer2');
+    glob.refreshVariableList(document.getElementById("storage"));
+    glob.refreshVariableList(
+      document.getElementById("storage2"),
+      "varNameContainer2"
+    );
   },
 
   action(cache) {

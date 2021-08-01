@@ -1,12 +1,12 @@
 module.exports = {
-  name: 'Add Embed Field',
-  section: 'Embed Message',
+  name: "Add Embed Field",
+  section: "Embed Message",
 
   subtitle(data) {
     return `${data.name} - ${data.message}`;
   },
 
-  fields: ['storage', 'varName', 'fieldName', 'message', 'inline'],
+  fields: ["storage", "varName", "fieldName", "message", "inline"],
 
   html(_isEvent, data) {
     return `
@@ -52,9 +52,9 @@ module.exports = {
     const name = this.evalMessage(data.fieldName, cache);
     const message = this.evalMessage(data.message, cache);
 
-    const inline = Boolean(data.inline === '0');
+    const inline = Boolean(data.inline === "0");
     if (embed && embed.addField) {
-      embed.addField(name || '\u200B', message || '\u200B', inline);
+      embed.addField(name || "\u200B", message || "\u200B", inline);
     }
     this.callNextAction(cache);
   },

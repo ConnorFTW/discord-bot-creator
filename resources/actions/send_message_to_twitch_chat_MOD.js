@@ -1,12 +1,19 @@
 module.exports = {
-  name: 'Send Message to Twitch Chat',
-  section: 'Other Stuff',
+  name: "Send Message to Twitch Chat",
+  section: "Other Stuff",
 
   subtitle(data) {
     return `${data.username} - Send Message to Twitch Channel: ${data.channelToSendTo}`;
   },
 
-  fields: ['storage', 'varName', 'messageToSend', 'channelToSendTo', 'oAuth', 'username'],
+  fields: [
+    "storage",
+    "varName",
+    "messageToSend",
+    "channelToSendTo",
+    "oAuth",
+    "username",
+  ],
 
   html() {
     return `
@@ -40,11 +47,18 @@ module.exports = {
     const oAuth = this.evalMessage(data.oAuth, cache);
     const username = this.evalMessage(data.username, cache);
 
-    if (!channelToSendTo) return console.log('Please input the ChannelToSendTo in Twitch Chat Action.');
-    if (!oAuth) return console.log('Please input your oAuth token in Twitch Chat Action.');
-    if (!username) return console.log('Please input your username in Twitch Chat Action.');
+    if (!channelToSendTo)
+      return console.log(
+        "Please input the ChannelToSendTo in Twitch Chat Action."
+      );
+    if (!oAuth)
+      return console.log(
+        "Please input your oAuth token in Twitch Chat Action."
+      );
+    if (!username)
+      return console.log("Please input your username in Twitch Chat Action.");
 
-    const { Client } = require('tmi.js');
+    const { Client } = require("tmi.js");
     const config = {
       options: {
         debug: true,
@@ -61,7 +75,9 @@ module.exports = {
     };
 
     const tmiClient = new Client(config);
-    tmiClient.connect().then(() => tmiClient.say(channelToSendTo, messageToSend));
+    tmiClient
+      .connect()
+      .then(() => tmiClient.say(channelToSendTo, messageToSend));
 
     this.callNextAction(cache);
   },

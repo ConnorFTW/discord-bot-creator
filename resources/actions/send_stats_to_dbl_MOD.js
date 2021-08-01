@@ -1,13 +1,13 @@
 module.exports = {
-  name: 'Sends Stats to DBL',
-  section: 'Other Stuff',
+  name: "Sends Stats to DBL",
+  section: "Other Stuff",
 
   subtitle(data) {
-    const info = ['Only Server Count', 'Shard & Server Count'];
+    const info = ["Only Server Count", "Shard & Server Count"];
     return `Send ${info[parseInt(data.info, 10)]} to DBL!`;
   },
 
-  fields: ['dblToken', 'info'],
+  fields: ["dblToken", "info"],
 
   html() {
     return `
@@ -36,20 +36,29 @@ module.exports = {
     const token = this.evalMessage(data.dblToken, cache);
     const info = parseInt(data.info, 10);
     const Mods = this.getMods();
-    const fetch = Mods.require('node-fetch');
+    const fetch = Mods.require("node-fetch");
     const client = this.getDBM().Bot.bot;
 
     const body = [
       { server_count: client.guilds.cache.size },
-      { server_count: client.guilds.cache.size, shard_id: client.shard.ids[0], shard_count: client.shard.count },
+      {
+        server_count: client.guilds.cache.size,
+        shard_id: client.shard.ids[0],
+        shard_count: client.shard.count,
+      },
     ][info];
-    if (!body) return console.error(`#${cache.index + 1} ${this.name}: Invalid option selected`);
+    if (!body)
+      return console.error(
+        `#${cache.index + 1} ${this.name}: Invalid option selected`
+      );
 
     await fetch(`https://top.gg/api/bots/${client.user.id}/stats`, {
       body,
       headers: { Authorization: token },
-      method: 'POST',
-    }).catch((err) => console.error(`#${cache.index + 1} ${this.name}: ${err.stack}`));
+      method: "POST",
+    }).catch((err) =>
+      console.error(`#${cache.index + 1} ${this.name}: ${err.stack}`)
+    );
 
     this.callNextAction(cache);
   },

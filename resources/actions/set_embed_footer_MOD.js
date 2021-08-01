@@ -1,12 +1,12 @@
 module.exports = {
-  name: 'Set Embed Footer',
-  section: 'Embed Message',
+  name: "Set Embed Footer",
+  section: "Embed Message",
 
   subtitle(data) {
     return `${data.message}`;
   },
 
-  fields: ['storage', 'varName', 'message', 'footerIcon'],
+  fields: ["storage", "varName", "message", "footerIcon"],
 
   html(_isEvent, data) {
     return `
@@ -35,7 +35,7 @@ module.exports = {
   init() {
     const { glob, document } = this;
 
-    glob.refreshVariableList(document.getElementById('storage'));
+    glob.refreshVariableList(document.getElementById("storage"));
   },
 
   action(cache) {
@@ -45,7 +45,10 @@ module.exports = {
     const embed = this.getVariable(storage, varName, cache);
 
     if (embed && embed.setFooter) {
-      embed.setFooter(this.evalMessage(data.message, cache), this.evalMessage(data.footerIcon, cache));
+      embed.setFooter(
+        this.evalMessage(data.message, cache),
+        this.evalMessage(data.footerIcon, cache)
+      );
     }
     this.callNextAction(cache);
   },

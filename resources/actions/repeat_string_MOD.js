@@ -1,17 +1,17 @@
 module.exports = {
-  name: 'Repeat String',
-  section: 'Other Stuff',
+  name: "Repeat String",
+  section: "Other Stuff",
 
   subtitle(data) {
-    return `${data.xtimes || '0'}x "${data.girdi || 'None'}"`;
+    return `${data.xtimes || "0"}x "${data.girdi || "None"}"`;
   },
 
   variableStorage(data, varType) {
     if (parseInt(data.storage, 10) !== varType) return;
-    return [data.varName, 'String'];
+    return [data.varName, "String"];
   },
 
-  fields: ['storage', 'varName', 'girdi', 'xtimes'],
+  fields: ["storage", "varName", "girdi", "xtimes"],
 
   html(_isEvent, data) {
     return `

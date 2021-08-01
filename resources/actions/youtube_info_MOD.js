@@ -1,38 +1,38 @@
 module.exports = {
-  name: 'Store YouTube Info',
-  section: 'YouTube Tools',
+  name: "Store YouTube Info",
+  section: "YouTube Tools",
 
   subtitle(data) {
     const info = [
-      'Video ID',
-      'Video URL',
-      'Video Title',
-      'Video Description',
-      'Video Channel Name',
-      'Video Channel ID',
-      'Video Channel URL',
-      'Video Channel Avatar URL',
-      'Video Channel is Verified?',
-      'Video Channel Subscriber Count',
-      'Video is Unlisted?',
-      'Video is Family Friendly?',
-      'Video Duration',
-      'Available Countries',
-      'Video Like Count',
-      'Video Dislike Count',
-      'Video Thumbnail URL',
-      'Video Publish Date',
-      'Video Views',
-      'Video is Live?',
-      'Video Owner Viewing?',
-      'Video is Age Restricted?',
+      "Video ID",
+      "Video URL",
+      "Video Title",
+      "Video Description",
+      "Video Channel Name",
+      "Video Channel ID",
+      "Video Channel URL",
+      "Video Channel Avatar URL",
+      "Video Channel is Verified?",
+      "Video Channel Subscriber Count",
+      "Video is Unlisted?",
+      "Video is Family Friendly?",
+      "Video Duration",
+      "Available Countries",
+      "Video Like Count",
+      "Video Dislike Count",
+      "Video Thumbnail URL",
+      "Video Publish Date",
+      "Video Views",
+      "Video is Live?",
+      "Video Owner Viewing?",
+      "Video is Age Restricted?",
     ];
     return `YouTube ${info[parseInt(data.info, 10)]}`;
   },
 
   variableStorage(data, varType) {
     if (parseInt(data.storage, 10) !== varType) return;
-    let dataType = 'Unknown Type';
+    let dataType = "Unknown Type";
     switch (parseInt(data.info, 10)) {
       case 0: // Video ID
       case 2: // Video Title
@@ -41,15 +41,15 @@ module.exports = {
       case 4: // Video Channel Name
       case 12: // Video Duration
       case 21: // Video Publish Date
-        dataType = 'Text';
+        dataType = "Text";
         break;
       case 1: // Video URL
       case 20: // Video Channel URL
       case 24: // Video Channel Avatar URL
-        dataType = 'URL';
+        dataType = "URL";
         break;
       case 6: // Video Thumbnail URL
-        dataType = 'Image URL';
+        dataType = "Image URL";
         break;
       case 19: // Video is live?
       case 22: // Video Owner Viewing?
@@ -57,22 +57,22 @@ module.exports = {
       case 25: // Video Channel is Verified?
       case 11: // Video is Family Friendly?
       case 10: // Video is Unlisted?
-        dataType = 'Boolean';
+        dataType = "Boolean";
         break;
       case 13: // Video Views
       case 16: // Video Like Count
       case 17: // Video Dislike Count
       case 26: // Video Channel Subscriber Count
-        dataType = 'Number';
+        dataType = "Number";
         break;
       case 14: // Available Countries
-        dataType = 'Object';
+        dataType = "Object";
         break;
     }
     return [data.varName, dataType];
   },
 
-  fields: ['video', 'info', 'storage', 'varName'],
+  fields: ["video", "info", "storage", "varName"],
 
   html(_isEvent, data) {
     return `
@@ -126,7 +126,7 @@ module.exports = {
   init() {
     const { glob, document } = this;
 
-    glob.variableChange(document.getElementById('storage'), 'varNameContainer');
+    glob.variableChange(document.getElementById("storage"), "varNameContainer");
   },
 
   async action(cache) {
@@ -134,11 +134,12 @@ module.exports = {
     const info = parseInt(data.info, 10);
     const input = this.evalMessage(data.video, cache);
     const Mods = this.getMods();
-    const ytsr = Mods.require('ytsr');
-    const ytdl = Mods.require('ytdl-core');
+    const ytsr = Mods.require("ytsr");
+    const ytdl = Mods.require("ytdl-core");
     let result;
 
-    if (!input) return console.log('Please specify a video to get video informations.');
+    if (!input)
+      return console.log("Please specify a video to get video informations.");
 
     const searchResults = await ytsr(input);
     if (!searchResults) return this.callNextAction(cache);
@@ -157,13 +158,13 @@ module.exports = {
       case 2: // Video Title
         result = video.title
           .replace(/&quot;/g, '"')
-          .replace(/&amp;/g, '&')
+          .replace(/&amp;/g, "&")
           .replace(/&#39;/g, "'");
         break;
       case 3: // Video Description
         result = video.description
           .replace(/&quot;/g, '"')
-          .replace(/&amp;/g, '&')
+          .replace(/&amp;/g, "&")
           .replace(/&#39;/g, "'");
         break;
       case 4: // Video Channel Name

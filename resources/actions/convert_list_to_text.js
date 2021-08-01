@@ -1,29 +1,38 @@
 module.exports = {
-  name: 'Convert List to Text',
-  section: 'Lists and Loops',
+  name: "Convert List to Text",
+  section: "Lists and Loops",
 
   subtitle(data) {
     const list = [
-      'Server Members',
-      'Server Channels',
-      'Server Roles',
-      'Server Emojis',
-      'All Bot Servers',
-      'Mentioned User Roles',
-      'Command Author Roles',
-      'Temp Variable',
-      'Server Variable',
-      'Global Variable',
+      "Server Members",
+      "Server Channels",
+      "Server Roles",
+      "Server Emojis",
+      "All Bot Servers",
+      "Mentioned User Roles",
+      "Command Author Roles",
+      "Temp Variable",
+      "Server Variable",
+      "Global Variable",
     ];
     return `Convert ${list[parseInt(data.list, 10)]} to Text`;
   },
 
   variableStorage(data, varType) {
     if (parseInt(data.storage, 10) !== varType) return;
-    return [data.varName2, 'Text'];
+    return [data.varName2, "Text"];
   },
 
-  fields: ['list', 'varName', 'start', 'middle', 'end', 'storage', 'varName2', 'sort'],
+  fields: [
+    "list",
+    "varName",
+    "start",
+    "middle",
+    "end",
+    "storage",
+    "varName2",
+    "sort",
+  ],
 
   html(isEvent, data) {
     return `
@@ -77,7 +86,7 @@ module.exports = {
 
   init() {
     const { glob, document } = this;
-    glob.listChange(document.getElementById('list'), 'varNameContainer');
+    glob.listChange(document.getElementById("list"), "varNameContainer");
   },
 
   action(cache) {
@@ -88,10 +97,10 @@ module.exports = {
     const sort = parseInt(data.sort, 10);
     if (sort === 0) list = list.sort();
 
-    const start = this.evalMessage(data.start, cache).replace('\\n', '\n');
-    const middle = this.evalMessage(data.middle, cache).replace('\\n', '\n');
-    const end = this.evalMessage(data.end, cache).replace('\\n', '\n');
-    let result = '';
+    const start = this.evalMessage(data.start, cache).replace("\\n", "\n");
+    const middle = this.evalMessage(data.middle, cache).replace("\\n", "\n");
+    const end = this.evalMessage(data.end, cache).replace("\\n", "\n");
+    let result = "";
 
     for (let i = 0; i < list.length; i++) {
       if (i === 0) {

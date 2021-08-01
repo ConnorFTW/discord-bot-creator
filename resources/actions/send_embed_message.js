@@ -1,36 +1,36 @@
 module.exports = {
-  name: 'Send Embed Message',
-  section: 'Embed Message',
+  name: "Send Embed Message",
+  section: "Embed Message",
 
   subtitle(data) {
     const channels = [
-      'Same Channel',
-      'Command Author',
-      'Mentioned User',
-      'Mentioned Channel',
-      'Default Channel (Top Channel)',
-      'Temp Variable',
-      'Server Variable',
-      'Global Variable',
+      "Same Channel",
+      "Command Author",
+      "Mentioned User",
+      "Mentioned Channel",
+      "Default Channel (Top Channel)",
+      "Temp Variable",
+      "Server Variable",
+      "Global Variable",
     ];
     return `${channels[parseInt(data.channel, 10)]}: ${data.varName}`;
   },
 
   variableStorage(data, varType) {
     if (parseInt(data.storage3, 10) !== varType) return;
-    return [data.varName3, 'Message'];
+    return [data.varName3, "Message"];
   },
 
   fields: [
-    'storage',
-    'varName',
-    'channel',
-    'varName2',
-    'storage3',
-    'varName3',
-    'iffalse',
-    'iffalseVal',
-    'messageContent',
+    "storage",
+    "varName",
+    "channel",
+    "varName2",
+    "storage3",
+    "varName3",
+    "iffalse",
+    "iffalseVal",
+    "messageContent",
   ],
 
   html(isEvent, data) {
@@ -95,27 +95,34 @@ module.exports = {
       switch (parseInt(event.value, 10)) {
         case 0:
         case 1:
-          document.getElementById('iffalseContainer').style.display = 'none';
+          document.getElementById("iffalseContainer").style.display = "none";
           break;
         case 2:
-          document.getElementById('iffalseName').innerHTML = 'Action Number';
-          document.getElementById('iffalseContainer').style.display = null;
+          document.getElementById("iffalseName").innerHTML = "Action Number";
+          document.getElementById("iffalseContainer").style.display = null;
           break;
         case 3:
-          document.getElementById('iffalseName').innerHTML = 'Number of Actions to Skip';
-          document.getElementById('iffalseContainer').style.display = null;
+          document.getElementById("iffalseName").innerHTML =
+            "Number of Actions to Skip";
+          document.getElementById("iffalseContainer").style.display = null;
           break;
         case 4:
-          document.getElementById('iffalseName').innerHTML = 'Anchor ID';
-          document.getElementById('iffalseContainer').style.display = null;
+          document.getElementById("iffalseName").innerHTML = "Anchor ID";
+          document.getElementById("iffalseContainer").style.display = null;
           break;
         default:
           break;
       }
     };
-    glob.sendTargetChange(document.getElementById('channel'), 'varNameContainer2');
-    glob.variableChange(document.getElementById('storage3'), 'varNameContainer3');
-    glob.onChangeFalse(document.getElementById('iffalse'));
+    glob.sendTargetChange(
+      document.getElementById("channel"),
+      "varNameContainer2"
+    );
+    glob.variableChange(
+      document.getElementById("storage3"),
+      "varNameContainer3"
+    );
+    glob.onChangeFalse(document.getElementById("iffalse"));
   },
 
   action(cache) {

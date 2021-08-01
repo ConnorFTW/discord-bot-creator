@@ -1,20 +1,20 @@
 module.exports = {
-  name: 'Set AFK Channel',
-  section: 'Server Control',
+  name: "Set AFK Channel",
+  section: "Server Control",
 
   subtitle(data) {
     const channels = [
       "Command Author's Voice Ch.",
       "Mentioned User's Voice Ch.",
-      'Default Voice Channel',
-      'Temp Variable',
-      'Server Variable',
-      'Global Variable',
+      "Default Voice Channel",
+      "Temp Variable",
+      "Server Variable",
+      "Global Variable",
     ];
     return `${channels[parseInt(data.afkchannel, 10)]}`;
   },
 
-  fields: ['server', 'varName', 'afkchannel', 'varNameChannel'],
+  fields: ["server", "varName", "afkchannel", "varNameChannel"],
 
   html(isEvent, data) {
     return `
@@ -81,8 +81,11 @@ module.exports = {
   init() {
     const { glob, document } = this;
 
-    glob.serverChange(document.getElementById('server'), 'varNameContainer');
-    glob.voiceChannelChange(document.getElementById('afkchannel'), 'varNameContainerr');
+    glob.serverChange(document.getElementById("server"), "varNameContainer");
+    glob.voiceChannelChange(
+      document.getElementById("afkchannel"),
+      "varNameContainerr"
+    );
   },
 
   action(cache) {
@@ -97,7 +100,7 @@ module.exports = {
     if (!channel) return this.callNextAction(cache);
 
     if (Array.isArray(server)) {
-      this.callListFunc(server, 'setAFKChannel', channel).then(() => {
+      this.callListFunc(server, "setAFKChannel", channel).then(() => {
         this.callNextAction(cache);
       });
     } else if (server && server.setAFKChannel) {

@@ -1,10 +1,10 @@
 module.exports = {
-  name: 'Edit Webhook',
-  section: 'Webhook Control',
+  name: "Edit Webhook",
+  section: "Webhook Control",
   subtitle(data) {
     return `${data.webhookName}`;
   },
-  fields: ['webhookName', 'webhookIcon', 'webhook', 'varName'],
+  fields: ["webhookName", "webhookIcon", "webhook", "varName"],
 
   html(_isEvent, data) {
     return `
@@ -34,7 +34,7 @@ module.exports = {
 
   init() {
     const { glob, document } = this;
-    glob.channelChange(document.getElementById('webhook'));
+    glob.channelChange(document.getElementById("webhook"));
   },
 
   action(cache) {

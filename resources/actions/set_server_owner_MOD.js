@@ -1,15 +1,21 @@
 module.exports = {
-  name: 'Set Server Owner',
-  section: 'Server Control',
+  name: "Set Server Owner",
+  section: "Server Control",
 
   subtitle(data) {
-    const members = ['Mentioned User', 'Command Author', 'Temp Variable', 'Server Variable', 'Global Variable'];
-    return `${members[data.member]} ${data.member < 2 ? '' : `- ${data.varName2}`} ${
-      !data.reason ? '' : `with Reason: <i>${data.reason}<i>`
-    }`;
+    const members = [
+      "Mentioned User",
+      "Command Author",
+      "Temp Variable",
+      "Server Variable",
+      "Global Variable",
+    ];
+    return `${members[data.member]} ${
+      data.member < 2 ? "" : `- ${data.varName2}`
+    } ${!data.reason ? "" : `with Reason: <i>${data.reason}<i>`}`;
   },
 
-  fields: ['server', 'varName', 'member', 'varName2', 'reason'],
+  fields: ["server", "varName", "member", "varName2", "reason"],
 
   html(isEvent, data) {
     return `
@@ -46,8 +52,8 @@ module.exports = {
   init() {
     const { glob, document } = this;
 
-    glob.serverChange(document.getElementById('server'), 'varNameContainer');
-    glob.memberChange(document.getElementById('member'), 'varNameContainer2');
+    glob.serverChange(document.getElementById("server"), "varNameContainer");
+    glob.memberChange(document.getElementById("member"), "varNameContainer2");
   },
 
   action(cache) {
@@ -64,7 +70,7 @@ module.exports = {
     const reason = this.evalMessage(data.reason, cache);
 
     if (Array.isArray(server)) {
-      this.callListFunc(server, 'setOwner', [mem]).then(() => {
+      this.callListFunc(server, "setOwner", [mem]).then(() => {
         this.callNextAction(cache);
       });
     } else if (server && server.setOwner) {

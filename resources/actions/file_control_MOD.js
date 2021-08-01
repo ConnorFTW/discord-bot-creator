@@ -1,11 +1,29 @@
 module.exports = {
-  name: 'File Control',
-  section: 'File Stuff',
-  fields: ['input', 'format', 'filename', 'filepath', 'filepath2', 'filetask', 'input2', 'togglestatus'],
+  name: "File Control",
+  section: "File Stuff",
+  fields: [
+    "input",
+    "format",
+    "filename",
+    "filepath",
+    "filepath2",
+    "filetask",
+    "input2",
+    "togglestatus",
+  ],
 
   subtitle(data) {
-    const filetasks = ['Create', 'Write', 'Append into', 'Delete', 'Insert into', 'Copy'];
-    return `${filetasks[parseInt(data.filetask, 10)]} ${data.filename}${data.format}`;
+    const filetasks = [
+      "Create",
+      "Write",
+      "Append into",
+      "Delete",
+      "Insert into",
+      "Copy",
+    ];
+    return `${filetasks[parseInt(data.filetask, 10)]} ${data.filename}${
+      data.format
+    }`;
   },
 
   html() {
@@ -188,38 +206,38 @@ module.exports = {
 
   init() {
     const { document } = this;
-    const selector = document.getElementById('filetask');
-    const selector2 = document.getElementById('format');
-    const targetfield = document.getElementById('inputArea');
-    const targetfield2 = document.getElementById('lineInsert');
-    const targetField3 = document.getElementById('newPath');
-    const val1 = document.getElementById('togglestatus').value;
-    if (val1 === 'yes') document.getElementById('togglestatus').checked = true;
+    const selector = document.getElementById("filetask");
+    const selector2 = document.getElementById("format");
+    const targetfield = document.getElementById("inputArea");
+    const targetfield2 = document.getElementById("lineInsert");
+    const targetField3 = document.getElementById("newPath");
+    const val1 = document.getElementById("togglestatus").value;
+    if (val1 === "yes") document.getElementById("togglestatus").checked = true;
 
     function showInput() {
       const selected = selector[selector.selectedIndex].value;
       const selected2 = selector2[selector2.selectedIndex].value;
-      if (selected2 === '.json' && (selected !== '5' || selected !== '4')) {
-        document.getElementById('visibot').style.display = 'block';
+      if (selected2 === ".json" && (selected !== "5" || selected !== "4")) {
+        document.getElementById("visibot").style.display = "block";
       } else {
-        document.getElementById('visibot').style.display = 'none';
+        document.getElementById("visibot").style.display = "none";
       }
-      if (selected === '0' || selected === '3' || selected === '5') {
+      if (selected === "0" || selected === "3" || selected === "5") {
         // Hides "Input Text"
-        targetfield.classList.add('hidden');
+        targetfield.classList.add("hidden");
       } else {
-        targetfield.classList.remove('hidden');
+        targetfield.classList.remove("hidden");
       }
-      if (selected === '4') {
-        targetfield2.classList.remove('hidden');
+      if (selected === "4") {
+        targetfield2.classList.remove("hidden");
       } else {
-        targetfield2.classList.add('hidden'); // Hides "Line to Insert at"
+        targetfield2.classList.add("hidden"); // Hides "Line to Insert at"
       }
-      if (selected === '5') {
+      if (selected === "5") {
         // Hides "New File Path"
-        targetField3.classList.remove('hidden');
+        targetField3.classList.remove("hidden");
       } else {
-        targetField3.classList.add('hidden');
+        targetField3.classList.add("hidden");
       }
     }
 
@@ -227,10 +245,10 @@ module.exports = {
   },
 
   action(cache) {
-    const path = require('path');
+    const path = require("path");
     const Mods = this.getMods();
-    const fs = Mods.require('fs-extra');
-    const insertLine = Mods.require('insert-line');
+    const fs = Mods.require("fs-extra");
+    const insertLine = Mods.require("insert-line");
 
     const data = cache.actions[cache.index];
     const dirName = path.normalize(this.evalMessage(data.filepath, cache));
@@ -243,24 +261,30 @@ module.exports = {
     const fpath2 = path.join(dirName2, fileName + data.format);
     const task = parseInt(data.filetask, 10);
     const itext = this.evalMessage(data.input, cache);
-    const lmg = 'Something went wrong while';
+    const lmg = "Something went wrong while";
 
     try {
       switch (task) {
         case 0: // Create File
-          if (fileName === '') break;
-          fs.writeFileSync(fpath, '');
+          if (fileName === "") break;
+          fs.writeFileSync(fpath, "");
           break;
         case 1: // Write File
-          if (fileName === '') throw new Error('File Name not Provided:');
-          fs.writeFileSync(fpath, togglestat === 'yes' ? JSON.stringify(itext) : itext);
+          if (fileName === "") throw new Error("File Name not Provided:");
+          fs.writeFileSync(
+            fpath,
+            togglestat === "yes" ? JSON.stringify(itext) : itext
+          );
           break;
         case 2: // Append File
-          if (fileName === '') throw new Error('File Name not Provided:');
-          fs.appendFileSync(fpath, `${togglestat === 'yes' ? JSON.stringify(itext) : itext}\r\n`);
+          if (fileName === "") throw new Error("File Name not Provided:");
+          fs.appendFileSync(
+            fpath,
+            `${togglestat === "yes" ? JSON.stringify(itext) : itext}\r\n`
+          );
           break;
         case 4: // Insert Line to File
-          if (fileName === '') throw new Error('File Name not Provided:');
+          if (fileName === "") throw new Error("File Name not Provided:");
           insertLine(fpath)
             .content(itext)
             .at(line)
@@ -278,7 +302,9 @@ module.exports = {
           break;
       }
     } catch (err) {
-      const type = ['creating', 'writing', 'appending', 'deleting', 'copying'][task];
+      const type = ["creating", "writing", "appending", "deleting", "copying"][
+        task
+      ];
       return console.error(`${lmg} ${type} [${err}]`);
     }
 
@@ -286,7 +312,9 @@ module.exports = {
       if (dirName) {
         fs.ensureDirSync(path.normalize(dirName));
       } else {
-        throw new Error('you did not set a file path, please go back and check your work.');
+        throw new Error(
+          "you did not set a file path, please go back and check your work."
+        );
       }
     } catch (err) {
       return console.error(`ERROR ${err.stack || err}`);

@@ -63,7 +63,7 @@ ipcMain.on("getSettings", async (event, args) => {
 });
 
 ipcMain.on("getActions", async (event, args) => {
-  const actions = await loader?.getLocalActions();
+  let actions = await loader?.getLocalActions();
   event.sender.send("getActions", actions);
 });
 

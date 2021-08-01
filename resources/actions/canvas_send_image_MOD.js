@@ -1,27 +1,37 @@
 module.exports = {
-  name: 'Canvas Send Image',
-  section: 'Image Editing',
+  name: "Canvas Send Image",
+  section: "Image Editing",
 
   subtitle(data) {
     const channels = [
-      'Same Channel',
-      'Command Author',
-      'Mentioned User',
-      'Mentioned Channel',
-      'Default Channel',
-      'Temp Variable',
-      'Server Variable',
-      'Global Variable',
+      "Same Channel",
+      "Command Author",
+      "Mentioned User",
+      "Mentioned Channel",
+      "Default Channel",
+      "Temp Variable",
+      "Server Variable",
+      "Global Variable",
     ];
     return `${channels[parseInt(data.channel, 10)]}`;
   },
 
   variableStorage(data, varType) {
     if (parseInt(data.storage2, 10) !== varType) return;
-    return [data.varName3, 'Message'];
+    return [data.varName3, "Message"];
   },
 
-  fields: ['storage', 'varName', 'channel', 'varName2', 'message', 'compress', 'spoiler', 'storage2', 'varName3'],
+  fields: [
+    "storage",
+    "varName",
+    "channel",
+    "varName2",
+    "message",
+    "compress",
+    "spoiler",
+    "storage2",
+    "varName3",
+  ],
 
   html(isEvent, data) {
     return `
@@ -94,14 +104,20 @@ module.exports = {
   init() {
     const { glob, document } = this;
 
-    glob.refreshVariableList(document.getElementById('storage'));
-    glob.sendTargetChange(document.getElementById('channel'), 'varNameContainer2');
-    glob.variableChange(document.getElementById('storage2'), 'varNameContainer3');
+    glob.refreshVariableList(document.getElementById("storage"));
+    glob.sendTargetChange(
+      document.getElementById("channel"),
+      "varNameContainer2"
+    );
+    glob.variableChange(
+      document.getElementById("storage2"),
+      "varNameContainer3"
+    );
   },
 
   action(cache) {
     const { DiscordJS } = this.getDBM();
-    const Canvas = require('canvas');
+    const Canvas = require("canvas");
     const data = cache.actions[cache.index];
     const storage = parseInt(data.storage, 10);
     const varName = this.evalMessage(data.varName, cache);
@@ -117,18 +133,22 @@ module.exports = {
     const image = new Canvas.Image();
     image.src = imagedata;
     const canvas = Canvas.createCanvas(image.width, image.height);
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext("2d");
     ctx.drawImage(image, 0, 0, image.width, image.height);
-    const name = `${parseInt(data.spoiler, 10) === 1 ? 'SPOILER_' : ''}image.png`;
-    const buffer = canvas.toBuffer('image/png', { compressionLevel: compress });
+    const name = `${
+      parseInt(data.spoiler, 10) === 1 ? "SPOILER_" : ""
+    }image.png`;
+    const buffer = canvas.toBuffer("image/png", { compressionLevel: compress });
     const attachment = new DiscordJS.MessageAttachment(buffer, name);
     if (target && target.send) {
-      target.send(this.evalMessage(data.message, cache), attachment).then((msgobject) => {
-        const varName3 = this.evalMessage(data.varName3, cache);
-        const storage2 = parseInt(data.storage2, 10);
-        this.storeValue(msgobject, storage2, varName3, cache);
-        this.callNextAction(cache);
-      });
+      target
+        .send(this.evalMessage(data.message, cache), attachment)
+        .then((msgobject) => {
+          const varName3 = this.evalMessage(data.varName3, cache);
+          const storage2 = parseInt(data.storage2, 10);
+          this.storeValue(msgobject, storage2, varName3, cache);
+          this.callNextAction(cache);
+        });
     } else {
       this.callNextAction(cache);
     }

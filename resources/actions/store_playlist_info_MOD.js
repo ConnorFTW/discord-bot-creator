@@ -1,17 +1,17 @@
 module.exports = {
-  name: 'Store Playlist Info',
-  section: 'YouTube Tools',
+  name: "Store Playlist Info",
+  section: "YouTube Tools",
 
   subtitle() {
-    return 'Store YouTube playlist information.';
+    return "Store YouTube playlist information.";
   },
 
   variableStorage(data, varType) {
     if (parseInt(data.storage, 10) !== varType) return;
-    return [data.varName, 'Playlist Info'];
+    return [data.varName, "Playlist Info"];
   },
 
-  fields: ['query', 'info', 'storage', 'varName'],
+  fields: ["query", "info", "storage", "varName"],
 
   html(_isEvent, data) {
     return `
@@ -52,24 +52,24 @@ module.exports = {
     const url = this.evalMessage(data.query, cache);
     const INFO = parseInt(data.info, 10);
     const Mods = this.getMods();
-    const ytlist = Mods.require('youtube-playlist');
+    const ytlist = Mods.require("youtube-playlist");
     let result;
 
     switch (INFO) {
       case 0:
-        result = await ytlist(url, ['id', 'name', 'url']);
+        result = await ytlist(url, ["id", "name", "url"]);
         break;
       case 1:
-        result = await ytlist(url, 'url');
+        result = await ytlist(url, "url");
         break;
       case 2:
-        result = await ytlist(url, 'name');
+        result = await ytlist(url, "name");
         break;
       case 3:
-        result = await ytlist(url, 'duration');
+        result = await ytlist(url, "duration");
         break;
       case 4:
-        result = await ytlist(url, 'id');
+        result = await ytlist(url, "id");
         break;
       default:
         break;

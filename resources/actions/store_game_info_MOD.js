@@ -1,85 +1,93 @@
 module.exports = {
-  name: 'Store Game Info',
-  section: 'Member Control',
+  name: "Store Game Info",
+  section: "Member Control",
 
   subtitle(data) {
-    const members = ['Mentioned User', 'Command Author', 'Temp Variable', 'Server Variable', 'Global Variable'];
-    const info = [
-      'Game Application ID',
-      'Game Details',
-      'Game Name',
-      'Game State',
-      'Game Is Being Streamed?',
-      'Game Stream URL',
-      'Game Status Type',
-      'Game Large Image ID',
-      'Game Large Image URL',
-      'Game Large Image Text',
-      'Game Small Image ID',
-      'Game Small Image URL',
-      'Game Small Image Text',
-      'Game Timestamp Start',
-      'Game Party ID',
-      'Game Timestamp End',
-      'Game Party Size',
+    const members = [
+      "Mentioned User",
+      "Command Author",
+      "Temp Variable",
+      "Server Variable",
+      "Global Variable",
     ];
-    return `${members[parseInt(data.member, 10)]} - ${info[parseInt(data.info, 10)]}`;
+    const info = [
+      "Game Application ID",
+      "Game Details",
+      "Game Name",
+      "Game State",
+      "Game Is Being Streamed?",
+      "Game Stream URL",
+      "Game Status Type",
+      "Game Large Image ID",
+      "Game Large Image URL",
+      "Game Large Image Text",
+      "Game Small Image ID",
+      "Game Small Image URL",
+      "Game Small Image Text",
+      "Game Timestamp Start",
+      "Game Party ID",
+      "Game Timestamp End",
+      "Game Party Size",
+    ];
+    return `${members[parseInt(data.member, 10)]} - ${
+      info[parseInt(data.info, 10)]
+    }`;
   },
 
   variableStorage(data, varType) {
     if (parseInt(data.storage, 10) !== varType) return;
-    let dataType = 'Unknown Type';
+    let dataType = "Unknown Type";
     switch (parseInt(data.info, 10)) {
       case 0:
-        dataType = 'Application ID';
+        dataType = "Application ID";
         break;
       case 1:
-        dataType = 'Text';
+        dataType = "Text";
         break;
       case 2:
-        dataType = 'Text';
+        dataType = "Text";
         break;
       case 3:
-        dataType = 'Text';
+        dataType = "Text";
         break;
       case 4:
-        dataType = 'Boolean';
+        dataType = "Boolean";
         break;
       case 5:
-        dataType = 'Stream URL';
+        dataType = "Stream URL";
         break;
       case 6:
-        dataType = 'Number';
+        dataType = "Number";
         break;
       case 7:
-        dataType = 'Large Image ID';
+        dataType = "Large Image ID";
         break;
       case 8:
-        dataType = 'Large Image URL';
+        dataType = "Large Image URL";
         break;
       case 9:
-        dataType = 'Large Image Text';
+        dataType = "Large Image Text";
         break;
       case 10:
-        dataType = 'Small Image ID';
+        dataType = "Small Image ID";
         break;
       case 11:
-        dataType = 'Small Image URL';
+        dataType = "Small Image URL";
         break;
       case 12:
-        dataType = 'Small Image Text';
+        dataType = "Small Image Text";
         break;
       case 13:
-        dataType = 'Date';
+        dataType = "Date";
         break;
       case 14:
-        dataType = 'Party ID';
+        dataType = "Party ID";
         break;
       case 15:
-        dataType = 'Date';
+        dataType = "Date";
         break;
       case 16:
-        dataType = 'Number';
+        dataType = "Number";
         break;
       default:
         break;
@@ -87,7 +95,7 @@ module.exports = {
     return [data.varName2, dataType];
   },
 
-  fields: ['member', 'varName', 'info', 'storage', 'varName2'],
+  fields: ["member", "varName", "info", "storage", "varName2"],
 
   html(isEvent, data) {
     return `
@@ -152,7 +160,7 @@ module.exports = {
   init() {
     const { glob, document } = this;
 
-    glob.memberChange(document.getElementById('member'), 'varNameContainer');
+    glob.memberChange(document.getElementById("member"), "varNameContainer");
   },
 
   action(cache) {

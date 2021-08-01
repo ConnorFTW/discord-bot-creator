@@ -1,61 +1,78 @@
 module.exports = {
-  name: 'Store Audit Log List MOD',
-  section: 'Server Control',
+  name: "Store Audit Log List MOD",
+  section: "Server Control",
 
   subtitle(data) {
-    const storage = ['All Member', 'Mentioned User', 'Command Author', 'tempVars', 'serverVars', 'globalVars'];
+    const storage = [
+      "All Member",
+      "Mentioned User",
+      "Command Author",
+      "tempVars",
+      "serverVars",
+      "globalVars",
+    ];
     const type = {
-      0: 'All Type',
-      1: 'Update Server',
-      10: 'Create Channel',
-      11: 'Update Channel',
-      12: 'Delete Channel',
-      13: 'Create Channel Permission',
-      14: 'Update Channel Permission',
-      15: 'Delete Channel Permission',
-      20: 'Kick Member',
-      21: 'Prune Members',
-      22: 'Ban Member',
-      23: 'Unban Member',
-      24: 'Update Member',
-      25: 'Update Member Roles',
-      26: 'Move Member',
-      27: 'Disconnect Member',
-      28: 'Add Bot',
-      30: 'Create Role',
-      31: 'Update Role',
-      32: 'Delete Role',
-      40: 'Create Invite',
-      41: 'Update Invite',
-      42: 'Delete Invite',
-      50: 'Create Webhook',
-      51: 'Update Webhook',
-      52: 'Delete Webhook',
-      60: 'Create Emoji',
-      61: 'Update Emoji',
-      62: 'Delete Emoji',
-      72: 'Delete Messages',
-      73: 'Bulk Delete Messages',
-      74: 'Pin Message',
-      75: 'Unpin Message',
-      76: 'Create Integration',
-      77: 'Update Intergration',
-      78: 'Delete Integration',
+      0: "All Type",
+      1: "Update Server",
+      10: "Create Channel",
+      11: "Update Channel",
+      12: "Delete Channel",
+      13: "Create Channel Permission",
+      14: "Update Channel Permission",
+      15: "Delete Channel Permission",
+      20: "Kick Member",
+      21: "Prune Members",
+      22: "Ban Member",
+      23: "Unban Member",
+      24: "Update Member",
+      25: "Update Member Roles",
+      26: "Move Member",
+      27: "Disconnect Member",
+      28: "Add Bot",
+      30: "Create Role",
+      31: "Update Role",
+      32: "Delete Role",
+      40: "Create Invite",
+      41: "Update Invite",
+      42: "Delete Invite",
+      50: "Create Webhook",
+      51: "Update Webhook",
+      52: "Delete Webhook",
+      60: "Create Emoji",
+      61: "Update Emoji",
+      62: "Delete Emoji",
+      72: "Delete Messages",
+      73: "Bulk Delete Messages",
+      74: "Pin Message",
+      75: "Unpin Message",
+      76: "Create Integration",
+      77: "Update Intergration",
+      78: "Delete Integration",
     };
 
     const storageData = parseInt(data.storage, 10);
     if ([0, 1, 2].includes(storageData)) {
       return `Store ${storage[storageData]} - ${type[parseInt(data.type, 10)]}`;
     }
-    return `Store ${storage[storageData]} ("${data.varName}") - ${type[parseInt(data.type, 10)]}`;
+    return `Store ${storage[storageData]} ("${data.varName}") - ${
+      type[parseInt(data.type, 10)]
+    }`;
   },
 
   variableStorage(data, varType) {
     if (parseInt(data.storage2, 10) !== varType) return;
-    return [data.varName2, 'Audit Log List'];
+    return [data.varName2, "Audit Log List"];
   },
 
-  fields: ['storage', 'varName', 'type', 'before', 'limit', 'storage2', 'varName2'],
+  fields: [
+    "storage",
+    "varName",
+    "type",
+    "before",
+    "limit",
+    "storage2",
+    "varName2",
+  ],
 
   html(isEvent, data) {
     return `
@@ -147,14 +164,14 @@ module.exports = {
 
   init() {
     const { glob, document } = this;
-    const varNameContainer = document.getElementById('varNameContainer');
+    const varNameContainer = document.getElementById("varNameContainer");
 
     glob.onChange0 = function onChange0(storage) {
       switch (parseInt(storage.value, 10)) {
         case 0:
         case 1:
         case 2:
-          varNameContainer.style.display = 'none';
+          varNameContainer.style.display = "none";
           break;
         default:
           varNameContainer.style.display = null;
@@ -162,7 +179,7 @@ module.exports = {
       }
     };
 
-    glob.onChange0(document.getElementById('storage'));
+    glob.onChange0(document.getElementById("storage"));
   },
 
   action(cache) {
@@ -193,7 +210,7 @@ module.exports = {
     } else {
       options.type = null;
     }
-    if (!isNaN(before) && before !== '') {
+    if (!isNaN(before) && before !== "") {
       options.before = before;
     }
     if (limit && !isNaN(limit)) {

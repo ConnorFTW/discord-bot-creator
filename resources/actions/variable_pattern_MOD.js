@@ -1,18 +1,26 @@
 module.exports = {
-  name: 'Variable Pattern MOD',
-  section: 'Variable Things',
+  name: "Variable Pattern MOD",
+  section: "Variable Things",
 
   subtitle(data) {
-    const storage = ['', 'Temp Variable', 'Server Variable', 'Global Variable'];
+    const storage = ["", "Temp Variable", "Server Variable", "Global Variable"];
     return `${storage[parseInt(data.storage, 10)]} (${data.varName})`;
   },
 
   variableStorage(data, varType) {
     if (parseInt(data.storage2, 10) !== varType) return;
-    return [data.varName2, 'String'];
+    return [data.varName2, "String"];
   },
 
-  fields: ['storage', 'varName', 'info', 'info2', 'value', 'storage2', 'varName2'],
+  fields: [
+    "storage",
+    "varName",
+    "info",
+    "info2",
+    "value",
+    "storage2",
+    "varName2",
+  ],
 
   html(_isEvent, data) {
     return `
@@ -69,32 +77,36 @@ module.exports = {
     const { glob, document } = this;
 
     glob.onChange1 = function onChange1(event) {
-      const info3text = document.getElementById('info3text');
-      if (event.value === '0' || event.value === '1' || event.value === '4') {
-        const info2text = document.getElementById('info2text');
-        document.getElementById('info2box').style.display = null;
-        if (event.value === '0') {
-          info2text.innerHTML = 'Repeat Every Character';
-          info3text.innerHTML = 'Repeat Character';
-        } else if (event.value === '1') {
-          info2text.innerHTML = 'Change From Character';
-          info3text.innerHTML = 'Change To Character';
-        } else if (event.value === '4') {
-          info2text.innerHTML = 'Position Character';
-          info3text.innerHTML = 'Add Character';
+      const info3text = document.getElementById("info3text");
+      if (event.value === "0" || event.value === "1" || event.value === "4") {
+        const info2text = document.getElementById("info2text");
+        document.getElementById("info2box").style.display = null;
+        if (event.value === "0") {
+          info2text.innerHTML = "Repeat Every Character";
+          info3text.innerHTML = "Repeat Character";
+        } else if (event.value === "1") {
+          info2text.innerHTML = "Change From Character";
+          info3text.innerHTML = "Change To Character";
+        } else if (event.value === "4") {
+          info2text.innerHTML = "Position Character";
+          info3text.innerHTML = "Add Character";
         }
       } else {
-        document.getElementById('info2box').style.display = 'none';
-        if (event.value === '2' || event.value === '3') {
-          info3text.innerHTML = 'Add Character';
-        } else if (event.value === '5' || event.value === '6' || event.value === '7') {
-          info3text.innerHTML = 'Store Number Character';
+        document.getElementById("info2box").style.display = "none";
+        if (event.value === "2" || event.value === "3") {
+          info3text.innerHTML = "Add Character";
+        } else if (
+          event.value === "5" ||
+          event.value === "6" ||
+          event.value === "7"
+        ) {
+          info3text.innerHTML = "Store Number Character";
         }
       }
     };
 
-    glob.onChange1(document.getElementById('info'));
-    glob.refreshVariableList(document.getElementById('storage'));
+    glob.onChange1(document.getElementById("info"));
+    glob.refreshVariableList(document.getElementById("storage"));
   },
 
   action(cache) {
@@ -107,17 +119,21 @@ module.exports = {
     let result;
     let info2;
 
-    if (info === 0 || info === 1 || info === 4) info2 = this.evalMessage(data.info2, cache);
+    if (info === 0 || info === 1 || info === 4)
+      info2 = this.evalMessage(data.info2, cache);
 
     switch (info) {
       case 0: {
-        const parts = variable.toString().split('.');
-        parts[0] = parts[0].replace(new RegExp(`\\B(?=(.{${info2}})+(?!.))`, 'g'), value);
-        result = parts.join('.');
+        const parts = variable.toString().split(".");
+        parts[0] = parts[0].replace(
+          new RegExp(`\\B(?=(.{${info2}})+(?!.))`, "g"),
+          value
+        );
+        result = parts.join(".");
         break;
       }
       case 1: {
-        result = variable.replace(new RegExp(info2, 'g'), value);
+        result = variable.replace(new RegExp(info2, "g"), value);
         break;
       }
       case 2: {

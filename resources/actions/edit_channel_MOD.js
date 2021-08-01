@@ -1,31 +1,33 @@
 module.exports = {
-  name: 'Edit Channel',
-  section: 'Channel Control',
+  name: "Edit Channel",
+  section: "Channel Control",
 
   subtitle(data) {
     const names = [
-      'Same Channel',
-      'Mentioned Channel',
-      'Default Channel',
-      'Temp Variable',
-      'Server Variable',
-      'Global Variable',
+      "Same Channel",
+      "Mentioned Channel",
+      "Default Channel",
+      "Temp Variable",
+      "Server Variable",
+      "Global Variable",
     ];
     const opt = [
-      'Name',
-      'Topic',
-      'Position',
-      'Bitrate',
-      'User Limit',
-      'Category ID',
-      'Rate Limit Per User',
-      'Set Channel NSFW',
-      'Remove Channel NSFW',
+      "Name",
+      "Topic",
+      "Position",
+      "Bitrate",
+      "User Limit",
+      "Category ID",
+      "Rate Limit Per User",
+      "Set Channel NSFW",
+      "Remove Channel NSFW",
     ];
-    return `${names[parseInt(data.storage, 10)]} - ${opt[parseInt(data.toChange, 10)]}`;
+    return `${names[parseInt(data.storage, 10)]} - ${
+      opt[parseInt(data.toChange, 10)]
+    }`;
   },
 
-  fields: ['storage', 'varName', 'channelType', 'toChange', 'newState'],
+  fields: ["storage", "varName", "channelType", "toChange", "newState"],
 
   html(isEvent, data) {
     return `
@@ -75,7 +77,7 @@ module.exports = {
 
   init() {
     const { glob, document } = this;
-    glob.channelChange(document.getElementById('storage'), 'varNameContainer');
+    glob.channelChange(document.getElementById("storage"), "varNameContainer");
   },
 
   action(cache) {
@@ -135,6 +137,6 @@ module.exports = {
   },
 
   mod(DBM) {
-    DBM.Actions['Edit channel'] = DBM.Actions['Edit Channel'];
+    DBM.Actions["Edit channel"] = DBM.Actions["Edit Channel"];
   },
 };

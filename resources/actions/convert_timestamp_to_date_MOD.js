@@ -1,6 +1,6 @@
 module.exports = {
-  name: 'Convert Timestamp to Date',
-  section: 'Other Stuff',
+  name: "Convert Timestamp to Date",
+  section: "Other Stuff",
 
   subtitle(data) {
     return `Convert ${data.time}`;
@@ -8,10 +8,10 @@ module.exports = {
 
   variableStorage(data, varType) {
     if (parseInt(data.storage, 10) !== varType) return;
-    return [data.varName, 'Date'];
+    return [data.varName, "Date"];
   },
 
-  fields: ['time', 'storage', 'varName'],
+  fields: ["time", "storage", "varName"],
 
   html(_isEvent, data) {
     return `
@@ -41,13 +41,13 @@ module.exports = {
 
   init() {
     const { glob, document } = this;
-    glob.variableChange(document.getElementById('storage'), 'varNameContainer');
+    glob.variableChange(document.getElementById("storage"), "varNameContainer");
   },
 
   action(cache) {
     const data = cache.actions[cache.index];
     const Mods = this.getMods();
-    const toDate = Mods.require('normalize-date');
+    const toDate = Mods.require("normalize-date");
     const time = this.evalMessage(data.time, cache);
 
     let result;
@@ -56,7 +56,7 @@ module.exports = {
     } else {
       result = toDate(time);
     }
-    if (result.toString() === 'Invalid Date') result = undefined;
+    if (result.toString() === "Invalid Date") result = undefined;
 
     if (result !== undefined) {
       const storage = parseInt(data.storage, 10);

@@ -1,39 +1,41 @@
 module.exports = {
-  name: 'Clone Channel MOD',
-  section: 'Channel Control',
+  name: "Clone Channel MOD",
+  section: "Channel Control",
 
   subtitle(data) {
     const names = [
-      'Same Channel',
-      'Mentioned Channel',
-      'Default Channel',
-      'Temp Variable',
-      'Server Variable',
-      'Global Variable',
+      "Same Channel",
+      "Mentioned Channel",
+      "Default Channel",
+      "Temp Variable",
+      "Server Variable",
+      "Global Variable",
     ];
     const index = parseInt(data.storage, 10);
-    return index < 3 ? `Clone Channel : ${names[index]}` : `Clone Channel : ${names[index]} - ${data.varName}`;
+    return index < 3
+      ? `Clone Channel : ${names[index]}`
+      : `Clone Channel : ${names[index]} - ${data.varName}`;
   },
 
   variableStorage(data, varType) {
     if (parseInt(data.storage2, 10) !== varType) return;
-    return [data.varName2, 'Channel'];
+    return [data.varName2, "Channel"];
   },
 
   fields: [
-    'storage',
-    'varName',
-    'categoryID',
-    'position',
-    'permission',
-    'info',
-    'topic',
-    'slowmode',
-    'nsfw',
-    'bitrate',
-    'userLimit',
-    'storage2',
-    'varName2',
+    "storage",
+    "varName",
+    "categoryID",
+    "position",
+    "permission",
+    "info",
+    "topic",
+    "slowmode",
+    "nsfw",
+    "bitrate",
+    "userLimit",
+    "storage2",
+    "varName2",
   ],
 
   html(isEvent, data) {
@@ -132,22 +134,25 @@ module.exports = {
   init() {
     const { glob, document } = this;
 
-    glob.channelChange(document.getElementById('storage'), 'varNameContainer');
-    glob.variableChange(document.getElementById('storage2'), 'varNameContainer2');
+    glob.channelChange(document.getElementById("storage"), "varNameContainer");
+    glob.variableChange(
+      document.getElementById("storage2"),
+      "varNameContainer2"
+    );
 
     glob.channeltype = function channeltype(event) {
-      if (event.value === '0') {
-        document.getElementById('text').style.display = 'none';
-        document.getElementById('voice').style.display = 'none';
-      } else if (event.value === '1') {
-        document.getElementById('text').style.display = null;
-        document.getElementById('voice').style.display = 'none';
-      } else if (event.value === '2') {
-        document.getElementById('text').style.display = 'none';
-        document.getElementById('voice').style.display = null;
+      if (event.value === "0") {
+        document.getElementById("text").style.display = "none";
+        document.getElementById("voice").style.display = "none";
+      } else if (event.value === "1") {
+        document.getElementById("text").style.display = null;
+        document.getElementById("voice").style.display = "none";
+      } else if (event.value === "2") {
+        document.getElementById("text").style.display = "none";
+        document.getElementById("voice").style.display = null;
       }
     };
-    glob.channeltype(document.getElementById('info'));
+    glob.channeltype(document.getElementById("info"));
   },
 
   action(cache) {
@@ -158,20 +163,27 @@ module.exports = {
     const channel = this.getChannel(storage, varName, cache);
 
     if (!server || !channel) {
-      console.log(`${server ? 'channel' : 'server'} could not be found! Clone Channel MOD.`);
+      console.log(
+        `${
+          server ? "channel" : "server"
+        } could not be found! Clone Channel MOD.`
+      );
       return this.callNextAction(cache);
     }
 
     const options = {
-      permissionOverwrites: data.permission === 1 ? channel.permissionOverwrites : [],
-      parent: data.categoryID ? parseInt(this.evalMessage(data.categoryID, cache), 10) : null,
+      permissionOverwrites:
+        data.permission === 1 ? channel.permissionOverwrites : [],
+      parent: data.categoryID
+        ? parseInt(this.evalMessage(data.categoryID, cache), 10)
+        : null,
     };
-    if (channel.type === 'voice') {
+    if (channel.type === "voice") {
       Object.assign(options, {
         userLimit: data.userLimit === 1 ? channel.userLimit : 0,
         bitrate: data.bitrate === 1 ? channel.bitrate : 64,
       });
-    } else if (channel.type === 'text') {
+    } else if (channel.type === "text") {
       Object.assign(options, {
         nsfw: data.nsfw === 1 ? channel.nsfw : false,
         topic: data.topic === 1 ? channel.topic : undefined,

@@ -1,26 +1,28 @@
 module.exports = {
-  name: 'Set slowmode MOD',
-  section: 'Channel Control',
+  name: "Set slowmode MOD",
+  section: "Channel Control",
 
   subtitle(data) {
     const names = [
-      'Same Channel',
-      'Mentioned Channel',
-      'Default Channel',
-      'Temp Variable',
-      'Server Variable',
-      'Global Variable',
+      "Same Channel",
+      "Mentioned Channel",
+      "Default Channel",
+      "Temp Variable",
+      "Server Variable",
+      "Global Variable",
     ];
     const index = parseInt(data.storage, 10);
-    return index < 3 ? `Set slowmode : ${names[index]}` : `Set slowmode : ${names[index]} - ${data.varName}`;
+    return index < 3
+      ? `Set slowmode : ${names[index]}`
+      : `Set slowmode : ${names[index]} - ${data.varName}`;
   },
 
   variableStorage(data, varType) {
     if (parseInt(data.storage2, 10) !== varType) return;
-    return [data.varName2, 'Channel'];
+    return [data.varName2, "Channel"];
   },
 
-  fields: ['storage', 'varName', 'varName2', 'amount', 'reason'],
+  fields: ["storage", "varName", "varName2", "amount", "reason"],
 
   html(isEvent, data) {
     return `
@@ -59,7 +61,7 @@ module.exports = {
     const reason = this.evalMessage(data.reason, cache);
     const { type } = channel;
 
-    if (type !== 'text') return this.callNextAction(cache);
+    if (type !== "text") return this.callNextAction(cache);
 
     channel.setRateLimitPerUser(amount, reason);
 

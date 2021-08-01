@@ -1,56 +1,56 @@
 module.exports = {
-  name: 'Set Role Permissions',
-  section: 'Role Control',
+  name: "Set Role Permissions",
+  section: "Role Control",
 
   subtitle(data) {
     const roles = [
-      'Mentioned Role',
-      '1st Author Role',
-      '1st Server Role',
-      'Temp Variable',
-      'Server Variable',
-      'Global Variable',
+      "Mentioned Role",
+      "1st Author Role",
+      "1st Server Role",
+      "Temp Variable",
+      "Server Variable",
+      "Global Variable",
     ];
-    const index = ['Granted', 'Denied'];
+    const index = ["Granted", "Denied"];
     const perm = [
-      'Administrator',
-      'Manage Guild',
-      'Manage Nicknames',
-      'Manage Roles',
-      'Manage Emojis',
-      'Kick Members',
-      'Ban Members',
-      'View Audit Log',
-      'Change Nickname',
-      'Create Instant Invite',
-      'Priority Speaker',
-      'Manage Channel',
-      'Manage Webhooks',
-      'Read Messages',
-      'Send Messages',
-      'Send TTS Messages',
-      'Manage Messages',
-      'Embed Links',
-      'Attach Files',
-      'Read Message History',
-      'Mention Everyone',
-      'Use External Emojis',
-      'Add Reactions',
-      'Connect to Voice',
-      'Speak in Voice',
-      'Mute Members',
-      'Deafen Members',
-      'Move Members',
-      'Use Voice Activity',
-      'All Permissions',
-      'Stream',
+      "Administrator",
+      "Manage Guild",
+      "Manage Nicknames",
+      "Manage Roles",
+      "Manage Emojis",
+      "Kick Members",
+      "Ban Members",
+      "View Audit Log",
+      "Change Nickname",
+      "Create Instant Invite",
+      "Priority Speaker",
+      "Manage Channel",
+      "Manage Webhooks",
+      "Read Messages",
+      "Send Messages",
+      "Send TTS Messages",
+      "Manage Messages",
+      "Embed Links",
+      "Attach Files",
+      "Read Message History",
+      "Mention Everyone",
+      "Use External Emojis",
+      "Add Reactions",
+      "Connect to Voice",
+      "Speak in Voice",
+      "Mute Members",
+      "Deafen Members",
+      "Move Members",
+      "Use Voice Activity",
+      "All Permissions",
+      "Stream",
     ];
-    return `${roles[data.role]} - ${perm[data.permission]} - ${index[data.state]} ${
-      !data.reason ? '' : `with Reason: <i>${data.reason}<i>`
-    }`;
+    return `${roles[data.role]} - ${perm[data.permission]} - ${
+      index[data.state]
+    } ${!data.reason ? "" : `with Reason: <i>${data.reason}<i>`}`;
   },
 
-  fields: ['role', 'varName', 'permission', 'state', 'reason'],
+  fields: ["role", "varName", "permission", "state", "reason"],
 
   html(isEvent, data) {
     return `
@@ -119,7 +119,7 @@ module.exports = {
 
   init() {
     const { glob, document } = this;
-    glob.roleChange(document.getElementById('role'), 'varNameContainer');
+    glob.roleChange(document.getElementById("role"), "varNameContainer");
   },
 
   action(cache) {
@@ -130,23 +130,26 @@ module.exports = {
     const info = parseInt(data.permission, 10);
     const reason = this.evalMessage(data.reason, cache);
 
-    if (data.permission === '29') {
+    if (data.permission === "29") {
       const options = {};
-      options[data.permission] = data.state === '0' ? true : data.state === '1' ? false : null;
+      options[data.permission] =
+        data.state === "0" ? true : data.state === "1" ? false : null;
       if (role && role.id) {
         if (Array.isArray(role)) {
-          this.callListFunc(role, 'setPermissions', [role.id, options]).then(() => {
-            this.callNextAction(cache);
-          });
+          this.callListFunc(role, "setPermissions", [role.id, options]).then(
+            () => {
+              this.callNextAction(cache);
+            }
+          );
         }
-        if (data.state === '0') {
+        if (data.state === "0") {
           role
             .setPermissions(2146958847, reason)
             .then(() => {
               this.callNextAction(cache);
             })
             .catch(this.displayError.bind(this, data, cache));
-        } else if (data.state === '1') {
+        } else if (data.state === "1") {
           role
             .setPermissions([0], reason)
             .then(() => {
@@ -256,14 +259,17 @@ module.exports = {
     }
 
     const options = {};
-    options[data.permission] = data.state === '0' ? true : data.state === '1' ? false : null;
+    options[data.permission] =
+      data.state === "0" ? true : data.state === "1" ? false : null;
     if (role && role.id) {
       if (Array.isArray(role)) {
-        this.callListFunc(role, 'setPermissions', [role.id, options]).then(() => {
-          this.callNextAction(cache);
-        });
+        this.callListFunc(role, "setPermissions", [role.id, options]).then(
+          () => {
+            this.callNextAction(cache);
+          }
+        );
       }
-      if (data.state === '0') {
+      if (data.state === "0") {
         const perms = role.permissions;
         role
           .setPermissions([perms, result], reason)
@@ -271,7 +277,7 @@ module.exports = {
             this.callNextAction(cache);
           })
           .catch(this.displayError.bind(this, data, cache));
-      } else if (data.state === '1') {
+      } else if (data.state === "1") {
         const perms2 = role.permissions - result;
         role
           .setPermissions([perms2], reason)

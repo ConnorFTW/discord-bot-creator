@@ -1,12 +1,14 @@
 module.exports = {
-  name: 'Control Global Data',
-  section: 'Data',
+  name: "Control Global Data",
+  section: "Data",
 
   subtitle(data) {
-    return `(${data.dataName}) ${data.changeType === '1' ? '+=' : '='} ${data.value}`;
+    return `(${data.dataName}) ${data.changeType === "1" ? "+=" : "="} ${
+      data.value
+    }`;
   },
 
-  fields: ['dataName', 'changeType', 'value'],
+  fields: ["dataName", "changeType", "value"],
 
   html() {
     return `
@@ -35,7 +37,7 @@ module.exports = {
     const data = cache.actions[cache.index];
 
     const dataName = this.evalMessage(data.dataName, cache);
-    const isAdd = data.changeType === '1';
+    const isAdd = data.changeType === "1";
     const { Globals } = this.getDBM();
 
     let val = this.evalMessage(data.value, cache);

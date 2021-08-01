@@ -1,12 +1,12 @@
 module.exports = {
-  name: 'Stop RSS Feed Watcher',
-  section: 'Other Stuff',
+  name: "Stop RSS Feed Watcher",
+  section: "Other Stuff",
 
   subtitle(data) {
     return `${data.url}`;
   },
 
-  fields: ['storage', 'varName'],
+  fields: ["storage", "varName"],
 
   html(isEvent, data) {
     return `

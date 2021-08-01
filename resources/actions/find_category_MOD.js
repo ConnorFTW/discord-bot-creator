@@ -1,18 +1,18 @@
 module.exports = {
-  name: 'Find Category',
-  section: 'Channel Control',
+  name: "Find Category",
+  section: "Channel Control",
 
   subtitle(data) {
-    const info = ['Category ID', 'Category Name', 'Category Topic'];
+    const info = ["Category ID", "Category Name", "Category Topic"];
     return `Find Category by ${info[parseInt(data.info, 10)]}`;
   },
 
   variableStorage(data, varType) {
     if (parseInt(data.storage, 10) !== varType) return;
-    return [data.varName, 'Category'];
+    return [data.varName, "Category"];
   },
 
-  fields: ['info', 'find', 'storage', 'varName'],
+  fields: ["info", "find", "storage", "varName"],
 
   html(isEvent, data) {
     return `
@@ -94,7 +94,7 @@ module.exports = {
     const data = cache.actions[cache.index];
     const info = parseInt(data.info, 10);
     const find = this.evalMessage(data.find, cache);
-    const channels = server.channels.cache.filter((s) => s.type === 'category');
+    const channels = server.channels.cache.filter((s) => s.type === "category");
     let result;
 
     switch (info) {

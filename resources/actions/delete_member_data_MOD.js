@@ -1,13 +1,19 @@
 module.exports = {
-  name: 'Delete Member Data',
-  section: 'Data',
+  name: "Delete Member Data",
+  section: "Data",
 
   subtitle(data) {
-    const members = ['Mentioned User', 'Command Author', 'Temp Variable', 'Server Variable', 'Global Variable'];
+    const members = [
+      "Mentioned User",
+      "Command Author",
+      "Temp Variable",
+      "Server Variable",
+      "Global Variable",
+    ];
     return `${members[parseInt(data.member, 10)]} - ${data.dataName}`;
   },
 
-  fields: ['member', 'varName', 'dataName'],
+  fields: ["member", "varName", "dataName"],
 
   html(isEvent, data) {
     return `
@@ -33,7 +39,7 @@ module.exports = {
 
   init() {
     const { glob, document } = this;
-    glob.memberChange(document.getElementById('member'), 'varNameContainer');
+    glob.memberChange(document.getElementById("member"), "varNameContainer");
   },
 
   action(cache) {
@@ -48,9 +54,9 @@ module.exports = {
   },
 
   mod(DBM) {
-    DBM.Actions['Delete Member Data MOD'] = DBM.Actions['Delete Member Data'];
+    DBM.Actions["Delete Member Data MOD"] = DBM.Actions["Delete Member Data"];
     DBM.DiscordJS.Structures.extend(
-      'GuildMember',
+      "GuildMember",
       (GuildMember) =>
         class extends GuildMember {
           constructor(client, data, guild) {
@@ -61,29 +67,29 @@ module.exports = {
             const { players } = DBM.Files.data;
             if (players[this.id] && name && players[this.id][name]) {
               delete players[this.id][name];
-              DBM.Files.saveData('players');
+              DBM.Files.saveData("players");
             } else if (!name) {
               delete players[this.id];
-              DBM.Files.saveData('players');
+              DBM.Files.saveData("players");
             }
           }
-        },
+        }
     );
     DBM.DiscordJS.Structures.extend(
-      'User',
+      "User",
       (User) =>
         class extends User {
           delData(name) {
             const { players } = DBM.Files.data;
             if (players[this.id] && name && players[this.id][name]) {
               delete players[this.id][name];
-              DBM.Files.saveData('players');
+              DBM.Files.saveData("players");
             } else if (!name) {
               delete players[this.id];
-              DBM.Files.saveData('players');
+              DBM.Files.saveData("players");
             }
           }
-        },
+        }
     );
   },
 };

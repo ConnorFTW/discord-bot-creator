@@ -1,6 +1,6 @@
 module.exports = {
-  name: 'Find Webhook',
-  section: 'Webhook Control',
+  name: "Find Webhook",
+  section: "Webhook Control",
 
   subtitle(data) {
     return `${data.id}`;
@@ -8,10 +8,10 @@ module.exports = {
 
   variableStorage(data, varType) {
     if (parseInt(data.storage, 10) !== varType) return;
-    return [data.varName, 'Webhook'];
+    return [data.varName, "Webhook"];
   },
 
-  fields: ['id', 'token', 'storage', 'varName'],
+  fields: ["id", "token", "storage", "varName"],
 
   html(isEvent, data) {
     return `

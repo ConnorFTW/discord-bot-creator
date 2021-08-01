@@ -1,37 +1,37 @@
 module.exports = {
-  name: 'Store File Info',
-  section: 'File Stuff',
+  name: "Store File Info",
+  section: "File Stuff",
 
   subtitle(data) {
     return `Store File Info - ${data.info}`;
   },
 
-  fields: ['filePath', 'info', 'storage', 'varName'],
+  fields: ["filePath", "info", "storage", "varName"],
 
   variableStorage(data, varType) {
     if (data.storage !== varType) return;
-    let dataType = 'Unknown type';
+    let dataType = "Unknown type";
     switch (data.info) {
-      case 'File Size':
-        dataType = 'Number';
+      case "File Size":
+        dataType = "Number";
         break;
-      case 'File Extension':
-        dataType = 'String';
+      case "File Extension":
+        dataType = "String";
         break;
-      case 'File Character Count':
-        dataType = 'Number';
+      case "File Character Count":
+        dataType = "Number";
         break;
-      case 'File Creation Date Timestamp':
-        dataType = 'Timestamp';
+      case "File Creation Date Timestamp":
+        dataType = "Timestamp";
         break;
-      case 'File Exists':
-        dataType = 'Boolean';
+      case "File Exists":
+        dataType = "Boolean";
         break;
-      case 'File Content':
-        dataType = 'String';
+      case "File Content":
+        dataType = "String";
         break;
-      case 'File Name':
-        dataType = 'String';
+      case "File Name":
+        dataType = "String";
         break;
     }
     return [data.varName, dataType];
@@ -65,34 +65,34 @@ Variable name:<br>
     const data = cache.actions[cache.index];
     const storage = parseInt(data.storage, 10);
     const { info } = data;
-    const path = require('path');
-    const fs = require('fs');
+    const path = require("path");
+    const fs = require("fs");
     const varName = this.evalMessage(data.varName, cache);
     const filePath = this.evalMessage(data.filePath, cache);
 
-    if (!filePath) return this.displayError('Insert a file path!');
+    if (!filePath) return this.displayError("Insert a file path!");
 
     let result;
     switch (info) {
-      case 'File Size':
+      case "File Size":
         result = fs.statSync(filePath).size;
         break;
-      case 'File Extension':
+      case "File Extension":
         result = path.extname(/[^/]*$/.exec(filePath)[0]);
         break;
-      case 'File Character Count':
+      case "File Character Count":
         result = fs.readFileSync(filePath).toString().length;
         break;
-      case 'File Creation Date Timestamp':
+      case "File Creation Date Timestamp":
         result = fs.statSync(filePath).mtimeMs;
         break;
-      case 'File Exists':
+      case "File Exists":
         result = fs.existsSync(filePath);
         break;
-      case 'File Content':
+      case "File Content":
         result = fs.readFileSync(filePath).toString();
         break;
-      case 'File Name':
+      case "File Name":
         result = path.basename(filePath);
         break;
     }

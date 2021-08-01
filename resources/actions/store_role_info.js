@@ -1,69 +1,71 @@
 module.exports = {
-  name: 'Store Role Info',
-  section: 'Role Control',
+  name: "Store Role Info",
+  section: "Role Control",
 
   subtitle(data) {
     const roles = [
-      'Mentioned Role',
-      '1st Author Role',
-      '1st Server Role',
-      'Temp Variable',
-      'Server Variable',
-      'Global Variable',
+      "Mentioned Role",
+      "1st Author Role",
+      "1st Server Role",
+      "Temp Variable",
+      "Server Variable",
+      "Global Variable",
     ];
     const info = [
-      'Role Object',
-      'Role ID',
-      'Role Name',
-      'Role Color',
-      'Role Position',
-      'Role Timestamp',
-      'Role Is Mentionable?',
-      'Role Is Separate From Others?',
-      'Role Is Managed?',
-      'Role Member List',
-      'Role Creation Date',
-      'Role Permissions',
-      'Role Members Amount',
-      'Role Permissions List',
+      "Role Object",
+      "Role ID",
+      "Role Name",
+      "Role Color",
+      "Role Position",
+      "Role Timestamp",
+      "Role Is Mentionable?",
+      "Role Is Separate From Others?",
+      "Role Is Managed?",
+      "Role Member List",
+      "Role Creation Date",
+      "Role Permissions",
+      "Role Members Amount",
+      "Role Permissions List",
     ];
-    return `${roles[parseInt(data.role, 10)]} - ${info[parseInt(data.info, 10)]}`;
+    return `${roles[parseInt(data.role, 10)]} - ${
+      info[parseInt(data.info, 10)]
+    }`;
   },
 
   variableStorage(data, varType) {
     if (parseInt(data.storage, 10) !== varType) return;
-    let dataType = 'Unknown Type';
+    let dataType = "Unknown Type";
     switch (parseInt(data.info, 10)) {
       case 0:
-        dataType = 'Role';
+        dataType = "Role";
         break;
       case 1:
-        dataType = 'Role ID';
+        dataType = "Role ID";
         break;
       case 2:
-        dataType = 'Text';
+        dataType = "Text";
         break;
       case 3:
-        dataType = 'Color';
+        dataType = "Color";
         break;
       case 4:
       case 5:
-        dataType = 'Text';
+        dataType = "Text";
         break;
       case 6:
       case 7:
       case 8:
-        dataType = 'Boolean';
+        dataType = "Boolean";
         break;
       case 9:
-        dataType = 'Member List';
+        dataType = "Member List";
         break;
       case 10:
-        dataType = 'Date';
+        dataType = "Date";
         break;
       case 11:
       case 12:
-        dataType = 'Number';
+        dataType = "Number";
         break;
       default:
         break;
@@ -71,7 +73,7 @@ module.exports = {
     return [data.varName2, dataType];
   },
 
-  fields: ['role', 'varName', 'info', 'storage', 'varName2'],
+  fields: ["role", "varName", "info", "storage", "varName2"],
 
   html(isEvent, data) {
     return `
@@ -125,7 +127,7 @@ module.exports = {
 
   init() {
     const { glob, document } = this;
-    glob.roleChange(document.getElementById('role'), 'varNameContainer');
+    glob.roleChange(document.getElementById("role"), "varNameContainer");
   },
 
   action(cache) {
@@ -178,7 +180,11 @@ module.exports = {
         result = targetRole.members.size;
         break;
       case 13:
-        result = targetRole.permissions.toArray().join(', ').replace(/_/g, ' ').toLowerCase();
+        result = targetRole.permissions
+          .toArray()
+          .join(", ")
+          .replace(/_/g, " ")
+          .toLowerCase();
         break;
       default:
         break;

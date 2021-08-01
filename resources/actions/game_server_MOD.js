@@ -1,48 +1,48 @@
 module.exports = {
-  name: 'Store Game Server Info',
-  section: 'Other Stuff',
+  name: "Store Game Server Info",
+  section: "Other Stuff",
 
   subtitle(data) {
     const info = [
-      'Server Name',
-      'Map',
-      'Number Of Players',
-      'Number Of Bots',
-      'Max Players',
-      'Server Tags',
-      'Does Server Have Password?',
-      'Server Player List',
+      "Server Name",
+      "Map",
+      "Number Of Players",
+      "Number Of Bots",
+      "Max Players",
+      "Server Tags",
+      "Does Server Have Password?",
+      "Server Player List",
     ];
     return `${info[parseInt(data.info, 10)]}`;
   },
 
   variableStorage(data, varType) {
     if (parseInt(data.storage, 10) !== varType) return;
-    let dataType = 'Unknown Type';
+    let dataType = "Unknown Type";
     switch (parseInt(data.info, 10)) {
       case 0:
-        dataType = 'Server Name';
+        dataType = "Server Name";
         break;
       case 1:
-        dataType = 'Map';
+        dataType = "Map";
         break;
       case 2:
-        dataType = 'Number';
+        dataType = "Number";
         break;
       case 3:
-        dataType = 'Number';
+        dataType = "Number";
         break;
       case 4:
-        dataType = 'Server Tags';
+        dataType = "Server Tags";
         break;
       case 5:
-        dataType = 'Boolean';
+        dataType = "Boolean";
         break;
     }
     return [data.varName, dataType];
   },
 
-  fields: ['serverip', 'serverport', 'game', 'info', 'storage', 'varName'],
+  fields: ["serverip", "serverport", "game", "info", "storage", "varName"],
 
   html(_isEvent, data) {
     return `
@@ -384,7 +384,7 @@ module.exports = {
   init() {
     const { glob, document } = this;
 
-    glob.variableChange(document.getElementById('storage'), 'varNameContainer');
+    glob.variableChange(document.getElementById("storage"), "varNameContainer");
   },
 
   action(cache) {
@@ -396,9 +396,9 @@ module.exports = {
     const port = this.evalMessage(data.serverport, cache);
 
     const Mods = this.getMods();
-    const Gamedig = Mods.require('gamedig');
+    const Gamedig = Mods.require("gamedig");
 
-    if (!ip) return console.log('Please provide Server IP & Port.');
+    if (!ip) return console.log("Please provide Server IP & Port.");
 
     Gamedig.query({
       type: gametype,

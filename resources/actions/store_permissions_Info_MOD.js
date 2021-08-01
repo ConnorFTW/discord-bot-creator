@@ -1,19 +1,26 @@
 module.exports = {
-  name: 'Store Permissions Info',
-  section: 'Permission Control',
+  name: "Store Permissions Info",
+  section: "Permission Control",
 
   subtitle(data) {
-    const variables = ['', 'Temp Variable', 'Server Variable', 'Global Variable'];
-    const options = [
-      'Allow Bitfields',
-      'Allow Flags',
-      'Disallow Flags',
-      'Disallow Flags',
-      'Have Administrator',
-      'Have View Audit Log',
-      'Have Manage Server',
+    const variables = [
+      "",
+      "Temp Variable",
+      "Server Variable",
+      "Global Variable",
     ];
-    return `${variables[data.storage]} (${data.varName}) - ${options[data.info]}`;
+    const options = [
+      "Allow Bitfields",
+      "Allow Flags",
+      "Disallow Flags",
+      "Disallow Flags",
+      "Have Administrator",
+      "Have View Audit Log",
+      "Have Manage Server",
+    ];
+    return `${variables[data.storage]} (${data.varName}) - ${
+      options[data.info]
+    }`;
   },
 
   variableStorage(data, varType) {
@@ -22,11 +29,11 @@ module.exports = {
     switch (parseInt(data.info, 10)) {
       case 0:
       case 2:
-        dataType = 'Permission Bitfield';
+        dataType = "Permission Bitfield";
         break;
       case 1:
       case 3:
-        dataType = 'Permissions Flags';
+        dataType = "Permissions Flags";
         break;
       case 4:
       case 5:
@@ -58,7 +65,7 @@ module.exports = {
       case 31:
       case 32:
       case 33:
-        dataType = 'Boolean';
+        dataType = "Boolean";
         break;
       default:
         break;
@@ -66,7 +73,7 @@ module.exports = {
     return [data.varName2, dataType];
   },
 
-  fields: ['storage', 'varName', 'info', 'storage2', 'varName2'],
+  fields: ["storage", "varName", "info", "storage2", "varName2"],
 
   html(isEvent, data) {
     return `
@@ -147,7 +154,7 @@ module.exports = {
 
   init() {
     const { glob, document } = this;
-    glob.refreshVariableList(document.getElementById('storage'));
+    glob.refreshVariableList(document.getElementById("storage"));
   },
 
   action(cache) {
@@ -161,7 +168,10 @@ module.exports = {
     const storage2 = parseInt(data.storage2, 10);
     const varName2 = this.evalMessage(data.varName2, cache);
 
-    if ((!permissions.allow && ![2, 3].includes(info)) || (!permissions.disallow && [2, 3].includes(info))) {
+    if (
+      (!permissions.allow && ![2, 3].includes(info)) ||
+      (!permissions.disallow && [2, 3].includes(info))
+    ) {
       this.storeValue(result, storage2, varName2, cache);
       this.callNextAction(cache);
       return;
@@ -181,100 +191,100 @@ module.exports = {
         result = permissions.disallow.toArray();
         break;
       case 4:
-        result = permissions.allow.has('ADMINISTRATOR');
+        result = permissions.allow.has("ADMINISTRATOR");
         break;
       case 5:
-        result = permissions.allow.has('VIEW_AUDIT_LOG');
+        result = permissions.allow.has("VIEW_AUDIT_LOG");
         break;
       case 6:
-        result = permissions.allow.has('MANAGE_GUILD');
+        result = permissions.allow.has("MANAGE_GUILD");
         break;
       case 7:
-        result = permissions.allow.has('MANAGE_ROLES');
+        result = permissions.allow.has("MANAGE_ROLES");
         break;
       case 8:
-        result = permissions.allow.has('MANAGE_CHANNELS');
+        result = permissions.allow.has("MANAGE_CHANNELS");
         break;
       case 9:
-        result = permissions.allow.has('KICK_MEMBERS');
+        result = permissions.allow.has("KICK_MEMBERS");
         break;
       case 10:
-        result = permissions.allow.has('BAN_MEMBERS');
+        result = permissions.allow.has("BAN_MEMBERS");
         break;
       case 11:
-        result = permissions.allow.has('CREATE_INSTANT_INVITE');
+        result = permissions.allow.has("CREATE_INSTANT_INVITE");
         break;
       case 12:
-        result = permissions.allow.has('CHANGE_NICKNAME');
+        result = permissions.allow.has("CHANGE_NICKNAME");
         break;
       case 13:
-        result = permissions.allow.has('MANAGE_NICKNAMES');
+        result = permissions.allow.has("MANAGE_NICKNAMES");
         break;
       case 14:
-        result = permissions.allow.has('MANAGE_EMOJIS');
+        result = permissions.allow.has("MANAGE_EMOJIS");
         break;
       case 15:
-        result = permissions.allow.has('MANAGE_WEBHOOKS');
+        result = permissions.allow.has("MANAGE_WEBHOOKS");
         break;
       case 16:
-        result = permissions.allow.has('VIEW_CHANNEL');
+        result = permissions.allow.has("VIEW_CHANNEL");
         break;
       case 17:
-        result = permissions.allow.has('SEND_MESSAGES');
+        result = permissions.allow.has("SEND_MESSAGES");
         break;
       case 18:
-        result = permissions.allow.has('SEND_TTS_MESSAGES');
+        result = permissions.allow.has("SEND_TTS_MESSAGES");
         break;
       case 19:
-        result = permissions.allow.has('MANAGE_MESSAGES');
+        result = permissions.allow.has("MANAGE_MESSAGES");
         break;
       case 20:
-        result = permissions.allow.has('EMBED_LINKS');
+        result = permissions.allow.has("EMBED_LINKS");
         break;
       case 21:
-        result = permissions.allow.has('ATTACH_FILES');
+        result = permissions.allow.has("ATTACH_FILES");
         break;
       case 22:
-        result = permissions.allow.has('READ_MESSAGE_HISTORY');
+        result = permissions.allow.has("READ_MESSAGE_HISTORY");
         break;
       case 23:
-        result = permissions.allow.has('MENTION_EVERYONE');
+        result = permissions.allow.has("MENTION_EVERYONE");
         break;
       case 24:
-        result = permissions.allow.has('USE_EXTERNAL_EMOJIS');
+        result = permissions.allow.has("USE_EXTERNAL_EMOJIS");
         break;
       case 25:
-        result = permissions.allow.has('ADD_REACTIONS');
+        result = permissions.allow.has("ADD_REACTIONS");
         break;
       case 26:
-        result = permissions.allow.has('CONNECT');
+        result = permissions.allow.has("CONNECT");
         break;
       case 27:
-        result = permissions.allow.has('SPEAK');
+        result = permissions.allow.has("SPEAK");
         break;
       case 28:
-        result = permissions.allow.has('STREAM');
+        result = permissions.allow.has("STREAM");
         break;
       case 29:
-        result = permissions.allow.has('MUTE_MEMBERS');
+        result = permissions.allow.has("MUTE_MEMBERS");
         break;
       case 30:
-        result = permissions.allow.has('DEAFEN_MEMBERS');
+        result = permissions.allow.has("DEAFEN_MEMBERS");
         break;
       case 31:
-        result = permissions.allow.has('MOVE_MEMBERS');
+        result = permissions.allow.has("MOVE_MEMBERS");
         break;
       case 32:
-        result = permissions.allow.has('USE_VAD');
+        result = permissions.allow.has("USE_VAD");
         break;
       case 33:
-        result = permissions.allow.has('PRIORITY_SPEAKER');
+        result = permissions.allow.has("PRIORITY_SPEAKER");
         break;
       default:
         break;
     }
 
-    if (typeof result !== 'undefined') {
+    if (typeof result !== "undefined") {
       this.storeValue(result, storage2, varName2, cache);
     }
     this.callNextAction(cache);

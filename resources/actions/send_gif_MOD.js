@@ -1,22 +1,24 @@
 module.exports = {
-  name: 'Send GIF',
-  section: 'Image Editing',
+  name: "Send GIF",
+  section: "Image Editing",
 
   subtitle(data) {
     const channels = [
-      'Same Channel',
-      'Command Author',
-      'Mentioned User',
-      'Mentioned Channel',
-      'Default Channel (Top Channel)',
-      'Temp Variable',
-      'Server Variable',
-      'Global Variable',
+      "Same Channel",
+      "Command Author",
+      "Mentioned User",
+      "Mentioned Channel",
+      "Default Channel (Top Channel)",
+      "Temp Variable",
+      "Server Variable",
+      "Global Variable",
     ];
-    return `${channels[parseInt(data.channel, 10)]} ${data.channel < 5 ? '' : `- ${data.varName2}`}`;
+    return `${channels[parseInt(data.channel, 10)]} ${
+      data.channel < 5 ? "" : `- ${data.varName2}`
+    }`;
   },
 
-  fields: ['storage', 'varName', 'channel', 'varName2', 'message'],
+  fields: ["storage", "varName", "channel", "varName2", "message"],
 
   html(isEvent, data) {
     return `
@@ -54,8 +56,11 @@ module.exports = {
   init() {
     const { glob, document } = this;
 
-    glob.refreshVariableList(document.getElementById('storage'));
-    glob.sendTargetChange(document.getElementById('channel'), 'varNameContainer2');
+    glob.refreshVariableList(document.getElementById("storage"));
+    glob.sendTargetChange(
+      document.getElementById("channel"),
+      "varNameContainer2"
+    );
   },
 
   action(cache) {
@@ -71,7 +76,10 @@ module.exports = {
     const target = this.getSendTarget(channel, varName2, cache);
 
     if (Array.isArray(target)) {
-      this.callListFunc(target, 'send', [this.evalMessage(data.message, cache), { files: [image] }])
+      this.callListFunc(target, "send", [
+        this.evalMessage(data.message, cache),
+        { files: [image] },
+      ])
         .then(() => {
           this.callNextAction(cache);
         })

@@ -1,21 +1,21 @@
 module.exports = {
-  name: 'Set Role Voice Channel Perms',
-  section: 'Channel Control',
+  name: "Set Role Voice Channel Perms",
+  section: "Channel Control",
 
   subtitle(data) {
     const names = [
       "Command Author's Voice Ch.",
       "Mentioned User's Voice Ch.",
-      'Default Voice Channel',
-      'Temp Variable',
-      'Server Variable',
-      'Global Variable',
+      "Default Voice Channel",
+      "Temp Variable",
+      "Server Variable",
+      "Global Variable",
     ];
     const index = parseInt(data.vchannel, 10);
     return index < 3 ? `${names[index]}` : `${names[index]} - ${data.varName}`;
   },
 
-  fields: ['vchannel', 'varName', 'role', 'varName2', 'permission', 'state'],
+  fields: ["vchannel", "varName", "role", "varName2", "permission", "state"],
 
   html(isEvent, data) {
     return `
@@ -64,8 +64,11 @@ module.exports = {
   init() {
     const { glob, document } = this;
 
-    glob.voiceChannelChange(document.getElementById('vchannel'), 'varNameContainer');
-    glob.roleChange(document.getElementById('role'), 'varNameContainer2');
+    glob.voiceChannelChange(
+      document.getElementById("vchannel"),
+      "varNameContainer"
+    );
+    glob.roleChange(document.getElementById("role"), "varNameContainer2");
   },
 
   action(cache) {
@@ -78,7 +81,8 @@ module.exports = {
     const role = this.getRole(storage2, varName2, cache);
     const options = {};
 
-    options[data.permission] = data.state === '0' ? true : data.state === '2' ? false : null;
+    options[data.permission] =
+      data.state === "0" ? true : data.state === "2" ? false : null;
 
     if (role && role.id) {
       if (channel && channel.updateOverwrite) {

@@ -1,16 +1,21 @@
 module.exports = {
-  name: 'Custom Image Effects',
-  section: 'Image Editing',
+  name: "Custom Image Effects",
+  section: "Image Editing",
 
   subtitle(data) {
-    const storeTypes = ['', 'Temp Variable', 'Server Variable', 'Global Variable'];
-    const effect = ['Custom Blur', 'Custom Pixelate'];
-    return `${storeTypes[parseInt(data.storage, 10)]} (${data.varName}) -> ${effect[parseInt(data.effect, 10)]} ${
-      data.intensity
-    }`;
+    const storeTypes = [
+      "",
+      "Temp Variable",
+      "Server Variable",
+      "Global Variable",
+    ];
+    const effect = ["Custom Blur", "Custom Pixelate"];
+    return `${storeTypes[parseInt(data.storage, 10)]} (${data.varName}) -> ${
+      effect[parseInt(data.effect, 10)]
+    } ${data.intensity}`;
   },
 
-  fields: ['storage', 'varName', 'effect', 'intensity'],
+  fields: ["storage", "varName", "effect", "intensity"],
 
   html(_isEvent, data) {
     return `
@@ -43,7 +48,7 @@ module.exports = {
 
   init() {
     const { glob, document } = this;
-    glob.refreshVariableList(document.getElementById('storage'));
+    glob.refreshVariableList(document.getElementById("storage"));
   },
 
   action(cache) {
@@ -55,19 +60,20 @@ module.exports = {
     const image = this.getVariable(storage, varName, cache);
     const intensity = parseInt(data.intensity, 10);
 
-    const Jimp = require('jimp');
+    const Jimp = require("jimp");
 
     if (!image) return this.callNextAction(cache);
 
     Jimp.read(image, (err, image1) => {
-      if (err) return console.error('Error with custom image effects: ', err);
+      if (err) return console.error("Error with custom image effects: ", err);
       const effect = parseInt(data.effect, 10);
       switch (effect) {
         case 0:
           image1.blur(intensity);
 
           image1.getBuffer(Jimp.MIME_PNG, (error, image2) => {
-            if (err) return console.error('Error with custom image effects: ', error);
+            if (err)
+              return console.error("Error with custom image effects: ", error);
 
             Actions.storeValue(image2, storage, varName, cache);
             Actions.callNextAction(cache);
@@ -77,7 +83,8 @@ module.exports = {
         case 1:
           image1.pixelate(intensity);
           image1.getBuffer(Jimp.MIME_PNG, (error, image2) => {
-            if (err) return console.error('Error with custom image effects: ', error);
+            if (err)
+              return console.error("Error with custom image effects: ", error);
 
             Actions.storeValue(image2, storage, varName, cache);
             Actions.callNextAction(cache);

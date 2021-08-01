@@ -1,13 +1,13 @@
 module.exports = {
-  name: 'Edit Item from List MOD',
-  displayName: 'Edit Item from List',
-  section: 'Lists and Loops',
+  name: "Edit Item from List MOD",
+  displayName: "Edit Item from List",
+  section: "Lists and Loops",
 
   subtitle(data) {
     return `Edit "${data.value}" at position ${data.position}`;
   },
 
-  fields: ['storage', 'varName', 'position', 'value'],
+  fields: ["storage", "varName", "position", "value"],
 
   html(_isEvent, data) {
     return `
@@ -37,7 +37,7 @@ module.exports = {
 
   init() {
     const { glob, document } = this;
-    glob.refreshVariableList(document.getElementById('storage'));
+    glob.refreshVariableList(document.getElementById("storage"));
   },
 
   action(cache) {

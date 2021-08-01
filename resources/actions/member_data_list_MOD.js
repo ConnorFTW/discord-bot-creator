@@ -1,6 +1,6 @@
 module.exports = {
-  name: 'Store Member Data List',
-  section: 'Member Control',
+  name: "Store Member Data List",
+  section: "Member Control",
 
   subtitle(data) {
     return `${[data.dataName]}`;
@@ -8,22 +8,22 @@ module.exports = {
 
   variableStorage(data, varType) {
     if (parseInt(data.storage, 10) !== varType) return;
-    return [data.varName2, 'Array'];
+    return [data.varName2, "Array"];
   },
 
   fields: [
-    'debu',
-    'numbefst2',
-    'numbefst',
-    'numbefstselect',
-    'sort',
-    'start',
-    'middle',
-    'end',
-    'getresults',
-    'dataName',
-    'varName2',
-    'storage',
+    "debu",
+    "numbefst2",
+    "numbefst",
+    "numbefstselect",
+    "sort",
+    "start",
+    "middle",
+    "end",
+    "getresults",
+    "dataName",
+    "varName2",
+    "storage",
   ],
 
   html(isEvent, data) {
@@ -90,15 +90,15 @@ module.exports = {
     const { document, glob } = this;
     glob.onChange1 = function onChange1(event) {
       const value = parseInt(event.value, 10);
-      const dom = document.getElementById('numbefst');
+      const dom = document.getElementById("numbefst");
 
       if (value === 1) {
-        dom.style.display = 'none';
+        dom.style.display = "none";
       } else if (value === 2) {
         dom.style.display = null;
       }
     };
-    glob.onChange1(document.getElementById('numbefstselect'));
+    glob.onChange1(document.getElementById("numbefstselect"));
   },
 
   action(cache) {
@@ -115,10 +115,10 @@ module.exports = {
     const debug = parseInt(data.debu, 10);
     const Mods = this.getMods();
 
-    const { sort } = Mods.require('fast-sort');
-    const { JSONPath } = Mods.require('jsonpath-plus');
-    const fs = require('fs');
-    let file = fs.readFileSync('./data/players.json', 'utf8');
+    const { sort } = Mods.require("fast-sort");
+    const { JSONPath } = Mods.require("jsonpath-plus");
+    const fs = require("fs");
+    let file = fs.readFileSync("./data/players.json", "utf8");
 
     if (file) {
       let dataName = this.evalMessage(data.dataName, cache);
@@ -185,12 +185,12 @@ module.exports = {
               const file = JSON.parse(result2);
 
               const res = JSONPath({
-                path: '$..name2',
+                path: "$..name2",
                 json: file,
               });
 
               const res2 = JSONPath({
-                path: '$..id',
+                path: "$..id",
                 json: file,
               });
 
@@ -204,20 +204,24 @@ module.exports = {
               const st2 = eval(st);
               /* eslint-enable */
 
-              list5.push('easter egg :eyes:');
+              list5.push("easter egg :eyes:");
               switch (selectionsnum) {
                 case 1:
                   list2.push(`${st2 + middle + en2}\n`);
                   break;
                 case 2:
-                  list2.push(`${list5.length + this.evalMessage(data.numbefst2, cache)} ${st2}${middle}${en2}\n`);
+                  list2.push(
+                    `${
+                      list5.length + this.evalMessage(data.numbefst2, cache)
+                    } ${st2}${middle}${en2}\n`
+                  );
                   break;
               }
             } catch (err) {
               if (debug === 0) console.error(err);
             }
 
-            list4 = list2.join('');
+            list4 = list2.join("");
           }
 
           this.storeValue(list4, storage, varName2, cache);

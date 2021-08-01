@@ -1,13 +1,13 @@
 module.exports = {
-  name: 'Loop Queue',
-  section: 'Audio Control',
+  name: "Loop Queue",
+  section: "Audio Control",
 
   subtitle(data) {
-    const actions = ['Loop Whole Queue', 'Loop Current Item'];
+    const actions = ["Loop Whole Queue", "Loop Current Item"];
     return `${actions[parseInt(data.loop, 10)]}`;
   },
 
-  fields: ['status', 'loop'],
+  fields: ["status", "loop"],
 
   html() {
     return `

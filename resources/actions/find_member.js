@@ -1,20 +1,30 @@
 module.exports = {
-  name: 'Find Member',
-  section: 'Member Control',
+  name: "Find Member",
+  section: "Member Control",
 
   subtitle(data) {
-    const op1 = ['Member', 'User'];
-    const info = [' ID', ' Username', ' Display Name', ' Tag', ' Color'];
-    return `Find ${op1[parseInt(data.find2, 10)]} by ${op1[parseInt(data.find2, 10)]}${info[parseInt(data.info, 10)]}`;
+    const op1 = ["Member", "User"];
+    const info = [" ID", " Username", " Display Name", " Tag", " Color"];
+    return `Find ${op1[parseInt(data.find2, 10)]} by ${
+      op1[parseInt(data.find2, 10)]
+    }${info[parseInt(data.info, 10)]}`;
   },
 
   variableStorage(data, varType) {
-    const op1 = ['Member', 'User'];
+    const op1 = ["Member", "User"];
     if (parseInt(data.storage, 10) !== varType) return;
     return [data.varName, `Server ${op1[parseInt(data.find2, 10)]}`];
   },
 
-  fields: ['info', 'find', 'storage', 'varName', 'find2', 'iffalse', 'iffalseVal'],
+  fields: [
+    "info",
+    "find",
+    "storage",
+    "varName",
+    "find2",
+    "iffalse",
+    "iffalseVal",
+  ],
 
   html(_isEvent, data) {
     return `
@@ -74,19 +84,20 @@ module.exports = {
       switch (parseInt(event.value, 10)) {
         case 0:
         case 1:
-          document.getElementById('iffalseContainer').style.display = 'none';
+          document.getElementById("iffalseContainer").style.display = "none";
           break;
         case 2:
-          document.getElementById('iffalseName').innerHTML = 'Action Number';
-          document.getElementById('iffalseContainer').style.display = null;
+          document.getElementById("iffalseName").innerHTML = "Action Number";
+          document.getElementById("iffalseContainer").style.display = null;
           break;
         case 3:
-          document.getElementById('iffalseName').innerHTML = 'Number of Actions to Skip';
-          document.getElementById('iffalseContainer').style.display = null;
+          document.getElementById("iffalseName").innerHTML =
+            "Number of Actions to Skip";
+          document.getElementById("iffalseContainer").style.display = null;
           break;
         case 4:
-          document.getElementById('iffalseName').innerHTML = 'Anchor ID';
-          document.getElementById('iffalseContainer').style.display = null;
+          document.getElementById("iffalseName").innerHTML = "Anchor ID";
+          document.getElementById("iffalseContainer").style.display = null;
           break;
         default:
           break;
@@ -94,18 +105,21 @@ module.exports = {
     };
     glob.change = function change() {
       try {
-        const sel = document.getElementById('find2').value;
-        const option = document.getElementById('info');
-        if (sel === '0') {
+        const sel = document.getElementById("find2").value;
+        const option = document.getElementById("info");
+        if (sel === "0") {
           for (let i = 0; i < option.length; i++) {
             option[i].disabled = false;
-            option[i].innerHTML = option[i].innerHTML.replace(/[^\s]*/, 'Member');
+            option[i].innerHTML = option[i].innerHTML.replace(
+              /[^\s]*/,
+              "Member"
+            );
           }
-        } else if (sel === '1') {
+        } else if (sel === "1") {
           option[3].disabled = true;
           option[4].disabled = true;
           for (let i = 0; i < option.length; i++) {
-            option[i].innerHTML = option[i].innerHTML.replace(/[^\s]*/, 'User');
+            option[i].innerHTML = option[i].innerHTML.replace(/[^\s]*/, "User");
           }
         }
       } catch (err) {
@@ -113,7 +127,7 @@ module.exports = {
       }
     };
     glob.change();
-    glob.onChangeFalse(document.getElementById('iffalse'));
+    glob.onChangeFalse(document.getElementById("iffalse"));
   },
 
   async action(cache) {
@@ -124,23 +138,36 @@ module.exports = {
     const info = parseInt(data.info, 10);
     const find = this.evalMessage(data.find, cache);
     const find2 = parseInt(data.find2, 10);
-    if (server.memberCount !== server.members.cache.size) server.members.fetch();
+    if (server.memberCount !== server.members.cache.size)
+      server.members.fetch();
     const members = server.members.cache;
     const users = this.getDBM().Bot.bot.users.cache;
     let result;
 
     switch (info) {
       case 0:
-        result = members.get(find) || users.get(find) || (await this.getDBM().Bot.bot.users.fetch(find));
+        result =
+          members.get(find) ||
+          users.get(find) ||
+          (await this.getDBM().Bot.bot.users.fetch(find));
         break;
       case 1:
-        result = find2 === 0 ? members.find((m) => m.user.username === find) : users.find((u) => u.username === find);
+        result =
+          find2 === 0
+            ? members.find((m) => m.user.username === find)
+            : users.find((u) => u.username === find);
         break;
       case 2:
-        result = find2 === 0 ? members.find((m) => m.displayName === find) : users.find((u) => u.username === find);
+        result =
+          find2 === 0
+            ? members.find((m) => m.displayName === find)
+            : users.find((u) => u.username === find);
         break;
       case 3:
-        result = find2 === 0 ? members.find((m) => m.user.tag === find) : users.find((u) => u.tag === find);
+        result =
+          find2 === 0
+            ? members.find((m) => m.user.tag === find)
+            : users.find((u) => u.tag === find);
         break;
       case 4:
         result = members.find((m) => m.displayHexColor === find);

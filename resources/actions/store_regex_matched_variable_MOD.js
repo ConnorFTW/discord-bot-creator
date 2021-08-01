@@ -1,18 +1,28 @@
 module.exports = {
-  name: 'Store Regex Matched Variable',
-  section: 'Variable Things',
+  name: "Store Regex Matched Variable",
+  section: "Variable Things",
 
   subtitle(data) {
-    const storage = ['', 'Temp Variable', 'Server Variable', 'Global Variable'];
-    return ` (${data.typeVariable}) ~Var: ${storage[parseInt(data.storage, 10)]} (${data.varName})`;
+    const storage = ["", "Temp Variable", "Server Variable", "Global Variable"];
+    return ` (${data.typeVariable}) ~Var: ${
+      storage[parseInt(data.storage, 10)]
+    } (${data.varName})`;
   },
 
   variableStorage(data, varType) {
     if (parseInt(data.storage, 10) !== varType) return;
-    return [data.varName, 'Unknown Type'];
+    return [data.varName, "Unknown Type"];
   },
 
-  fields: ['behavior', 'inputStorage', 'inputVarName', 'theType', 'typeVariable', 'storage', 'varName'],
+  fields: [
+    "behavior",
+    "inputStorage",
+    "inputVarName",
+    "theType",
+    "typeVariable",
+    "storage",
+    "varName",
+  ],
 
   html(_isEvent, data) {
     return `
@@ -69,8 +79,11 @@ module.exports = {
 
   init() {
     const { glob, document } = this;
-    glob.variableChange(document.getElementById('inputStorage'), 'inputVarNameContainer');
-    glob.variableChange(document.getElementById('storage'), 'varNameContainer');
+    glob.variableChange(
+      document.getElementById("inputStorage"),
+      "inputVarNameContainer"
+    );
+    glob.variableChange(document.getElementById("storage"), "varNameContainer");
   },
 
   action(cache) {
@@ -94,16 +107,28 @@ module.exports = {
         case 0:
           try {
             if (typeVariable) {
-              regex = new RegExp(typeVariable, 'i');
+              regex = new RegExp(typeVariable, "i");
               if (regex.test(inputData)) {
                 outputData = inputData.match(regex);
                 if (outputData) {
                   jsonData = JSON.stringify(outputData);
-                  this.storeValue(this.eval(jsonData, cache), storage, varName, cache);
+                  this.storeValue(
+                    this.eval(jsonData, cache),
+                    storage,
+                    varName,
+                    cache
+                  );
                 }
               } else {
-                console.log(`Store Regex Match: Invalid Regex: (RegEx String: ${typeVariable})`);
-                this.storeValue(this.eval(outputData, cache), storage, varName, cache);
+                console.log(
+                  `Store Regex Match: Invalid Regex: (RegEx String: ${typeVariable})`
+                );
+                this.storeValue(
+                  this.eval(outputData, cache),
+                  storage,
+                  varName,
+                  cache
+                );
               }
             }
           } catch (error) {
@@ -113,12 +138,17 @@ module.exports = {
         case 1:
           try {
             if (typeVariable) {
-              regex = new RegExp(typeVariable, 'g');
+              regex = new RegExp(typeVariable, "g");
               if (inputData) {
                 outputData = inputData.replace(regex, typeVariable);
                 if (outputData) {
                   jsonData = JSON.stringify(outputData);
-                  this.storeValue(this.eval(jsonData, cache), storage, varName, cache);
+                  this.storeValue(
+                    this.eval(jsonData, cache),
+                    storage,
+                    varName,
+                    cache
+                  );
                 }
               }
             }
@@ -129,7 +159,7 @@ module.exports = {
       }
     }
 
-    if (data.behavior === '0') {
+    if (data.behavior === "0") {
       this.callNextAction(cache);
     }
   },

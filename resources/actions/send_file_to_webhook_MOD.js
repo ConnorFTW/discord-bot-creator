@@ -1,17 +1,17 @@
 module.exports = {
-  name: 'Send File To Webhook',
-  section: 'Webhook Control',
+  name: "Send File To Webhook",
+  section: "Webhook Control",
 
   subtitle() {
-    return 'Send a file to a webhook';
+    return "Send a file to a webhook";
   },
 
   variableStorage(data, varType) {
     if (parseInt(data.storage, 10) !== varType) return;
-    return [data.varName, 'Number'];
+    return [data.varName, "Number"];
   },
 
-  fields: ['storage', 'varName', 'file'],
+  fields: ["storage", "varName", "file"],
 
   html(isEvent, data) {
     return `
@@ -35,7 +35,7 @@ module.exports = {
 
   init() {
     const { glob, document } = this;
-    glob.refreshVariableList(document.getElementById('storage'));
+    glob.refreshVariableList(document.getElementById("storage"));
   },
 
   action(cache) {

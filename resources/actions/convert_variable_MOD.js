@@ -1,27 +1,35 @@
 module.exports = {
-  name: 'Convert Variable',
-  section: 'Variable Things',
+  name: "Convert Variable",
+  section: "Variable Things",
 
   subtitle(data) {
     const info = [
-      'Number (Parsing Int)',
-      'Number (Parsing Float)',
-      'String',
-      'Uppercased String',
-      'Lowercased String',
-      'Number (Int)',
-      'Number (Float)',
+      "Number (Parsing Int)",
+      "Number (Parsing Float)",
+      "String",
+      "Uppercased String",
+      "Lowercased String",
+      "Number (Int)",
+      "Number (Float)",
     ];
     return `Conversion Type: ${info[parseInt(data.conversion, 10)]}`;
   },
 
   variableStorage(data, varType) {
-    const info2 = ['Number', 'Number', 'String', 'String', 'String', 'Number', 'Number'];
+    const info2 = [
+      "Number",
+      "Number",
+      "String",
+      "String",
+      "String",
+      "Number",
+      "Number",
+    ];
     if (parseInt(data.storage2, 10) !== varType) return;
     return [data.varName2, info2[parseInt(data.conversion, 10)]];
   },
 
-  fields: ['storage', 'varName', 'conversion', 'storage2', 'varName2'],
+  fields: ["storage", "varName", "conversion", "storage2", "varName2"],
 
   html(isEvent, data) {
     return `
@@ -99,7 +107,7 @@ module.exports = {
 
   init() {
     const { glob, document } = this;
-    glob.refreshVariableList(document.getElementById('storage'));
+    glob.refreshVariableList(document.getElementById("storage"));
   },
 
   action(cache) {

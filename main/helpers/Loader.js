@@ -1,6 +1,7 @@
 import fs from "fs";
 import fg from "fast-glob";
 import path from "path";
+import _eval from "eval";
 
 export default class Loader {
   constructor({ filePath }) {
@@ -15,26 +16,40 @@ export default class Loader {
     );
   }
   async getLocalActions() {
-    const files = await fg(
-      path.resolve(__dirname, "../../public/resources/action-configs/*.json")
-    );
+    const files = await fg("./resources/actions/*.js");
+    // Remove strange dev file
+    files.unshift();
+    const file = files[0];
+    const actions = files
+      .map((file) => _eval(fs.readFileSync(file, "utf-8")))
+      .map((content) => {
+        return {
+          name: content.name + "",
+          section: content.section + "",
+          html: content.html + "",
+          mod: content.mod + "",
+          getMods: content.getMods + "",
+          subtitle: content.subtitle + "",
+          fields: content.fields,
+          init: content.init + "",
+          action: content.action + "",
+          displayName: content.displayName + "",
+          variableStorage: content.variableStorage + "",
+          requiresAudioLibraries: content.requiresAudioLibraries + "",
+          version: content.version + "",
+          commandOnly: content.commandOnly + "",
+        };
+      });
 
-    console.log(files);
-    const actions = files.map((file) =>
-      JSON.parse(fs.readFileSync(file, "utf-8"))
-    );
-
-    return JSON.stringify(actions);
+    return actions;
   }
   async getCommands() {
-    console.log(path.resolve(this.filePath, "./data/commands.json"));
     return fs.readFileSync(
       path.resolve(this.filePath, "./data/commands.json"),
       "utf8"
     );
   }
   async getEvents() {
-    console.log(path.resolve(this.filePath, "./data/events.json"));
     return fs.readFileSync(
       path.resolve(this.filePath, "./data/events.json"),
       "utf8"

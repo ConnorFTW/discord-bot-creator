@@ -1,6 +1,6 @@
 module.exports = {
-  name: 'Read File',
-  section: 'File Stuff',
+  name: "Read File",
+  section: "File Stuff",
 
   subtitle(data) {
     return `Read File "${data.filename}"`;
@@ -8,10 +8,10 @@ module.exports = {
 
   variableStorage(data, varType) {
     if (parseInt(data.storage, 10) !== varType) return;
-    return [data.varName2, 'File'];
+    return [data.varName2, "File"];
   },
 
-  fields: ['filename', 'storage', 'varName2'],
+  fields: ["filename", "storage", "varName2"],
 
   html(_isEvent, data) {
     return `
@@ -39,14 +39,19 @@ module.exports = {
 
   action(cache) {
     const data = cache.actions[cache.index];
-    const { readFileSync } = require('fs');
+    const { readFileSync } = require("fs");
     const path = this.evalMessage(data.filename, cache);
     try {
       if (path) {
-        const output = readFileSync(path, 'utf8');
-        this.storeValue(output, parseInt(data.storage, 10), this.evalMessage(data.varName2, cache), cache);
+        const output = readFileSync(path, "utf8");
+        this.storeValue(
+          output,
+          parseInt(data.storage, 10),
+          this.evalMessage(data.varName2, cache),
+          cache
+        );
       } else {
-        console.log('File path is missing from read file mod!');
+        console.log("File path is missing from read file mod!");
       }
     } catch (err) {
       console.error(`ERROR! ${err.stack || err}`);

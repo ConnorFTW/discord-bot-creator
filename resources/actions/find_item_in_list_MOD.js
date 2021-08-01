@@ -1,29 +1,29 @@
 module.exports = {
-  name: 'Find Item in List',
-  section: 'Lists and Loops',
+  name: "Find Item in List",
+  section: "Lists and Loops",
 
   subtitle(data) {
     const list = [
-      'Server Members',
-      'Server Channels',
-      'Server Roles',
-      'Server Emojis',
-      'All Bot Servers',
-      'Mentioned User Roles',
-      'Command Author Roles',
-      'Temp Variable',
-      'Server Variable',
-      'Global Variable',
+      "Server Members",
+      "Server Channels",
+      "Server Roles",
+      "Server Emojis",
+      "All Bot Servers",
+      "Mentioned User Roles",
+      "Command Author Roles",
+      "Temp Variable",
+      "Server Variable",
+      "Global Variable",
     ];
     return `Find "${data.item}" in ${list[parseInt(data.list, 10)]}`;
   },
 
   variableStorage(data, varType) {
     if (parseInt(data.storage, 10) !== varType) return;
-    return [data.varName2, 'Number'];
+    return [data.varName2, "Number"];
   },
 
-  fields: ['list', 'varName', 'item', 'storage', 'varName2'],
+  fields: ["list", "varName", "item", "storage", "varName2"],
 
   html(isEvent, data) {
     return `
@@ -62,15 +62,15 @@ module.exports = {
 
     glob.onChange1 = function onChange1(event) {
       const value = parseInt(event.value, 10);
-      const dom = document.getElementById('positionHolder');
+      const dom = document.getElementById("positionHolder");
       if (value < 3) {
-        dom.style.display = 'none';
+        dom.style.display = "none";
       } else {
         dom.style.display = null;
       }
     };
 
-    glob.listChange(document.getElementById('list'), 'varNameContainer');
+    glob.listChange(document.getElementById("list"), "varNameContainer");
   },
 
   action(cache) {

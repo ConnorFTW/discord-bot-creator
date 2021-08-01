@@ -1,57 +1,64 @@
 module.exports = {
-  name: 'Store Category Info',
-  section: 'Channel Control',
+  name: "Store Category Info",
+  section: "Channel Control",
 
   subtitle(data) {
-    const categories = ['You cheater!', 'Temp Variable', 'Server Variable', 'Global Variable'];
-    const info = [
-      'Category ID',
-      'Category Name',
-      'Category Server',
-      'Category Position',
-      'Category Is Manageable?',
-      'Category Is Deleteable?',
-      'Category Channel List',
-      'Category Channel Count',
-      'Category Text Channel List',
-      'Category Text Channel Count',
-      'Category Voice Channel List',
-      'Category Voice Channel Count',
+    const categories = [
+      "You cheater!",
+      "Temp Variable",
+      "Server Variable",
+      "Global Variable",
     ];
-    return `${categories[parseInt(data.category, 10)]} - ${info[parseInt(data.info, 10)]}`;
+    const info = [
+      "Category ID",
+      "Category Name",
+      "Category Server",
+      "Category Position",
+      "Category Is Manageable?",
+      "Category Is Deleteable?",
+      "Category Channel List",
+      "Category Channel Count",
+      "Category Text Channel List",
+      "Category Text Channel Count",
+      "Category Voice Channel List",
+      "Category Voice Channel Count",
+    ];
+    return `${categories[parseInt(data.category, 10)]} - ${
+      info[parseInt(data.info, 10)]
+    }`;
   },
 
   variableStorage(data, varType) {
     if (parseInt(data.storage, 10) !== varType) return;
-    let dataType = 'Unknown Type';
+    let dataType = "Unknown Type";
     switch (parseInt(data.info, 10)) {
       case 0:
-        dataType = 'Category ID';
+        dataType = "Category ID";
         break;
       case 1:
-        dataType = 'Text';
+        dataType = "Text";
         break;
       case 2:
-        dataType = 'Server';
+        dataType = "Server";
         break;
       case 3:
       case 7:
       case 9:
       case 11:
-        dataType = 'Number';
+        dataType = "Number";
         break;
       case 4:
       case 5:
-        dataType = 'Boolean';
+        dataType = "Boolean";
         break;
       case 6:
-        dataType = 'Channel List';
+        dataType = "Channel List";
         break;
       case 8:
-        dataType = 'Text Channel List';
+        dataType = "Text Channel List";
         break;
       case 10:
-        dataType = 'Voice Channel List';
+        dataType = "Voice Channel List";
         break;
       default:
         break;
@@ -59,7 +66,7 @@ module.exports = {
     return [data.varName2, dataType];
   },
 
-  fields: ['category', 'varName', 'info', 'storage', 'varName2'],
+  fields: ["category", "varName", "info", "storage", "varName2"],
 
   html(isEvent, data) {
     return `
@@ -148,7 +155,7 @@ module.exports = {
 
   init() {
     const { glob, document } = this;
-    glob.refreshVariableList(document.getElementById('category'));
+    glob.refreshVariableList(document.getElementById("category"));
   },
 
   action(cache) {
@@ -186,16 +193,22 @@ module.exports = {
         result = targetCategory.children.size; // Category Channel Count
         break;
       case 8:
-        result = targetCategory.children.filter((c) => ['text', 'news', 'store'].includes(c.type)).array(); // Category Text Channel List
+        result = targetCategory.children
+          .filter((c) => ["text", "news", "store"].includes(c.type))
+          .array(); // Category Text Channel List
         break;
       case 9:
-        result = targetCategory.children.filter((c) => ['text', 'news', 'store'].includes(c.type)).size; // Category Text Channel Count
+        result = targetCategory.children.filter((c) =>
+          ["text", "news", "store"].includes(c.type)
+        ).size; // Category Text Channel Count
         break;
       case 10:
-        result = targetCategory.children.filter((c) => c.type === 'voice').array(); // Category Voice Channel List
+        result = targetCategory.children
+          .filter((c) => c.type === "voice")
+          .array(); // Category Voice Channel List
         break;
       case 11:
-        result = targetCategory.children.filter((c) => c.type === 'voice').size; // Category Voice Channel Count
+        result = targetCategory.children.filter((c) => c.type === "voice").size; // Category Voice Channel Count
         break;
       default:
         break;

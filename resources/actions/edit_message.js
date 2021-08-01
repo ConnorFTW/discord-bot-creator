@@ -1,15 +1,15 @@
 module.exports = {
-  name: 'Edit Message',
-  section: 'Messaging',
+  name: "Edit Message",
+  section: "Messaging",
 
   subtitle(data) {
-    const names = ['Temp Variable', 'Server Variable', 'Global Variable'];
-    return data.storage === '0'
+    const names = ["Temp Variable", "Server Variable", "Global Variable"];
+    return data.storage === "0"
       ? `${names[parseInt(data.storage, 10) - 1]}`
       : `${names[parseInt(data.storage, 10) - 1]} (${data.varName})`;
   },
 
-  fields: ['storage', 'varName', 'message', 'storage2', 'varName2'],
+  fields: ["storage", "varName", "message", "storage2", "varName2"],
 
   html(isEvent, data) {
     return `
@@ -47,8 +47,11 @@ module.exports = {
   init() {
     const { glob, document } = this;
 
-    glob.messageChange(document.getElementById('storage'), 'varNameContainer');
-    glob.refreshVariableList(document.getElementById('storage2'), 'varNameContainer2');
+    glob.messageChange(document.getElementById("storage"), "varNameContainer");
+    glob.refreshVariableList(
+      document.getElementById("storage2"),
+      "varNameContainer2"
+    );
   },
 
   action(cache) {
@@ -65,7 +68,7 @@ module.exports = {
     const embed = this.getVariable(storage2, varName2, cache);
 
     if (Array.isArray(message)) {
-      this.callListFunc(message, 'edit', [content, embed]).then(() => {
+      this.callListFunc(message, "edit", [content, embed]).then(() => {
         this.callNextAction(cache);
       });
     } else if (message && message.edit && !message.deleted) {

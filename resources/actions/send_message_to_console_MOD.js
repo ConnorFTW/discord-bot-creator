@@ -1,15 +1,15 @@
 module.exports = {
-  name: 'Send Message to Console',
-  section: 'Other Stuff',
+  name: "Send Message to Console",
+  section: "Other Stuff",
 
   subtitle(data) {
     if (data.tosend.length > 0) {
       return `<font color="${data.color}">${data.tosend}</font>`;
     }
-    return 'Please enter a message!';
+    return "Please enter a message!";
   },
 
-  fields: ['tosend', 'color'],
+  fields: ["tosend", "color"],
 
   html() {
     return `
@@ -27,7 +27,7 @@ module.exports = {
 
   action(cache) {
     const Mods = this.getMods();
-    const chalk = Mods.require('chalk');
+    const chalk = Mods.require("chalk");
     const data = cache.actions[cache.index];
     const send = this.evalMessage(data.tosend, cache);
 
@@ -37,6 +37,7 @@ module.exports = {
   },
 
   mod(DBM) {
-    DBM.Actions['Send Message to Console (Logs)'] = DBM.Actions['Send Message to Console'];
+    DBM.Actions["Send Message to Console (Logs)"] =
+      DBM.Actions["Send Message to Console"];
   },
 };

@@ -1,18 +1,18 @@
 module.exports = {
-  name: 'Store Global Data',
-  section: 'Data',
+  name: "Store Global Data",
+  section: "Data",
 
   subtitle(data) {
-    const storage = ['', 'Temp Variable', 'Server Variable', 'Global Variable'];
+    const storage = ["", "Temp Variable", "Server Variable", "Global Variable"];
     return `${storage[parseInt(data.storage, 10)]} (${data.varName})`;
   },
 
   variableStorage(data, varType) {
     if (parseInt(data.storage, 10) !== varType) return;
-    return [data.varName, 'Unknown Type'];
+    return [data.varName, "Unknown Type"];
   },
 
-  fields: ['dataName', 'defaultVal', 'storage', 'varName'],
+  fields: ["dataName", "defaultVal", "storage", "varName"],
 
   html(_isEvent, data) {
     return `

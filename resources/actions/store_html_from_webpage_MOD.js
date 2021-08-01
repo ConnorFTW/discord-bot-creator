@@ -1,6 +1,6 @@
 module.exports = {
-  name: 'Store HTML From Webpage',
-  section: 'HTML/XML Things',
+  name: "Store HTML From Webpage",
+  section: "HTML/XML Things",
 
   subtitle(data) {
     return `URL: ${data.url}`;
@@ -8,10 +8,10 @@ module.exports = {
 
   variableStorage(data, varType) {
     if (parseInt(data.storage, 10) !== varType) return;
-    return [data.varName, 'HTML Webpage'];
+    return [data.varName, "HTML Webpage"];
   },
 
-  fields: ['url', 'storage', 'varName'],
+  fields: ["url", "storage", "varName"],
 
   html(isEvent, data) {
     return `
@@ -36,12 +36,12 @@ module.exports = {
   init() {
     const { glob, document } = this;
 
-    glob.variableChange(document.getElementById('storage'), 'varNameContainer');
+    glob.variableChange(document.getElementById("storage"), "varNameContainer");
   },
 
   async action(cache) {
     const Mods = this.getMods();
-    const fetch = Mods.require('node-fetch');
+    const fetch = Mods.require("node-fetch");
 
     const data = cache.actions[cache.index];
 

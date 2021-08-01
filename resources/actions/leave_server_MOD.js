@@ -1,12 +1,12 @@
 module.exports = {
-  name: 'Leave Server',
-  section: 'Bot Client Control',
+  name: "Leave Server",
+  section: "Bot Client Control",
 
   subtitle() {
-    return 'Leaves a server';
+    return "Leaves a server";
   },
 
-  fields: ['server', 'varName'],
+  fields: ["server", "varName"],
 
   html(isEvent, data) {
     return `
@@ -26,7 +26,7 @@ module.exports = {
 
   init() {
     const { glob, document } = this;
-    glob.serverChange(document.getElementById('server'), 'varNameContainer');
+    glob.serverChange(document.getElementById("server"), "varNameContainer");
   },
 
   action(cache) {
@@ -36,7 +36,7 @@ module.exports = {
     const server = this.getServer(type, varName, cache);
 
     if (Array.isArray(server)) {
-      this.callListFunc(server, 'leave').then(() => {
+      this.callListFunc(server, "leave").then(() => {
         this.callNextAction(cache);
       });
     } else if (server && server.leave) {

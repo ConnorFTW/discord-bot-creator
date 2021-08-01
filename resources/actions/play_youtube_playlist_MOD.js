@@ -1,6 +1,6 @@
 module.exports = {
-  name: 'Play YouTube Playlist',
-  section: 'Audio Control',
+  name: "Play YouTube Playlist",
+  section: "Audio Control",
 
   requiresAudioLibraries: true,
 
@@ -8,7 +8,7 @@ module.exports = {
     return `${data.url}`;
   },
 
-  fields: ['url', 'seek', 'volume', 'passes', 'bitrate', 'maxvid'],
+  fields: ["url", "seek", "volume", "passes", "bitrate", "maxvid"],
 
   html() {
     return `
@@ -40,15 +40,15 @@ module.exports = {
     const Mods = this.getMods();
     const url = this.evalMessage(data.url, cache);
     const maxvideos = this.evalMessage(data.maxvid, cache) || 250;
-    const ytpl = Mods.require('ytpl'); // be sure you have the latest YTPL, this was modified with 2.0.3 in mind
+    const ytpl = Mods.require("ytpl"); // be sure you have the latest YTPL, this was modified with 2.0.3 in mind
     const { msg } = cache;
     const options = {
-      watermark: 'highWaterMark: 1', // idk what this does, but the queue data has it, so i might as well add it in case someone needs it
+      watermark: "highWaterMark: 1", // idk what this does, but the queue data has it, so i might as well add it in case someone needs it
     };
 
     // Check Input
     if (!url) {
-      return console.log('Please insert a playlist url!');
+      return console.log("Please insert a playlist url!");
     }
 
     // Check Options
@@ -68,7 +68,7 @@ module.exports = {
     if (data.bitrate) {
       options.bitrate = parseInt(this.evalMessage(data.bitrate, cache), 10);
     } else {
-      options.bitrate = 'auto';
+      options.bitrate = "auto";
     }
     if (msg) {
       options.requester = msg.author;
@@ -81,7 +81,7 @@ module.exports = {
           const thumbnail = video.bestThumbnail.url;
           Audio.addToQueue(
             [
-              'yt',
+              "yt",
               {
                 ...options,
                 title,
@@ -90,7 +90,7 @@ module.exports = {
               },
               video.shortUrl,
             ],
-            cache,
+            cache
           );
         }
       });

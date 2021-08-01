@@ -1,26 +1,26 @@
 module.exports = {
-  name: 'Store UTC Time Info',
-  section: 'Other Stuff',
+  name: "Store UTC Time Info",
+  section: "Other Stuff",
 
   subtitle(data) {
     const time = [
-      'UTC Year',
-      'UTC Month',
-      'UTC Day of the Month',
-      'UTC Hour',
-      'UTC Minute',
-      'UTC Second',
-      'UTC Millisecond',
+      "UTC Year",
+      "UTC Month",
+      "UTC Day of the Month",
+      "UTC Hour",
+      "UTC Minute",
+      "UTC Second",
+      "UTC Millisecond",
     ];
     return `${time[parseInt(data.type, 10)]}`;
   },
 
   variableStorage(data, varType) {
     if (parseInt(data.storage, 10) !== varType) return;
-    return [data.varName, 'Number'];
+    return [data.varName, "Number"];
   },
 
-  fields: ['type', 'storage', 'varName'],
+  fields: ["type", "storage", "varName"],
 
   html(_isEvent, data) {
     return `

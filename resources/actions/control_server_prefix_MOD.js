@@ -1,15 +1,15 @@
 module.exports = {
-  name: 'Control Server Prefix',
-  section: 'Server Control',
+  name: "Control Server Prefix",
+  section: "Server Control",
 
   subtitle(data) {
     if (parseInt(data.controlType, 10) === 1) {
-      return 'Delete server prefix';
+      return "Delete server prefix";
     }
     return `Set server prefix: ${data.prefix}`;
   },
 
-  fields: ['server', 'controlType', 'varName', 'prefix'],
+  fields: ["server", "controlType", "varName", "prefix"],
 
   html(isEvent, data) {
     return `
@@ -41,17 +41,19 @@ module.exports = {
   init() {
     const { glob, document } = this;
 
-    glob.serverChange(document.getElementById('server'), 'varNameContainer');
+    glob.serverChange(document.getElementById("server"), "varNameContainer");
     glob.onChangeControl = function onChangeControl(controlType) {
-      document.getElementById('prefixContainer').style.display = [null, 'none'][parseInt(controlType.value, 10)];
+      document.getElementById("prefixContainer").style.display = [null, "none"][
+        parseInt(controlType.value, 10)
+      ];
     };
 
-    glob.onChangeControl(document.getElementById('controlType'));
+    glob.onChangeControl(document.getElementById("controlType"));
   },
 
   action(cache) {
-    const fs = require('fs');
-    const path = require('path');
+    const fs = require("fs");
+    const path = require("path");
     const data = cache.actions[cache.index];
     const type = parseInt(data.server, 10);
     const { Actions } = this.getDBM();
@@ -60,16 +62,16 @@ module.exports = {
     const server = this.getServer(type, varName, cache);
     const controlType = parseInt(data.controlType, 10);
     const prefix = this.evalMessage(data.prefix, cache);
-    const settingsPath = path.join('data', 'serverSettings.json');
+    const settingsPath = path.join("data", "serverSettings.json");
 
     if (!fs.existsSync(settingsPath))
       return Actions.displayError(
         data,
         cache,
-        'You must have the server_prefixes_EXT.js extension installed to use this action',
+        "You must have the server_prefixes_EXT.js extension installed to use this action"
       );
 
-    fs.readFile(settingsPath, 'utf8', (err, file) => {
+    fs.readFile(settingsPath, "utf8", (err, file) => {
       if (err) return Actions.displayError(data, cache, err);
       const json = JSON.parse(file);
       if (controlType === 0) {

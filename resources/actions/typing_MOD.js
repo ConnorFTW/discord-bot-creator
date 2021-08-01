@@ -1,23 +1,25 @@
 module.exports = {
-  name: 'Bot Typing',
-  section: 'Bot Client Control',
+  name: "Bot Typing",
+  section: "Bot Client Control",
 
   subtitle(data) {
     const names = [
-      'Same Channel',
-      'Mentioned Channel',
-      'Default Channel',
-      'Temp Variable',
-      'Server Variable',
-      'Global Variable',
+      "Same Channel",
+      "Mentioned Channel",
+      "Default Channel",
+      "Temp Variable",
+      "Server Variable",
+      "Global Variable",
     ];
-    const names2 = ['Starts Typing', 'Stops Typing'];
+    const names2 = ["Starts Typing", "Stops Typing"];
     const index2 = parseInt(data.typing, 10);
     const index = parseInt(data.storage, 10);
-    return index < 3 ? `${names[index]} - ${names2[index2]}` : `${names[index]} - ${data.varName} - ${names2[index2]}`;
+    return index < 3
+      ? `${names[index]} - ${names2[index2]}`
+      : `${names[index]} - ${data.varName} - ${names2[index2]}`;
   },
 
-  fields: ['storage', 'varName', 'typing'],
+  fields: ["storage", "varName", "typing"],
 
   html(isEvent, data) {
     return `
@@ -51,7 +53,7 @@ module.exports = {
 
   init() {
     const { glob, document } = this;
-    glob.channelChange(document.getElementById('storage'), 'varNameContainer');
+    glob.channelChange(document.getElementById("storage"), "varNameContainer");
   },
 
   action(cache) {
@@ -61,7 +63,7 @@ module.exports = {
     const channel = this.getChannel(storage, varName, cache);
 
     try {
-      data.typing === '0' ? channel.startTyping() : channel.stopTyping();
+      data.typing === "0" ? channel.startTyping() : channel.stopTyping();
     } catch (e) {
       console.error(`ERROR! ${e}${e.stack}`);
     }

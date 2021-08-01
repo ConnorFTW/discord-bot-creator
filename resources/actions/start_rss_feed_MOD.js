@@ -1,6 +1,6 @@
 module.exports = {
-  name: 'RSS Feed Watcher',
-  section: 'Other Stuff',
+  name: "RSS Feed Watcher",
+  section: "Other Stuff",
 
   subtitle(data) {
     return `${data.url}`;
@@ -8,10 +8,10 @@ module.exports = {
 
   variableStorage(data, varType) {
     if (parseInt(data.storage, 10) !== varType) return;
-    return [data.varName, 'RSS Feed'];
+    return [data.varName, "RSS Feed"];
   },
 
-  fields: ['path', 'url', 'storage', 'varName'],
+  fields: ["path", "url", "storage", "varName"],
 
   html(_isEvent, data) {
     return `
@@ -56,8 +56,8 @@ module.exports = {
     const { Actions } = this.getDBM();
     const stor = storage + varName;
     const Mods = this.getMods();
-    const { JSONPath } = Mods.require('jsonpath-plus');
-    const Watcher = Mods.require('feed-watcher');
+    const { JSONPath } = Mods.require("jsonpath-plus");
+    const Watcher = Mods.require("feed-watcher");
     const feed = url;
     const interval = 10; // seconds
 
@@ -66,7 +66,7 @@ module.exports = {
     this.storeValue(watcher, storage, stor, cache);
 
     // Check for new entries every n seconds.
-    watcher.on('new entries', (entries) => {
+    watcher.on("new entries", (entries) => {
       entries.forEach((entry) => {
         if (path) {
           const res = JSONPath({
@@ -84,7 +84,7 @@ module.exports = {
     watcher
       .start()
       .then(() => {
-        console.log('Starting watching...');
+        console.log("Starting watching...");
       })
       .catch(console.error);
   },

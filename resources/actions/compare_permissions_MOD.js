@@ -1,19 +1,33 @@
 module.exports = {
-  name: 'Compare Permissions',
+  name: "Compare Permissions",
 
-  section: 'Permission Control',
+  section: "Permission Control",
 
   subtitle(data) {
-    const variables = ['', 'Temp Variable', 'Server Variable', 'Global Variable'];
-    return `Compare ${variables[data.storage]} (${data.varName}) To ${variables[data.storage2]} (${data.varName2})`;
+    const variables = [
+      "",
+      "Temp Variable",
+      "Server Variable",
+      "Global Variable",
+    ];
+    return `Compare ${variables[data.storage]} (${data.varName}) To ${
+      variables[data.storage2]
+    } (${data.varName2})`;
   },
 
   variableStorage(data, varType) {
     if (parseInt(data.storage3, 10) !== varType) return;
-    return [data.varName3, 'Array of Permissions'];
+    return [data.varName3, "Array of Permissions"];
   },
 
-  fields: ['storage', 'varName', 'storage2', 'varName2', 'storage3', 'varName3'],
+  fields: [
+    "storage",
+    "varName",
+    "storage2",
+    "varName2",
+    "storage3",
+    "varName3",
+  ],
 
   html(_isEvent, data) {
     return `
@@ -57,8 +71,8 @@ module.exports = {
 
   init() {
     const { glob, document } = this;
-    glob.refreshVariableList(document.getElementById('storage'));
-    glob.refreshVariableList(document.getElementById('storage2'));
+    glob.refreshVariableList(document.getElementById("storage"));
+    glob.refreshVariableList(document.getElementById("storage2"));
   },
 
   action(cache) {
@@ -94,13 +108,13 @@ module.exports = {
         console.error(err);
       }
     } else if (!oldPermissions.bitfield && !newPermissions.bitfield) {
-      console.error('Old permissions and new permissions not found.');
+      console.error("Old permissions and new permissions not found.");
     } else if (!oldPermissions.bitfield) {
-      console.error('Old permissions not found.');
+      console.error("Old permissions not found.");
     } else if (!newPermissions.bitfield) {
-      console.error('New permissions not found.');
+      console.error("New permissions not found.");
     } else {
-      console.error('Something error!!!');
+      console.error("Something error!!!");
     }
   },
 

@@ -1,7 +1,7 @@
 module.exports = {
-  name: 'Base Convert MOD',
-  displayName: 'Base Convert',
-  section: 'Other Stuff',
+  name: "Base Convert MOD",
+  displayName: "Base Convert",
+  section: "Other Stuff",
 
   subtitle(data) {
     return `Base ${data.basef} to Base ${data.baset}`;
@@ -9,10 +9,10 @@ module.exports = {
 
   variableStorage(data, varType) {
     if (parseInt(data.storage, 10) !== varType) return;
-    return [data.varName, 'Number'];
+    return [data.varName, "Number"];
   },
 
-  fields: ['num', 'basef', 'baset', 'storage', 'varName'],
+  fields: ["num", "basef", "baset", "storage", "varName"],
 
   html(_isEvent, data) {
     return `

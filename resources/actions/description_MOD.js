@@ -1,12 +1,12 @@
 module.exports = {
-  name: 'Command Description',
-  section: 'Other Stuff',
+  name: "Command Description",
+  section: "Other Stuff",
 
   subtitle() {
-    return 'Command Description';
+    return "Command Description";
   },
 
-  fields: ['description', 'restrictedTo'],
+  fields: ["description", "restrictedTo"],
 
   html() {
     return `

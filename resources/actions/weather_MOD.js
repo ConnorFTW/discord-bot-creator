@@ -1,66 +1,66 @@
 module.exports = {
-  name: 'Weather',
-  section: 'Other Stuff',
+  name: "Weather",
+  section: "Other Stuff",
 
   subtitle(data) {
     const info = [
-      'Temperature',
-      'Weather Text',
-      'Date',
-      'City',
-      'Country',
-      'Wind Speed',
-      'Wind Direction',
-      'Humidity',
-      'Feelslike',
-      'Image URL',
-      'Current Day',
+      "Temperature",
+      "Weather Text",
+      "Date",
+      "City",
+      "Country",
+      "Wind Speed",
+      "Wind Direction",
+      "Humidity",
+      "Feelslike",
+      "Image URL",
+      "Current Day",
     ];
     return `${info[parseInt(data.info, 10)]}`;
   },
 
   variableStorage(data, varType) {
     if (parseInt(data.storage, 10) !== varType) return;
-    let dataType = 'Unknown Weather Type';
+    let dataType = "Unknown Weather Type";
     switch (parseInt(data.info, 10)) {
       case 0:
-        dataType = 'Temperature';
+        dataType = "Temperature";
         break;
       case 1:
-        dataType = 'Weather - Text';
+        dataType = "Weather - Text";
         break;
       case 2:
-        dataType = 'Date';
+        dataType = "Date";
         break;
       case 3:
-        dataType = 'Weather - City';
+        dataType = "Weather - City";
         break;
       case 4:
-        dataType = 'Weather - Country';
+        dataType = "Weather - Country";
         break;
       case 6:
-        dataType = 'Wind Speed';
+        dataType = "Wind Speed";
         break;
       case 8:
-        dataType = 'Wind Direction';
+        dataType = "Wind Direction";
         break;
       case 9:
-        dataType = 'Atmosphere Humidity';
+        dataType = "Atmosphere Humidity";
         break;
       case 14:
-        dataType = 'Feelslike';
+        dataType = "Feelslike";
         break;
       case 15:
-        dataType = 'Image URL';
+        dataType = "Image URL";
         break;
       case 16:
-        dataType = 'Current Day';
+        dataType = "Current Day";
         break;
     }
     return [data.varName, dataType];
   },
 
-  fields: ['city', 'degreeType', 'info', 'storage', 'varName'],
+  fields: ["city", "degreeType", "info", "storage", "varName"],
 
   html(isEvent, data) {
     return `
@@ -107,7 +107,7 @@ module.exports = {
 
   init() {
     const { glob, document } = this;
-    glob.variableChange(document.getElementById('storage'), 'varNameContainer');
+    glob.variableChange(document.getElementById("storage"), "varNameContainer");
   },
 
   action(cache) {
@@ -115,19 +115,20 @@ module.exports = {
     const info = parseInt(data.info, 10);
 
     const Mods = this.getMods();
-    const weather = Mods.require('weather-js');
+    const weather = Mods.require("weather-js");
 
     const city = this.evalMessage(data.city, cache);
     const degreeType = this.evalMessage(data.degreeType, cache);
     const { Actions } = this.getDBM();
 
     if (!city) {
-      console.error('Please specify a city to get weather information.');
+      console.error("Please specify a city to get weather information.");
       return this.callNextAction(cache);
     }
 
     weather.find({ search: city, degreeType }, (err, response) => {
-      if (err || !response || !response[0]) return Actions.callNextAction(cache);
+      if (err || !response || !response[0])
+        return Actions.callNextAction(cache);
       const current = response[0].current;
       let result;
 

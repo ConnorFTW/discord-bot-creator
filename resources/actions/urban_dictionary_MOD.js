@@ -1,51 +1,51 @@
 module.exports = {
-  name: 'Urban Dictionary Search',
-  section: 'Other Stuff',
+  name: "Urban Dictionary Search",
+  section: "Other Stuff",
 
   subtitle(data) {
     const info = [
-      'Definition',
-      'Result URL',
-      'Example',
-      'Thumbs Up Count',
-      'Thumbs Down Count',
-      'Author',
-      'Result ID',
-      'Tags',
+      "Definition",
+      "Result URL",
+      "Example",
+      "Thumbs Up Count",
+      "Thumbs Down Count",
+      "Author",
+      "Result ID",
+      "Tags",
     ];
     return `${info[parseInt(data.info, 10)]}`;
   },
 
   variableStorage(data, varType) {
     if (parseInt(data.storage, 10) !== varType) return;
-    let dataType = 'Unknown Urban Dictionary Result';
+    let dataType = "Unknown Urban Dictionary Result";
     switch (parseInt(data.info, 10)) {
       case 0:
-        dataType = 'U.D. Definition';
+        dataType = "U.D. Definition";
         break;
       case 1:
-        dataType = 'U.D. URL';
+        dataType = "U.D. URL";
         break;
       case 2:
-        dataType = 'U.D. Example';
+        dataType = "U.D. Example";
         break;
       case 3:
-        dataType = 'U.D. Thumbs Up Count';
+        dataType = "U.D. Thumbs Up Count";
         break;
       case 4:
-        dataType = 'U.D. Thumbs Down Count';
+        dataType = "U.D. Thumbs Down Count";
         break;
       case 5:
-        dataType = 'U.D. Author';
+        dataType = "U.D. Author";
         break;
       case 6:
-        dataType = 'U.D. Result ID';
+        dataType = "U.D. Result ID";
         break;
     }
     return [data.varName, dataType];
   },
 
-  fields: ['string', 'info', 'storage', 'varName'],
+  fields: ["string", "info", "storage", "varName"],
 
   html(_isEvent, data) {
     return `
@@ -83,7 +83,7 @@ module.exports = {
 
   init() {
     const { glob, document } = this;
-    glob.variableChange(document.getElementById('storage'), 'varNameContainer');
+    glob.variableChange(document.getElementById("storage"), "varNameContainer");
   },
 
   action(cache) {
@@ -91,11 +91,14 @@ module.exports = {
     const info = parseInt(data.info, 10);
     const string = this.evalMessage(data.string, cache);
 
-    if (!string) return console.log('Please write something to search on Urban Dictionary.');
+    if (!string)
+      return console.log(
+        "Please write something to search on Urban Dictionary."
+      );
 
     const { Actions } = this.getDBM();
     const Mods = this.getMods();
-    const urban = Mods.require('urban');
+    const urban = Mods.require("urban");
 
     urban(`${string}`).first((results) => {
       if (!results) return Actions.callNextAction(cache);

@@ -1,16 +1,22 @@
 module.exports = {
-  name: 'Set Bot Activity',
-  section: 'Bot Client Control',
+  name: "Set Bot Activity",
+  section: "Bot Client Control",
 
   subtitle(data) {
-    const activities = ['Playing', 'Listening to', 'Watching', 'Streaming Twitch', 'Competing'];
+    const activities = [
+      "Playing",
+      "Listening to",
+      "Watching",
+      "Streaming Twitch",
+      "Competing",
+    ];
 
-    const stats = ['Online', 'Idle', 'Invisible', 'Do Not Disturb'];
+    const stats = ["Online", "Idle", "Invisible", "Do Not Disturb"];
 
     return `${stats[data.stat]}, ${activities[data.activity]} ${data.nameText}`;
   },
 
-  fields: ['activity', 'nameText', 'url', 'stat'],
+  fields: ["activity", "nameText", "url", "stat"],
 
   html() {
     return `
@@ -74,20 +80,20 @@ module.exports = {
   init() {
     const { document } = this;
 
-    const selector = document.getElementById('activity');
-    const targetfield = document.getElementById('urlArea');
+    const selector = document.getElementById("activity");
+    const targetfield = document.getElementById("urlArea");
 
-    if (selector[selector.selectedIndex].value === '3') {
-      targetfield.classList.remove('hidden');
+    if (selector[selector.selectedIndex].value === "3") {
+      targetfield.classList.remove("hidden");
     } else {
-      targetfield.classList.add('hidden');
+      targetfield.classList.add("hidden");
     }
 
     function showUrl() {
-      if (selector[selector.selectedIndex].value === '3') {
-        targetfield.classList.remove('hidden');
+      if (selector[selector.selectedIndex].value === "3") {
+        targetfield.classList.remove("hidden");
       } else {
-        targetfield.classList.add('hidden');
+        targetfield.classList.add("hidden");
       }
     }
 
@@ -101,8 +107,16 @@ module.exports = {
     const nameText = this.evalMessage(data.nameText, cache) || null;
     const url = this.evalMessage(data.url, cache);
 
-    const target = ['PLAYING', 'LISTENING', 'WATCHING', 'STREAMING', 'COMPETING'][parseInt(data.activity, 10)];
-    const statusTarget = ['online', 'idle', 'invisible', 'dnd'][parseInt(data.stat, 10)];
+    const target = [
+      "PLAYING",
+      "LISTENING",
+      "WATCHING",
+      "STREAMING",
+      "COMPETING",
+    ][parseInt(data.activity, 10)];
+    const statusTarget = ["online", "idle", "invisible", "dnd"][
+      parseInt(data.stat, 10)
+    ];
 
     const obj = {
       activity: {
@@ -111,7 +125,7 @@ module.exports = {
       },
       status: statusTarget,
     };
-    if (target === 'STREAMING') Object.assign(obj.activity, { url });
+    if (target === "STREAMING") Object.assign(obj.activity, { url });
     botClient
       .setPresence(obj)
       .then(() => this.callNextAction(cache))

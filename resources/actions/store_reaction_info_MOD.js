@@ -1,49 +1,56 @@
 module.exports = {
-  name: 'Store Reaction Info',
-  section: 'Reaction Control',
+  name: "Store Reaction Info",
+  section: "Reaction Control",
 
   subtitle(data) {
-    const reaction = ['You cheater!', 'Temp Variable', 'Server Variable', 'Global Variable'];
-    const info = [
-      'Message Object',
-      'Bot reacted?',
-      'Users Who Reacted List',
-      'Emoji Name',
-      'Reaction Count',
-      'First User to React',
-      'Random User to React',
-      'Last User to React',
+    const reaction = [
+      "You cheater!",
+      "Temp Variable",
+      "Server Variable",
+      "Global Variable",
     ];
-    return `${reaction[parseInt(data.reaction, 10)]} - ${info[parseInt(data.info, 10)]}`;
+    const info = [
+      "Message Object",
+      "Bot reacted?",
+      "Users Who Reacted List",
+      "Emoji Name",
+      "Reaction Count",
+      "First User to React",
+      "Random User to React",
+      "Last User to React",
+    ];
+    return `${reaction[parseInt(data.reaction, 10)]} - ${
+      info[parseInt(data.info, 10)]
+    }`;
   },
 
   variableStorage(data, varType) {
     if (parseInt(data.storage, 10) !== varType) return;
-    let dataType = 'Unknown Type';
+    let dataType = "Unknown Type";
     switch (parseInt(data.info, 10)) {
       case 0:
-        dataType = 'Message';
+        dataType = "Message";
         break;
       case 1:
-        dataType = 'Boolean';
+        dataType = "Boolean";
         break;
       case 2:
-        dataType = 'List';
+        dataType = "List";
         break;
       case 3:
-        dataType = 'String';
+        dataType = "String";
         break;
       case 4:
-        dataType = 'Number';
+        dataType = "Number";
         break;
       case 5:
-        dataType = 'User';
+        dataType = "User";
         break;
       case 6:
-        dataType = 'User';
+        dataType = "User";
         break;
       case 7:
-        dataType = 'User';
+        dataType = "User";
         break;
       default:
         break;
@@ -51,7 +58,7 @@ module.exports = {
     return [data.varName2, dataType];
   },
 
-  fields: ['reaction', 'varName', 'info', 'storage', 'varName2'],
+  fields: ["reaction", "varName", "info", "storage", "varName2"],
 
   html(isEvent, data) {
     return `
@@ -98,7 +105,7 @@ module.exports = {
 
   init() {
     const { glob, document } = this;
-    glob.refreshVariableList(document.getElementById('reaction'));
+    glob.refreshVariableList(document.getElementById("reaction"));
   },
 
   action(cache) {

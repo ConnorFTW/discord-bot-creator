@@ -1,6 +1,6 @@
 module.exports = {
-  name: 'Find Reaction',
-  section: 'Reaction Control',
+  name: "Find Reaction",
+  section: "Reaction Control",
 
   subtitle(data) {
     return `${data.find}`;
@@ -8,10 +8,10 @@ module.exports = {
 
   variableStorage(data, varType) {
     if (parseInt(data.storage, 10) !== varType) return;
-    return [data.varName2, 'Reaction'];
+    return [data.varName2, "Reaction"];
   },
 
-  fields: ['message', 'varName', 'info', 'find', 'storage', 'varName2'],
+  fields: ["message", "varName", "info", "find", "storage", "varName2"],
 
   html(isEvent, data) {
     return `
@@ -56,7 +56,7 @@ module.exports = {
 
   init() {
     const { glob, document } = this;
-    glob.messageChange(document.getElementById('message'), 'varNameContainer');
+    glob.messageChange(document.getElementById("message"), "varNameContainer");
   },
 
   action(cache) {

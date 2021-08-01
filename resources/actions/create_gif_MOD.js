@@ -1,6 +1,6 @@
 module.exports = {
-  name: 'Create GIF',
-  section: 'Image Editing',
+  name: "Create GIF",
+  section: "Image Editing",
 
   subtitle(data) {
     return `${data.url}`;
@@ -8,10 +8,10 @@ module.exports = {
 
   variableStorage(data, varType) {
     if (parseInt(data.storage, 10) !== varType) return;
-    return [data.varName, 'GIF'];
+    return [data.varName, "GIF"];
   },
 
-  fields: ['url', 'storage', 'varName'],
+  fields: ["url", "storage", "varName"],
 
   html(isEvent, data) {
     return `
@@ -40,13 +40,13 @@ module.exports = {
     const obj = this.evalMessage(data.url, cache);
 
     let gif;
-    if (!obj.startsWith('http')) {
+    if (!obj.startsWith("http")) {
       gif = this.getLocalFile(obj);
     } else {
       gif = obj;
     }
 
-    if (!gif.includes('.gif')) return this.callNextAction(cache);
+    if (!gif.includes(".gif")) return this.callNextAction(cache);
 
     const varName = this.evalMessage(data.varName, cache);
     const storage = parseInt(data.storage, 10);

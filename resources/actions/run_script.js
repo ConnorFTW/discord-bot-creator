@@ -1,6 +1,6 @@
 module.exports = {
-  name: 'Run Script',
-  section: 'Other Stuff',
+  name: "Run Script",
+  section: "Other Stuff",
 
   subtitle(data) {
     return `${data.code}`;
@@ -8,40 +8,40 @@ module.exports = {
 
   variableStorage(data, varType) {
     if (parseInt(data.storage, 10) !== varType) return;
-    let dataType = 'Unknown Type';
+    let dataType = "Unknown Type";
     switch (parseInt(data.VTypeSelect, 10)) {
       case 0:
-        dataType = 'Unknown Type';
+        dataType = "Unknown Type";
         break;
       case 1:
-        dataType = 'Number';
+        dataType = "Number";
         break;
       case 2:
-        dataType = 'String';
+        dataType = "String";
         break;
       case 3:
-        dataType = 'Image';
+        dataType = "Image";
         break;
       case 4:
-        dataType = 'Member';
+        dataType = "Member";
         break;
       case 5:
-        dataType = 'Message';
+        dataType = "Message";
         break;
       case 6:
-        dataType = 'Text Channel';
+        dataType = "Text Channel";
         break;
       case 7:
-        dataType = 'Voice Channel';
+        dataType = "Voice Channel";
         break;
       case 8:
-        dataType = 'Role';
+        dataType = "Role";
         break;
       case 9:
-        dataType = 'Server';
+        dataType = "Server";
         break;
       case 10:
-        dataType = 'Emoji';
+        dataType = "Emoji";
         break;
       case 11:
         dataType = data.CVTypeValue;
@@ -50,7 +50,15 @@ module.exports = {
     return [data.varName, dataType];
   },
 
-  fields: ['code', 'behavior', 'interpretation', 'storage', 'varName', 'VTypeSelect', 'CVTypeValue'],
+  fields: [
+    "code",
+    "behavior",
+    "interpretation",
+    "storage",
+    "varName",
+    "VTypeSelect",
+    "CVTypeValue",
+  ],
 
   html(_isEvent, data) {
     return `
@@ -151,8 +159,8 @@ module.exports = {
   init() {
     const { glob, document } = this;
 
-    document.getElementById('JSEditor').src =
-      'data:text/html,' +
+    document.getElementById("JSEditor").src =
+      "data:text/html," +
       `
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.3/ace.js" integrity="sha256-gkWBmkjy/8e1QUz5tv4CCYgEtjR8sRlGiXsMeebVeUo=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.3/ext-language_tools.js" integrity="sha256-PAtX04Rk2WBELn+z4CmyvM2E5bhFBNEplF8mrHBvMJc=" crossorigin="anonymous"></script>
@@ -209,91 +217,100 @@ module.exports = {
   }
 </style>`;
 
-    document.getElementById('JSEditor').addEventListener('load', function load() {
-      if (document.getElementById('code').value) {
-        this.contentWindow.document.getElementById('hideCode').value = document.getElementById('code').value;
-        // eslint-disable-next-line no-undef
-        this.contentWindow.document.getElementById('hideCode').dispatchEvent(new Event('_load'));
-      }
-      this.style.visibility = 'visible';
-    });
+    document
+      .getElementById("JSEditor")
+      .addEventListener("load", function load() {
+        if (document.getElementById("code").value) {
+          this.contentWindow.document.getElementById("hideCode").value =
+            document.getElementById("code").value;
+          // eslint-disable-next-line no-undef
+          this.contentWindow.document
+            .getElementById("hideCode")
+            .dispatchEvent(new Event("_load"));
+        }
+        this.style.visibility = "visible";
+      });
 
-    document.getElementById('code').addEventListener('input', () => {
-      document.getElementById('JSEditor').contentWindow.document.getElementById('hideCode').value =
-        document.getElementById('code').value;
+    document.getElementById("code").addEventListener("input", () => {
+      document
+        .getElementById("JSEditor")
+        .contentWindow.document.getElementById("hideCode").value =
+        document.getElementById("code").value;
       // eslint-disable-next-line no-undef
       document
-        .getElementById('JSEditor')
-        .contentWindow.document.getElementById('hideCode')
-        .dispatchEvent(new Event('_load'));
+        .getElementById("JSEditor")
+        .contentWindow.document.getElementById("hideCode")
+        .dispatchEvent(new Event("_load"));
     });
 
     document
-      .getElementById('createAction')
+      .getElementById("createAction")
       .setAttribute(
-        'onclick',
-        'if(document.getElementById("JSEditor").contentWindow.document.getElementById("hideCode").value) document.getElementById("code").value = document.getElementById("JSEditor").contentWindow.document.getElementById("hideCode").value; finish()',
+        "onclick",
+        'if(document.getElementById("JSEditor").contentWindow.document.getElementById("hideCode").value) document.getElementById("code").value = document.getElementById("JSEditor").contentWindow.document.getElementById("hideCode").value; finish()'
       );
 
     glob.onChangeVTypeSelect1 = function onChangeVTypeSelect1() {
-      if (document.getElementById('storage').value === '0') {
-        document.getElementById('VTypeDiv').style.display = 'none';
+      if (document.getElementById("storage").value === "0") {
+        document.getElementById("VTypeDiv").style.display = "none";
       } else {
-        document.getElementById('VTypeDiv').style.display = null;
+        document.getElementById("VTypeDiv").style.display = null;
       }
     };
 
     glob.onChangeVTypeSelect2 = function onChangeVTypeSelect2(element) {
-      if (element.value === '11') {
-        document.getElementById('CVTypeDiv').style.display = null;
+      if (element.value === "11") {
+        document.getElementById("CVTypeDiv").style.display = null;
       } else {
-        document.getElementById('CVTypeDiv').style.display = 'none';
+        document.getElementById("CVTypeDiv").style.display = "none";
       }
     };
 
     glob.onClickDefault = function onClickDefault(element) {
-      if (document.getElementById('code').style.display === 'none') {
-        element.innerHTML = 'Back';
+      if (document.getElementById("code").style.display === "none") {
+        element.innerHTML = "Back";
 
-        document.getElementById('code').value = document
-          .getElementById('JSEditor')
-          .contentWindow.document.getElementById('hideCode').value;
+        document.getElementById("code").value = document
+          .getElementById("JSEditor")
+          .contentWindow.document.getElementById("hideCode").value;
 
-        document.getElementById('code').style.display = 'initial';
-        document.getElementById('JSEditor').style.display = 'none';
+        document.getElementById("code").style.display = "initial";
+        document.getElementById("JSEditor").style.display = "none";
       } else {
-        element.innerHTML = 'Default';
+        element.innerHTML = "Default";
 
-        document.getElementById('JSEditor').contentWindow.document.getElementById('hideCode').value =
-          document.getElementById('code').value;
+        document
+          .getElementById("JSEditor")
+          .contentWindow.document.getElementById("hideCode").value =
+          document.getElementById("code").value;
         // eslint-disable-next-line no-undef
         document
-          .getElementById('JSEditor')
-          .contentWindow.document.getElementById('hideCode')
-          .dispatchEvent(new Event('_load'));
+          .getElementById("JSEditor")
+          .contentWindow.document.getElementById("hideCode")
+          .dispatchEvent(new Event("_load"));
 
-        document.getElementById('code').style.display = 'none';
-        document.getElementById('JSEditor').style.display = 'initial';
+        document.getElementById("code").style.display = "none";
+        document.getElementById("JSEditor").style.display = "initial";
       }
     };
 
     glob.onChangeVTypeSelect1();
     glob.onClickDefault();
-    glob.onChangeVTypeSelect2(document.getElementById('VTypeSelect'));
-    glob.variableChange(document.getElementById('storage'), 'varNameContainer');
+    glob.onChangeVTypeSelect2(document.getElementById("VTypeSelect"));
+    glob.variableChange(document.getElementById("storage"), "varNameContainer");
   },
 
   action(cache) {
     const data = cache.actions[cache.index];
 
     let code;
-    if (data.interpretation === '0') {
+    if (data.interpretation === "0") {
       code = this.evalMessage(data.code, cache);
     } else {
       code = data.code;
     }
 
-    if (data.storage !== '0') {
+    if (data.storage !== "0") {
       const result = this.eval(code, cache);
       const varName = this.evalMessage(data.varName, cache);
       const storage = parseInt(data.storage, 10);
@@ -301,7 +318,7 @@ module.exports = {
     } else {
       this.eval(code, cache);
     }
-    if (data.behavior === '0') this.callNextAction(cache);
+    if (data.behavior === "0") this.callNextAction(cache);
   },
 
   mod() {},

@@ -1,14 +1,21 @@
 module.exports = {
-  name: 'Delete Server',
-  section: 'Server Control',
+  name: "Delete Server",
+  section: "Server Control",
 
   subtitle(data) {
-    const servers = ['Current Server', 'Temp Variable', 'Server Variable', 'Global Variable'];
+    const servers = [
+      "Current Server",
+      "Temp Variable",
+      "Server Variable",
+      "Global Variable",
+    ];
     const index = parseInt(data.server, 10);
-    return data.server === '0' ? `${servers[index]}` : `${servers[index]} - ${data.varName}`;
+    return data.server === "0"
+      ? `${servers[index]}`
+      : `${servers[index]} - ${data.varName}`;
   },
 
-  fields: ['server', 'varName'],
+  fields: ["server", "varName"],
 
   html(isEvent, data) {
     return `
@@ -28,7 +35,7 @@ module.exports = {
 
   init() {
     const { glob, document } = this;
-    glob.serverChange(document.getElementById('server'), 'varNameContainer');
+    glob.serverChange(document.getElementById("server"), "varNameContainer");
   },
 
   action(cache) {
@@ -38,7 +45,7 @@ module.exports = {
     const targetServer = this.getServer(server, varName, cache);
 
     if (Array.isArray(targetServer)) {
-      this.callListFunc(targetServer, 'delete', []).then(() => {
+      this.callListFunc(targetServer, "delete", []).then(() => {
         this.callNextAction(cache);
       });
     } else if (targetServer && targetServer.delete) {

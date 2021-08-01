@@ -1,6 +1,6 @@
 module.exports = {
-  name: 'Parse From Stored Webpage',
-  section: 'HTML/XML Things',
+  name: "Parse From Stored Webpage",
+  section: "HTML/XML Things",
 
   subtitle(data) {
     return ` Var: ${data.varName} Path: ${data.xpath}`;
@@ -8,10 +8,17 @@ module.exports = {
 
   variableStorage(data, varType) {
     if (parseInt(data.storage, 10) !== varType) return;
-    return [data.varName, 'String'];
+    return [data.varName, "String"];
   },
 
-  fields: ['debugMode', 'xpath', 'source', 'sourceVarName', 'storage', 'varName'],
+  fields: [
+    "debugMode",
+    "xpath",
+    "source",
+    "sourceVarName",
+    "storage",
+    "varName",
+  ],
 
   html(isEvent, data) {
     return `
@@ -76,26 +83,32 @@ module.exports = {
     const { glob, document } = this;
 
     try {
-      const wrexlinks = document.getElementsByClassName('wrexlink');
+      const wrexlinks = document.getElementsByClassName("wrexlink");
       for (let x = 0; x < wrexlinks.length; x++) {
         const wrexlink = wrexlinks[x];
-        const url = wrexlink.getAttribute('data-url');
+        const url = wrexlink.getAttribute("data-url");
         if (url) {
-          wrexlink.setAttribute('title', url);
-          wrexlink.addEventListener('click', (e) => {
+          wrexlink.setAttribute("title", url);
+          wrexlink.addEventListener("click", (e) => {
             e.stopImmediatePropagation();
             console.log(`Launching URL: [${url}] in your default browser.`);
-            require('child_process').execSync(`start ${url}`);
+            require("child_process").execSync(`start ${url}`);
           });
         }
       }
     } catch (error) {
       // write any init errors to errors.txt in dbms' main directory
-      require('fs').appendFile('errors.txt', error.stack ? error.stack : `${error}\r\n`);
+      require("fs").appendFile(
+        "errors.txt",
+        error.stack ? error.stack : `${error}\r\n`
+      );
     }
 
-    glob.variableChange(document.getElementById('storage'), 'varNameContainer');
-    glob.variableChange(document.getElementById('source'), 'sourceVarNameContainer');
+    glob.variableChange(document.getElementById("storage"), "varNameContainer");
+    glob.variableChange(
+      document.getElementById("source"),
+      "sourceVarNameContainer"
+    );
   },
 
   action(cache) {
@@ -125,9 +138,9 @@ module.exports = {
 
       const html = this.getVariable(source, sourceVarName, cache);
 
-      const xpath = Mods.require('xpath');
-      const DOM = Mods.require('xmldom').DOMParser;
-      const ent = Mods.require('ent');
+      const xpath = Mods.require("xpath");
+      const DOM = Mods.require("xmldom").DOMParser;
+      const ent = Mods.require("ent");
 
       if (myXPath) {
         // check for errors
@@ -136,7 +149,8 @@ module.exports = {
           xpath.evaluate(myXPath, null, null, null);
         } catch (error) {
           errored = error;
-          if (!error.toString().includes('nodeType')) console.error(`Invalid XPath: [${myXPath}] (${error || ''})`);
+          if (!error.toString().includes("nodeType"))
+            console.error(`Invalid XPath: [${myXPath}] (${error || ""})`);
         }
 
         if (html) {
@@ -166,49 +180,63 @@ module.exports = {
             if (nodes && nodes.length > 0) {
               const out = [];
               nodes.forEach((node) => {
-                const name = node.name || 'Text Value';
+                const name = node.name || "Text Value";
                 const value = node.value ? node.value : node.toString();
 
                 if (DEBUG) {
-                  console.log('====================================');
+                  console.log("====================================");
                   console.log(`Source String: ${node.toString()}`);
-                  console.log('====================================');
+                  console.log("====================================");
                   // console.log("Parent Node Name: " +  .name);
                   console.log(`Name: ${name}`);
                   console.log(`Line Number: ${node.lineNumber}`);
                   console.log(`Column Number: ${node.columnNumber}`);
                   console.log(`Parsed Value: ${value.trim()}`);
-                  console.log('====================================\n');
+                  console.log("====================================\n");
                 }
 
                 out.push(value.trim());
               });
 
               if (out.length > 1 && DEBUG) {
-                console.log('Stored value(s);\r\n');
+                console.log("Stored value(s);\r\n");
 
                 for (let i = 0; i < out.length; i++) {
                   console.log(`[${i}] = ${out[i]}`);
                 }
 
-                console.log('\r\nAppend the key that you want to store that value to the variable.');
+                console.log(
+                  "\r\nAppend the key that you want to store that value to the variable."
+                );
 
-                const storageType = ['', 'tempVars', 'serverVars', 'globalVars'];
+                const storageType = [
+                  "",
+                  "tempVars",
+                  "serverVars",
+                  "globalVars",
+                ];
                 const output = storageType[storage];
 
-                console.log(`Example \${${output}("${varName}")} to \${${output}("${varName}")[key]}`);
-                console.log(`${varName}[key] if not using it as a template\r\n`);
+                console.log(
+                  `Example \${${output}("${varName}")} to \${${output}("${varName}")[key]}`
+                );
+                console.log(
+                  `${varName}[key] if not using it as a template\r\n`
+                );
               }
 
               this.storeValue(out, storage, varName, cache);
-              if (DEBUG) console.log(`Stored value(s) [${out}] to  [${varName}] `);
+              if (DEBUG)
+                console.log(`Stored value(s) [${out}] to  [${varName}] `);
 
               this.callNextAction(cache);
             } else {
-              console.error(`Could not store a value from path ${myXPath}, Check that the path is valid!\n`);
+              console.error(
+                `Could not store a value from path ${myXPath}, Check that the path is valid!\n`
+              );
               if (DEBUG)
                 console.info(
-                  `parsestatus ==> ${parseLog.errorLevel}\nlocator:${mylocator.columnNumber}/${mylocator.lineNumber}`,
+                  `parsestatus ==> ${parseLog.errorLevel}\nlocator:${mylocator.columnNumber}/${mylocator.lineNumber}`
                 );
 
               this.storeValue(errored || undefined, storage, varName, cache);
@@ -219,7 +247,7 @@ module.exports = {
             this.callNextAction(cache);
           }
         } else {
-          console.error('HTML data Is Not Valid!');
+          console.error("HTML data Is Not Valid!");
         }
       } else {
         console.error(`Path [${myXPath}] Is Not Valid`);

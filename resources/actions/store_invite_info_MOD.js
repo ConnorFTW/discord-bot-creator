@@ -1,60 +1,60 @@
 module.exports = {
-  name: 'Store Invite Info',
-  section: 'Channel Control',
+  name: "Store Invite Info",
+  section: "Channel Control",
 
   subtitle(data) {
     const info = [
-      'Channel Object',
-      'Invite Creator',
-      'Creation Date',
-      'Expiration Date',
-      'Guild Object',
-      'Max. Uses',
-      'Is Temporary?',
-      'URL for Invite',
-      'Times Used',
-      'Invite server member count',
-      'Invite code',
+      "Channel Object",
+      "Invite Creator",
+      "Creation Date",
+      "Expiration Date",
+      "Guild Object",
+      "Max. Uses",
+      "Is Temporary?",
+      "URL for Invite",
+      "Times Used",
+      "Invite server member count",
+      "Invite code",
     ];
     return `Store ${info[parseInt(data.info, 10)]} from Invite`;
   },
 
   variableStorage(data, varType) {
     if (parseInt(data.storage, 10) !== varType) return;
-    let dataType = 'Unknown Type';
+    let dataType = "Unknown Type";
     switch (parseInt(data.info, 10)) {
       case 0:
-        dataType = 'Object';
+        dataType = "Object";
         break;
       case 1:
-        dataType = 'User';
+        dataType = "User";
         break;
       case 2:
-        dataType = 'date';
+        dataType = "date";
         break;
       case 3:
-        dataType = 'date';
+        dataType = "date";
         break;
       case 4:
-        dataType = 'Guild';
+        dataType = "Guild";
         break;
       case 5:
-        dataType = 'number';
+        dataType = "number";
         break;
       case 6:
-        dataType = 'boolean';
+        dataType = "boolean";
         break;
       case 7:
-        dataType = 'string';
+        dataType = "string";
         break;
       case 8:
-        dataType = 'number';
+        dataType = "number";
         break;
       case 9:
-        dataType = 'number';
+        dataType = "number";
         break;
       case 10:
-        dataType = 'number';
+        dataType = "number";
         break;
       default:
         break;
@@ -62,7 +62,7 @@ module.exports = {
     return [data.varName, dataType];
   },
 
-  fields: ['invite', 'info', 'storage', 'varName'],
+  fields: ["invite", "info", "storage", "varName"],
 
   html(_isEvent, data) {
     return `
@@ -101,7 +101,7 @@ module.exports = {
   init() {
     const { glob, document } = this;
 
-    glob.variableChange(document.getElementById('storage'), 'varNameContainer');
+    glob.variableChange(document.getElementById("storage"), "varNameContainer");
   },
 
   async action(cache) {
@@ -111,7 +111,9 @@ module.exports = {
     const storage = parseInt(data.storage, 10);
     const varName = this.evalMessage(data.varName, cache);
 
-    const inviteInfo = await this.getDBM().Bot.bot.fetchInvite(invite).catch(console.error);
+    const inviteInfo = await this.getDBM()
+      .Bot.bot.fetchInvite(invite)
+      .catch(console.error);
     if (!inviteInfo) return this.callNextAction(cache);
 
     let result;

@@ -1,30 +1,38 @@
 module.exports = {
-  name: 'Google Image Search',
-  section: 'Other Stuff',
+  name: "Google Image Search",
+  section: "Other Stuff",
 
   subtitle(data) {
-    const info = ['Title', 'URL', 'Snippet'];
+    const info = ["Title", "URL", "Snippet"];
     return `Google Image Result ${info[parseInt(data.info, 10)]}`;
   },
 
   variableStorage(data, varType) {
     if (parseInt(data.storage, 10) !== varType) return;
-    let dataType = 'Unknown Google Type';
+    let dataType = "Unknown Google Type";
     switch (parseInt(data.info, 10)) {
       case 0:
-        dataType = 'Google Result Title';
+        dataType = "Google Result Title";
         break;
       case 1:
-        dataType = 'Google Result URL';
+        dataType = "Google Result URL";
         break;
       case 2:
-        dataType = 'Google Result Snippet';
+        dataType = "Google Result Snippet";
         break;
     }
     return [data.varName, dataType];
   },
 
-  fields: ['string', 'apikey', 'clientid', 'info', 'resultNo', 'storage', 'varName'],
+  fields: [
+    "string",
+    "apikey",
+    "clientid",
+    "info",
+    "resultNo",
+    "storage",
+    "varName",
+  ],
 
   html(_isEvent, data) {
     return `
@@ -85,13 +93,16 @@ module.exports = {
 
   init() {
     const { glob, document } = this;
-    glob.variableChange(document.getElementById('storage'), 'varNameContainer');
+    glob.variableChange(document.getElementById("storage"), "varNameContainer");
   },
 
   action(cache) {
     const data = cache.actions[cache.index];
     const info = parseInt(data.info, 10);
-    const string = this.evalMessage(data.string, cache).replace(/[\u{0080}-\u{FFFF}]/gu, '');
+    const string = this.evalMessage(data.string, cache).replace(
+      /[\u{0080}-\u{FFFF}]/gu,
+      ""
+    );
     const resultNumber = parseInt(data.resultNo, 10);
     const clientid = this.evalMessage(data.clientid, cache);
     const apikey = this.evalMessage(data.apikey, cache);
@@ -99,15 +110,19 @@ module.exports = {
 
     if (!string)
       return console.error(
-        `There was an error in Google Image Search MOD (#${index}): \nPlease write something to Google it!`,
+        `There was an error in Google Image Search MOD (#${index}): \nPlease write something to Google it!`
       );
     if (!clientid)
-      return console.error(`There was an error in Google Image Search MOD (#${index}): \nPlease provide a Client ID!`);
+      return console.error(
+        `There was an error in Google Image Search MOD (#${index}): \nPlease provide a Client ID!`
+      );
     if (!apikey)
-      return console.error(`There was an error in Google Image Search MOD (#${index}): \nPlease provide an API Key`);
+      return console.error(
+        `There was an error in Google Image Search MOD (#${index}): \nPlease provide an API Key`
+      );
 
     const Mods = this.getMods();
-    const ImgSearch = Mods.require('image-search-google');
+    const ImgSearch = Mods.require("image-search-google");
     const imgClient = new ImgSearch(`${clientid}`, `${apikey}`);
     const options = { page: 1 };
     imgClient
@@ -124,9 +139,9 @@ module.exports = {
             result = result[resultNumber].thumbnailLink;
             break;
           default:
-            result = 'Check Console.';
+            result = "Check Console.";
             console.error(
-              `There was an error in Google Image Search MOD (#${index}): \nDesired Search Type does not exist.`,
+              `There was an error in Google Image Search MOD (#${index}): \nDesired Search Type does not exist.`
             );
             break;
         }
@@ -136,12 +151,16 @@ module.exports = {
           this.storeValue(result, storage, varName2, cache);
           this.callNextAction(cache);
         } else {
-          console.error(`There was an error in Google Image Search MOD (#${cache.index}): \nNo Result was provided.`);
+          console.error(
+            `There was an error in Google Image Search MOD (#${cache.index}): \nNo Result was provided.`
+          );
           this.callNextAction(cache);
         }
       })
       .catch((error) => {
-        console.error(`There was an error in Google Image Search MOD (#${cache.index}): \n${error}`);
+        console.error(
+          `There was an error in Google Image Search MOD (#${cache.index}): \n${error}`
+        );
         this.callNextAction(cache);
       });
   },

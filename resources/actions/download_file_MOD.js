@@ -1,12 +1,14 @@
 module.exports = {
-  name: 'Download File',
-  section: 'File Stuff',
+  name: "Download File",
+  section: "File Stuff",
 
   subtitle(data) {
-    return `From: ${data.url} to ${data.filePath}/${data.fileName || 'download'}.${data.fileFormat || 'txt'}`;
+    return `From: ${data.url} to ${data.filePath}/${
+      data.fileName || "download"
+    }.${data.fileFormat || "txt"}`;
   },
 
-  fields: ['url', 'fileName', 'fileFormat', 'filePath'],
+  fields: ["url", "fileName", "fileFormat", "filePath"],
 
   html() {
     return `
@@ -45,20 +47,20 @@ module.exports = {
     const fileFormat = this.evalMessage(data.fileFormat, cache);
     const filePath = this.evalMessage(data.filePath, cache);
     const Mods = this.getMods();
-    const http = require('https');
-    const fs = require('fs');
-    const path = `${filePath}/${fileName || 'download'}.${fileFormat || 'txt'}`;
+    const http = require("https");
+    const fs = require("fs");
+    const path = `${filePath}/${fileName || "download"}.${fileFormat || "txt"}`;
 
     if (!Mods.checkURL(url)) {
       url = encodeURI(url);
     }
 
     if (!fs.existsSync(path)) {
-      fs.writeFileSync(path, '');
+      fs.writeFileSync(path, "");
     }
 
     const ws = fs.createWriteStream(path);
-    ws.on('open', () => {
+    ws.on("open", () => {
       http.get(url, (res) => res.pipe(ws));
     });
 

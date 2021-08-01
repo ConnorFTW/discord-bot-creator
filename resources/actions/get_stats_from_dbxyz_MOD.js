@@ -1,88 +1,88 @@
 module.exports = {
-  name: 'Get Bot Stats From DBXYZ',
-  displayName: 'Get Bot Stats From Discord Boats',
-  section: 'Other Stuff',
+  name: "Get Bot Stats From DBXYZ",
+  displayName: "Get Bot Stats From Discord Boats",
+  section: "Other Stuff",
 
   subtitle(data) {
     const info = [
-      'Bot ID',
-      'Bot Name',
-      'Prefix',
-      'Bots Lib',
-      'Server Count',
-      'Short Description',
-      'Description',
-      'Avatar',
-      'Owner ID',
-      'Owner Name',
-      'Invite',
-      'Support Server',
-      'Website',
-      'Waiting For Review',
-      'Certified?',
-      'Vanity Url',
+      "Bot ID",
+      "Bot Name",
+      "Prefix",
+      "Bots Lib",
+      "Server Count",
+      "Short Description",
+      "Description",
+      "Avatar",
+      "Owner ID",
+      "Owner Name",
+      "Invite",
+      "Support Server",
+      "Website",
+      "Waiting For Review",
+      "Certified?",
+      "Vanity Url",
     ];
     return `Get Bots' ${info[parseInt(data.info, 10)]}`;
   },
 
   variableStorage(data, varType) {
     if (parseInt(data.storage, 10) !== varType) return;
-    let dataType = 'A Discord Boats Stat';
+    let dataType = "A Discord Boats Stat";
     switch (parseInt(data.info, 10)) {
       case 0:
-        dataType = 'Bot ID';
+        dataType = "Bot ID";
         break;
       case 1:
-        dataType = 'Bot Name';
+        dataType = "Bot Name";
         break;
       case 2:
-        dataType = 'Bot Prefix';
+        dataType = "Bot Prefix";
         break;
       case 3:
-        dataType = 'Library';
+        dataType = "Library";
         break;
       case 4:
-        dataType = 'Server Count';
+        dataType = "Server Count";
         break;
       case 5:
-        dataType = 'Short Description';
+        dataType = "Short Description";
         break;
       case 6:
-        dataType = 'Long Description';
+        dataType = "Long Description";
         break;
       case 7:
-        dataType = 'Avatar';
+        dataType = "Avatar";
         break;
       case 8:
-        dataType = 'Bot Owner ID';
+        dataType = "Bot Owner ID";
         break;
       case 9:
-        dataType = 'Bot Owner Name';
+        dataType = "Bot Owner Name";
         break;
       case 10:
-        dataType = 'Bot Invite';
+        dataType = "Bot Invite";
         break;
       case 11:
-        dataType = 'Support Server';
+        dataType = "Support Server";
         break;
       case 12:
-        dataType = 'Website';
+        dataType = "Website";
         break;
       case 13:
-        dataType = 'Waiting For Approval?';
+        dataType = "Waiting For Approval?";
         break;
       case 14:
-        dataType = 'Certified?';
+        dataType = "Certified?";
         break;
       case 15:
-        dataType = 'Vanity Url';
+        dataType = "Vanity Url";
         break;
       default:
         break;
     }
     return [data.varName, dataType];
   },
-  fields: ['botID', 'info', 'storage', 'varName'],
+  fields: ["botID", "info", "storage", "varName"],
 
   html(isEvent, data) {
     return `
@@ -133,7 +133,7 @@ module.exports = {
   init() {
     const { glob, document } = this;
 
-    glob.variableChange(document.getElementById('storage'), 'varNameContainer');
+    glob.variableChange(document.getElementById("storage"), "varNameContainer");
   },
 
   action(cache) {
@@ -142,7 +142,7 @@ module.exports = {
     const info = parseInt(data.info, 10);
 
     const Mods = this.getMods();
-    const sf = Mods.require('snekfetch');
+    const sf = Mods.require("snekfetch");
 
     sf.get(`https://discord.boats/api/bot/${botID}`)
       .then((r) => {

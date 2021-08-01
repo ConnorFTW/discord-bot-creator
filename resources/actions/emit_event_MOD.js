@@ -1,30 +1,32 @@
 /* eslint-disable no-empty */
 module.exports = {
-  name: 'Emit Event',
-  section: 'Bot Client Control',
-  fields: ['eventType', 'firstArg', 'secondArg'],
+  name: "Emit Event",
+  section: "Bot Client Control",
+  fields: ["eventType", "firstArg", "secondArg"],
 
   subtitle({ eventType }) {
     let DiscordJS;
     try {
-      DiscordJS = require('discord.js');
+      DiscordJS = require("discord.js");
     } catch (_) {}
 
     const events = Object.values(DiscordJS.Constants.Events).sort();
-    return events.includes(eventType) ? `Emits a ${eventType} event` : 'Not emitting anything';
+    return events.includes(eventType)
+      ? `Emits a ${eventType} event`
+      : "Not emitting anything";
   },
 
   init() {
-    const { execSync } = require('child_process');
+    const { execSync } = require("child_process");
     const { document } = this;
 
-    const wrexlinks = document.getElementsByClassName('wrexlink2');
+    const wrexlinks = document.getElementsByClassName("wrexlink2");
     for (let i = 0; i < wrexlinks.length; i++) {
       const wrexlink = wrexlinks[i];
-      const url = wrexlink.getAttribute('data-url2');
+      const url = wrexlink.getAttribute("data-url2");
       if (url) {
-        wrexlink.setAttribute('title', url);
-        wrexlink.addEventListener('click', (e) => {
+        wrexlink.setAttribute("title", url);
+        wrexlink.addEventListener("click", (e) => {
           e.stopImmediatePropagation();
           execSync(`start ${url}`);
         });
@@ -35,12 +37,13 @@ module.exports = {
   html() {
     let DiscordJS;
     try {
-      DiscordJS = require('discord.js');
+      DiscordJS = require("discord.js");
     } catch (_) {}
 
-    const events = DiscordJS && Object.values(DiscordJS.Constants.Events).sort();
+    const events =
+      DiscordJS && Object.values(DiscordJS.Constants.Events).sort();
     const docs = `https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-${
-      (events && events[0]) || 'channelCreate'
+      (events && events[0]) || "channelCreate"
     }`;
 
     return `
@@ -52,14 +55,14 @@ module.exports = {
         <summary><span style="color: white"><b>Available event types (click to expand)</b></summary>
         <div class="codeblock">
           <span style="color:#9b9b9b">
-            ${events.map((e) => `<li>${e}</li>`).join('\n')}
+            ${events.map((e) => `<li>${e}</li>`).join("\n")}
           </span>
           <p>
             You can learn more about what events take what arguments on the <u><span class="wrexlink2" data-url2="${docs}">discord.js documentation.</span></u>
           </p>
       </details>
     </div>`
-      : ''
+      : ""
   }
   <div class="container">
     Event Type:<br>
@@ -113,7 +116,10 @@ module.exports = {
     const { DiscordJS } = this.getDBM();
     const events = Object.values(DiscordJS.Constants.Events).sort();
     const event = this.evalMessage(data.eventType);
-    if (!events.includes(event)) return console.error(`${this.name} (#${cache.index + 1}): Unknown event type.`);
+    if (!events.includes(event))
+      return console.error(
+        `${this.name} (#${cache.index + 1}): Unknown event type.`
+      );
 
     const firstArg = this.evalMessage(data.firstArg, cache);
     const secondArg = this.evalMessage(data.secondArg, cache);

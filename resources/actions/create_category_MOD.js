@@ -1,6 +1,6 @@
 module.exports = {
-  name: 'Create Category Channel',
-  section: 'Channel Control',
+  name: "Create Category Channel",
+  section: "Channel Control",
 
   subtitle(data) {
     return `${data.channelName}`;
@@ -8,10 +8,10 @@ module.exports = {
 
   variableStorage(data, varType) {
     if (parseInt(data.storage, 10) !== varType) return;
-    return [data.varName, 'Channel'];
+    return [data.varName, "Channel"];
   },
 
-  fields: ['channelName', 'position', 'storage', 'varName'],
+  fields: ["channelName", "position", "storage", "varName"],
 
   html(isEvent, data) {
     return `
@@ -37,19 +37,20 @@ Name:<br>
 
   init() {
     const { glob, document } = this;
-    glob.variableChange(document.getElementById('storage'), 'varNameContainer');
+    glob.variableChange(document.getElementById("storage"), "varNameContainer");
   },
 
   action(cache) {
     const data = cache.actions[cache.index];
     const { server } = cache;
-    if (!this.dest(server, 'channels', 'create')) return this.callnextAction(cache);
+    if (!this.dest(server, "channels", "create"))
+      return this.callnextAction(cache);
 
     const name = this.evalMessage(data.channelName, cache);
     const position = parseInt(data.position, 10);
     const storage = parseInt(data.storage, 10);
     server.channels
-      .create(name, { type: 'category', position })
+      .create(name, { type: "category", position })
       .then((channel) => {
         const varName = this.evalMessage(data.varName, cache);
         this.storeValue(channel, storage, varName, cache);

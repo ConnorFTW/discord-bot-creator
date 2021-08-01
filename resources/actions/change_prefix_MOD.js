@@ -1,12 +1,12 @@
 module.exports = {
-  name: 'Change Global Prefix',
-  section: 'Bot Client Control',
+  name: "Change Global Prefix",
+  section: "Bot Client Control",
 
   subtitle() {
-    return 'Change Prefix';
+    return "Change Prefix";
   },
 
-  fields: ['pprefix'],
+  fields: ["pprefix"],
 
   html() {
     return `
@@ -25,7 +25,9 @@ module.exports = {
       const prefix = this.evalMessage(data.pprefix, cache);
       if (prefix) {
         this.getDBM().Files.data.settings.tag = prefix;
-        this.getDBM().Files.saveData('settings', () => console.log(`Prefix changed to ${prefix}`));
+        this.getDBM().Files.saveData("settings", () =>
+          console.log(`Prefix changed to ${prefix}`)
+        );
       } else {
         console.log(`${prefix} is not valid! Try again!`);
       }

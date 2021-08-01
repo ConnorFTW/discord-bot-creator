@@ -1,69 +1,76 @@
 module.exports = {
-  name: 'Store Emoji Info',
-  section: 'Emoji Control',
+  name: "Store Emoji Info",
+  section: "Emoji Control",
 
   subtitle(data) {
-    const emoji = ['You cheater!', 'Temp Variable', 'Server Variable', 'Global Variable'];
-    const info = [
-      'Emoji Object',
-      'Emoji Is Animated?',
-      'Emoji Creation Date',
-      'Emoji Name',
-      'Emoji URL',
-      'Emoji ID',
-      'Emoji Timestamp',
-      'Emoji Is Deletable?',
-      'Emoji Has Been Deleted?',
-      'Emoji Server',
-      'Emoji Identifier',
-      'Emoji Is Managed By An External Service?',
-      'Emoji Requires Colons Surrounding It?',
+    const emoji = [
+      "You cheater!",
+      "Temp Variable",
+      "Server Variable",
+      "Global Variable",
     ];
-    return `${emoji[parseInt(data.emoji, 10)]} - ${info[parseInt(data.info, 10)]}`;
+    const info = [
+      "Emoji Object",
+      "Emoji Is Animated?",
+      "Emoji Creation Date",
+      "Emoji Name",
+      "Emoji URL",
+      "Emoji ID",
+      "Emoji Timestamp",
+      "Emoji Is Deletable?",
+      "Emoji Has Been Deleted?",
+      "Emoji Server",
+      "Emoji Identifier",
+      "Emoji Is Managed By An External Service?",
+      "Emoji Requires Colons Surrounding It?",
+    ];
+    return `${emoji[parseInt(data.emoji, 10)]} - ${
+      info[parseInt(data.info, 10)]
+    }`;
   },
 
   variableStorage(data, varType) {
     if (parseInt(data.storage, 10) !== varType) return;
-    let dataType = 'Unknown Type';
+    let dataType = "Unknown Type";
     switch (parseInt(data.info, 10)) {
       case 0:
-        dataType = 'Emoji Object';
+        dataType = "Emoji Object";
         break;
       case 1:
-        dataType = 'Text';
+        dataType = "Text";
         break;
       case 2:
-        dataType = 'Date';
+        dataType = "Date";
         break;
       case 3:
-        dataType = 'Emoji Name';
+        dataType = "Emoji Name";
         break;
       case 4:
-        dataType = 'Emoji URL';
+        dataType = "Emoji URL";
         break;
       case 5:
-        dataType = 'Emoji ID';
+        dataType = "Emoji ID";
         break;
       case 6:
-        dataType = 'Number';
+        dataType = "Number";
         break;
       case 7:
-        dataType = 'Boolean';
+        dataType = "Boolean";
         break;
       case 8:
-        dataType = 'Boolean';
+        dataType = "Boolean";
         break;
       case 9:
-        dataType = 'Server';
+        dataType = "Server";
         break;
       case 10:
-        dataType = 'String';
+        dataType = "String";
         break;
       case 11:
-        dataType = 'Boolean';
+        dataType = "Boolean";
         break;
       case 12:
-        dataType = 'Boolean';
+        dataType = "Boolean";
         break;
       default:
         break;
@@ -71,7 +78,7 @@ module.exports = {
     return [data.varName2, dataType];
   },
 
-  fields: ['emoji', 'varName', 'info', 'storage', 'varName2'],
+  fields: ["emoji", "varName", "info", "storage", "varName2"],
 
   html(isEvent, data) {
     return `
@@ -128,7 +135,7 @@ module.exports = {
 
   init() {
     const { glob, document } = this;
-    glob.emojiChange(document.getElementById('emoji'));
+    glob.emojiChange(document.getElementById("emoji"));
   },
 
   action(cache) {

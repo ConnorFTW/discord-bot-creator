@@ -1,17 +1,17 @@
 module.exports = {
-  name: 'Text To Speech',
-  section: 'Messaging',
+  name: "Text To Speech",
+  section: "Messaging",
 
   subtitle() {
-    return 'Make your Discord bot talk.';
+    return "Make your Discord bot talk.";
   },
 
   variableStorage(data, varType) {
     if (parseInt(data.storage, 10) !== varType) return;
-    return [data.varName, 'Audio URL'];
+    return [data.varName, "Audio URL"];
   },
 
-  fields: ['text', 'lang', 'storage', 'varName'],
+  fields: ["text", "lang", "storage", "varName"],
 
   html(_isEvent, data) {
     return `
@@ -47,12 +47,12 @@ module.exports = {
     const text = this.evalMessage(data.text, cache);
     const language = this.evalMessage(data.lang, cache);
     const Mods = this.getMods();
-    const tts = Mods.require('google-tts-api');
+    const tts = Mods.require("google-tts-api");
 
     const play = await tts.getAudioUrl(text, {
       lang: language,
       slow: false,
-      host: 'https://translate.google.com',
+      host: "https://translate.google.com",
     });
     this.storeValue(play, storage, varName, cache);
     this.callNextAction(cache);

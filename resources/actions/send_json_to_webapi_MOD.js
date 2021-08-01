@@ -1,28 +1,30 @@
 module.exports = {
-  name: 'Send Json to WebAPI',
-  section: 'JSON Things',
+  name: "Send Json to WebAPI",
+  section: "JSON Things",
 
   subtitle(data) {
-    return `Store: ${data.varName} DebugMode: ${data.debugMode === '1' ? 'Enabled' : 'Disabled'}`;
+    return `Store: ${data.varName} DebugMode: ${
+      data.debugMode === "1" ? "Enabled" : "Disabled"
+    }`;
   },
 
   variableStorage(data, varType) {
     if (parseInt(data.storage, 10) !== varType) return;
-    return [data.varName, 'JSON Object'];
+    return [data.varName, "JSON Object"];
   },
 
   fields: [
-    'hideUrl',
-    'debugMode',
-    'postUrl',
-    'postJson',
-    'storage',
-    'varName',
-    'token',
-    'user',
-    'pass',
-    'headers',
-    'method',
+    "hideUrl",
+    "debugMode",
+    "postUrl",
+    "postJson",
+    "storage",
+    "varName",
+    "token",
+    "user",
+    "pass",
+    "headers",
+    "method",
   ],
 
   html(_isEvent, data) {
@@ -137,21 +139,21 @@ module.exports = {
   init() {
     const { glob, document } = this;
 
-    const wrexlinks = document.getElementsByClassName('wrexlink');
+    const wrexlinks = document.getElementsByClassName("wrexlink");
     for (let x = 0; x < wrexlinks.length; x++) {
       const wrexlink = wrexlinks[x];
-      const url = wrexlink.getAttribute('data-url');
+      const url = wrexlink.getAttribute("data-url");
       if (url) {
-        wrexlink.setAttribute('title', url);
-        wrexlink.addEventListener('click', (e) => {
+        wrexlink.setAttribute("title", url);
+        wrexlink.addEventListener("click", (e) => {
           e.stopImmediatePropagation();
           console.log(`Launching URL: [${url}] in your default browser.`);
-          require('child_process').execSync(`start ${url}`);
+          require("child_process").execSync(`start ${url}`);
         });
       }
     }
 
-    glob.variableChange(document.getElementById('storage'), 'varNameContainer');
+    glob.variableChange(document.getElementById("storage"), "varNameContainer");
   },
 
   async action(cache) {
@@ -159,7 +161,7 @@ module.exports = {
     const { Actions } = this.getDBM();
 
     const Mods = this.getMods();
-    const fetch = require('node-fetch');
+    const fetch = require("node-fetch");
 
     let url = this.evalMessage(data.postUrl, cache);
     const method = this.evalMessage(data.method, cache);
@@ -195,50 +197,64 @@ module.exports = {
         const setHeaders = {};
 
         // set default required header
-        setHeaders['User-Agent'] = 'Other';
-        setHeaders['Content-Type'] = 'application/json';
+        setHeaders["User-Agent"] = "Other";
+        setHeaders["Content-Type"] = "application/json";
 
         // if user or pass, apply it to headers
-        if (user || pass) setHeaders.Authorization = `Basic ${Buffer.from(`${user}:${pass}`).toString('base64')}`;
+        if (user || pass)
+          setHeaders.Authorization = `Basic ${Buffer.from(
+            `${user}:${pass}`
+          ).toString("base64")}`;
 
         // if token, apply it to headers
         if (token) setHeaders.Authorization = `Bearer ${token}`;
 
         // Because headers are a dictionary ;)
         if (headers) {
-          const lines = String(headers).split('\n');
+          const lines = String(headers).split("\n");
           for (let i = 0; i < lines.length; i++) {
-            const header = lines[i].split(':');
+            const header = lines[i].split(":");
 
-            if (lines[i].includes(':') && header.length > 0) {
-              const key = header[0] || 'Unknown';
-              const value = header[1] || 'Unknown';
+            if (lines[i].includes(":") && header.length > 0) {
+              const key = header[0] || "Unknown";
+              const value = header[1] || "Unknown";
               setHeaders[key] = value;
 
               if (debugMode) console.log(`Applied Header: ${lines[i]}`);
             } else if (debugMode)
               console.error(
-                `WebAPI: Error: Custom Header line ${lines[i]} is wrongly formatted. You must split the key from the value with a colon (:)`,
+                `WebAPI: Error: Custom Header line ${lines[i]} is wrongly formatted. You must split the key from the value with a colon (:)`
               );
           }
         }
 
-        const jsonData = await fetch(url, { method, body: postJson, headers: setHeaders }).then((r) => r.json());
+        const jsonData = await fetch(url, {
+          method,
+          body: postJson,
+          headers: setHeaders,
+        }).then((r) => r.json());
 
         try {
           if (jsonData) {
             Actions.storeValue(jsonData, storage, varName, cache);
 
             if (debugMode) {
-              console.log(`WebAPI: JSON Data Response value stored to: [${varName}]`);
-              console.log('Response (Disable DebugMode to stop printing the response data to the console):\r\n');
+              console.log(
+                `WebAPI: JSON Data Response value stored to: [${varName}]`
+              );
+              console.log(
+                "Response (Disable DebugMode to stop printing the response data to the console):\r\n"
+              );
               console.log(JSON.stringify(jsonData, null, 4));
             }
           } else {
             const errorJson = JSON.stringify({ statusCode: 0 });
             Actions.storeValue(errorJson, storage, varName, cache);
 
-            if (debugMode) console.error(`WebAPI: Error: ${errorJson} stored to: [${varName}]`);
+            if (debugMode)
+              console.error(
+                `WebAPI: Error: ${errorJson} stored to: [${varName}]`
+              );
           }
 
           Actions.callNextAction(cache);

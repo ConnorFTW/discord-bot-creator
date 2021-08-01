@@ -1,6 +1,6 @@
 module.exports = {
-  name: 'License',
-  section: '#Mod Information',
+  name: "License",
+  section: "#Mod Information",
 
   subtitle() {
     return 'Does nothing - Click "Edit" for more information';

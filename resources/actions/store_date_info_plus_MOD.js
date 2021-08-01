@@ -1,35 +1,47 @@
 module.exports = {
-  name: 'Store Date Info Plus',
-  section: 'Other Stuff',
+  name: "Store Date Info Plus",
+  section: "Other Stuff",
 
   subtitle(data) {
     const info = [
-      'Day of Week',
-      'Day Number',
-      'Day of Year',
-      'Week of Year',
-      'Month of Year',
-      'Month Number',
-      'Year',
-      'Hour',
-      'Minute',
-      'Second',
-      'Millisecond',
-      'Timezone',
-      'Unix Timestamp',
+      "Day of Week",
+      "Day Number",
+      "Day of Year",
+      "Week of Year",
+      "Month of Year",
+      "Month Number",
+      "Year",
+      "Hour",
+      "Minute",
+      "Second",
+      "Millisecond",
+      "Timezone",
+      "Unix Timestamp",
     ];
-    const storage = ['', 'Temp Variable', 'Server Variable', 'Global Variable'];
+    const storage = ["", "Temp Variable", "Server Variable", "Global Variable"];
     return `Store ${
-      data.modeStorage === '0' ? `"${info[data.info]}"` : data.buildInput === '' ? '"Not Set"' : `"${data.buildInput}"`
+      data.modeStorage === "0"
+        ? `"${info[data.info]}"`
+        : data.buildInput === ""
+        ? '"Not Set"'
+        : `"${data.buildInput}"`
     } from a Date ~ ${storage[data.storage]}`;
   },
 
   variableStorage(data, varType) {
     if (parseInt(data.storage, 10) !== varType) return;
-    return [data.varName, 'Date'];
+    return [data.varName, "Date"];
   },
 
-  fields: ['sourceDate', 'dateLanguage', 'modeStorage', 'info', 'buildInput', 'storage', 'varName'],
+  fields: [
+    "sourceDate",
+    "dateLanguage",
+    "modeStorage",
+    "info",
+    "buildInput",
+    "storage",
+    "varName",
+  ],
 
   html(_isEvent, data) {
     return `
@@ -111,30 +123,30 @@ module.exports = {
     glob.onChangeMode = function onChangeMode(modeStorage) {
       switch (parseInt(modeStorage.value, 10)) {
         case 0:
-          document.getElementById('selectMode').style.display = null;
-          document.getElementById('buildMode').style.display = 'none';
-          document.getElementById('noteContainer').style.display = 'none';
+          document.getElementById("selectMode").style.display = null;
+          document.getElementById("buildMode").style.display = "none";
+          document.getElementById("noteContainer").style.display = "none";
           break;
         case 1:
-          document.getElementById('selectMode').style.display = 'none';
-          document.getElementById('buildMode').style.display = null;
-          document.getElementById('noteContainer').style.display = null;
+          document.getElementById("selectMode").style.display = "none";
+          document.getElementById("buildMode").style.display = null;
+          document.getElementById("noteContainer").style.display = null;
           break;
       }
     };
 
-    glob.onChangeMode(document.getElementById('modeStorage'));
+    glob.onChangeMode(document.getElementById("modeStorage"));
 
-    const wrexlinks = document.getElementsByClassName('wrexlink');
+    const wrexlinks = document.getElementsByClassName("wrexlink");
     for (let x = 0; x < wrexlinks.length; x++) {
       const wrexlink = wrexlinks[x];
-      const url = wrexlink.getAttribute('data-url');
+      const url = wrexlink.getAttribute("data-url");
       if (url) {
-        wrexlink.setAttribute('title', url);
-        wrexlink.addEventListener('click', (e) => {
+        wrexlink.setAttribute("title", url);
+        wrexlink.addEventListener("click", (e) => {
           e.stopImmediatePropagation();
           console.log(`Launching URL: [${url}] in your default browser.`);
-          require('child_process').execSync(`start ${url}`);
+          require("child_process").execSync(`start ${url}`);
         });
       }
     }
@@ -142,12 +154,12 @@ module.exports = {
 
   action(cache) {
     const data = cache.actions[cache.index];
-    const moment = this.getMods().require('moment');
+    const moment = this.getMods().require("moment");
     const dateLanguage = this.evalMessage(data.dateLanguage, cache);
     const date = moment(
       Date.parse(this.evalMessage(data.sourceDate, cache)),
-      '',
-      dateLanguage === '' ? 'en' : dateLanguage,
+      "",
+      dateLanguage === "" ? "en" : dateLanguage
     );
     const buildInput = this.evalMessage(data.buildInput, cache);
     const modeType = parseInt(this.evalMessage(data.modeStorage, cache), 10);
@@ -158,43 +170,43 @@ module.exports = {
     if (modeType === 0) {
       switch (info) {
         case 0:
-          result = date.format('dddd');
+          result = date.format("dddd");
           break;
         case 1:
-          result = date.format('DD');
+          result = date.format("DD");
           break;
         case 2:
-          result = date.format('DDD');
+          result = date.format("DDD");
           break;
         case 3:
-          result = date.format('ww');
+          result = date.format("ww");
           break;
         case 4:
-          result = date.format('MMMMM');
+          result = date.format("MMMMM");
           break;
         case 5:
-          result = date.format('MM');
+          result = date.format("MM");
           break;
         case 6:
-          result = date.format('YYYY');
+          result = date.format("YYYY");
           break;
         case 7:
-          result = date.format('hh');
+          result = date.format("hh");
           break;
         case 8:
-          result = date.format('mm');
+          result = date.format("mm");
           break;
         case 9:
-          result = date.format('ss');
+          result = date.format("ss");
           break;
         case 10:
-          result = date.format('SS');
+          result = date.format("SS");
           break;
         case 11:
-          result = date.format('ZZ');
+          result = date.format("ZZ");
           break;
         case 12:
-          result = date.format('X');
+          result = date.format("X");
           break;
         default:
           break;
@@ -203,9 +215,9 @@ module.exports = {
       result = date.format(buildInput);
     }
 
-    if (result === 'Invalid date') {
+    if (result === "Invalid date") {
       return console.log(
-        'Invalid Date! Check that your date is valid in "Store Date Info Plus". A Date generally looks like the one stored in "Creation Date" of a server. (variables works)',
+        'Invalid Date! Check that your date is valid in "Store Date Info Plus". A Date generally looks like the one stored in "Creation Date" of a server. (variables works)'
       );
     }
 

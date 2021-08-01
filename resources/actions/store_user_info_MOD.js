@@ -1,67 +1,75 @@
 module.exports = {
-  name: 'Store User Info',
-  section: 'User Control',
+  name: "Store User Info",
+  section: "User Control",
 
   subtitle(data) {
-    const users = ['Mentioned User', 'Command Author', 'Temp Variable', 'Server Variable', 'Global Variable'];
-    const info = [
-      'Object',
-      'ID',
-      'Username',
-      'Status',
-      'Avatar URL',
-      'Last Message',
-      'Last Message ID',
-      'Playing Status Name',
-      'Custom Status',
-      'Discriminator',
-      'Tag',
-      'Created At',
-      'Created Timestamp',
-      'Flags List',
-      'Client Status',
+    const users = [
+      "Mentioned User",
+      "Command Author",
+      "Temp Variable",
+      "Server Variable",
+      "Global Variable",
     ];
-    return `${users[parseInt(data.user, 10)]} - User ${info[parseInt(data.info, 10)]}`;
+    const info = [
+      "Object",
+      "ID",
+      "Username",
+      "Status",
+      "Avatar URL",
+      "Last Message",
+      "Last Message ID",
+      "Playing Status Name",
+      "Custom Status",
+      "Discriminator",
+      "Tag",
+      "Created At",
+      "Created Timestamp",
+      "Flags List",
+      "Client Status",
+    ];
+    return `${users[parseInt(data.user, 10)]} - User ${
+      info[parseInt(data.info, 10)]
+    }`;
   },
 
   variableStorage(data, varType) {
     if (parseInt(data.storage, 10) !== varType) return;
-    let dataType = 'Unknown Type';
+    let dataType = "Unknown Type";
     switch (parseInt(data.info, 10)) {
       case 0:
-        dataType = 'User';
+        dataType = "User";
         break;
       case 1:
-        dataType = 'User ID';
+        dataType = "User ID";
         break;
       case 2:
       case 3:
       case 5:
       case 7:
       case 8:
-        dataType = 'Text';
+        dataType = "Text";
         break;
       case 4:
-        dataType = 'Image URL';
+        dataType = "Image URL";
         break;
       case 6:
-        dataType = 'Message ID';
+        dataType = "Message ID";
         break;
       case 9:
-        dataType = 'User Discriminator';
+        dataType = "User Discriminator";
         break;
       case 10:
-        dataType = 'User Tag';
+        dataType = "User Tag";
         break;
       case 11:
-        dataType = 'Date';
+        dataType = "Date";
         break;
       case 12:
-        dataType = 'Timestamp';
+        dataType = "Timestamp";
         break;
       case 13:
       case 14:
-        dataType = 'List';
+        dataType = "List";
         break;
       default:
         break;
@@ -69,7 +77,7 @@ module.exports = {
     return [data.varName2, dataType];
   },
 
-  fields: ['user', 'varName', 'info', 'storage', 'varName2'],
+  fields: ["user", "varName", "info", "storage", "varName2"],
 
   html(isEvent, data) {
     return `
@@ -124,7 +132,7 @@ module.exports = {
   init() {
     const { glob, document } = this;
 
-    glob.memberChange(document.getElementById('user'), 'varNameContainer');
+    glob.memberChange(document.getElementById("user"), "varNameContainer");
   },
 
   action(cache) {
@@ -148,18 +156,18 @@ module.exports = {
         result = user.username;
         break;
       case 3: // User Status
-        if (this.dest(user.presence, 'status')) {
+        if (this.dest(user.presence, "status")) {
           const { status } = user.presence;
-          if (status === 'online') result = 'Online';
-          else if (status === 'offline') result = 'Offline';
-          else if (status === 'idle') result = 'Idle';
-          else if (status === 'dnd') result = 'Do Not Disturb';
+          if (status === "online") result = "Online";
+          else if (status === "offline") result = "Offline";
+          else if (status === "idle") result = "Idle";
+          else if (status === "dnd") result = "Do Not Disturb";
         }
         break;
       case 4: // User Avatar
         result = user.displayAvatarURL({
           dynamic: true,
-          format: 'png',
+          format: "png",
           size: 4096,
         });
         break;
@@ -170,15 +178,19 @@ module.exports = {
         result = user.lastMessageID;
         break;
       case 7: // User Activities
-        if (this.dest(user.presence, 'activities')) {
-          const status = user.presence.activities.filter((s) => s.type !== 'CUSTOM_STATUS');
-          result = status && this.dest(status[0], 'name');
+        if (this.dest(user.presence, "activities")) {
+          const status = user.presence.activities.filter(
+            (s) => s.type !== "CUSTOM_STATUS"
+          );
+          result = status && this.dest(status[0], "name");
         }
         break;
       case 8: // User Custom Status
-        if (this.dest(user.presence, 'activities')) {
-          const status = user.presence.activities.filter((s) => this.dest(s, 'type') === 'CUSTOM_STATUS');
-          result = status && this.dest(status[0], 'state');
+        if (this.dest(user.presence, "activities")) {
+          const status = user.presence.activities.filter(
+            (s) => this.dest(s, "type") === "CUSTOM_STATUS"
+          );
+          result = status && this.dest(status[0], "state");
         }
         break;
       case 9: // User Discriminator
@@ -201,7 +213,7 @@ module.exports = {
       }
       case 14: {
         // User Status
-        const status = this.dest(user.presence, 'clientStatus');
+        const status = this.dest(user.presence, "clientStatus");
         result = status && Object.keys(status);
         break;
       }

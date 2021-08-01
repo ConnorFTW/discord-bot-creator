@@ -1,33 +1,33 @@
 module.exports = {
-  name: 'Get Song Lyrics',
-  section: 'Other Stuff',
+  name: "Get Song Lyrics",
+  section: "Other Stuff",
 
   subtitle(data) {
-    const info = ['Title', 'Artist', 'Lyrics', 'URL'];
+    const info = ["Title", "Artist", "Lyrics", "URL"];
     return `Get Lyrics - ${info[parseInt(data.info, 10)]}`;
   },
 
   variableStorage(data, varType) {
     if (parseInt(data.storage, 10) !== varType) return;
-    let dataType = 'Unknown Type';
+    let dataType = "Unknown Type";
     switch (parseInt(data.info, 10)) {
       case 0:
-        dataType = 'String';
+        dataType = "String";
         break;
       case 1:
-        dataType = 'String';
+        dataType = "String";
         break;
       case 2:
-        dataType = 'String';
+        dataType = "String";
         break;
       case 3:
-        dataType = 'URL';
+        dataType = "URL";
         break;
     }
     return [data.varName, dataType];
   },
 
-  fields: ['song', 'key', 'info', 'storage', 'varName'],
+  fields: ["song", "key", "info", "storage", "varName"],
 
   html(_isEvent, data) {
     return `
@@ -104,7 +104,7 @@ module.exports = {
 
   init() {
     const { glob, document } = this;
-    glob.variableChange(document.getElementById('storage'), 'varNameContainer');
+    glob.variableChange(document.getElementById("storage"), "varNameContainer");
   },
 
   action(cache) {
@@ -113,10 +113,11 @@ module.exports = {
     const info = parseInt(data.info, 10);
     const geniustoken = this.evalMessage(data.key, cache);
     const songname = this.evalMessage(data.song, cache);
-    if (!geniustoken) return console.log('Please set your token in Get Lyrics Action!');
+    if (!geniustoken)
+      return console.log("Please set your token in Get Lyrics Action!");
 
     const Mods = this.getMods();
-    const analyrics = Mods.require('analyrics');
+    const analyrics = Mods.require("analyrics");
 
     analyrics.setToken(geniustoken);
 

@@ -1,42 +1,42 @@
 /* eslint-disable no-unused-vars */
 module.exports = {
-  name: 'Store Data List MOD',
-  displayName: 'Store Data List',
-  section: 'Other Stuff',
+  name: "Store Data List MOD",
+  displayName: "Store Data List",
+  section: "Other Stuff",
 
   subtitle(data) {
-    const files = ['players.json', 'servers.json'];
+    const files = ["players.json", "servers.json"];
     return `${files[parseInt(data.File, 10)]} - ${data.dataName}`;
   },
 
   variableStorage(data, varType) {
     if (parseInt(data.storage, 10) !== varType) return;
-    let dataType = 'Unknown Type';
+    let dataType = "Unknown Type";
     switch (parseInt(data.resultInfo, 10)) {
       case 0:
-        dataType = 'List';
+        dataType = "List";
         break;
       case 1:
-        dataType = 'Number';
+        dataType = "Number";
         break;
     }
     return [data.varName, dataType];
   },
 
   fields: [
-    'File',
-    'serverType',
-    'dataName',
-    'sort',
-    'numberBoolean',
-    'resultFormat',
-    'resultInfo',
-    'rank',
-    'resultType',
-    'resultFrom',
-    'resultTo',
-    'varName',
-    'storage',
+    "File",
+    "serverType",
+    "dataName",
+    "sort",
+    "numberBoolean",
+    "resultFormat",
+    "resultInfo",
+    "rank",
+    "resultType",
+    "resultFrom",
+    "resultTo",
+    "varName",
+    "storage",
   ],
 
   html(_isEvent, data) {
@@ -133,29 +133,31 @@ module.exports = {
 
   init() {
     const { glob, document } = this;
-    const Input0 = document.getElementById('Input0');
-    const Input1 = document.getElementById('Input1');
-    const Input2 = document.getElementById('Input2');
-    const Input3 = document.getElementById('Input3');
-    const Input4 = document.getElementById('Input4');
-    const Result0 = document.getElementById('Result0');
-    const Result1 = document.getElementById('Result1');
-    const rank = document.getElementById('rank');
-    const link = document.getElementById('link');
+    const Input0 = document.getElementById("Input0");
+    const Input1 = document.getElementById("Input1");
+    const Input2 = document.getElementById("Input2");
+    const Input3 = document.getElementById("Input3");
+    const Input4 = document.getElementById("Input4");
+    const Result0 = document.getElementById("Result0");
+    const Result1 = document.getElementById("Result1");
+    const rank = document.getElementById("rank");
+    const link = document.getElementById("link");
 
     link.onclick = function onclick() {
-      require('child_process').execSync('start https://gist.github.com/LeonZ2019/72dd92c14fdb29afbc64151003d1d48e');
+      require("child_process").execSync(
+        "start https://gist.github.com/LeonZ2019/72dd92c14fdb29afbc64151003d1d48e"
+      );
     };
 
     glob.onChange0 = function onChange0(File) {
       switch (parseInt(File.value, 10)) {
         case 0:
           Input0.style.display = null;
-          rank.placeholder = 'Input Member ID here';
+          rank.placeholder = "Input Member ID here";
           break;
         case 1:
-          Input0.style.display = 'none';
-          rank.placeholder = 'Input Server ID here';
+          Input0.style.display = "none";
+          rank.placeholder = "Input Server ID here";
           break;
       }
     };
@@ -164,17 +166,17 @@ module.exports = {
       switch (parseInt(resultInfo.value, 10)) {
         case 0:
           Result0.style.display = null;
-          Result1.style.display = 'none';
+          Result1.style.display = "none";
           Input1.style.display = null;
           Input2.style.display = null;
           break;
         case 1:
-          Result0.style.display = 'none';
+          Result0.style.display = "none";
           Result1.style.display = null;
-          Input1.style.display = 'none';
-          Input2.style.display = 'none';
-          Input3.style.display = 'none';
-          Input4.style.display = 'none';
+          Input1.style.display = "none";
+          Input2.style.display = "none";
+          Input3.style.display = "none";
+          Input4.style.display = "none";
           break;
       }
     };
@@ -182,39 +184,39 @@ module.exports = {
     glob.onChange2 = function onChange2(resultType) {
       switch (parseInt(resultType.value, 10)) {
         case 0:
-          Input3.style.display = 'none';
-          Input4.style.display = 'none';
+          Input3.style.display = "none";
+          Input4.style.display = "none";
           break;
         case 1:
-          Input3.style.display = 'none';
+          Input3.style.display = "none";
           Input4.style.display = null;
-          Input3.style.width = '0%';
-          Input4.style.width = '100%';
+          Input3.style.width = "0%";
+          Input4.style.width = "100%";
           break;
         case 2:
           Input3.style.display = null;
-          Input4.style.display = 'none';
-          Input3.style.width = '100%';
-          Input4.style.width = '0%';
+          Input4.style.display = "none";
+          Input3.style.width = "100%";
+          Input4.style.width = "0%";
           break;
         case 3:
           Input3.style.display = null;
           Input4.style.display = null;
-          Input3.style.width = '50%';
-          Input4.style.width = '50%';
+          Input3.style.width = "50%";
+          Input4.style.width = "50%";
           break;
       }
     };
 
-    glob.onChange0(document.getElementById('File'));
-    glob.onChange1(document.getElementById('resultInfo'));
-    glob.onChange2(document.getElementById('resultType'));
+    glob.onChange0(document.getElementById("File"));
+    glob.onChange1(document.getElementById("resultInfo"));
+    glob.onChange2(document.getElementById("resultType"));
   },
 
   async action(cache) {
     const Client = this.getDBM().Bot.bot;
     const { Files } = this.getDBM();
-    const { sort: fastsort } = require('fast-sort');
+    const { sort: fastsort } = require("fast-sort");
     const data = cache.actions[cache.index];
     const File = parseInt(data.File, 10);
     let file = Files.data.servers;
@@ -337,7 +339,7 @@ module.exports = {
             array1.push(`${result[resultFrom].rank + eval(resultFormat)}\n`);
           }
         }
-        array1 = array1.join('');
+        array1 = array1.join("");
         this.storeValue(array1, storage, varName, cache);
         break;
       }

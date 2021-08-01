@@ -1,13 +1,27 @@
 module.exports = {
-  name: 'Canvas Crop Image',
-  section: 'Image Editing',
+  name: "Canvas Crop Image",
+  section: "Image Editing",
 
   subtitle(data) {
-    const storeTypes = ['', 'Temp Variable', 'Server Variable', 'Global Variable'];
+    const storeTypes = [
+      "",
+      "Temp Variable",
+      "Server Variable",
+      "Global Variable",
+    ];
     return `${storeTypes[parseInt(data.storage, 10)]} (${data.varName})`;
   },
 
-  fields: ['storage', 'varName', 'align', 'align2', 'width', 'height', 'positionx', 'positiony'],
+  fields: [
+    "storage",
+    "varName",
+    "align",
+    "align2",
+    "width",
+    "height",
+    "positionx",
+    "positiony",
+  ],
 
   html(_isEvent, data) {
     return `
@@ -78,25 +92,25 @@ module.exports = {
   init() {
     const { glob, document } = this;
 
-    const position = document.getElementById('position');
-    const specific = document.getElementById('specific');
+    const position = document.getElementById("position");
+    const specific = document.getElementById("specific");
 
     glob.onChange0 = function onChange0(event) {
       if (parseInt(event.value, 10) === 9) {
         position.style.display = null;
         specific.style.display = null;
       } else {
-        position.style.display = 'none';
-        specific.style.display = 'none';
+        position.style.display = "none";
+        specific.style.display = "none";
       }
     };
 
-    glob.refreshVariableList(document.getElementById('storage'));
-    glob.onChange0(document.getElementById('align'));
+    glob.refreshVariableList(document.getElementById("storage"));
+    glob.onChange0(document.getElementById("align"));
   },
 
   action(cache) {
-    const Canvas = require('canvas');
+    const Canvas = require("canvas");
     const data = cache.actions[cache.index];
     const storage = parseInt(data.storage, 10);
     const varName = this.evalMessage(data.varName, cache);
@@ -109,12 +123,12 @@ module.exports = {
     image.src = imagedata;
     let cropw = this.evalMessage(data.width, cache);
     let croph = this.evalMessage(data.height, cache);
-    if (cropw.endsWith('%')) {
+    if (cropw.endsWith("%")) {
       cropw = (image.width * parseFloat(cropw)) / 100;
     } else {
       cropw = parseFloat(cropw);
     }
-    if (croph.endsWith('%')) {
+    if (croph.endsWith("%")) {
       croph = (image.height * parseFloat(croph)) / 100;
     } else {
       croph = parseFloat(croph);
@@ -209,9 +223,11 @@ module.exports = {
         break;
     }
     const canvas = Canvas.createCanvas(cropw, croph);
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext("2d");
     ctx.drawImage(image, positionx, positiony);
-    const result = canvas.toDataURL('image/png').replace('image/png', 'image/octet-stream');
+    const result = canvas
+      .toDataURL("image/png")
+      .replace("image/png", "image/octet-stream");
     this.storeValue(result, storage, varName, cache);
     this.callNextAction(cache);
   },

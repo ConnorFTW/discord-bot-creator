@@ -1,17 +1,17 @@
 module.exports = {
-  name: 'Get Dominant Color',
-  section: 'Image Editing',
+  name: "Get Dominant Color",
+  section: "Image Editing",
 
   subtitle() {
-    return 'Get dominant color from URL';
+    return "Get dominant color from URL";
   },
 
   variableStorage(data, varType) {
     if (parseInt(data.storage, 10) !== varType) return;
-    return [data.varName, 'String'];
+    return [data.varName, "String"];
   },
 
-  fields: ['info', 'find', 'storage', 'varName'],
+  fields: ["info", "find", "storage", "varName"],
 
   html(_isEvent, data) {
     return `
@@ -46,8 +46,8 @@ module.exports = {
 
   async action(cache) {
     const Mods = this.getMods();
-    const { getColorFromURL } = Mods.require('color-thief-node');
-    const rgbToHex = Mods.require('rgb-hex');
+    const { getColorFromURL } = Mods.require("color-thief-node");
+    const rgbToHex = Mods.require("rgb-hex");
     const data = cache.actions[cache.index];
     const info = parseInt(data.info, 10);
     const url = this.evalMessage(data.find, cache);
@@ -57,7 +57,7 @@ module.exports = {
       case 0:
         try {
           const RGB = await getColorFromURL(url);
-          result = `#${rgbToHex(RGB.join(', '))}`;
+          result = `#${rgbToHex(RGB.join(", "))}`;
         } catch (error) {
           result = undefined;
         }

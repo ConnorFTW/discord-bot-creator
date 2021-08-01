@@ -1,51 +1,51 @@
 module.exports = {
-  name: 'Edit Embed Object',
-  section: 'Embed Message',
+  name: "Edit Embed Object",
+  section: "Embed Message",
 
   subtitle(data) {
-    const storage = ['', 'Temp Variable', 'Server Variable', 'Global Variable'];
+    const storage = ["", "Temp Variable", "Server Variable", "Global Variable"];
     return `${storage[parseInt(data.storage, 10)]} (${data.varName})`;
   },
 
   variableStorage(data, varType) {
     if (parseInt(data.storage, 10) !== varType) return;
-    return [data.varName, 'Embed Object'];
+    return [data.varName, "Embed Object"];
   },
 
   fields: [
-    'storage',
-    'varName',
-    'Edit0',
-    'Edit1',
-    'Edit2',
-    'Edit3',
-    'Edit4',
-    'Edit5',
-    'Edit6',
-    'Edit7',
-    'Edit8',
-    'Edit9',
-    'Edit10',
-    'Edit11',
-    'Edit12',
-    'title',
-    'url',
-    'description',
-    'color',
-    'imageUrl',
-    'imageUrl2',
-    'thumbUrl',
-    'thumbUrl2',
-    'author',
-    'authorUrl',
-    'authorIcon',
-    'footer',
-    'footerIcon',
-    'timestamp',
-    'fieldNum',
-    'fieldName',
-    'fieldDescription',
-    'fieldInline',
+    "storage",
+    "varName",
+    "Edit0",
+    "Edit1",
+    "Edit2",
+    "Edit3",
+    "Edit4",
+    "Edit5",
+    "Edit6",
+    "Edit7",
+    "Edit8",
+    "Edit9",
+    "Edit10",
+    "Edit11",
+    "Edit12",
+    "title",
+    "url",
+    "description",
+    "color",
+    "imageUrl",
+    "imageUrl2",
+    "thumbUrl",
+    "thumbUrl2",
+    "author",
+    "authorUrl",
+    "authorIcon",
+    "footer",
+    "footerIcon",
+    "timestamp",
+    "fieldNum",
+    "fieldName",
+    "fieldDescription",
+    "fieldInline",
   ],
 
   html(_isEvent, data) {
@@ -285,31 +285,31 @@ module.exports = {
 
   init() {
     const { glob, document } = this;
-    const Input0 = document.getElementById('Input0');
-    const Input1 = document.getElementById('Input1');
-    const Input2 = document.getElementById('Input2');
-    const Input3 = document.getElementById('Input3');
-    const Input4 = document.getElementById('Input4');
-    const Input4a = document.getElementById('Input4a');
-    const Input4placeholder = document.getElementById('Input4placeholder');
-    const Input5 = document.getElementById('Input5');
-    const Input5a = document.getElementById('Input5a');
-    const Input5placeholder = document.getElementById('Input5placeholder');
-    const Input6 = document.getElementById('Input6');
-    const Input7 = document.getElementById('Input7');
-    const Input8 = document.getElementById('Input8');
-    const Input9 = document.getElementById('Input9');
-    const Input10 = document.getElementById('Input10');
-    const Input11 = document.getElementById('Input11');
-    const Input12 = document.getElementById('Input12');
-    const Input13 = document.getElementById('Input13');
-    const fieldInline = document.getElementById('fieldInline');
+    const Input0 = document.getElementById("Input0");
+    const Input1 = document.getElementById("Input1");
+    const Input2 = document.getElementById("Input2");
+    const Input3 = document.getElementById("Input3");
+    const Input4 = document.getElementById("Input4");
+    const Input4a = document.getElementById("Input4a");
+    const Input4placeholder = document.getElementById("Input4placeholder");
+    const Input5 = document.getElementById("Input5");
+    const Input5a = document.getElementById("Input5a");
+    const Input5placeholder = document.getElementById("Input5placeholder");
+    const Input6 = document.getElementById("Input6");
+    const Input7 = document.getElementById("Input7");
+    const Input8 = document.getElementById("Input8");
+    const Input9 = document.getElementById("Input9");
+    const Input10 = document.getElementById("Input10");
+    const Input11 = document.getElementById("Input11");
+    const Input12 = document.getElementById("Input12");
+    const Input13 = document.getElementById("Input13");
+    const fieldInline = document.getElementById("fieldInline");
 
     glob.onChange0 = function onChange0(Edit0) {
       switch (parseInt(Edit0.value, 10)) {
         case 0:
         case 2:
-          Input0.style.display = 'none';
+          Input0.style.display = "none";
           break;
         case 1:
           Input0.style.display = null;
@@ -320,7 +320,7 @@ module.exports = {
       switch (parseInt(Edit1.value, 10)) {
         case 0:
         case 2:
-          Input1.style.display = 'none';
+          Input1.style.display = "none";
           break;
         case 1:
           Input1.style.display = null;
@@ -331,7 +331,7 @@ module.exports = {
       switch (parseInt(Edit2.value, 10)) {
         case 0:
         case 2:
-          Input2.style.display = 'none';
+          Input2.style.display = "none";
           break;
         case 1:
           Input2.style.display = null;
@@ -342,7 +342,7 @@ module.exports = {
       switch (parseInt(Edit3.value, 10)) {
         case 0:
         case 2:
-          Input3.style.display = 'none';
+          Input3.style.display = "none";
           break;
         case 1:
           Input3.style.display = null;
@@ -353,19 +353,19 @@ module.exports = {
       switch (parseInt(Edit4.value, 10)) {
         case 0:
         case 2:
-          Input4.style.display = 'none';
-          Input4a.style.display = 'none';
+          Input4.style.display = "none";
+          Input4a.style.display = "none";
           break;
         case 1:
           Input4.style.display = null;
-          Input4placeholder.innerHTML = 'Image URL:';
-          document.getElementById('imageUrl').value = '';
-          Input4a.style.display = 'none';
+          Input4placeholder.innerHTML = "Image URL:";
+          document.getElementById("imageUrl").value = "";
+          Input4a.style.display = "none";
           break;
         case 3:
           Input4.style.display = null;
-          Input4placeholder.innerHTML = 'Local Path:';
-          document.getElementById('imageUrl').value = './resources';
+          Input4placeholder.innerHTML = "Local Path:";
+          document.getElementById("imageUrl").value = "./resources";
           Input4a.style.display = null;
           break;
       }
@@ -374,19 +374,19 @@ module.exports = {
       switch (parseInt(Edit5.value, 10)) {
         case 0:
         case 2:
-          Input5.style.display = 'none';
-          Input5a.style.display = 'none';
+          Input5.style.display = "none";
+          Input5a.style.display = "none";
           break;
         case 1:
           Input5.style.display = null;
-          Input5placeholder.innerHTML = 'Image URL:';
-          document.getElementById('thumbUrl').value = '';
-          Input5a.style.display = 'none';
+          Input5placeholder.innerHTML = "Image URL:";
+          document.getElementById("thumbUrl").value = "";
+          Input5a.style.display = "none";
           break;
         case 3:
           Input5.style.display = null;
-          Input5placeholder.innerHTML = 'Local Path:';
-          document.getElementById('thumbUrl').value = './resources';
+          Input5placeholder.innerHTML = "Local Path:";
+          document.getElementById("thumbUrl").value = "./resources";
           Input5a.style.display = null;
           break;
       }
@@ -395,7 +395,7 @@ module.exports = {
       switch (parseInt(Edit6.value, 10)) {
         case 0:
         case 2:
-          Input6.style.display = 'none';
+          Input6.style.display = "none";
           break;
         case 1:
           Input6.style.display = null;
@@ -406,7 +406,7 @@ module.exports = {
       switch (parseInt(Edit7.value, 10)) {
         case 0:
         case 2:
-          Input7.style.display = 'none';
+          Input7.style.display = "none";
           break;
         case 1:
           Input7.style.display = null;
@@ -417,7 +417,7 @@ module.exports = {
       switch (parseInt(Edit8.value, 10)) {
         case 0:
         case 2:
-          Input8.style.display = 'none';
+          Input8.style.display = "none";
           break;
         case 1:
           Input8.style.display = null;
@@ -428,7 +428,7 @@ module.exports = {
       switch (parseInt(Edit9.value, 10)) {
         case 0:
         case 2:
-          Input9.style.display = 'none';
+          Input9.style.display = "none";
           break;
         case 1:
           Input9.style.display = null;
@@ -439,7 +439,7 @@ module.exports = {
       switch (parseInt(Edit10.value, 10)) {
         case 0:
         case 2:
-          Input10.style.display = 'none';
+          Input10.style.display = "none";
           break;
         case 1:
           Input10.style.display = null;
@@ -451,7 +451,7 @@ module.exports = {
         case 0:
         case 1:
         case 3:
-          Input11.style.display = 'none';
+          Input11.style.display = "none";
           break;
         case 2:
           Input11.style.display = null;
@@ -463,22 +463,22 @@ module.exports = {
       switch (parseInt(Edit12.value, 10)) {
         case 0:
         case 3:
-          Input12.style.display = 'none';
-          Input13.style.display = 'none';
+          Input12.style.display = "none";
+          Input13.style.display = "none";
           break;
         case 1:
           Input12.style.display = null;
           Input13.style.display = null;
           if (fieldInline.length !== 3) {
-            const option = document.createElement('option');
+            const option = document.createElement("option");
             option.value = 0;
-            option.innerHTML = 'Keep Inline';
+            option.innerHTML = "Keep Inline";
             fieldInline.prepend(option);
           }
           break;
         case 2:
           Input12.style.display = null;
-          Input13.style.display = 'none';
+          Input13.style.display = "none";
           break;
         case 4:
           Input12.style.display = null;
@@ -490,7 +490,7 @@ module.exports = {
       }
     };
 
-    const varName = document.getElementById('varName');
+    const varName = document.getElementById("varName");
     function filter(dataType) {
       for (let i = 0; i < dataType.length; i++) {
         if (dataType[i].value === varName.value) {
@@ -500,34 +500,34 @@ module.exports = {
     }
 
     glob.onChange13 = function onChange13() {
-      const list = document.getElementById('variableList');
+      const list = document.getElementById("variableList");
       if (list.children.length === 0) return;
       const dataType = list.options;
       const correct = filter(dataType);
       if (correct !== undefined) {
-        if (correct.innerHTML !== 'Embed Object') {
+        if (correct.innerHTML !== "Embed Object") {
           // eslint-disable-next-line no-undef
           alert(
-            `Please select an Embed Object to edit. You've selected a ${correct.innerHTML}; This won't edit your message directly, you'll have to later select 'Edit Message' and use the same embed as here in Source Embed`,
+            `Please select an Embed Object to edit. You've selected a ${correct.innerHTML}; This won't edit your message directly, you'll have to later select 'Edit Message' and use the same embed as here in Source Embed`
           );
         }
       }
     };
     glob.onChange13(varName);
 
-    glob.onChange0(document.getElementById('Edit0'));
-    glob.onChange1(document.getElementById('Edit1'));
-    glob.onChange2(document.getElementById('Edit2'));
-    glob.onChange3(document.getElementById('Edit3'));
-    glob.onChange4(document.getElementById('Edit4'));
-    glob.onChange5(document.getElementById('Edit5'));
-    glob.onChange6(document.getElementById('Edit6'));
-    glob.onChange7(document.getElementById('Edit7'));
-    glob.onChange8(document.getElementById('Edit8'));
-    glob.onChange9(document.getElementById('Edit9'));
-    glob.onChange10(document.getElementById('Edit10'));
-    glob.onChange11(document.getElementById('Edit11'));
-    glob.onChange12(document.getElementById('Edit12'));
+    glob.onChange0(document.getElementById("Edit0"));
+    glob.onChange1(document.getElementById("Edit1"));
+    glob.onChange2(document.getElementById("Edit2"));
+    glob.onChange3(document.getElementById("Edit3"));
+    glob.onChange4(document.getElementById("Edit4"));
+    glob.onChange5(document.getElementById("Edit5"));
+    glob.onChange6(document.getElementById("Edit6"));
+    glob.onChange7(document.getElementById("Edit7"));
+    glob.onChange8(document.getElementById("Edit8"));
+    glob.onChange9(document.getElementById("Edit9"));
+    glob.onChange10(document.getElementById("Edit10"));
+    glob.onChange11(document.getElementById("Edit11"));
+    glob.onChange12(document.getElementById("Edit12"));
   },
 
   action(cache) {
@@ -652,12 +652,20 @@ module.exports = {
       } else if (Edit6 === 2) {
         embed.author.name = undefined;
       }
-      if (authorUrl !== undefined && Edit7 === 1 && embed.author !== undefined) {
+      if (
+        authorUrl !== undefined &&
+        Edit7 === 1 &&
+        embed.author !== undefined
+      ) {
         embed.author.url = authorUrl;
       } else if (Edit7 === 2) {
         embed.author.url = undefined;
       }
-      if (authorIcon !== undefined && Edit8 === 1 && embed.author !== undefined) {
+      if (
+        authorIcon !== undefined &&
+        Edit8 === 1 &&
+        embed.author !== undefined
+      ) {
         embed.author.iconURL = authorIcon;
       } else if (Edit8 === 2) {
         embed.author.iconURL = undefined;
@@ -758,6 +766,6 @@ module.exports = {
   },
 
   mod(DBM) {
-    DBM.Actions['Edit Embed Object MOD'] = DBM.Actions['Edit Embed Object'];
+    DBM.Actions["Edit Embed Object MOD"] = DBM.Actions["Edit Embed Object"];
   },
 };

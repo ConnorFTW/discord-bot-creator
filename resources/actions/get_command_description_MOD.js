@@ -1,11 +1,11 @@
 module.exports = {
-  name: 'Get Command Description',
-  displayName: 'Get Command Description',
-  section: 'Other Stuff',
-  fields: ['findBy', 'commandData', 'saveTo', 'varName'],
+  name: "Get Command Description",
+  displayName: "Get Command Description",
+  section: "Other Stuff",
+  fields: ["findBy", "commandData", "saveTo", "varName"],
 
   subtitle() {
-    return 'Get Command Description';
+    return "Get Command Description";
   },
 
   html() {
@@ -49,7 +49,7 @@ module.exports = {
     const { Files } = this.getDBM();
     const { commands } = Files.data;
 
-    if (findBy === 'id') {
+    if (findBy === "id") {
       let cmd;
 
       for (let i = 0; i < commands.length; i++) {
@@ -60,8 +60,13 @@ module.exports = {
         if (cmd && cmd._id === findByValue) {
           for (let j = 0; j < cmd.actions.length; j++) {
             const action = cmd.actions[j];
-            if (action.name === 'Command Description') {
-              this.storeValue(action.description, Number(saveTo), saveToName, cache);
+            if (action.name === "Command Description") {
+              this.storeValue(
+                action.description,
+                Number(saveTo),
+                saveToName,
+                cache
+              );
               this.callNextAction(cache);
               return;
             }
@@ -72,7 +77,7 @@ module.exports = {
 
       this.storeValue(null, Number(saveTo), saveToName, cache);
       this.callNextAction(cache);
-    } else if (findBy === 'name') {
+    } else if (findBy === "name") {
       let cmd;
 
       for (let i = 0; i < commands.length; i++) {
@@ -83,8 +88,13 @@ module.exports = {
         if (cmd && cmd.name === findByValue) {
           for (let j = 0; j < cmd.actions.length; j++) {
             const action = cmd.actions[j];
-            if (action.name === 'Command Description') {
-              this.storeValue(action.description, Number(saveTo), saveToName, cache);
+            if (action.name === "Command Description") {
+              this.storeValue(
+                action.description,
+                Number(saveTo),
+                saveToName,
+                cache
+              );
               this.callNextAction(cache);
               return;
             }

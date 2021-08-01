@@ -1,6 +1,6 @@
 module.exports = {
-  name: 'Revise',
-  section: 'Other Stuff',
+  name: "Revise",
+  section: "Other Stuff",
 
   subtitle(data) {
     return `Revise: "${data.reviser}"`;
@@ -8,10 +8,10 @@ module.exports = {
 
   variableStorage(data, varType) {
     if (parseInt(data.storage, 10) !== varType) return;
-    return [data.varName2, 'Revised Result'];
+    return [data.varName2, "Revised Result"];
   },
 
-  fields: ['reviser', 'storage', 'varName2'],
+  fields: ["reviser", "storage", "varName2"],
 
   html(_isEvent, data) {
     return `
@@ -39,7 +39,7 @@ module.exports = {
     const data = cache.actions[cache.index];
     const reviseText = this.evalMessage(data.reviser, cache);
     try {
-      const array = reviseText.split(' ');
+      const array = reviseText.split(" ");
 
       for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -47,8 +47,13 @@ module.exports = {
       }
       const storage = parseInt(data.storage, 10);
       const varName2 = this.evalMessage(data.varName2, cache);
-      const out = array.join(' ').trim();
-      this.storeValue(out.substr(0, 1).toUpperCase() + out.substr(1), storage, varName2, cache);
+      const out = array.join(" ").trim();
+      this.storeValue(
+        out.substr(0, 1).toUpperCase() + out.substr(1),
+        storage,
+        varName2,
+        cache
+      );
     } catch (err) {
       console.log(`ERROR! ${err.stack || err}`);
     }

@@ -1,14 +1,28 @@
 module.exports = {
-  name: 'Ban Member',
-  section: 'Member Control',
+  name: "Ban Member",
+  section: "Member Control",
 
   subtitle(data) {
-    const users = ['Mentioned User', 'Command Author', 'Temp Variable', 'Server Variable', 'Global Variable', 'By ID'];
-    const guilds = ['Current Server', 'Temp Variable', 'Server Variable', 'Global Variable'];
-    return `${users[parseInt(data.member, 10)]} - ${guilds[parseInt(data.guild, 10)]}`;
+    const users = [
+      "Mentioned User",
+      "Command Author",
+      "Temp Variable",
+      "Server Variable",
+      "Global Variable",
+      "By ID",
+    ];
+    const guilds = [
+      "Current Server",
+      "Temp Variable",
+      "Server Variable",
+      "Global Variable",
+    ];
+    return `${users[parseInt(data.member, 10)]} - ${
+      guilds[parseInt(data.guild, 10)]
+    }`;
   },
 
-  fields: ['member', 'varName', 'reason', 'guild', 'varName2', 'days'],
+  fields: ["member", "varName", "reason", "guild", "varName2", "days"],
 
   html(isEvent, data) {
     return `
@@ -51,16 +65,17 @@ This action has been modified by DBM Mods.<br>
     const { glob, document } = this;
 
     glob.user = function user(element, container) {
-      if (element.value === '5') {
-        document.getElementById(container).childNodes[0].nodeValue = 'User ID:';
+      if (element.value === "5") {
+        document.getElementById(container).childNodes[0].nodeValue = "User ID:";
       } else {
-        document.getElementById(container).childNodes[0].nodeValue = 'Variable Name:';
+        document.getElementById(container).childNodes[0].nodeValue =
+          "Variable Name:";
       }
       glob.memberChange(element, container);
     };
 
-    glob.user(document.getElementById('member'), 'varNameContainer');
-    glob.serverChange(document.getElementById('guild'), 'varNameContainer2');
+    glob.user(document.getElementById("member"), "varNameContainer");
+    glob.serverChange(document.getElementById("guild"), "varNameContainer2");
   },
 
   action(cache) {
@@ -70,14 +85,19 @@ This action has been modified by DBM Mods.<br>
     const varName2 = this.evalMessage(data.varName2, cache);
     const guildType = parseInt(data.guild, 10);
     const server = this.getServer(guildType, varName2, cache);
-    const reason = this.evalMessage(data.reason, cache) || '';
+    const reason = this.evalMessage(data.reason, cache) || "";
     const days = parseInt(this.evalMessage(data.days, cache), 10);
-    const member = type === 5 ? this.evalMessage(varName) : this.getMember(type, varName, cache);
+    const member =
+      type === 5
+        ? this.evalMessage(varName)
+        : this.getMember(type, varName, cache);
     if (guildType !== 0) {
       cache.server = server;
     }
     if (Array.isArray(member)) {
-      this.callListFunc(member, 'ban', [{ days, reason }]).then(() => this.callNextAction(cache));
+      this.callListFunc(member, "ban", [{ days, reason }]).then(() =>
+        this.callNextAction(cache)
+      );
     } else if (member) {
       server.members
         .ban(member, { days, reason })

@@ -1,27 +1,37 @@
 module.exports = {
-  name: 'Send Image MOD',
-  section: 'Image Editing',
+  name: "Send Image MOD",
+  section: "Image Editing",
 
   subtitle(data) {
     const channels = [
-      'Same Channel',
-      'Command Author',
-      'Mentioned User',
-      'Mentioned Channel',
-      'Default Channel (Top Channel)',
-      'Temp Variable',
-      'Server Variable',
-      'Global Variable',
+      "Same Channel",
+      "Command Author",
+      "Mentioned User",
+      "Mentioned Channel",
+      "Default Channel (Top Channel)",
+      "Temp Variable",
+      "Server Variable",
+      "Global Variable",
     ];
     return `${channels[parseInt(data.channel, 10)]}`;
   },
 
   variableStorage(data, varType) {
     if (parseInt(data.storage2, 10) !== varType) return;
-    return [data.varName3, 'Message'];
+    return [data.varName3, "Message"];
   },
 
-  fields: ['storage', 'varName', 'channel', 'varName2', 'message', 'imageName', 'imageFormat', 'storage2', 'varName3'],
+  fields: [
+    "storage",
+    "varName",
+    "channel",
+    "varName2",
+    "message",
+    "imageName",
+    "imageFormat",
+    "storage2",
+    "varName3",
+  ],
 
   html(isEvent, data) {
     return `
@@ -84,9 +94,15 @@ module.exports = {
   init() {
     const { glob, document } = this;
 
-    glob.refreshVariableList(document.getElementById('storage'));
-    glob.variableChange(document.getElementById('storage2'), 'varNameContainer3'); // Fix the varname container poofing ~TheMonDon
-    glob.sendTargetChange(document.getElementById('channel'), 'varNameContainer2');
+    glob.refreshVariableList(document.getElementById("storage"));
+    glob.variableChange(
+      document.getElementById("storage2"),
+      "varNameContainer3"
+    ); // Fix the varname container poofing ~TheMonDon
+    glob.sendTargetChange(
+      document.getElementById("channel"),
+      "varNameContainer2"
+    );
   },
 
   action(cache) {
@@ -104,7 +120,7 @@ module.exports = {
       const { Images } = this.getDBM();
       Images.createBuffer(image)
         .then((buffer) => {
-          this.callListFunc(target, 'send', [
+          this.callListFunc(target, "send", [
             this.evalMessage(data.message, cache),
             {
               files: [

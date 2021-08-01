@@ -1,19 +1,29 @@
 module.exports = {
-  name: 'Check DBL Voted',
-  section: 'Conditions',
+  name: "Check DBL Voted",
+  section: "Conditions",
 
   subtitle(data) {
     const results = [
-      'Continue Actions',
-      'Stop Action Sequence',
-      'Jump To Action',
-      'Jump Forward Actions',
-      'Jump to Anchor',
+      "Continue Actions",
+      "Stop Action Sequence",
+      "Jump To Action",
+      "Jump Forward Actions",
+      "Jump to Anchor",
     ];
-    return `If True: ${results[parseInt(data.iftrue, 10)]} ~ If False: ${results[parseInt(data.iffalse, 10)]}`;
+    return `If True: ${results[parseInt(data.iftrue, 10)]} ~ If False: ${
+      results[parseInt(data.iffalse, 10)]
+    }`;
   },
 
-  fields: ['member', 'apitoken', 'varName', 'iftrue', 'iftrueVal', 'iffalse', 'iffalseVal'],
+  fields: [
+    "member",
+    "apitoken",
+    "varName",
+    "iftrue",
+    "iftrueVal",
+    "iffalse",
+    "iffalseVal",
+  ],
 
   html(isEvent, data) {
     return `
@@ -42,35 +52,36 @@ module.exports = {
 
   init() {
     const { glob, document } = this;
-    const option = document.createElement('OPTION');
-    option.value = '4';
-    option.text = 'Jump to Anchor';
-    const iffalse = document.getElementById('iffalse');
+    const option = document.createElement("OPTION");
+    option.value = "4";
+    option.text = "Jump to Anchor";
+    const iffalse = document.getElementById("iffalse");
     if (iffalse.length === 4) iffalse.add(option);
 
-    const option2 = document.createElement('OPTION');
-    option2.value = '4';
-    option2.text = 'Jump to Anchor';
-    const iftrue = document.getElementById('iftrue');
+    const option2 = document.createElement("OPTION");
+    option2.value = "4";
+    option2.text = "Jump to Anchor";
+    const iftrue = document.getElementById("iftrue");
     if (iftrue.length === 4) iftrue.add(option2);
 
     glob.onChangeTrue = function onChangeTrue(event) {
       switch (parseInt(event.value, 10)) {
         case 0:
         case 1:
-          document.getElementById('iftrueContainer').style.display = 'none';
+          document.getElementById("iftrueContainer").style.display = "none";
           break;
         case 2:
-          document.getElementById('iftrueName').innerHTML = 'Action Number';
-          document.getElementById('iftrueContainer').style.display = null;
+          document.getElementById("iftrueName").innerHTML = "Action Number";
+          document.getElementById("iftrueContainer").style.display = null;
           break;
         case 3:
-          document.getElementById('iftrueName').innerHTML = 'Number of Actions to Skip';
-          document.getElementById('iftrueContainer').style.display = null;
+          document.getElementById("iftrueName").innerHTML =
+            "Number of Actions to Skip";
+          document.getElementById("iftrueContainer").style.display = null;
           break;
         case 4:
-          document.getElementById('iftrueName').innerHTML = 'Anchor ID';
-          document.getElementById('iftrueContainer').style.display = null;
+          document.getElementById("iftrueName").innerHTML = "Anchor ID";
+          document.getElementById("iftrueContainer").style.display = null;
           break;
         default:
           break;
@@ -80,27 +91,28 @@ module.exports = {
       switch (parseInt(event.value, 10)) {
         case 0:
         case 1:
-          document.getElementById('iffalseContainer').style.display = 'none';
+          document.getElementById("iffalseContainer").style.display = "none";
           break;
         case 2:
-          document.getElementById('iffalseName').innerHTML = 'Action Number';
-          document.getElementById('iffalseContainer').style.display = null;
+          document.getElementById("iffalseName").innerHTML = "Action Number";
+          document.getElementById("iffalseContainer").style.display = null;
           break;
         case 3:
-          document.getElementById('iffalseName').innerHTML = 'Number of Actions to Skip';
-          document.getElementById('iffalseContainer').style.display = null;
+          document.getElementById("iffalseName").innerHTML =
+            "Number of Actions to Skip";
+          document.getElementById("iffalseContainer").style.display = null;
           break;
         case 4:
-          document.getElementById('iffalseName').innerHTML = 'Anchor ID';
-          document.getElementById('iffalseContainer').style.display = null;
+          document.getElementById("iffalseName").innerHTML = "Anchor ID";
+          document.getElementById("iffalseContainer").style.display = null;
           break;
         default:
           break;
       }
     };
-    glob.memberChange(document.getElementById('member'), 'varNameContainer');
-    glob.onChangeTrue(document.getElementById('iftrue'));
-    glob.onChangeFalse(document.getElementById('iffalse'));
+    glob.memberChange(document.getElementById("member"), "varNameContainer");
+    glob.onChangeTrue(document.getElementById("iftrue"));
+    glob.onChangeFalse(document.getElementById("iffalse"));
   },
 
   action(cache) {
@@ -111,12 +123,15 @@ module.exports = {
     const member = this.getMember(type, varName, cache);
 
     const Mods = this.getMods();
-    const TopGG = Mods.require('@top.gg/sdk');
+    const TopGG = Mods.require("@top.gg/sdk");
 
-    if (!apitoken) return console.log('ERROR! Please provide an API token for DBL!');
+    if (!apitoken)
+      return console.log("ERROR! Please provide an API token for DBL!");
 
     const api = new TopGG.Api(apitoken);
-    api.hasVoted(member.id).then((voted) => this.executeResults(voted, data, cache));
+    api
+      .hasVoted(member.id)
+      .then((voted) => this.executeResults(voted, data, cache));
   },
 
   mod() {},

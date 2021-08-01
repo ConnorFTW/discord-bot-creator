@@ -1,18 +1,23 @@
 module.exports = {
-  name: 'Crosspost Message',
-  section: 'Messaging',
+  name: "Crosspost Message",
+  section: "Messaging",
 
   subtitle(data) {
-    const message = ['Command Message', 'Temp Variable', 'Server Variable', 'Global Variable'];
+    const message = [
+      "Command Message",
+      "Temp Variable",
+      "Server Variable",
+      "Global Variable",
+    ];
     return `${message[parseInt(data.message, 10)]}`;
   },
 
   variableStorage(data, varType) {
     if (parseInt(data.storage, 10) !== varType) return;
-    return [data.varName2, 'Message'];
+    return [data.varName2, "Message"];
   },
 
-  fields: ['message', 'varName', 'storage', 'varName2'],
+  fields: ["message", "varName", "storage", "varName2"],
 
   html(isEvent, data) {
     return `
@@ -45,8 +50,14 @@ module.exports = {
   init() {
     const { glob, document } = this;
 
-    glob.sendTargetChange(document.getElementById('message'), 'varNameContainer');
-    glob.variableChange(document.getElementById('storage'), 'varNameContainer2');
+    glob.sendTargetChange(
+      document.getElementById("message"),
+      "varNameContainer"
+    );
+    glob.variableChange(
+      document.getElementById("storage"),
+      "varNameContainer2"
+    );
   },
 
   action(cache) {
@@ -55,7 +66,10 @@ module.exports = {
     const message = this.getMessage(parseInt(data.message, 10), varName, cache);
 
     if (!message) return this.callNextAction(cache);
-    if (!message.crosspost) throw new Error('You need at least Discord.js version 12.4.0 to use this mod.');
+    if (!message.crosspost)
+      throw new Error(
+        "You need at least Discord.js version 12.4.0 to use this mod."
+      );
 
     message
       .crosspost()

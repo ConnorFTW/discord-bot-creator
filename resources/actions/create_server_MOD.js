@@ -1,6 +1,6 @@
 module.exports = {
-  name: 'Create Server',
-  section: 'Server Control',
+  name: "Create Server",
+  section: "Server Control",
 
   subtitle(data) {
     return `${data.serverName}`;
@@ -8,10 +8,10 @@ module.exports = {
 
   variableStorage(data, varType) {
     if (parseInt(data.storage, 10) !== varType) return;
-    return [data.varName, 'Server'];
+    return [data.varName, "Server"];
   },
 
-  fields: ['serverName', 'serverRegion', 'storage', 'varName'],
+  fields: ["serverName", "serverRegion", "storage", "varName"],
 
   html(isEvent, data) {
     return `
@@ -42,7 +42,7 @@ module.exports = {
 
   init() {
     const { glob, document } = this;
-    glob.variableChange(document.getElementById('storage'), 'varNameContainer');
+    glob.variableChange(document.getElementById("storage"), "varNameContainer");
   },
 
   action(cache) {

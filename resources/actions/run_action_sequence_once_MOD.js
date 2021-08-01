@@ -1,12 +1,12 @@
 module.exports = {
-  name: 'Run Action Sequence Once',
-  section: 'Other Stuff',
+  name: "Run Action Sequence Once",
+  section: "Other Stuff",
 
   subtitle(data) {
-    return `Run Once ${data.behavior === '2' ? 'Per Server' : 'Globally'}`;
+    return `Run Once ${data.behavior === "2" ? "Per Server" : "Globally"}`;
   },
 
-  fields: ['behavior'],
+  fields: ["behavior"],
 
   html() {
     return `

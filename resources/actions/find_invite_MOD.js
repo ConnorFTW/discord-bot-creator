@@ -1,6 +1,6 @@
 module.exports = {
-  name: 'Find Invite',
-  section: 'Invite Control',
+  name: "Find Invite",
+  section: "Invite Control",
 
   subtitle(data) {
     return `${data.invite}`;
@@ -8,10 +8,10 @@ module.exports = {
 
   variableStorage(data, varType) {
     if (parseInt(data.storage, 10) !== varType) return;
-    return [data.varName, 'Invite'];
+    return [data.varName, "Invite"];
   },
 
-  fields: ['invite', 'storage', 'varName'],
+  fields: ["invite", "storage", "varName"],
 
   html(isEvent, data) {
     return `

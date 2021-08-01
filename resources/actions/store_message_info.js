@@ -1,105 +1,112 @@
 module.exports = {
-  name: 'Store Message Info',
-  section: 'Messaging',
+  name: "Store Message Info",
+  section: "Messaging",
 
   subtitle(data) {
-    const message = ['Command Message', 'Temp Variable', 'Server Variable', 'Global Variable'];
-    const info = [
-      'Message Object',
-      'Message ID',
-      'Message Text',
-      'Message Author',
-      'Message Channel',
-      'Message Timestamp',
-      'Message is Pinned',
-      'Message is TTS',
-      'Message Attachments List',
-      'Message Edits',
-      '',
-      '',
-      'Messages Reactions Count',
-      'Mentioned Users List',
-      'Mentioned Users Count',
-      'Message URL',
-      'Message Creation Date',
-      'Message Content Length',
-      'Message Attachments Count',
-      'Message Guild',
-      'Message Type',
-      'Message Webhook ID',
-      'Message Embed Object',
-      'Mentioned Channels List',
-      'Mentioned Channels Count',
-      'Mentioned Roles list',
-      'Mentioned Roles Count',
+    const message = [
+      "Command Message",
+      "Temp Variable",
+      "Server Variable",
+      "Global Variable",
     ];
-    return `${message[parseInt(data.message, 10)]} - ${info[parseInt(data.info, 10)]}`;
+    const info = [
+      "Message Object",
+      "Message ID",
+      "Message Text",
+      "Message Author",
+      "Message Channel",
+      "Message Timestamp",
+      "Message is Pinned",
+      "Message is TTS",
+      "Message Attachments List",
+      "Message Edits",
+      "",
+      "",
+      "Messages Reactions Count",
+      "Mentioned Users List",
+      "Mentioned Users Count",
+      "Message URL",
+      "Message Creation Date",
+      "Message Content Length",
+      "Message Attachments Count",
+      "Message Guild",
+      "Message Type",
+      "Message Webhook ID",
+      "Message Embed Object",
+      "Mentioned Channels List",
+      "Mentioned Channels Count",
+      "Mentioned Roles list",
+      "Mentioned Roles Count",
+    ];
+    return `${message[parseInt(data.message, 10)]} - ${
+      info[parseInt(data.info, 10)]
+    }`;
   },
 
   variableStorage(data, varType) {
     if (parseInt(data.storage, 10) !== varType) return;
-    let dataType = 'Unknown Type';
+    let dataType = "Unknown Type";
     switch (parseInt(data.info, 10)) {
       case 0:
-        dataType = 'Message';
+        dataType = "Message";
         break;
       case 1:
-        dataType = 'Message ID';
+        dataType = "Message ID";
         break;
       case 2:
-        dataType = 'Text';
+        dataType = "Text";
         break;
       case 3:
-        dataType = 'Server Member';
+        dataType = "Server Member";
         break;
       case 4:
-        dataType = 'Channel';
+        dataType = "Channel";
         break;
       case 5:
-        dataType = 'Text';
+        dataType = "Text";
         break;
       case 6:
       case 7:
-        dataType = 'Boolean';
+        dataType = "Boolean";
         break;
       case 8:
-        dataType = 'Date';
+        dataType = "Date";
         break;
       case 9:
-        dataType = 'Messages List';
+        dataType = "Messages List";
         break;
       case 13:
       case 23:
       case 25:
-        dataType = 'Array';
+        dataType = "Array";
         break;
       case 14:
-        dataType = 'Number';
+        dataType = "Number";
         break;
       case 15:
-        dataType = 'URL';
+        dataType = "URL";
         break;
       case 16:
-        dataType = 'Date';
+        dataType = "Date";
         break;
       case 12:
       case 17:
       case 18:
       case 24:
       case 26:
-        dataType = 'Number';
+        dataType = "Number";
         break;
       case 19:
-        dataType = 'Guild';
+        dataType = "Guild";
         break;
       case 20:
-        dataType = 'Message Type';
+        dataType = "Message Type";
         break;
       case 21:
-        dataType = 'Webhook ID';
+        dataType = "Webhook ID";
         break;
       case 22:
-        dataType = 'Embed Message';
+        dataType = "Embed Message";
         break;
       default:
         break;
@@ -107,7 +114,7 @@ module.exports = {
     return [data.varName2, dataType];
   },
 
-  fields: ['message', 'varName', 'info', 'storage', 'varName2'],
+  fields: ["message", "varName", "info", "storage", "varName2"],
 
   html(isEvent, data) {
     return `
@@ -173,7 +180,7 @@ module.exports = {
   init() {
     const { glob, document } = this;
 
-    glob.messageChange(document.getElementById('message'), 'varNameContainer');
+    glob.messageChange(document.getElementById("message"), "varNameContainer");
   },
 
   action(cache) {

@@ -1,38 +1,47 @@
 module.exports = {
-  name: 'Check Variable',
-  section: 'Conditions',
+  name: "Check Variable",
+  section: "Conditions",
 
   subtitle(data) {
     const comparisons = [
-      'Exists',
-      'Equals',
-      'Equals Exactly',
-      'Less Than',
-      'Greater Than',
-      'Includes',
-      'Matches Regex',
-      'Length is Bigger Than',
-      'Length is Smaller Than',
-      'Length is Equals',
-      'Starts With',
-      'Ends With',
-      'Matches Full Regex',
-      'Less Than or Equal to',
-      'Greater Than or Equal to',
+      "Exists",
+      "Equals",
+      "Equals Exactly",
+      "Less Than",
+      "Greater Than",
+      "Includes",
+      "Matches Regex",
+      "Length is Bigger Than",
+      "Length is Smaller Than",
+      "Length is Equals",
+      "Starts With",
+      "Ends With",
+      "Matches Full Regex",
+      "Less Than or Equal to",
+      "Greater Than or Equal to",
     ];
     const results = [
-      'Continue Actions',
-      'Stop Action Sequence',
-      'Jump To Action',
-      'Jump Forward Actions',
-      'Jump to Anchor',
+      "Continue Actions",
+      "Stop Action Sequence",
+      "Jump To Action",
+      "Jump Forward Actions",
+      "Jump to Anchor",
     ];
     return `${comparisons[parseInt(data.comparison, 10)]} | If True: ${
       results[parseInt(data.iftrue, 10)]
     } ~ If False: ${results[parseInt(data.iffalse, 10)]}`;
   },
 
-  fields: ['storage', 'varName', 'comparison', 'value', 'iftrue', 'iftrueVal', 'iffalse', 'iffalseVal'],
+  fields: [
+    "storage",
+    "varName",
+    "comparison",
+    "value",
+    "iftrue",
+    "iftrueVal",
+    "iffalse",
+    "iffalseVal",
+  ],
 
   html(_isEvent, data) {
     return `
@@ -85,51 +94,53 @@ module.exports = {
 
     glob.onChange1 = function onChange1(event) {
       if (parseInt(event.value, 10) === 0) {
-        document.getElementById('directValue').style.display = 'none';
+        document.getElementById("directValue").style.display = "none";
       } else {
-        document.getElementById('directValue').style.display = null;
+        document.getElementById("directValue").style.display = null;
       }
       switch (parseInt(event.value, 10)) {
         case 6:
-          document.getElementById('value').placeholder = "('My'|'Regex')";
+          document.getElementById("value").placeholder = "('My'|'Regex')";
           break;
         case 12:
-          document.getElementById('value').placeholder = "/('My'|'Regex')\\w+/igm";
+          document.getElementById("value").placeholder =
+            "/('My'|'Regex')\\w+/igm";
           break;
         default:
-          document.getElementById('value').placeholder = '';
+          document.getElementById("value").placeholder = "";
       }
     };
 
-    const option = document.createElement('OPTION');
-    option.value = '4';
-    option.text = 'Jump to Anchor';
-    const iffalse = document.getElementById('iffalse');
+    const option = document.createElement("OPTION");
+    option.value = "4";
+    option.text = "Jump to Anchor";
+    const iffalse = document.getElementById("iffalse");
     if (iffalse.length === 4) iffalse.add(option);
 
-    const option2 = document.createElement('OPTION');
-    option2.value = '4';
-    option2.text = 'Jump to Anchor';
-    const iftrue = document.getElementById('iftrue');
+    const option2 = document.createElement("OPTION");
+    option2.value = "4";
+    option2.text = "Jump to Anchor";
+    const iftrue = document.getElementById("iftrue");
     if (iftrue.length === 4) iftrue.add(option2);
 
     glob.onChangeTrue = function onChangeTrue(event) {
       switch (parseInt(event.value, 10)) {
         case 0:
         case 1:
-          document.getElementById('iftrueContainer').style.display = 'none';
+          document.getElementById("iftrueContainer").style.display = "none";
           break;
         case 2:
-          document.getElementById('iftrueName').innerHTML = 'Action Number';
-          document.getElementById('iftrueContainer').style.display = null;
+          document.getElementById("iftrueName").innerHTML = "Action Number";
+          document.getElementById("iftrueContainer").style.display = null;
           break;
         case 3:
-          document.getElementById('iftrueName').innerHTML = 'Number of Actions to Skip';
-          document.getElementById('iftrueContainer').style.display = null;
+          document.getElementById("iftrueName").innerHTML =
+            "Number of Actions to Skip";
+          document.getElementById("iftrueContainer").style.display = null;
           break;
         case 4:
-          document.getElementById('iftrueName').innerHTML = 'Anchor ID';
-          document.getElementById('iftrueContainer').style.display = null;
+          document.getElementById("iftrueName").innerHTML = "Anchor ID";
+          document.getElementById("iftrueContainer").style.display = null;
           break;
         default:
           break;
@@ -139,28 +150,29 @@ module.exports = {
       switch (parseInt(event.value, 10)) {
         case 0:
         case 1:
-          document.getElementById('iffalseContainer').style.display = 'none';
+          document.getElementById("iffalseContainer").style.display = "none";
           break;
         case 2:
-          document.getElementById('iffalseName').innerHTML = 'Action Number';
-          document.getElementById('iffalseContainer').style.display = null;
+          document.getElementById("iffalseName").innerHTML = "Action Number";
+          document.getElementById("iffalseContainer").style.display = null;
           break;
         case 3:
-          document.getElementById('iffalseName').innerHTML = 'Number of Actions to Skip';
-          document.getElementById('iffalseContainer').style.display = null;
+          document.getElementById("iffalseName").innerHTML =
+            "Number of Actions to Skip";
+          document.getElementById("iffalseContainer").style.display = null;
           break;
         case 4:
-          document.getElementById('iffalseName').innerHTML = 'Anchor ID';
-          document.getElementById('iffalseContainer').style.display = null;
+          document.getElementById("iffalseName").innerHTML = "Anchor ID";
+          document.getElementById("iffalseContainer").style.display = null;
           break;
         default:
           break;
       }
     };
-    glob.onChange1(document.getElementById('comparison'));
-    glob.refreshVariableList(document.getElementById('storage'));
-    glob.onChangeTrue(document.getElementById('iftrue'));
-    glob.onChangeFalse(document.getElementById('iffalse'));
+    glob.onChange1(document.getElementById("comparison"));
+    glob.refreshVariableList(document.getElementById("storage"));
+    glob.onChangeTrue(document.getElementById("iftrue"));
+    glob.onChangeFalse(document.getElementById("iffalse"));
   },
 
   action(cache) {
@@ -193,10 +205,10 @@ module.exports = {
         result = val1 > val2;
         break;
       case 5:
-        if (typeof val1.includes === 'function') result = val1.includes(val2);
+        if (typeof val1.includes === "function") result = val1.includes(val2);
         break;
       case 6:
-        result = Boolean(val1.match(new RegExp(`^${val2}$`, 'i')));
+        result = Boolean(val1.match(new RegExp(`^${val2}$`, "i")));
         break;
       case 7:
         result = val1.length > val2;
@@ -230,7 +242,9 @@ module.exports = {
 
   mod(DBM) {
     DBM.Actions.executeResults = function executeResults(result, data, cache) {
-      const errors = { 404: 'There was not an anchor found with that exact anchor ID!' };
+      const errors = {
+        404: "There was not an anchor found with that exact anchor ID!",
+      };
       if (result) {
         const type = parseInt(data.iftrue, 10);
         switch (type) {
@@ -258,8 +272,10 @@ module.exports = {
           }
           case 4: {
             const id = this.evalMessage(data.iftrueVal, cache);
-            const anchorIndex = cache.actions.findIndex((a) => a.name === 'Create Anchor' && a.anchor_id === id);
-            if (anchorIndex === -1) throw new Error(errors['404']);
+            const anchorIndex = cache.actions.findIndex(
+              (a) => a.name === "Create Anchor" && a.anchor_id === id
+            );
+            if (anchorIndex === -1) throw new Error(errors["404"]);
             cache.index = anchorIndex - 1;
             this.callNextAction(cache);
             break;
@@ -293,8 +309,10 @@ module.exports = {
           }
           case 4: {
             const id = this.evalMessage(data.iffalseVal, cache);
-            const anchorIndex = cache.actions.findIndex((a) => a.name === 'Create Anchor' && a.anchor_id === id);
-            if (anchorIndex === -1) throw new Error(errors['404']);
+            const anchorIndex = cache.actions.findIndex(
+              (a) => a.name === "Create Anchor" && a.anchor_id === id
+            );
+            if (anchorIndex === -1) throw new Error(errors["404"]);
             cache.index = anchorIndex - 1;
             this.callNextAction(cache);
             break;

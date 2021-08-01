@@ -1,7 +1,7 @@
 /* eslint-disable no-empty */
 module.exports = {
-  name: 'Translate',
-  section: 'Other Stuff',
+  name: "Translate",
+  section: "Other Stuff",
 
   subtitle(data) {
     return `Translate to [${data.translateTo}]`;
@@ -9,10 +9,10 @@ module.exports = {
 
   variableStorage(data, varType) {
     if (parseInt(data.storage, 10) !== varType) return;
-    return [data.varName, 'String'];
+    return [data.varName, "String"];
   },
 
-  fields: ['translateTo', 'translateMessage', 'storage', 'varName'],
+  fields: ["translateTo", "translateMessage", "storage", "varName"],
 
   html(_isEvent, data) {
     return `
@@ -40,7 +40,7 @@ module.exports = {
 
   init() {
     const { glob, document } = this;
-    glob.variableChange(document.getElementById('storage'), 'varNameContainer');
+    glob.variableChange(document.getElementById("storage"), "varNameContainer");
   },
 
   async action(cache) {
@@ -51,10 +51,12 @@ module.exports = {
     const varName = this.evalMessage(data.varName, cache);
 
     const Mods = this.getMods();
-    const translate = Mods.require('node-google-translate-skidz');
+    const translate = Mods.require("node-google-translate-skidz");
 
-    if (!translateTo || translateTo.length > 2) return console.log('Translate to can only be 2 letters.');
-    if (!translateMessage) return console.log('You need to write something to translate.');
+    if (!translateTo || translateTo.length > 2)
+      return console.log("Translate to can only be 2 letters.");
+    if (!translateMessage)
+      return console.log("You need to write something to translate.");
 
     let result;
     try {

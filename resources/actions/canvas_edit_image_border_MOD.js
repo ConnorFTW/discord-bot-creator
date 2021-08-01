@@ -1,13 +1,18 @@
 module.exports = {
-  name: 'Canvas Edit Image Border',
-  section: 'Image Editing',
+  name: "Canvas Edit Image Border",
+  section: "Image Editing",
 
   subtitle(data) {
-    const storeTypes = ['', 'Temp Variable', 'Server Variable', 'Global Variable'];
+    const storeTypes = [
+      "",
+      "Temp Variable",
+      "Server Variable",
+      "Global Variable",
+    ];
     return `${storeTypes[parseInt(data.storage, 10)]} (${data.varName})`;
   },
 
-  fields: ['storage', 'varName', 'circleinfo', 'radius'],
+  fields: ["storage", "varName", "circleinfo", "radius"],
 
   html(_isEvent, data) {
     return `
@@ -41,11 +46,11 @@ module.exports = {
   init() {
     const { glob, document } = this;
 
-    glob.refreshVariableList(document.getElementById('storage'));
+    glob.refreshVariableList(document.getElementById("storage"));
   },
 
   action(cache) {
-    const Canvas = require('canvas');
+    const Canvas = require("canvas");
     const data = cache.actions[cache.index];
     const storage = parseInt(data.storage, 10);
     const varName = this.evalMessage(data.varName, cache);
@@ -61,7 +66,7 @@ module.exports = {
     const imagew = image.width;
     const imageh = image.height;
     const canvas = Canvas.createCanvas(imagew, imageh);
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext("2d");
     function circle() {
       ctx.beginPath();
       ctx.arc(imagew / 2, imageh / 2, (imagew + imageh) / 4, 0, Math.PI * 2);
@@ -89,7 +94,9 @@ module.exports = {
       circle();
     }
     ctx.drawImage(image, 0, 0);
-    const result = canvas.toDataURL('image/png').replace('image/png', 'image/octet-stream');
+    const result = canvas
+      .toDataURL("image/png")
+      .replace("image/png", "image/octet-stream");
     this.storeValue(result, storage, varName, cache);
     this.callNextAction(cache);
   },

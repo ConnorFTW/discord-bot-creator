@@ -1,13 +1,18 @@
 module.exports = {
-  name: 'Canvas Image Options',
-  section: 'Image Editing',
+  name: "Canvas Image Options",
+  section: "Image Editing",
 
   subtitle(data) {
-    const storeTypes = ['', 'Temp Variable', 'Server Variable', 'Global Variable'];
+    const storeTypes = [
+      "",
+      "Temp Variable",
+      "Server Variable",
+      "Global Variable",
+    ];
     return `${storeTypes[parseInt(data.storage, 10)]} (${data.varName})`;
   },
 
-  fields: ['storage', 'varName', 'mirror', 'rotation', 'width', 'height'],
+  fields: ["storage", "varName", "mirror", "rotation", "width", "height"],
 
   html(_isEvent, data) {
     return `
@@ -53,11 +58,11 @@ module.exports = {
   init() {
     const { glob, document } = this;
 
-    glob.refreshVariableList(document.getElementById('storage'));
+    glob.refreshVariableList(document.getElementById("storage"));
   },
 
   action(cache) {
-    const Canvas = require('canvas');
+    const Canvas = require("canvas");
     const data = cache.actions[cache.index];
     const storage = parseInt(data.storage, 10);
     const varName = this.evalMessage(data.varName, cache);
@@ -80,20 +85,22 @@ module.exports = {
     let mirrorw = 1;
     let mirrorh = 1;
     function rotate(r) {
-      const imagex = imagew * Math.abs(Math.cos(r)) + imageh * Math.abs(Math.sin(r));
-      const imagey = imageh * Math.abs(Math.cos(r)) + imagew * Math.abs(Math.sin(r));
+      const imagex =
+        imagew * Math.abs(Math.cos(r)) + imageh * Math.abs(Math.sin(r));
+      const imagey =
+        imageh * Math.abs(Math.cos(r)) + imagew * Math.abs(Math.sin(r));
       imagew = imagex;
       imageh = imagey;
     }
     function scale(w, h) {
-      if (w.endsWith('%')) {
-        const percent = w.replace('%', '');
+      if (w.endsWith("%")) {
+        const percent = w.replace("%", "");
         scalew = parseInt(percent, 10) / 100;
       } else {
         scalew = parseInt(w, 10) / imagew;
       }
-      if (h.endsWith('%')) {
-        const percent = h.replace('%', '');
+      if (h.endsWith("%")) {
+        const percent = h.replace("%", "");
         scaleh = parseInt(percent, 10) / 100;
       } else {
         scaleh = parseInt(h, 10) / imageh;
@@ -129,7 +136,7 @@ module.exports = {
     scalew *= mirrorw;
     scaleh *= mirrorh;
     const canvas = Canvas.createCanvas(imagew, imageh);
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext("2d");
     ctx.clearRect(0, 0, imagew, imageh);
     ctx.save();
     ctx.translate(imagew / 2, imageh / 2);
@@ -137,7 +144,9 @@ module.exports = {
     ctx.scale(scalew, scaleh);
     ctx.drawImage(image, -image.width / 2, -image.height / 2);
     ctx.restore();
-    const result = canvas.toDataURL('image/png').replace('image/png', 'image/octet-stream');
+    const result = canvas
+      .toDataURL("image/png")
+      .replace("image/png", "image/octet-stream");
     this.storeValue(result, storage, varName, cache);
     this.callNextAction(cache);
   },
