@@ -6,10 +6,12 @@ import CustomCommandView from "../../components/dashboard/custom-command-view";
 import Sidebar from "../../components/sidebar";
 import SettingsModal from "../../components/dashboard/modals/settings";
 import electron from "electron";
+import { deserialize } from "v8";
+import _eval from "eval";
 
 const ipcRenderer = electron.ipcRenderer || false;
 
-export default function Dashboard() {
+export default function Dashboard({}) {
   const { query } = useRouter();
   const [commands, setCommands] = useState([]);
   const [events, setEvents] = useState([]);
@@ -17,15 +19,17 @@ export default function Dashboard() {
   const [settings, setSettings] = useState({});
   const [selected, setSelected] = useState("");
   const [mode, setMode] = useState("command");
-  const [actions, setActions] = useState([]);
+  const [actionSchemas, setActionsSchemas] = useState([]);
 
-  useEffect(() => {
+  useEffect(async () => {
     ipcRenderer.on("getCommands", (_event, commands) => {
-      setCommands(JSON.parse(commands).filter((c) => c));
+      setCommands(JSON.parse(commands || {}).filter((c) => c));
       setIsLoading(!commands || !events);
     });
     ipcRenderer.on("getActions", (_event, actions) => {
-      setActions(JSON.parse(actions).filter((a) => a));
+      actions = actions.map((action) => _eval(action, "actions-eval.js"));
+      const actions = await window.loader.getActions();
+      setActionsSchemas(actions);
     });
     ipcRenderer.send("getActions");
     ipcRenderer.send("getCommands");
@@ -94,7 +98,8 @@ export default function Dashboard() {
                     prefix={settings?.prefix}
                     autoRestart={settings?.autoRestart}
                     toggleHints={settings?.toggleHints}
-                    actions={actions}
+                    actions={command?.actions}
+                    actionSchemas={actionSchemas}
                   />
                 </Tab.Pane>
               ))}
