@@ -65,7 +65,6 @@ export default function ActionForm({
           actionIndex={actionIndex}
         />
       )}
-      <pre>{JSON.stringify({ ...action, conditions: "Hidden" }, null, 2)}</pre>
     </Form.Group>
   );
 }

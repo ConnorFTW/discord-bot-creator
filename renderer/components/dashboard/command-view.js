@@ -42,20 +42,36 @@ export default function CommandView({ command: commandSchema }) {
         </Row>
         <Form>
           {command.c && (
-            <Form.Group>
-              <Form.Label>Trigger</Form.Label>
-              <Form.Select
-                value={command.trigger}
-                onChange={(e) =>
-                  setCommand({ ...command, trigger: e.target.value })
-                }
-              >
-                <option value="message">Message</option>
-                <option value="guildMemberAdd">New Member</option>
-                <option value="guildMemberRemove">Member Left</option>
-                <option value="clickButton">Button Click</option>
-              </Form.Select>
-            </Form.Group>
+            <>
+              <Form.Group>
+                <Form.Label>Trigger</Form.Label>
+                <Form.Select
+                  value={command.trigger}
+                  onChange={(e) =>
+                    setCommand({ ...command, trigger: e.target.value })
+                  }
+                >
+                  <option value="message">Message</option>
+                  <option value="guildMemberAdd">New Member</option>
+                  <option value="guildMemberRemove">Member Left</option>
+                  <option value="clickButton">Button Click</option>
+                </Form.Select>
+              </Form.Group>
+              <Form.Group>
+                <Form.Label>Command Type</Form.Label>
+                <Form.Select
+                  value={commmand.comType}
+                  onChange={(e) =>
+                    setCommand({ ...command, comType: e.target.value })
+                  }
+                >
+                  <option value="0">Normal Command</option>
+                  <option value="1">Includes Word</option>
+                  <option value="2">Matches Regular Expression</option>
+                  <option value="3">Any Message</option>
+                </Form.Select>
+              </Form.Group>
+            </>
           )}
           {!command.c && (
             <Form.Group>

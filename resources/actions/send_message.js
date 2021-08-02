@@ -36,7 +36,6 @@ module.exports = {
 
   html(isEvent, data) {
     return `
-<div style="width: 550px; height: 350px; overflow-y: scroll;">
   <div></div><br>
   <div>
     <div style="float: left; width: 35%;">
@@ -81,7 +80,6 @@ module.exports = {
       <span id="iffalseName">Action Number</span>:<br>
       <input id="iffalseVal" class="round" type="text">
     </div>
-  </div>
 </div>`;
   },
 

@@ -1,1 +1,14 @@
 $input-color: #222;
+
+select {
+  @extend .form-select;
+}
+
+input[type="text"],
+input[type="number"] {
+  @extend .form-control;
+}
+
+textarea {
+  @extend .form-control;
+}
