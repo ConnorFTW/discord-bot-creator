@@ -1,5 +1,5 @@
 import { Button, Form, Col } from "react-bootstrap";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import parseFnString from "parse-function-string";
 import useActions from "../../../lib/hooks/useActions";
 import ActionModal from "./action-modal";
@@ -61,6 +61,8 @@ export default function ActionForm({
           action={action}
           isEvent={isEvent}
           onHide={() => setOpen(false)}
+          update={update}
+          actionIndex={actionIndex}
         />
       )}
       <pre>{JSON.stringify({ ...action, conditions: "Hidden" }, null, 2)}</pre>

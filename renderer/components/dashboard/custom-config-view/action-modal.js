@@ -8,8 +8,18 @@ export default function ActionModal({
   show,
   isEvent,
   onHide,
+  update = () => {},
+  actionIndex,
 }) {
   const [state, setState] = useState({ visible: false, html: "" });
+
+  const glob = {
+    sendTargetChange() {},
+    variableChange() {},
+    memberChange() {},
+    messageChange() {},
+    refreshVariableList() {},
+  };
   useEffect(() => {
     if (!actionSchema?.name || !action) return;
 
@@ -19,10 +29,28 @@ export default function ActionModal({
     const val2 = "";
     const inputData = "";
     const item = "";
-    data.messages = [];
+    data.messages = [
+      `
+
+      `,
+    ];
     data.variables = [];
-    data.sendTargets = [];
-    data.members = [];
+    data.sendTargets = [
+      `
+    <option value="0">Same Channel</option>
+    <option value="1">Command Author</option>
+    <option value="2">Mentioned User</option>
+    <option value="3">Mentioned Channel</option>
+    <option value="4">Default Channel</option>
+    <option value="5">Temp Variable</option>
+    <option value="6">Server Variable</option>
+    <option value="7">Global Variable</option>
+    `,
+    ];
+    data.members = [
+      `
+      `,
+    ];
     data.conditions = [
       `
   <div style="padding-top: 8px;">
@@ -57,19 +85,6 @@ export default function ActionModal({
   </div>
     `,
     ];
-
-    const init = parseFunction(actionSchema.init).body;
-    actionSchema.fields?.forEach((field) => {
-      console.log(field);
-      let elem = document.getElementById(field);
-      console.log({ elem });
-      if (!elem) return;
-      elem.value = data[field];
-      elem?.addEventListener("onchange", (e) => {
-        console.log("Changing");
-        //update(actionIndex, { ...action, [field]: e.target.value });
-      });
-    });
     console.log(actionSchema.name);
 
     let htmlFunction = new Function(
@@ -84,12 +99,7 @@ export default function ActionModal({
 
     let html;
     const context = {
-      glob: {
-        sendTargetChange() {},
-        variableChange() {},
-        memberChange() {},
-        messageChange() {},
-      },
+      glob,
       document,
       getHtml() {
         html = htmlFunction.bind(this)(isEvent, data);
@@ -101,6 +111,19 @@ export default function ActionModal({
     context.getHtml();
     if (state.html) {
       context.init();
+
+      actionSchema.fields?.forEach((field) => {
+        let elem = document.getElementById(field);
+        if (!elem) return;
+        elem.value = data[field];
+        const onChange = elem.onchange;
+        elem.onchange = "";
+        elem?.addEventListener("change", (e) => {
+          console.log("Changing");
+          eval(onChange);
+          update(actionIndex, { ...action, [field]: e.target.value });
+        });
+      });
     }
     setState({ ...state, html });
   }, [actionSchema?.name, !!action, !!state.html]);
@@ -120,11 +143,7 @@ export default function ActionModal({
       </Modal.Body>
       <Modal.Footer className="d-flex flex-row justify-content-between">
         <Button onClick={onHide}>Close</Button>
-        <Button
-          onClick={() => setData(settings)}
-          variant="success"
-          className="mt-3"
-        >
+        <Button onClick={onHide} variant="success" className="mt-3">
           Save
         </Button>
       </Modal.Footer>
