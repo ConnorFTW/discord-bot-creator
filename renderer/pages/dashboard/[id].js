@@ -2,11 +2,13 @@ import { Col, Row, Tab } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/dist/client/router";
 import Head from "next/head";
-import CustomCommandView from "../../components/dashboard/command-view";
+import CommandView from "../../components/dashboard/command-view";
 import Sidebar from "../../components/sidebar";
 import SettingsModal from "../../components/dashboard/modals/settings";
 import electron from "electron";
 import useSettings from "../../lib/hooks/useSettings";
+import EventView from "../../components/dashboard/event-view";
+import useEvents from "../../lib/hooks/useEvents";
 
 const ipcRenderer = electron.ipcRenderer || false;
 
@@ -16,32 +18,23 @@ export default function Dashboard({}) {
   // Component Controls
   const [selected, setSelected] = useState("");
   const [settingsShow, setSettingsShow] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
   const [mode, setMode] = useState("command");
 
   // Data
-  const [events, setEvents] = useState([]);
-  const [actionSchemas, setActionsSchemas] = useState([]);
+  const [events] = useEvents();
   const [commands, setCommands] = useState([]);
   const [settings] = useSettings({});
 
   useEffect(async () => {
     ipcRenderer.on("getCommands", (_event, commands) => {
       setCommands(JSON.parse(commands || {}).filter((c) => c));
-      setIsLoading(!commands || !events);
     });
     ipcRenderer.on("getActions", (_event, actionSchemas) => {
       console.log(actionSchemas);
-      setActionsSchemas(actionSchemas);
-    });
-    ipcRenderer.on("getEvents", (_event, events) => {
-      setEvents(JSON.parse(events).filter((e) => e));
-      setIsLoading(!commands || !events);
     });
 
     ipcRenderer.send("getCommands");
     ipcRenderer.send("getActions");
-    ipcRenderer.send("getEvents");
   }, []);
 
   function onChange({ command, event }) {
@@ -67,7 +60,6 @@ export default function Dashboard({}) {
       <Tab.Container>
         <Row className="mx-0">
           <Sidebar
-            isValidating={isLoading}
             customCommand={events}
             selected={selected}
             setSelected={setSelected}
@@ -82,19 +74,21 @@ export default function Dashboard({}) {
             style={{ overflowY: "auto", maxHeight: "100vh" }}
           >
             <Tab.Content>
-              {optionList?.map((command, i) => (
+              {optionList?.map(({ name, "event-type": eventType } = {}, i) => (
                 <Tab.Pane
-                  eventKey={command?.name}
-                  key={command?.name}
-                  active={(!selected && i === 0) || selected === command?.name}
+                  eventKey={name}
+                  key={name}
+                  active={(!selected && i === 0) || selected === name}
                 >
-                  <CustomCommandView
-                    command={command}
-                    onChange={onChange}
-                    botId={query.id}
-                    actions={command?.actions}
-                    actionSchemas={actionSchemas}
-                  />
+                  {typeof eventType !== "undefined" ? (
+                    <EventView event={optionList[i]} />
+                  ) : (
+                    <CommandView
+                      command={optionList[i]}
+                      onChange={onChange}
+                      botId={query.id}
+                    />
+                  )}
                 </Tab.Pane>
               ))}
             </Tab.Content>

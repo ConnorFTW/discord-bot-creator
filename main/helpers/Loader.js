@@ -30,7 +30,6 @@ export default class Loader {
           subtitle: content.subtitle + "",
           fields: content.fields,
           init: content.init + "",
-          action: content.action + "",
           displayName: content.displayName + "",
           variableStorage: content.variableStorage + "",
           requiresAudioLibraries: content.requiresAudioLibraries + "",

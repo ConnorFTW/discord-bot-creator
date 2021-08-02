@@ -3,15 +3,11 @@ import { Button, Col, Form, Row, Spinner } from "react-bootstrap";
 import ActionForm from "./custom-config-view/action-form";
 import RemoveCommandButton from "./remove-command-button";
 
-export default function CustomCommandView({
-  command: commandSchema,
-  actions,
-  actionSchemas,
-}) {
+export default function CommandView({ command: commandSchema }) {
   const [command, setCommand] = useState(commandSchema);
   const [status, setStatus] = useState({});
 
-  if (commandSchema && !command.trigger) {
+  if (!command.trigger) {
     setCommand({ ...command, trigger: "message" });
   }
 
@@ -33,14 +29,6 @@ export default function CustomCommandView({
       ...command,
       actions: [...(command.actions || []), { type: "Send Message" }],
     });
-  };
-
-  const save = (e) => {
-    if (e) e.preventDefault();
-    setStatus({ ...status, isSaving: true });
-    setTimeout(() => {
-      setStatus({ ...status, isSaving: false });
-    }, 1000);
   };
 
   return (
@@ -83,11 +71,6 @@ export default function CustomCommandView({
           {command.actions?.map((action, i) => (
             <ActionForm
               action={action}
-              actions={actions}
-              actionSchema={actionSchemas.find(
-                (schema) => schema.name === action.name
-              )}
-              actionSchemas={actionSchemas}
               key={i}
               update={updateAction}
               actionIndex={i}
@@ -98,8 +81,6 @@ export default function CustomCommandView({
         </Form>
       </Col>
       <pre className="d-none">{JSON.stringify(command, null, 2)}</pre>
-      <pre className="d-none">{JSON.stringify(actions, null, 2)}</pre>
-      <pre className="d-none">{JSON.stringify(actionSchemas, null, 2)}</pre>
     </Row>
   );
 }

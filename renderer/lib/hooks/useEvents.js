@@ -14,12 +14,12 @@ export default function useEvents({ force } = {}) {
   });
 
   useEffect(() => {
-    if (events && !force) return;
     ipcRenderer?.on("getEvents", (event, events) => {
       events = JSON.parse(events || "[]");
       window._events = events;
       setEvents(events);
     });
+    if (events && !force) return;
     ipcRenderer?.send("getEvents");
 
     return () => {
@@ -27,5 +27,5 @@ export default function useEvents({ force } = {}) {
     };
   }, [!!ipcRenderer, events]);
 
-  return [events, setEvents];
+  return [events?.filter((e) => e), setEvents];
 }

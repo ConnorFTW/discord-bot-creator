@@ -1,34 +1,39 @@
 import { Button, Form, Col } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import parseFnString from "parse-function-string";
+import useActions from "../../../lib/hooks/useActions";
 
 export default function ActionForm({
   action,
   update,
   remove,
   actionIndex,
-  actionSchema,
-  actionSchemas,
+  isEvent,
 }) {
-  const { type } = action;
+  const [actionSchemas] = useActions();
+  const actionSchema =
+    actionSchemas.find(({ name }) => name === action.name) || {};
   const actionNames = actionSchemas?.map(({ name }) => name);
   const [state, setState] = useState({});
 
-  const updateType = (type) => {
-    action.type = type;
+  const updateName = (newName) => {
+    const schema = actionSchemas.find(({ name }) => name === newName);
+    let action = { name: newName };
+    schema.fields?.forEach((fields) => {
+      action[fields] = "";
+    });
     update(actionIndex, action);
   };
 
   useEffect(() => {
-    if (!actionSchema) return;
+    if (!actionSchema || !action) return;
 
-    const data = {};
+    const data = action || {};
     data.messages = [];
     data.variables = [];
     data.sendTargets = [];
     data.members = [];
     data.conditions = [];
-    const isEvent = 0;
 
     let htmlFunction = new Function(
       "isEvent",
@@ -36,14 +41,17 @@ export default function ActionForm({
       parseFnString(actionSchema.html).body
     );
 
-    setState({ ...state, html: htmlFunction(false, data) });
-  }, [actionSchema?.name]);
+    setState({ ...state, html: htmlFunction(isEvent, data) });
+  }, [actionSchema?.name, !!action]);
 
   return (
     <Form.Group className="border p-2 my-3">
       <Form.Group className="mb-3">
         <Form.Label>Type</Form.Label>
-        <Form.Select value={type} onChange={(e) => updateType(e.target.value)}>
+        <Form.Select
+          value={action.name}
+          onChange={(e) => updateName(e.target.value)}
+        >
           {actionNames?.map((name, i) => (
             <option value={name} key={name + "" + i}>
               {name}
@@ -62,6 +70,7 @@ export default function ActionForm({
           Remove
         </Button>
       </Col>
+      <pre>{JSON.stringify(action, null, 2)}</pre>
     </Form.Group>
   );
 }
