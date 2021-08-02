@@ -310,7 +310,7 @@ module.exports = {
 
   html() {
     return `
-    <div id ="wrexdiv" style="width: 550px; height: 350px; overflow-y: scroll;">
+    <div id ="wrexdiv" >
       <p>
         <u>DBM Mods Dependencies:</u><br><br>
         This isn't an action, but it is required for the actions under this category.<br><br>

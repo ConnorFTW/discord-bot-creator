@@ -50,7 +50,7 @@ module.exports = {
       .replace(/If True/g, "If Set Success")
       .replace(/If False/g, "If Set Failed");
     return `
-<div style="width: 550px; height: 350px; overflow-y: scroll;">
+<div >
   <div style="padding-top: 8px;">
     <div style="float: left; width: 35%;">
       Target Type:<br>

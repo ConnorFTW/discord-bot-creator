@@ -123,7 +123,7 @@ span.discord_code_blocks {
   font-family: Consolas
 }
 </style>
-<div id="wrexdiv" style="width: 550px; height: 350px; overflow-y: scroll;">
+<div id="wrexdiv" >
   <p>
     <h1 style="color: #fff">Welcome!</h1>
     Thank you for using the DBM Mod Collection!<br>

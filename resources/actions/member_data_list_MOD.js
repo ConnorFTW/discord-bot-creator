@@ -28,7 +28,7 @@ module.exports = {
 
   html(isEvent, data) {
     return `
-<div id="wrexdiv2" style="width: 550px; height: 350px; overflow-y: scroll;">
+<div id="wrexdiv2" >
   <div>
     <div style="padding-top: 8px;">
       <div style="float: left; width: 50%;">

@@ -83,7 +83,7 @@ module.exports = {
 
   html(_isEvent, data) {
     return `
-<div style="width: 550px; height: 350px; overflow-y: scroll;">
+<div >
   <div style="padding-top: 8px;">
     <div style="float: left; width: 35%; ">
       Apply Type:<br>

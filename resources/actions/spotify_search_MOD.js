@@ -278,7 +278,7 @@ module.exports = {
 
   html(_isEvent, data) {
     return `
-<div id ="wrexdiv" style="width: 550px; height: 350px; overflow-y: scroll;">
+<div id ="wrexdiv" >
   <div style="width: 95%; padding-top: 8px;">
     Client ID:<br>
     <textarea id="clientid" rows="2" placeholder="Write your Client ID. Get one from Spotify." style="width: 99%; font-family: monospace; white-space: nowrap; resize: none;"></textarea>

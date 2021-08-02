@@ -135,7 +135,7 @@ module.exports = {
       border-radius: 50%;
     }
   </style>
-  <div id="wrexdiv" style="width: 550px; height: 350px; overflow-y: scroll;" onload="showInput()">
+  <div id="wrexdiv"  onload="showInput()">
     <div style="padding-bottom: 100px; padding: 5px 15px 5px 5px">
       <div style="padding: 5px 10px 5px 5px">
         <div style="display: flex; flex-direction: row;">

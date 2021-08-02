@@ -101,9 +101,12 @@ export default function SettingsModal(props) {
           <Form.Check
             type="switch"
             label="Case Sensitive"
-            checked={checked}
+            checked={settings?.checked === "true" || false}
             onChange={(e) =>
-              setSettings({ ...settings, settings: e.target.checked })
+              setSettings({
+                ...settings,
+                settings: e.target.checked ? "true" : "false",
+              })
             }
             className="mb-3"
           />

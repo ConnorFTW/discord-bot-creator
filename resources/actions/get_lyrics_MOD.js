@@ -31,7 +31,7 @@ module.exports = {
 
   html(_isEvent, data) {
     return `
-<div style="width: 550px; height: 350px; overflow-y: scroll;">
+<div >
   <div>
     <div style="width: 95%; padding-top: 8px;">
       Song to Search:<br>

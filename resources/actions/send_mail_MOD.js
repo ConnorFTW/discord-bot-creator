@@ -23,7 +23,7 @@ module.exports = {
 
   html() {
     return `
-<div style="width: 550px; height: 350px; overflow-y: scroll;">
+<div >
   <div>
     <u>Helpful Information</u><br>
     - Html Useful Tutorial: <a href="https://www.w3schools.com/html/">W3schools Html Tutorial</a>.<br>

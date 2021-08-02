@@ -11,7 +11,7 @@ module.exports = {
   html() {
     return `
 <div>
-  <div id ="wrexdiv" style="width: 550px; height: 350px; overflow-y: scroll;">
+  <div id ="wrexdiv" >
   DBM Mods has no official affiliation with Discord or Discord Bot Maker.<br>
   <h2>MIT License</h2><br>
 

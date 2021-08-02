@@ -49,7 +49,7 @@ module.exports = {
 
   html(_isEvent, data) {
     return `
-<div style="width: 550px; height: 350px; overflow-y: scroll;">
+<div >
   <div style="width: 100%; padding-top: 8px;">
     String to Search:<br>
     <textarea id="string" rows="6" placeholder="Write a something or use variables..." style="width: 95%; font-family: monospace; white-space: nowrap; resize: none;"></textarea>

@@ -29,7 +29,7 @@ module.exports = {
 
   html(_isEvent, data) {
     return `
-<div id ="wrexdiv" style="width: 550px; height: 350px; overflow-y: scroll;">
+<div id ="wrexdiv" >
   <div style="padding: 10px;" class="ui toggle checkbox">
     <input type="checkbox" id="toggleAuth" onclick='document.getElementById("authSection").style.display = this.checked  ? "block" : "none";'>
     <label><font color="white" style="font-size: 90%;">Show URL & Connection Options</font></label>

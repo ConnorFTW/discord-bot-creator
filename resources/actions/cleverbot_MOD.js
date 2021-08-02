@@ -24,7 +24,7 @@ module.exports = {
 
   html(_isEvent, data) {
     return `
-<div id ="wrexdiv" style="width: 550px; height: 350px; overflow-y: scroll;">
+<div id ="wrexdiv" >
 <div>
   <div style="width: 45%; padding-top: 8px;">
     API:<br>

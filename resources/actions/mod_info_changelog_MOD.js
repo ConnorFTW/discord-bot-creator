@@ -11,7 +11,7 @@ module.exports = {
   html() {
     return `
 <div>
-<div id ="wrexdiv" style="width: 550px; height: 350px; overflow-y: scroll;">
+<div id ="wrexdiv" >
   <p>
   <h2>1.9.7: Bunch of bug fixes and new actions!</h2>
     ● Module Installer now functions as intended.<br>

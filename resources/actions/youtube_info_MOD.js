@@ -76,7 +76,7 @@ module.exports = {
 
   html(_isEvent, data) {
     return `
-<div style="width: 550px; height: 350px; overflow-y: scroll;">
+<div >
   <div style="width: 95%; padding-top: 8px;">
     Video to Search:<br>
     <textarea id="video" rows="2" placeholder="Video to search for goes here" style="width: 95%; font-family: monospace; white-space: nowrap; resize: none;"></textarea>

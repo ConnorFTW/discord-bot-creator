@@ -46,7 +46,7 @@ module.exports = {
 
   html(_isEvent, data) {
     return `
-  <div style="width: 550px; height: 350px; overflow-y: scroll;">
+  <div >
   <div>
   <div style="float: left; width: 50%; padding-top: 8px;">
     Server IP:<br>

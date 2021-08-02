@@ -46,7 +46,7 @@ module.exports = {
 
   html(isEvent, data) {
     return `
-  <div style="width: 550px; height: 350px; overflow-y: scroll;">
+  <div >
     <div>
     <div></div><br>
       <div style="float: left; width: 35%;">
