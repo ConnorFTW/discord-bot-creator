@@ -199,6 +199,7 @@ export default function ActionModal({
       </Modal.Header>
       <Modal.Body style={{ height: "60vh", overflowY: "scroll" }}>
         <div dangerouslySetInnerHTML={{ __html: state.html }} />
+        <pre>{JSON.stringify(action, null, 2)}</pre>
       </Modal.Body>
       <Modal.Footer className="d-flex flex-row justify-content-between">
         <Button onClick={onHide}>Close</Button>
