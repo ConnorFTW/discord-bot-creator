@@ -81,3 +81,8 @@ ipcMain.on("getEvents", async (event, args) => {
   const events = await loader?.getEvents();
   event.sender.send("getEvents", events);
 });
+
+ipcMain.on("saveSettings", async (event, settings) => {
+  await loader?.saveSettings(settings);
+  event.sender.send("saveSettings", { success: true, settings });
+});

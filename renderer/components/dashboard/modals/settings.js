@@ -1,3 +1,4 @@
+import { ipcRenderer } from "electron";
 import { useRouter } from "next/dist/client/router";
 import { Button, Form, FormControl, Modal } from "react-bootstrap";
 import useSettings from "../../../lib/hooks/useSettings";
@@ -34,6 +35,13 @@ export default function SettingsModal(props) {
 
   const changeToken = (e) => {
     setSettings({ ...settings, token: e.target.value });
+  };
+
+  const saveSettings = () => {
+    ipcRenderer.send("saveSettings", settings);
+    ipcRenderer.on("saveSettings", (event, data) => {
+      props.onHide();
+    });
   };
 
   return (
@@ -123,11 +131,7 @@ export default function SettingsModal(props) {
       </Modal.Body>
       <Modal.Footer className="d-flex flex-row justify-content-between">
         <Button onClick={props.onHide}>Close</Button>
-        <Button
-          onClick={() => setData(settings)}
-          variant="success"
-          className="mt-3"
-        >
+        <Button onClick={saveSettings} variant="success" className="mt-3">
           Save
         </Button>
       </Modal.Footer>

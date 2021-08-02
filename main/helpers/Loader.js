@@ -14,6 +14,15 @@ export default class Loader {
       "utf8"
     );
   }
+  saveSettings(settings) {
+    if (!Object.keys(settings).length) return;
+
+    console.log(settings);
+    fs.writeFileSync(
+      path.resolve(this.filePath, "./data/settings.json"),
+      JSON.stringify(settings, null, 2)
+    );
+  }
   async getLocalActions() {
     const files = await fg("./resources/actions/*.js");
     // Remove strange dev file
