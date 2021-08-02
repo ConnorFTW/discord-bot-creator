@@ -1,9 +1,0 @@
-{
-  "name": "Convert Seconds To D/H/M/S",
-  "section": "Other Stuff",
-  "fields": [
-    "time",
-    "storage",
-    "varName"
-  ]
-}

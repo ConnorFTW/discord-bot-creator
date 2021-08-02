@@ -1,8 +1,0 @@
-{
-  "name": "Comment",
-  "section": "Other Stuff",
-  "fields": [
-    "comment",
-    "color"
-  ]
-}

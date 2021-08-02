@@ -1,9 +1,0 @@
-{
-  "name": "Read File",
-  "section": "File Stuff",
-  "fields": [
-    "filename",
-    "storage",
-    "varName2"
-  ]
-}

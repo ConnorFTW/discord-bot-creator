@@ -1,7 +1,0 @@
-{
-  "name": "Set Bot Username",
-  "section": "Bot Client Control",
-  "fields": [
-    "username"
-  ]
-}

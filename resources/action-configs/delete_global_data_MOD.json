@@ -1,7 +1,0 @@
-{
-  "name": "Delete Global Data",
-  "section": "Data",
-  "fields": [
-    "dataName"
-  ]
-}

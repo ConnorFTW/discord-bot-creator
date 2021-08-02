@@ -1,9 +1,0 @@
-{
-  "name": "Loop through Folder",
-  "section": "Lists and Loops",
-  "fields": [
-    "filename",
-    "storage",
-    "varName2"
-  ]
-}

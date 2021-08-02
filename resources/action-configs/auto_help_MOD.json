@@ -1,9 +1,0 @@
-{
-  "name": "Auto Help",
-  "section": "Other Stuff",
-  "fields": [
-    "Category",
-    "Description",
-    "Include"
-  ]
-}

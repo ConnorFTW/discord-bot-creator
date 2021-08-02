@@ -1,8 +1,0 @@
-{
-  "name": "Shuffle Queue MOD",
-  "section": "Audio Control",
-  "fields": [
-    "server",
-    "varName"
-  ]
-}

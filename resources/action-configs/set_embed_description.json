@@ -1,9 +1,0 @@
-{
-  "name": "Set Embed Description",
-  "section": "Embed Message",
-  "fields": [
-    "storage",
-    "varName",
-    "message"
-  ]
-}

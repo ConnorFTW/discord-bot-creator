@@ -1,7 +1,0 @@
-{
-  "name": "Set Audio Volume",
-  "section": "Audio Control",
-  "fields": [
-    "volume"
-  ]
-}

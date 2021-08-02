@@ -1,9 +1,0 @@
-{
-  "name": "Kick Member",
-  "section": "Member Control",
-  "fields": [
-    "member",
-    "varName",
-    "reason"
-  ]
-}

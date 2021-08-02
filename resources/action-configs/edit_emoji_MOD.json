@@ -1,9 +1,0 @@
-{
-  "name": "Edit Emoji",
-  "section": "Emoji Control",
-  "fields": [
-    "storage",
-    "varName",
-    "emojiName"
-  ]
-}

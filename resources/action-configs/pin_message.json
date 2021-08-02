@@ -1,8 +1,0 @@
-{
-  "name": "Pin Message",
-  "section": "Messaging",
-  "fields": [
-    "storage",
-    "varName"
-  ]
-}

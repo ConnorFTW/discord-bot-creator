@@ -1,9 +1,0 @@
-{
-  "name": "Emit Event",
-  "section": "Bot Client Control",
-  "fields": [
-    "eventType",
-    "firstArg",
-    "secondArg"
-  ]
-}

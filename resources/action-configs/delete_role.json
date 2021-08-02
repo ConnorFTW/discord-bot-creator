@@ -1,9 +1,0 @@
-{
-  "name": "Delete Role",
-  "section": "Role Control",
-  "fields": [
-    "storage",
-    "varName",
-    "reason"
-  ]
-}

@@ -2,6 +2,7 @@ import { Button, Form, Col } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import parseFnString from "parse-function-string";
 import useActions from "../../../lib/hooks/useActions";
+import ActionModal from "./action-modal";
 
 export default function ActionForm({
   action,
@@ -10,11 +11,11 @@ export default function ActionForm({
   actionIndex,
   isEvent,
 }) {
+  const [open, setOpen] = useState(false);
   const [actionSchemas] = useActions();
   const actionSchema =
     actionSchemas.find(({ name }) => name === action.name) || {};
   const actionNames = actionSchemas?.map(({ name }) => name);
-  const [state, setState] = useState({});
 
   const updateName = (newName) => {
     const schema = actionSchemas.find(({ name }) => name === newName);
@@ -25,24 +26,9 @@ export default function ActionForm({
     update(actionIndex, action);
   };
 
-  useEffect(() => {
-    if (!actionSchema || !action) return;
-
-    const data = action || {};
-    data.messages = [];
-    data.variables = [];
-    data.sendTargets = [];
-    data.members = [];
-    data.conditions = [];
-
-    let htmlFunction = new Function(
-      "isEvent",
-      "data",
-      parseFnString(actionSchema.html).body
-    );
-
-    setState({ ...state, html: htmlFunction(isEvent, data) });
-  }, [actionSchema?.name, !!action]);
+  const openAction = () => {
+    setOpen(true);
+  };
 
   return (
     <Form.Group className="border p-2 my-3">
@@ -60,17 +46,24 @@ export default function ActionForm({
         </Form.Select>
         <Form.Text>{actionSchema?.description}</Form.Text>
       </Form.Group>
-      <div
-        dangerouslySetInnerHTML={{
-          __html: state.html,
-        }}
-      ></div>
       <Col className="mt-2">
         <Button className="btn-danger btn-sm" onClick={remove}>
           Remove
         </Button>
+        <Button className="btn-sm" onClick={openAction}>
+          Open
+        </Button>
       </Col>
-      <pre>{JSON.stringify(action, null, 2)}</pre>
+      {open && (
+        <ActionModal
+          show={true}
+          actionSchema={actionSchema}
+          action={action}
+          isEvent={isEvent}
+          onHide={() => setOpen(false)}
+        />
+      )}
+      <pre>{JSON.stringify({ ...action, conditions: "Hidden" }, null, 2)}</pre>
     </Form.Group>
   );
 }

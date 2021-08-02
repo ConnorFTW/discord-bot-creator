@@ -1,8 +1,0 @@
-{
-  "name": "Leave Server",
-  "section": "Bot Client Control",
-  "fields": [
-    "server",
-    "varName"
-  ]
-}

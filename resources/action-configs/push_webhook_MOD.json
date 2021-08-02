@@ -1,9 +1,0 @@
-{
-  "name": "Send Message To Webhook",
-  "section": "Webhook Control",
-  "fields": [
-    "webhook",
-    "varName",
-    "message"
-  ]
-}

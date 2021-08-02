@@ -1,9 +1,0 @@
-{
-  "name": "Store Time Info",
-  "section": "Other Stuff",
-  "fields": [
-    "type",
-    "storage",
-    "varName"
-  ]
-}

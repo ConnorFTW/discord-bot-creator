@@ -1,9 +1,0 @@
-{
-  "name": "Create Anchor",
-  "section": "Other Stuff",
-  "fields": [
-    "anchor_id",
-    "color",
-    "description"
-  ]
-}

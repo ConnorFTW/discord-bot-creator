@@ -1,9 +1,0 @@
-{
-  "name": "Create GIF",
-  "section": "Image Editing",
-  "fields": [
-    "url",
-    "storage",
-    "varName"
-  ]
-}

@@ -1,9 +1,0 @@
-{
-  "name": "Store Shard Info",
-  "section": "Bot Client Control",
-  "fields": [
-    "info",
-    "storage",
-    "varName2"
-  ]
-}

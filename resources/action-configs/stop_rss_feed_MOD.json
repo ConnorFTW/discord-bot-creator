@@ -1,8 +1,0 @@
-{
-  "name": "Stop RSS Feed Watcher",
-  "section": "Other Stuff",
-  "fields": [
-    "storage",
-    "varName"
-  ]
-}

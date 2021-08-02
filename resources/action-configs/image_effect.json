@@ -1,9 +1,0 @@
-{
-  "name": "Apply Image Effect",
-  "section": "Image Editing",
-  "fields": [
-    "storage",
-    "varName",
-    "effect"
-  ]
-}

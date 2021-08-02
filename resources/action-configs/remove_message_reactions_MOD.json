@@ -1,8 +1,0 @@
-{
-  "name": "Clear reactions from message",
-  "section": "Reaction Control",
-  "fields": [
-    "storage",
-    "varName"
-  ]
-}

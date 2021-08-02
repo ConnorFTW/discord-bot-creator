@@ -1,9 +1,0 @@
-{
-  "name": "Delete Server Data",
-  "section": "Data",
-  "fields": [
-    "server",
-    "varName",
-    "dataName"
-  ]
-}

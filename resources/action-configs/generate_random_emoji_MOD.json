@@ -1,8 +1,0 @@
-{
-  "name": "Generate Random Emoji",
-  "section": "Other Stuff",
-  "fields": [
-    "storage",
-    "varName"
-  ]
-}
