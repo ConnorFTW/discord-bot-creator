@@ -19,17 +19,19 @@ export default function Dashboard({}) {
   const [selected, setSelected] = useState("");
   const [mode, setMode] = useState("command");
   const [actionSchemas, setActionsSchemas] = useState([]);
+  const [settingsShow, setSettingsShow] = useState(false);
 
   useEffect(async () => {
     ipcRenderer.on("getCommands", (_event, commands) => {
       setCommands(JSON.parse(commands || {}).filter((c) => c));
       setIsLoading(!commands || !events);
     });
-    ipcRenderer.on("getActions", (_event, actions) => {
-      console.log(actions);
-      setActionsSchemas(actions);
+    ipcRenderer.on("getActions", (_event, actionSchemas) => {
+      console.log(actionSchemas);
+      setActionsSchemas(actionSchemas);
     });
     ipcRenderer.on("getSettings", (event, settings) => {
+      console.log(settings);
       setSettings(settings);
     });
     ipcRenderer.on("getEvents", (_event, events) => {
@@ -42,9 +44,6 @@ export default function Dashboard({}) {
     ipcRenderer.send("getSettings");
     ipcRenderer.send("getEvents");
   }, []);
-
-  const [modalShow, setModalShow] = useState(false);
-  const [settingsShow, setSettingsShow] = useState(false);
 
   function onChange({ command, event }) {
     if (command) {
