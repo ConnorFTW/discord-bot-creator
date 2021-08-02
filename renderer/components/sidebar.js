@@ -15,6 +15,7 @@ export default function Sidebar({
   setSettingsShow,
   setMode,
   mode,
+  SaveButton,
 }) {
   const [settings] = useSettings();
   const { query } = useRouter();
@@ -80,6 +81,7 @@ export default function Sidebar({
           <Button onClick={() => {}} variant="secondary">
             Add Command
           </Button>
+          {SaveButton}
           <SettingsIcon
             onClick={() => setSettingsShow(true)}
             className="settings-button"

@@ -86,3 +86,15 @@ ipcMain.on("saveSettings", async (event, settings) => {
   await loader?.saveSettings(settings);
   event.sender.send("saveSettings", { success: true, settings });
 });
+
+ipcMain.on("saveCommands", async (event, commands) => {
+  console.log(commands);
+  await loader?.saveCommands(commands);
+  console.log(commands);
+  event.sender.send("saveCommands", { success: true, commands });
+});
+
+ipcMain.on("saveEvents", async (event, events) => {
+  await loader?.saveEvents(events);
+  event.sender.send("saveEvents", { success: true, events });
+});

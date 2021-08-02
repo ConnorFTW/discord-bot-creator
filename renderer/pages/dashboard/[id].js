@@ -1,4 +1,4 @@
-import { Col, Row, Tab } from "react-bootstrap";
+import { Button, Col, Row, Tab } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/dist/client/router";
 import Head from "next/head";
@@ -7,6 +7,7 @@ import Sidebar from "../../components/sidebar";
 import SettingsModal from "../../components/dashboard/modals/settings";
 import electron from "electron";
 import useSettings from "../../lib/hooks/useSettings";
+import useCommands from "../../lib/hooks/useCommands";
 import EventView from "../../components/dashboard/event-view";
 import useEvents from "../../lib/hooks/useEvents";
 
@@ -19,10 +20,11 @@ export default function Dashboard({}) {
   const [selected, setSelected] = useState("");
   const [settingsShow, setSettingsShow] = useState(false);
   const [mode, setMode] = useState("command");
+  const [isSaving, setIsSaving] = useState(false);
 
   // Data
   const [events] = useEvents();
-  const [commands, setCommands] = useState([]);
+  const [commands, setCommands] = useCommands();
   const [settings] = useSettings({});
 
   useEffect(async () => {
@@ -36,6 +38,24 @@ export default function Dashboard({}) {
     ipcRenderer.send("getCommands");
     ipcRenderer.send("getActions");
   }, []);
+
+  const save = () => {
+    setIsSaving(true);
+    if (window._commands) {
+      ipcRenderer.send("saveCommands", window._commands);
+      ipcRenderer.on("saveCommands", (_event, _commands) => {
+        console.log(_commands);
+        setIsSaving(false);
+      });
+    }
+    if (window._events) {
+      ipcRenderer.send("saveEvents", window._events);
+      ipcRenderer.on("saveEvents", (_event, _events) => {
+        console.log(_events);
+        setIsSaving(false);
+      });
+    }
+  };
 
   function onChange({ command, event }) {
     if (command) {
@@ -67,6 +87,9 @@ export default function Dashboard({}) {
             setSettingsShow={setSettingsShow}
             setMode={setMode}
             mode={mode}
+            SaveButton={
+              <Button onClick={save}>{isSaving ? "Saving..." : "Save"}</Button>
+            }
           />
           <Col
             md={9}
@@ -74,6 +97,7 @@ export default function Dashboard({}) {
             style={{ overflowY: "auto", maxHeight: "100vh" }}
           >
             <Tab.Content>
+              <Button onClick={save}>{isSaving ? "Saving..." : "Save"}</Button>
               {optionList?.map(({ name, "event-type": eventType } = {}, i) => (
                 <Tab.Pane
                   eventKey={name}
@@ -94,6 +118,7 @@ export default function Dashboard({}) {
             </Tab.Content>
           </Col>
         </Row>
+        <pre>{JSON.stringify(events?.[0], null, 2)}</pre>
       </Tab.Container>
       <SettingsModal
         show={settingsShow}

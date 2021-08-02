@@ -1,17 +1,19 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import ActionForm from "./custom-config-view/action-form";
 
-export default function CommandView({ command: commandSchema }) {
-  const [command, setCommand] = useState(commandSchema);
+export default function CommandView({ command: _command } = {}) {
+  const [command, setCommand] = useState(_command);
 
-  if (!command.trigger) {
+  useEffect(() => setCommand(_command), [!!_command]);
+
+  if (command && !command.trigger) {
     setCommand({ ...command, trigger: "message" });
   }
 
-  const updateAction = (i, customAction) => {
+  const updateAction = (i, action) => {
     const actions = command.actions;
-    actions[i] = customAction;
+    actions[i] = { ...actions[i], ...action };
 
     setCommand({ ...command, actions });
   };

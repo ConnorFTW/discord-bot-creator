@@ -55,10 +55,25 @@ export default class Loader {
       "utf8"
     );
   }
+  async saveCommands(commands) {
+    if (!Object.keys(commands).length) return;
+    fs.writeFileSync(
+      path.resolve(this.filePath, "./data/commands.json"),
+      JSON.stringify(commands, null, 2)
+    );
+  }
   async getEvents() {
     return fs.readFileSync(
       path.resolve(this.filePath, "./data/events.json"),
       "utf8"
+    );
+  }
+
+  async saveEvents(events) {
+    if (!Object.keys(events).length) return;
+    fs.writeFileSync(
+      path.resolve(this.filePath, "./data/events.json"),
+      JSON.stringify(events, null, 2)
     );
   }
 }
