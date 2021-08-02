@@ -13,7 +13,7 @@ module.exports = {
   html() {
     return `
 <div>
-  <p>This action has been modified by DBM Mods.</p>
+  
 </div>
 <div>
   YouTube URL:<br>

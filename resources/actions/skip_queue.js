@@ -11,7 +11,7 @@ module.exports = {
   html() {
     return `
 <div>
-  <p>This action has been modified by DBM Mods.</p>
+  
 </div>
 <div style="float: left; width: 95%;">
   <br>Amount to Skip:<br>

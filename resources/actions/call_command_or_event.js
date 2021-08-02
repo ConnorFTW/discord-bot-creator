@@ -18,7 +18,7 @@ module.exports = {
   html() {
     return `
 <div>
-  <p>This action has been modified by DBM Mods.</p>
+  
 </div>
 <div style="float: left; width: 85%; padding-top: 20px;">
   Source Type:<br>

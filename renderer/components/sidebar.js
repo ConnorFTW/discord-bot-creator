@@ -1,6 +1,8 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { Button, ButtonGroup, Card, Form, Nav, Spinner } from "react-bootstrap";
+import useSettings from "../lib/hooks/useSettings";
+import BotControls from "./dashboard/sidebar/bot-controls";
 import SettingsIcon from "./icons/settings";
 
 export default function Sidebar({
@@ -10,11 +12,11 @@ export default function Sidebar({
   botData,
   setSelected,
   data,
-  setModalShow,
   setSettingsShow,
   setMode,
   mode,
 }) {
+  const [settings] = useSettings();
   const { query } = useRouter();
   const [state, setState] = useState({});
   useEffect(() => {
@@ -25,36 +27,6 @@ export default function Sidebar({
       });
     }
   }, [botData]);
-
-  const save = () => {
-    if (state.isStopping || state.isStarting || state.isSaving) return;
-    setState({ ...state, isSaving: true });
-    fetch(`/api/bot/${query.id}/start`, {
-      method: "POST",
-    }).then(() => {
-      setState({ ...state, isSaving: false });
-    });
-  };
-
-  const run = () => {
-    if (state.isStopping || state.isStarting || state.isSaving) return;
-    setState({ ...state, isStarting: true });
-    fetch(`/api/bot/${query.id}/start`, {
-      method: "POST",
-    }).then(() => {
-      setState({ ...state, isStarting: false, isRunning: true });
-    });
-  };
-
-  const stop = () => {
-    if (state.isStopping || state.isStarting || state.isSaving) return;
-    setState({ ...state, isStopping: true });
-    fetch(`/api/bot/${query.id}/stop`, {
-      method: "POST",
-    }).then(() => {
-      setState({ ...state, isStopping: false, isRunning: false });
-    });
-  };
 
   return (
     <>
@@ -102,40 +74,10 @@ export default function Sidebar({
           </Form.Group>
         </Card.Body>
         <Card.Footer className="d-flex flex-row justify-content-between align-items-center flex-wrap gap-2">
-          {query?.id && botData?.token ? (
-            <>
-              {state.isRunning ? (
-                <>
-                  <Button
-                    onClick={save}
-                    variant="success"
-                    className="mx-1"
-                    disabled={state.isSaving}
-                  >
-                    {state.isSaving ? "Restarting..." : "Restart"}
-                  </Button>
-                  <Button
-                    onClick={stop}
-                    variant="danger"
-                    className="mx-1"
-                    disabled={state.isStopping}
-                  >
-                    {state.isStopping ? "Stopping..." : "Stop"}
-                  </Button>
-                </>
-              ) : (
-                <Button onClick={run} disabled={state.isStarting}>
-                  {state.isStarting ? "Starting..." : "Run"}
-                </Button>
-              )}
-            </>
-          ) : null}
-          {!query?.id || botData?.token ? null : (
-            <Button onClick={() => setSettingsShow(true)}>Add token</Button>
-          )}
+          <BotControls />
         </Card.Footer>
         <Card.Footer className="d-flex flex-row justify-content-between align-items-center flex-wrap gap-2">
-          <Button onClick={() => setModalShow(true)} variant="secondary">
+          <Button onClick={() => {}} variant="secondary">
             Add Command
           </Button>
           <SettingsIcon

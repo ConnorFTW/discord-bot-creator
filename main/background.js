@@ -58,7 +58,7 @@ ipcMain.on("getLastDirectory", (event, arg) => {
 
 ipcMain.on("getSettings", async (event, args) => {
   const settings = await loader?.getSettings();
-
+  console.log(settings);
   event.sender.send("getSettings", settings);
 });
 
@@ -74,7 +74,6 @@ ipcMain.on("getConfig", async (event, args) => {
 
 ipcMain.on("getCommands", async (event, args) => {
   const commands = await loader?.getCommands();
-  console.log(commands);
   event.sender.send("getCommands", commands);
 });
 

@@ -10,7 +10,7 @@ module.exports = {
 
   html(_isEvent, data) {
     return `
-<div><p>This action has been modified by DBM Mods. Use [Title](Link) to mask links here.</p></div><br>
+<div><p> Use [Title](Link) to mask links here.</p></div><br>
 <div>
   <div style="float: left; width: 35%;">
     Source Embed Object:<br>

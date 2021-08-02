@@ -48,7 +48,7 @@ module.exports = {
     return `
   <div style="width: 550px; height: 350px; overflow-y: scroll;">
     <div>
-    <div>This action has been modified by DBM Mods.</div><br>
+    <div></div><br>
       <div style="float: left; width: 35%;">
         Source Channel:<br>
         <select id="channel" class="round" onchange="glob.channelChange(this, 'varNameContainer')">

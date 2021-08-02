@@ -2,24 +2,28 @@ import { Col, Row, Tab } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/dist/client/router";
 import Head from "next/head";
-import CustomCommandView from "../../components/dashboard/custom-command-view";
+import CustomCommandView from "../../components/dashboard/command-view";
 import Sidebar from "../../components/sidebar";
 import SettingsModal from "../../components/dashboard/modals/settings";
 import electron from "electron";
-import _eval from "eval";
+import useSettings from "../../lib/hooks/useSettings";
 
 const ipcRenderer = electron.ipcRenderer || false;
 
 export default function Dashboard({}) {
   const { query } = useRouter();
-  const [commands, setCommands] = useState([]);
-  const [events, setEvents] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [settings, setSettings] = useState({});
+
+  // Component Controls
   const [selected, setSelected] = useState("");
-  const [mode, setMode] = useState("command");
-  const [actionSchemas, setActionsSchemas] = useState([]);
   const [settingsShow, setSettingsShow] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [mode, setMode] = useState("command");
+
+  // Data
+  const [events, setEvents] = useState([]);
+  const [actionSchemas, setActionsSchemas] = useState([]);
+  const [commands, setCommands] = useState([]);
+  const [settings] = useSettings({});
 
   useEffect(async () => {
     ipcRenderer.on("getCommands", (_event, commands) => {
@@ -30,10 +34,6 @@ export default function Dashboard({}) {
       console.log(actionSchemas);
       setActionsSchemas(actionSchemas);
     });
-    ipcRenderer.on("getSettings", (event, settings) => {
-      console.log(settings);
-      setSettings(settings);
-    });
     ipcRenderer.on("getEvents", (_event, events) => {
       setEvents(JSON.parse(events).filter((e) => e));
       setIsLoading(!commands || !events);
@@ -41,7 +41,6 @@ export default function Dashboard({}) {
 
     ipcRenderer.send("getCommands");
     ipcRenderer.send("getActions");
-    ipcRenderer.send("getSettings");
     ipcRenderer.send("getEvents");
   }, []);
 
@@ -72,9 +71,7 @@ export default function Dashboard({}) {
             customCommand={events}
             selected={selected}
             setSelected={setSelected}
-            botData={settings}
             data={commands}
-            setModalShow={setModalShow}
             setSettingsShow={setSettingsShow}
             setMode={setMode}
             mode={mode}
@@ -95,9 +92,6 @@ export default function Dashboard({}) {
                     command={command}
                     onChange={onChange}
                     botId={query.id}
-                    prefix={settings?.prefix}
-                    autoRestart={settings?.autoRestart}
-                    toggleHints={settings?.toggleHints}
                     actions={command?.actions}
                     actionSchemas={actionSchemas}
                   />

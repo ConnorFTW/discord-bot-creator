@@ -73,7 +73,7 @@ module.exports = {
 
   html(isEvent, data) {
     return `
-<div><p>This action has been modified by DBM Mods.</p></div><br>
+<div></div><br>
 <div>
   <div style="float: left; width: 35%;">
     Source Channel:<br>

@@ -37,7 +37,7 @@ module.exports = {
   html(isEvent, data) {
     return `
 <div style="width: 550px; height: 350px; overflow-y: scroll;">
-  <div><p>This action has been modified by DBM Mods.</p></div><br>
+  <div></div><br>
   <div>
     <div style="float: left; width: 35%;">
       Send To:<br>

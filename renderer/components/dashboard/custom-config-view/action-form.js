@@ -1,15 +1,12 @@
 import { Button, Form, Col } from "react-bootstrap";
-import _eval from "eval";
 import { useEffect, useState } from "react";
 import parseFnString from "parse-function-string";
 
 export default function ActionForm({
   action,
-  actions,
   update,
   remove,
   actionIndex,
-  command,
   actionSchema,
   actionSchemas,
 }) {
@@ -33,15 +30,11 @@ export default function ActionForm({
     data.conditions = [];
     const isEvent = 0;
 
-    console.log("------------------------------------");
-
     let htmlFunction = new Function(
       "isEvent",
       "data",
       parseFnString(actionSchema.html).body
     );
-
-    console.log("------------------------------------");
 
     setState({ ...state, html: htmlFunction(false, data) });
   }, [actionSchema?.name]);
@@ -69,7 +62,6 @@ export default function ActionForm({
           Remove
         </Button>
       </Col>
-      <pre className="d-none">{JSON.stringify(action, null, 2)}</pre>
     </Form.Group>
   );
 }

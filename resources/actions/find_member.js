@@ -28,7 +28,7 @@ module.exports = {
 
   html(_isEvent, data) {
     return `
-<div><p>This action has been modified by DBM Mods.</p></div><br>
+<div></div><br>
 <div style="float: left;">
   <select id="find2" onchange="glob.change()" class="round">
     <option value="0" selected>Find Member (current server only)</option>

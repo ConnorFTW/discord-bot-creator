@@ -42,7 +42,7 @@ module.exports = {
 <div id ="wrexdiv" style="width: 550px; height: 350px; overflow-y: scroll; overflow-x: hidden;">
 <div>
   <p>
-    This action has been modified by DBM Mods.
+    
   </p>
 </div>
 <div style="float: left; width: 50%; padding-top: 16px;">

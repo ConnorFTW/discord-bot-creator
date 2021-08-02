@@ -9,7 +9,6 @@ export default class Loader {
     this.actions = {};
   }
   getSettings() {
-    console.log(this.filePath);
     return fs.readFileSync(
       path.resolve(this.filePath, "./data/settings.json"),
       "utf8"
@@ -19,7 +18,6 @@ export default class Loader {
     const files = await fg("./resources/actions/*.js");
     // Remove strange dev file
     files.unshift();
-    const file = files[0];
     const actions = files
       .map((file) => _eval(fs.readFileSync(file, "utf-8")))
       .map((content) => {

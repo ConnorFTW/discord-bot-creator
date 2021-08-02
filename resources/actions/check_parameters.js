@@ -28,7 +28,7 @@ module.exports = {
   html(_isEvent, data) {
     return `
 <div>
-  <p>This action has been modified by DBM Mods.</p>
+  
   <div style="float: left; width: 45%;">
     Condition:<br>
     <select id="condition" class="round">

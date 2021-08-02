@@ -26,7 +26,7 @@ module.exports = {
 
   html(isEvent, data) {
     return `
-This action has been modified by DBM Mods.<br>
+<br>
 <div>
   <div style="float: left; width: 35%;">
     Member:<br>

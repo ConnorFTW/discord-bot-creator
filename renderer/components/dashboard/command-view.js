@@ -1,48 +1,46 @@
 import { useState } from "react";
 import { Button, Col, Form, Row, Spinner } from "react-bootstrap";
+import ActionForm from "./custom-config-view/action-form";
 import RemoveCommandButton from "./remove-command-button";
 
-export default function CommandView({
-  command,
-  botId,
-  prefix,
-  autoRestart,
-  toggleHints,
+export default function CustomCommandView({
+  command: commandSchema,
+  actions,
+  actionSchemas,
 }) {
-  const [state, setState] = useState(command);
-  const { name, description, enabled, config } = state || {};
-  const [process, setProcess] = useState({});
+  const [command, setCommand] = useState(commandSchema);
+  const [status, setStatus] = useState({});
 
-  const enable = () => {
-    setState({ ...state, enabled: true });
+  if (commandSchema && !command.trigger) {
+    setCommand({ ...command, trigger: "message" });
+  }
+
+  const updateAction = (i, customAction) => {
+    const actions = command.actions;
+    actions[i] = customAction;
+
+    setCommand({ ...command, actions });
   };
 
-  const disable = () => {
-    setState({ ...state, enabled: false });
+  const removeAction = (i) => () => {
+    const actions = command.actions;
+    actions.splice(i, 1);
+    setCommand({ ...command, actions });
   };
 
-  const updateConfig = (key) => (e) => {
-    if (config[key]) {
-      config[key].value = e.target.value;
-    } else {
-      console.error(`No config found for key ${key}`);
-    }
-    setState({ config, ...state });
+  const addAction = () => {
+    setCommand({
+      ...command,
+      actions: [...(command.actions || []), { type: "Send Message" }],
+    });
   };
 
   const save = (e) => {
-    e.preventDefault();
-    setProcess({ ...process, isSaving: true });
-    fetch(`/api/bot/${botId}/config`, {
-      body: JSON.stringify(state),
-      method: "PUT",
-    })
-      .then(() => autoRestart && startBot(botId))
-      .then(() => {
-        setProcess({ ...process, isSaving: false });
-        mutate(`/api/bot/${botId}/config`);
-      })
-      .catch(console.error);
+    if (e) e.preventDefault();
+    setStatus({ ...status, isSaving: true });
+    setTimeout(() => {
+      setStatus({ ...status, isSaving: false });
+    }, 1000);
   };
 
   return (
@@ -50,59 +48,58 @@ export default function CommandView({
       <Col sm="8" className="mx-2 command-form">
         <Row>
           <Col>
-            <h1>
-              <span style={{ color: "grey" }}>{prefix || "!"}</span>
-              {name || "Untitled"}
-            </h1>
-            <p>{description}</p>
+            <h1>{command.name}</h1>
           </Col>
           <Col md="auto"></Col>
         </Row>
         <Form>
-          {Object.keys(config || {}).map((key) => (
-            <Form.Group key={key} className="mb-3">
-              <Form.Label>{config[key].name || key}</Form.Label>
-              <Form.Control
-                type="text"
-                value={config[key].value}
-                onInput={updateConfig(key)}
-                onChange={updateConfig(key)}
-                as={config[key].type === "text" ? "textarea" : "input"}
-              />
-              {toggleHints !== false && (
-                <Form.Text>{config[key].description || ""}</Form.Text>
-              )}
+          {command.c && (
+            <Form.Group>
+              <Form.Label>Trigger</Form.Label>
+              <Form.Select
+                value={command.trigger}
+                onChange={(e) =>
+                  setCommand({ ...command, trigger: e.target.value })
+                }
+              >
+                <option value="message">Message</option>
+                <option value="guildMemberAdd">New Member</option>
+                <option value="guildMemberRemove">Member Left</option>
+                <option value="clickButton">Button Click</option>
+              </Form.Select>
             </Form.Group>
+          )}
+          {!command.c && (
+            <Form.Group>
+              <Form.Label>Permissions</Form.Label>
+              <Form.Select value={command.permissions} />
+            </Form.Group>
+          )}
+          <Form.Group className="mt-3">
+            <Form.Label>Actions</Form.Label>
+            <br />
+            <Button onClick={addAction}>Add Action</Button>
+          </Form.Group>
+          {command.actions?.map((action, i) => (
+            <ActionForm
+              action={action}
+              actions={actions}
+              actionSchema={actionSchemas.find(
+                (schema) => schema.name === action.name
+              )}
+              actionSchemas={actionSchemas}
+              key={i}
+              update={updateAction}
+              actionIndex={i}
+              remove={removeAction(i)}
+              command={command}
+            />
           ))}
         </Form>
       </Col>
-      <Col className="command-actions">
-        {process.isSaving ? (
-          <Button disabled className="w-100 mb-2">
-            <Spinner animation="border" size="sm" /> Saving...
-          </Button>
-        ) : (
-          <Button className="w-100 mb-2" onClick={save}>
-            Save
-          </Button>
-        )}
-        {enabled ? (
-          <Button onClick={disable} variant="secondary" className="w-100 mb-2">
-            Disable
-          </Button>
-        ) : (
-          <>
-            <Button onClick={enable} className="mt-1 w-100 mb-2">
-              Enable
-            </Button>
-            <RemoveCommandButton
-              name={name}
-              endpoint={`/api/bot/${botId}/config`}
-            />
-          </>
-        )}
-      </Col>
-      <pre>{JSON.stringify(command, null, 2)}</pre>
+      <pre className="d-none">{JSON.stringify(command, null, 2)}</pre>
+      <pre className="d-none">{JSON.stringify(actions, null, 2)}</pre>
+      <pre className="d-none">{JSON.stringify(actionSchemas, null, 2)}</pre>
     </Row>
   );
 }

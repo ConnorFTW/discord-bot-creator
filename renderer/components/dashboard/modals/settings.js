@@ -1,12 +1,11 @@
-import { ipcRenderer } from "electron";
 import { useRouter } from "next/dist/client/router";
-import { useEffect, useState } from "react";
 import { Button, Form, FormControl, Modal } from "react-bootstrap";
+import useSettings from "../../../lib/hooks/useSettings";
 
 export default function SettingsModal(props) {
   const { query } = useRouter();
 
-  const [settings, setSettings] = useState(props.settings);
+  const [settings, setSettings] = useSettings();
 
   function setData(data) {
     fetch(`/api/bot/${query.id}`, {
@@ -19,12 +18,18 @@ export default function SettingsModal(props) {
     });
   }
 
+  let checked = false;
+
+  if (settings?.checked) {
+    if (settings.checked === "false") {
+      checked = false;
+    } else {
+      checked = true;
+    }
+  }
+
   const changePrefix = (e) => {
     setSettings({ ...settings, prefix: e.target.value });
-  };
-
-  const changeEmbedColor = (e) => {
-    setSettings({ ...settings, embedColor: e.target.value });
   };
 
   const changeToken = (e) => {
@@ -43,30 +48,15 @@ export default function SettingsModal(props) {
       </Modal.Header>
       <Modal.Body style={{ maxHeight: "80vh", overflowY: "scroll" }}>
         <Form>
-          <Form.Group>
+          <Form.Group className="mb-3">
             <Form.Label>Prefix</Form.Label>
             <FormControl
               type="text"
               onChange={changePrefix}
-              value={settings?.prefix ?? "!"}
+              value={settings?.tag}
             />
           </Form.Group>
-          <Form.Group>
-            <Form.Label>Embed Color</Form.Label>
-            <Form.Select
-              value={settings?.embedColor || "RED"}
-              onChange={changeEmbedColor}
-            >
-              <option value="RANDOM">Random</option>
-              <option value="RED">Red</option>
-              <option value="ORANGE">Orange</option>
-              <option value="YELLOW">Yellow</option>
-              <option value="GREEN">Green</option>
-              <option value="BLUE">Blue</option>
-              <option value="PURPLE">Purple</option>
-            </Form.Select>
-          </Form.Group>
-          <Form.Group>
+          <Form.Group className="mb-3">
             <Form.Label>Token</Form.Label>
             <FormControl
               type="text"
@@ -84,6 +74,21 @@ export default function SettingsModal(props) {
               </a>
             </Form.Text>
           </Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Label>Separator</Form.Label>
+            <FormControl
+              type="text"
+              value={settings?.separator || ""}
+              onChange={changeToken}
+              placeholder="\\s+"
+            />
+            <Form.Text>
+              <a
+                target="_blank"
+                href="https://discord.com/developers/applications/"
+              ></a>
+            </Form.Text>
+          </Form.Group>
           <Form.Check
             type="switch"
             label="Auto Restart"
@@ -91,6 +96,16 @@ export default function SettingsModal(props) {
             onChange={(e) =>
               setSettings({ ...settings, autoRestart: e.target.checked })
             }
+            className="mb-3"
+          />
+          <Form.Check
+            type="switch"
+            label="Case Sensitive"
+            checked={checked}
+            onChange={(e) =>
+              setSettings({ ...settings, settings: e.target.checked })
+            }
+            className="mb-3"
           />
           <Form.Check
             type="switch"
@@ -99,6 +114,7 @@ export default function SettingsModal(props) {
             onChange={(e) =>
               setSettings({ ...settings, toggleHints: e.target.checked })
             }
+            className="mb-3"
           />
         </Form>
       </Modal.Body>

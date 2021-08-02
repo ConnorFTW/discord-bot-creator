@@ -119,7 +119,7 @@ module.exports = {
   html(isEvent, data) {
     return `
 <div>
-<p>This action has been modified by DBM Mods.</p>
+
   <div style="float: left; width: 35%;">
     Source Message:<br>
     <select id="message" class="round" onchange="glob.messageChange(this, 'varNameContainer')">
