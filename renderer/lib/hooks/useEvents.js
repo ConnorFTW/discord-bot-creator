@@ -3,6 +3,7 @@ import electron from "electron";
 import { useEffect, useState } from "react";
 
 const ipcRenderer = electron.ipcRenderer || null;
+// Write the same for events
 
 export default function useEvents({ force } = {}) {
   const [events, setEvents] = useState(() => {
@@ -14,18 +15,23 @@ export default function useEvents({ force } = {}) {
   });
 
   useEffect(() => {
-    ipcRenderer?.on("getEvents", (event, events) => {
+    if (events) {
+      window._events = events;
+    }
+  }, [events]);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (window._events || (window._events && !force)) return;
+
+    ipcRenderer?.once("getEvents", (event, events) => {
       events = JSON.parse(events || "[]");
       window._events = events;
       setEvents(events);
     });
-    if (events && !force) return;
+
     ipcRenderer?.send("getEvents");
+  }, [typeof window]);
 
-    return () => {
-      ipcRenderer?.removeAllListeners("getEvents");
-    };
-  }, [!!ipcRenderer, events]);
-
-  return [events?.filter((e) => e), setEvents];
+  return [events?.filter((c) => c), setEvents];
 }

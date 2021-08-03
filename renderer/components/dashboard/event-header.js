@@ -1,39 +1,7 @@
 import { useState } from "react";
-import { Button, Col, Form, Row, Spinner } from "react-bootstrap";
-import useActions from "../../lib/hooks/useActions";
-import ActionForm from "./custom-config-view/action-form";
+import { Col, Form, Row } from "react-bootstrap";
 
 export default function EventView({ event }) {
-  const [events, setEvents] = useState(events || {});
-  const [actionSchemas] = useActions();
-  const actions = event?.actions || [];
-
-  const updateAction = (i, action) => {
-    if (event?.actions?.[i]) {
-      event.actions[i] = { ...event.actions[i], ...action };
-
-      setEvent(event);
-    }
-  };
-
-  const removeAction = (i) => () => {
-    const actions = event.actions;
-    actions.splice(i, 1);
-    setEvent({ ...event, actions });
-  };
-
-  const addAction = () => {
-    setEvent({
-      ...event,
-      actions: [...(event.actions || []), { type: "Send Message" }],
-    });
-  };
-
-  const setEvent = (event) => {
-    events[eventIndex] = event;
-    setEvents(events);
-  };
-
   return (
     <Row>
       <Col sm="8" className="mx-2 command-form">
@@ -87,25 +55,6 @@ export default function EventView({ event }) {
               <option value="34">On Time Restricted Command</option>
             </Form.Select>
           </Form.Group>
-          <Form.Group className="mt-3">
-            <Form.Label>Actions</Form.Label>
-            <br />
-            <Button onClick={addAction}>Add Action</Button>
-          </Form.Group>
-          {event.actions?.map((action, i) => (
-            <ActionForm
-              action={action}
-              actions={actions}
-              actionSchema={actionSchemas.find(
-                (schema) => schema.name === action.name
-              )}
-              key={i}
-              update={updateAction}
-              actionIndex={i}
-              remove={removeAction(i)}
-              command={event}
-            />
-          ))}
         </Form>
       </Col>
     </Row>

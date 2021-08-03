@@ -1,6 +1,5 @@
-import { Button, Form, Col } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 import { useState } from "react";
-import parseFnString from "parse-function-string";
 import useActions from "../../../lib/hooks/useActions";
 import ActionModal from "./action-modal";
 
@@ -31,10 +30,8 @@ export default function ActionForm({
   };
 
   return (
-    <Form.Group className="border p-2 my-3">
-      <Form.Group className="mb-3">
-        <Form.Label>Type</Form.Label>
-        <Form.Select
+    <Form.Group className="border p-2 my-3" onClick={openAction}>
+      {/* <Form.Select
           value={action.name}
           onChange={(e) => updateName(e.target.value)}
         >
@@ -43,17 +40,9 @@ export default function ActionForm({
               {name}
             </option>
           ))}
-        </Form.Select>
-        <Form.Text>{actionSchema?.description}</Form.Text>
-      </Form.Group>
-      <Col className="mt-2">
-        <Button className="btn-danger btn-sm" onClick={remove}>
-          Remove
-        </Button>
-        <Button className="btn-sm" onClick={openAction}>
-          Open
-        </Button>
-      </Col>
+        </Form.Select> */}
+      <p>{action.name}</p>
+      <Button className="btn-sm btn-danger btn-close" onClick={remove} />
       {open && (
         <ActionModal
           show={true}

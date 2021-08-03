@@ -15,18 +15,23 @@ export default function useCommands({ force } = {}) {
   });
 
   useEffect(() => {
-    ipcRenderer?.on("getCommands", (event, commands) => {
+    if (commands) {
+      window._commands = commands;
+    }
+  }, [commands]);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (window._commands || (window._commands && !force)) return;
+
+    ipcRenderer?.once("getCommands", (event, commands) => {
       commands = JSON.parse(commands || "[]");
       window._commands = commands;
       setCommands(commands);
     });
-    if (commands && !force) return;
-    ipcRenderer?.send("getCommands");
 
-    return () => {
-      ipcRenderer?.removeAllListeners("getCommands");
-    };
-  }, [!!ipcRenderer, commands]);
+    ipcRenderer?.send("getCommands");
+  }, [typeof window]);
 
   return [commands?.filter((c) => c), setCommands];
 }

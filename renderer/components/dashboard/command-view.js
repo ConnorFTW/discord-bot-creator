@@ -1,21 +1,16 @@
-import { useEffect, useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
+import useCommands from "../../lib/hooks/useCommands";
 import ActionForm from "./custom-config-view/action-form";
 
-export default function CommandView({ command: _command } = {}) {
-  const [command, setCommand] = useState(_command);
-
-  useEffect(() => setCommand(_command), [!!_command]);
-
-  if (command && !command.trigger) {
-    setCommand({ ...command, trigger: "message" });
-  }
+export default function CommandView({ commands, command, commandIndex } = {}) {
+  const [, setCommands] = useCommands();
 
   const updateAction = (i, action) => {
-    const actions = command.actions;
-    actions[i] = { ...actions[i], ...action };
+    if (command?.actions?.[i]) {
+      command.actions[i] = { ...command.actions[i], ...action };
 
-    setCommand({ ...command, actions });
+      setCommand(command);
+    }
   };
 
   const removeAction = (i) => () => {
@@ -29,6 +24,11 @@ export default function CommandView({ command: _command } = {}) {
       ...command,
       actions: [...(command.actions || []), { type: "Send Message" }],
     });
+  };
+
+  const setCommand = (command) => {
+    commands[commandIndex] = command;
+    setCommands(commands);
   };
 
   return (
@@ -105,12 +105,10 @@ export default function CommandView({ command: _command } = {}) {
               update={updateAction}
               actionIndex={i}
               remove={removeAction(i)}
-              command={command}
             />
           ))}
         </Form>
       </Col>
-      <pre className="d-none">{JSON.stringify(command, null, 2)}</pre>
     </Row>
   );
 }

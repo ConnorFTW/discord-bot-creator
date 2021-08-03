@@ -24,20 +24,8 @@ export default function Dashboard({}) {
 
   // Data
   const [events] = useEvents();
-  const [commands, setCommands] = useCommands();
+  const [commands] = useCommands();
   const [settings] = useSettings({});
-
-  useEffect(async () => {
-    ipcRenderer.on("getCommands", (_event, commands) => {
-      setCommands(JSON.parse(commands || {}).filter((c) => c));
-    });
-    ipcRenderer.on("getActions", (_event, actionSchemas) => {
-      console.log(actionSchemas);
-    });
-
-    ipcRenderer.send("getCommands");
-    ipcRenderer.send("getActions");
-  }, []);
 
   const save = () => {
     setIsSaving(true);
@@ -105,12 +93,14 @@ export default function Dashboard({}) {
                   active={(!selected && i === 0) || selected === name}
                 >
                   {typeof eventType !== "undefined" ? (
-                    <EventView event={optionList[i]} />
+                    <EventView event={optionList[i]} eventIndex={i} />
                   ) : (
                     <CommandView
+                      commands={optionList}
                       command={optionList[i]}
                       onChange={onChange}
                       botId={query.id}
+                      commandIndex={i}
                     />
                   )}
                 </Tab.Pane>
