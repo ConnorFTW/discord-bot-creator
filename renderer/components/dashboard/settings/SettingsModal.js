@@ -1,24 +1,9 @@
 import { ipcRenderer } from "electron";
-import { useRouter } from "next/dist/client/router";
 import { Button, Form, FormControl, Modal } from "react-bootstrap";
-import useSettings from "../../../lib/hooks/useSettings";
+import useSettings from "../../../lib/useSettings";
 
 export default function SettingsModal(props) {
-  const { query } = useRouter();
-
   const [settings, setSettings] = useSettings();
-
-  function setData(data) {
-    fetch(`/api/bot/${query.id}`, {
-      method: "PUT",
-      body: JSON.stringify(data),
-    }).then(() => {
-      if (data.running && data.autoRestart) {
-        startBot(query.id);
-      }
-    });
-  }
-
   let checked = false;
 
   if (settings?.checked) {

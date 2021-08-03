@@ -1,36 +1,6 @@
-import { Button, Col, Form, Row } from "react-bootstrap";
-import useCommands from "../../lib/hooks/useCommands";
-import ActionForm from "./custom-config-view/action-form";
+import { Col, Form, Row } from "react-bootstrap";
 
-export default function CommandView({ commands, command, commandIndex } = {}) {
-  const [, setCommands] = useCommands();
-
-  const updateAction = (i, action) => {
-    if (command?.actions?.[i]) {
-      command.actions[i] = { ...command.actions[i], ...action };
-
-      setCommand(command);
-    }
-  };
-
-  const removeAction = (i) => () => {
-    const actions = command.actions;
-    actions.splice(i, 1);
-    setCommand({ ...command, actions });
-  };
-
-  const addAction = () => {
-    setCommand({
-      ...command,
-      actions: [...(command.actions || []), { type: "Send Message" }],
-    });
-  };
-
-  const setCommand = (command) => {
-    commands[commandIndex] = command;
-    setCommands(commands);
-  };
-
+export default function CommandView({ command, index } = {}) {
   return (
     <Row>
       <Col sm="8" className="mx-2 command-form">
@@ -45,9 +15,7 @@ export default function CommandView({ commands, command, commandIndex } = {}) {
             <Form.Label>Command Type</Form.Label>
             <Form.Select
               value={command.comType}
-              onChange={(e) =>
-                setCommand({ ...command, comType: e.target.value })
-              }
+              onChange={() => update(index, "comType", e.target.value)}
             >
               <option value="0">Normal Command</option>
               <option value="1">Includes Word</option>
@@ -57,7 +25,10 @@ export default function CommandView({ commands, command, commandIndex } = {}) {
           </Form.Group>
           <Form.Group>
             <Form.Label>Permissions</Form.Label>
-            <Form.Select value={command.permissions}>
+            <Form.Select
+              value={command.permissions}
+              onChange={() => update(index, "permissions", e.target.value)}
+            >
               <option value="ADMINISTRATOR">Administrator</option>
               <option value="CREATE_INSTANT_INVITE">
                 Create Instant Invite
@@ -93,20 +64,6 @@ export default function CommandView({ commands, command, commandIndex } = {}) {
               <option value="MANAGE_EMOJIS">Manage Emojis</option>
             </Form.Select>
           </Form.Group>
-          <Form.Group className="mt-3">
-            <Form.Label>Actions</Form.Label>
-            <br />
-            <Button onClick={addAction}>Add Action</Button>
-          </Form.Group>
-          {command.actions?.map((action, i) => (
-            <ActionForm
-              action={action}
-              key={i}
-              update={updateAction}
-              actionIndex={i}
-              remove={removeAction(i)}
-            />
-          ))}
         </Form>
       </Col>
     </Row>

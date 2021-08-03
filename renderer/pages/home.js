@@ -24,9 +24,8 @@ export default function Dashboard() {
   // Can be used to create a bot
   async function setSettings(e) {
     e.preventDefault();
-    const slug = generateAlphaNumericString();
-    ipcRenderer.send("setSettings", { folder, slug });
-    router.push(`/dashboard/${slug}`);
+    window._folder = folder;
+    router.push(`/dashboard`);
   }
 
   function pickFolder() {
@@ -44,8 +43,9 @@ export default function Dashboard() {
     });
 
     ipcRenderer.on("getSettings", (event, data) => {
-      if (data?.slug) {
-        router.push(`/dashboard/${data.slug}`);
+      if (data?.folder) {
+        window._folder = data.folder;
+        router.push(`dashboard/`);
       }
     });
 
@@ -91,27 +91,18 @@ export default function Dashboard() {
               ))
             ) : (
               <Form>
-                <Form.Group>
-                  <Form.Label>Token</Form.Label>
-                  <Form.Control type="text" className="mb-2" />
-                  <Form.Text>
-                    You don't have to put it in just yet, you can add or change
-                    it later.
-                  </Form.Text>
-                </Form.Group>
-                <Button onClick={pickFolder} className="mt-3">
-                  Pick a folder
-                </Button>
-                {folder && (
-                  <>
-                    <Button
-                      type="submit"
-                      onClick={setSettings}
-                      className="mt-3 mx-3"
-                    >
-                      Create new bot
-                    </Button>
-                  </>
+                {folder ? (
+                  <Button
+                    type="submit"
+                    onClick={setSettings}
+                    className="mt-3 mx-3"
+                  >
+                    Create new bot
+                  </Button>
+                ) : (
+                  <Button onClick={pickFolder} className="mt-3">
+                    Pick a folder
+                  </Button>
                 )}
               </Form>
             )}

@@ -1,21 +1,18 @@
 import { Button, Col, Row, Tab } from "react-bootstrap";
-import { useEffect, useState } from "react";
-import { useRouter } from "next/dist/client/router";
+import { useState } from "react";
 import Head from "next/head";
-import CommandView from "../../components/dashboard/command-view";
-import Sidebar from "../../components/sidebar";
-import SettingsModal from "../../components/dashboard/modals/settings";
+import useCommands from "../lib/useCommands";
+import CommandHeader from "../components/dashboard/CommandHeader";
+import EventHeader from "../components/dashboard/EventHeader";
+import Sidebar from "../components/dashboard/sidebar/index";
+import SettingsModal from "../components/dashboard/settings/SettingsModal";
 import electron from "electron";
-import useSettings from "../../lib/hooks/useSettings";
-import useCommands from "../../lib/hooks/useCommands";
-import EventView from "../../components/dashboard/event-view";
-import useEvents from "../../lib/hooks/useEvents";
+import useSettings from "../lib/useSettings";
+import useEvents from "../lib/useEvents";
 
 const ipcRenderer = electron.ipcRenderer || false;
 
 export default function Dashboard({}) {
-  const { query } = useRouter();
-
   // Component Controls
   const [selected, setSelected] = useState("");
   const [settingsShow, setSettingsShow] = useState(false);
@@ -93,27 +90,19 @@ export default function Dashboard({}) {
                   active={(!selected && i === 0) || selected === name}
                 >
                   {typeof eventType !== "undefined" ? (
-                    <EventView event={optionList[i]} eventIndex={i} />
+                    <EventHeader event={optionList[i]} eventIndex={i} />
                   ) : (
-                    <CommandView
-                      commands={optionList}
-                      command={optionList[i]}
-                      onChange={onChange}
-                      botId={query.id}
-                      commandIndex={i}
-                    />
+                    <CommandHeader command={optionList[i]} commandIndex={i} />
                   )}
                 </Tab.Pane>
               ))}
             </Tab.Content>
           </Col>
         </Row>
-        <pre>{JSON.stringify(events?.[0], null, 2)}</pre>
       </Tab.Container>
       <SettingsModal
         show={settingsShow}
         onHide={() => setSettingsShow(false)}
-        botId={query.id}
         settings={settings}
       />
     </>

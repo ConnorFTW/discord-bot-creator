@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
-import ActionItem from "./action-item";
+import ActionItem from "./ActionListItem";
 
 export default function ActionList({ mode, onSelect, items, remove, add }) {
   return (

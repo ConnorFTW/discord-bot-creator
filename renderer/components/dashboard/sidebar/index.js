@@ -1,9 +1,9 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { Button, ButtonGroup, Card, Form, Nav, Spinner } from "react-bootstrap";
-import useSettings from "../lib/hooks/useSettings";
-import BotControls from "./dashboard/sidebar/bot-controls";
-import SettingsIcon from "./icons/settings";
+import useSettings from "../../../lib/useSettings";
+import BotControls from "./SidebarBotControls";
+import SettingsIcon from "../../icons/SettingsIcon";
 
 export default function Sidebar({
   isValidating,
