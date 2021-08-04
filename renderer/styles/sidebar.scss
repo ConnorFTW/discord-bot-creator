@@ -13,6 +13,8 @@
 
   .settings-button {
     cursor: pointer;
+    height: 1.5rem;
+    color: $light;
   }
 
   @media screen and (min-width: map-get($grid-breakpoints, md)) {

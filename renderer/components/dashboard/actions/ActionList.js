@@ -12,11 +12,10 @@ export default function ActionList({ Form: ActionForm }) {
 
   return (
     <Row>
-      <Col sm="8" className="mx-2 command-form">
-        <Row>
-          <Form.Label>Actions</Form.Label>
-          <Button onClick={onAdd}>Add Action</Button>
-        </Row>
+      <Col sm="8" className="mx-2 mb-3 command-form">
+        <Form.Label>Actions</Form.Label>
+        <br />
+        <Button onClick={onAdd}>Add Action</Button>
         {actions?.map((action, i) => (
           <>
             {action && <ActionForm action={action} />}

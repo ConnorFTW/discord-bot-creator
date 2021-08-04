@@ -1,35 +1,44 @@
 import { useState } from "react";
-import { Button, ButtonGroup, Card, Form, Nav, Spinner } from "react-bootstrap";
+import { Button, ButtonGroup, Card, Form, Nav } from "react-bootstrap";
 import SidebarBotControls from "./SidebarBotControls";
 import SettingsIcon from "../../icons/SettingsIcon";
 import SettingsModal from "../settings/SettingsModal";
 import { useDashboardContext } from "../DashboardContext";
 
-export default function Sidebar({ selected, setSelected, commands, events }) {
+export default function Sidebar({ selected, setSelected }) {
   const [settingsShow, setSettingsShow] = useState(false);
-  const { mode, updateMode } = useDashboardContext();
+  const {
+    updateMode,
+    handlers,
+    commands,
+    events,
+    updateHandlerIndex,
+    handlerIndex,
+  } = useDashboardContext();
+
+  const setMode = (mode) => () => updateMode(mode);
 
   return (
     <>
       <Card md={3} className="col px-0 sidebar">
         <Card.Header className="d-none d-md-block">
           <ButtonGroup className="d-flex">
-            <Button variant="secondary" onClick={() => updateMode("command")}>
+            <Button variant="secondary" onClick={setMode("command")}>
               Commands
             </Button>
-            <Button variant="secondary" onClick={() => updateMode("event")}>
+            <Button variant="secondary" onClick={setMode("event")}>
               Events
             </Button>
           </ButtonGroup>
         </Card.Header>
         <Card.Body className="px-2">
           <Nav variant="pills" className="flex-column d-md-block d-none ">
-            {(mode === "event" ? events : commands)?.map((d, i) => (
+            {handlers.map((d, i) => (
               <Nav.Item key={d?.name}>
                 <Nav.Link
-                  eventKey={d?.name}
-                  active={(!selected && i === 0) || selected === d?.name}
-                  onClick={() => setSelected(d?.name)}
+                  eventKey={"nav-link-" + d?.name}
+                  active={handlerIndex === i}
+                  onClick={() => updateHandlerIndex(i)}
                 >
                   {d?.name}
                 </Nav.Link>
@@ -42,8 +51,11 @@ export default function Sidebar({ selected, setSelected, commands, events }) {
               value={selected}
               onChange={(e) => setSelected(e.target.value)}
             >
-              {(commands || [])?.concat(events || [])?.map((c, i) => (
-                <option key={c?.name} onClick={() => setSelected(c?.name)}>
+              {commands?.concat(events || []).map((c, i) => (
+                <option
+                  key={"select-" + c?.name}
+                  onClick={() => updateHandlerIndex(i)}
+                >
                   {c?.name}
                 </option>
               ))}
@@ -57,14 +69,15 @@ export default function Sidebar({ selected, setSelected, commands, events }) {
           <Button onClick={() => {}} variant="secondary">
             Add Command
           </Button>
-          <SettingsIcon
+          <Button
             onClick={() => setSettingsShow(true)}
-            className="settings-button"
-            style={{
-              height: "1.5rem",
-              color: "grey",
-            }}
-          />
+            className="btn-sm btn-secondary"
+          >
+            <SettingsIcon
+              onClick={() => setSettingsShow(true)}
+              className="settings-button"
+            />
+          </Button>
         </Card.Footer>
       </Card>
       <SettingsModal

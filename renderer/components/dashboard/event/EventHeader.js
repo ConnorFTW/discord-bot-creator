@@ -1,9 +1,11 @@
 import { Col, Form, Row } from "react-bootstrap";
+import { useDashboardContext } from "../DashboardContext";
 
-export default function EventHeader({ event }) {
+export default function EventHeader() {
+  const { handler: event } = useDashboardContext();
   return (
     <Row>
-      <Col sm="8" className="mx-2 command-form">
+      <Col sm="8" className="mx-2 mb-3 command-form">
         <Row>
           <Col>
             <h1>{event?.name}</h1>

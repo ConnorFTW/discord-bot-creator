@@ -15,86 +15,88 @@ export function DashboardProvider({ children }) {
   const [commands] = useCommands();
   const [state, setState] = useState({
     mode: "command",
+    commands,
+    events,
     handlers: [],
     handler: {},
     handlerIndex: 0,
     actions: [],
     action: {},
     actions,
-    commands,
-    events,
     actionIndex: 0,
     actionSchemas: actions,
   });
 
   useEffect(() => {
-    if (state.mode === "command") {
-      updateHandlers(state.commands || []);
-    } else {
-      updateHandlers(state.events || []);
+    if (commands && events) {
+      if (JSON.stringify(commands) !== JSON.stringify(state.commands)) {
+        updateCommandsAndEvents(commands, events);
+      } else if (JSON.stringify(events) !== JSON.stringify(state.events)) {
+        updateCommandsAndEvents(commands, events);
+      }
     }
-  }, [state.mode]);
+  }, [!!commands, !!events]);
 
-  function updateMode(mode) {
-    setState({ ...state, mode });
+  // Every function checks and changes it's own value
+  // Then it calls the function below it
+  function updateMode(mode, _state = state) {
+    _state = { ..._state, mode: mode || _state.mode };
+
+    if (_state.mode === "event") {
+      updateHandlers(_state.events, _state);
+    } else {
+      updateHandlers(_state.commands, _state);
+    }
   }
 
-  function updateHandlers(handlers) {
+  function updateCommandsAndEvents(commands, events, _state = state) {
+    _state = {
+      ..._state,
+      commands: commands || _state.commands,
+      events: events || _state.events,
+    };
+
+    if (_state.mode === "event") {
+      updateHandlers(_state.events, _state);
+    } else {
+      updateHandlers(_state.commands, _state);
+    }
+  }
+
+  function updateHandlers(handlers, _state = state) {
     console.log({ handlers });
-    // Choose last item if doesn't exist in list
-    if (!handlers[state.handlerIndex]) {
-      const lastIndex = handlers.length - 1;
-      const handler = handlers[lastIndex] || {};
-      setState({
-        ...state,
-        handlers,
-        handler,
-        actions: handler.actions || [],
-        handlerIndex: lastIndex < 0 ? 0 : lastIndex,
-      });
-    } else {
-      setState({
-        ...state,
-        handlers,
-        handler: handlers[state.handlerIndex],
-      });
-    }
+    _state = { ..._state, handlers: handlers || [] };
+    updateHandlerIndex(_state.handlerIndex, _state);
   }
 
-  function updateHandlerIndex(index) {
-    setState({
-      ...state,
-      handlerIndex: index,
-      actionIndex: state.handlers[state.handlerIndex]?.[index] ? index : 0,
-      actions:
-        state.handlers[state.handlerIndex]?.[index]?.actions ||
-        state.handlers[state.handlerIndex]?.[0]?.actions ||
-        [],
-      handler: state.handlers[state.handlerIndex] || {},
-    });
+  function updateHandlerIndex(index, _state = state) {
+    const newIndex = _state.handlers[index]
+      ? index
+      : _state.handlers.length
+      ? _state.handlers.length - 1
+      : 0;
+    _state = { ..._state, handlerIndex: newIndex };
+    console.log(index, _state.handlers);
+    updateHandler(_state.handlers[newIndex] || {}, _state);
   }
 
-  function updateActions(actions) {
-    // Choose last action if doesn't exist in list
-    if (!actions[state.actionIndex]) {
-      const lastIndex = actions.length - 1;
-      setState({
-        ...state,
-        actions,
-        action: actions[lastIndex] || {},
-        actionIndex: lastIndex < 0 ? 0 : lastIndex,
-      });
-    } else {
-      setState({
-        ...state,
-        action,
-        action: actions[state.actionIndex],
-      });
-    }
+  function updateHandler(handler, _state = state) {
+    _state = { ..._state, handler, actions: handler.actions || [] };
+    updateActions(_state.actions, _state);
   }
 
-  function updateActionIndex(index) {
-    setState({ ...state, actionIndex: index });
+  function updateActions(actions, _state = state) {
+    _state = { ..._state, actions };
+    updateActionIndex(_state.actionIndex, _state);
+  }
+
+  function updateActionIndex(index, _state = state) {
+    const newIndex = _state.actions[index]
+      ? index
+      : _state.actions.length
+      ? _state.actions.length - 1
+      : 0;
+    setState({ ..._state, actionIndex: newIndex });
   }
 
   return (

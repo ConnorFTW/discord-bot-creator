@@ -15,7 +15,7 @@ export default function DashboardWindow() {
   const [events = []] = useEvents();
   const [commands = []] = useCommands();
 
-  let isEvent;
+  let isEvent = mode === "event";
 
   useEffect(() => {
     if (mode === "event") {
