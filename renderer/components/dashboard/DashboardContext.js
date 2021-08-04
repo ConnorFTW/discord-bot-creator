@@ -64,7 +64,6 @@ export function DashboardProvider({ children }) {
   }
 
   function updateHandlers(handlers, _state = state) {
-    console.log({ handlers });
     _state = { ..._state, handlers: handlers || [] };
     updateHandlerIndex(_state.handlerIndex, _state);
   }
@@ -76,7 +75,6 @@ export function DashboardProvider({ children }) {
       ? _state.handlers.length - 1
       : 0;
     _state = { ..._state, handlerIndex: newIndex };
-    console.log(index, _state.handlers);
     updateHandler(_state.handlers[newIndex] || {}, _state);
   }
 
