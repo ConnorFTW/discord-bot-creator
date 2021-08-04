@@ -1,6 +1,9 @@
 import { Col, Form, Row } from "react-bootstrap";
+import { useDashboardContext } from "../DashboardContext";
 
-export default function CommandView({ command, index } = {}) {
+export default function DashboardWindowHeader() {
+  const { handler: command } = useDashboardContext();
+
   return (
     <Row>
       <Col sm="8" className="mx-2 command-form">

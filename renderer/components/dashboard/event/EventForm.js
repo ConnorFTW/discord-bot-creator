@@ -2,7 +2,7 @@ import { Button, Modal } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import parseFunction from "parse-function-string";
 
-export default function ActionModal({
+export default function EventForm({
   actionSchema,
   action,
   show,

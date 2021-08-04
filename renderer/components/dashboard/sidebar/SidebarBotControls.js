@@ -1,13 +1,30 @@
 import { Button } from "react-bootstrap";
 import { ipcRenderer } from "electron";
 import { useState } from "react";
+import useSettings from "../../../lib/useSettings";
 
-export default function BotControls({ settings = {} }) {
+export default function SidebarBotControls() {
   const [state, setState] = useState({});
+  const [settings] = useSettings();
+
   const save = () => {
     if (state.isStopping || state.isStarting || state.isSaving) return;
     setState({ ...state, isSaving: true });
-    ipcRenderer.send("saveBot", settings);
+
+    if (window._commands) {
+      ipcRenderer.send("saveCommands", window._commands);
+      ipcRenderer.on("saveCommands", (_event, _commands) => {
+        console.log(_commands);
+        setState({ ...state, isSaving: false });
+      });
+    }
+    if (window._events) {
+      ipcRenderer.send("saveEvents", window._events);
+      ipcRenderer.on("saveEvents", (_event, _events) => {
+        console.log(_events);
+        setState({ ...state, isSaving: false });
+      });
+    }
   };
 
   const run = () => {
@@ -22,7 +39,7 @@ export default function BotControls({ settings = {} }) {
     setState({ ...state, isStopping: false, isRunning: false });
   };
 
-  if (!settings.token) {
+  if (!settings?.token) {
     return <Button onClick={() => setSettingsShow(true)}>Add token</Button>;
   }
 

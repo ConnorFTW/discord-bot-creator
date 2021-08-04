@@ -1,6 +1,6 @@
 import { Col, Form, Row } from "react-bootstrap";
 
-export default function EventView({ event }) {
+export default function EventHeader({ event }) {
   return (
     <Row>
       <Col sm="8" className="mx-2 command-form">
