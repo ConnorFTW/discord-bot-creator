@@ -10,107 +10,155 @@ export function useDashboardContext() {
 }
 
 export function DashboardProvider({ children }) {
-  const [actions] = useActions();
+  const [actionSchemas] = useActions();
   const [events] = useEvents();
   const [commands] = useCommands();
   const [state, setState] = useState({
+    actionSchemas: actionSchemas,
     mode: "command",
     commands,
     events,
-    handlers: [],
-    handler: {},
     handlerIndex: 0,
-    actions: [],
-    action: {},
-    actions,
     actionIndex: 0,
-    actionSchemas: actions,
   });
 
   useEffect(() => {
-    if (commands && events) {
-      if (JSON.stringify(commands) !== JSON.stringify(state.commands)) {
-        updateCommandsAndEvents(commands, events);
-      } else if (JSON.stringify(events) !== JSON.stringify(state.events)) {
-        updateCommandsAndEvents(commands, events);
-      }
-    }
-  }, [!!commands, !!events]);
+    if (!commands || !events) return;
+    //updateCommandsAndEvents(commands, events);
+    setState({ ...state, commands, events });
+  }, [JSON.stringify(commands), JSON.stringify(events)]);
 
-  // Every function checks and changes it's own value
-  // Then it calls the function below it
-  function updateMode(mode, _state = state) {
-    _state = { ..._state, mode: mode || _state.mode };
+  const handlers =
+    (state.mode === "event" ? state.events : state.commands) || [];
+  const handler = handlers[state.handlerIndex] || {};
+  console.log("HandlerIndex after re-render", state.handlerIndex);
+  const actions = handler.actions || [];
+  const action = actions[state.actionIndex] || {};
 
-    if (_state.mode === "event") {
-      updateHandlers(_state.events, _state);
+  /**
+   * @param {string} mode
+   */
+  const updateMode = (mode) => {
+    setState({ ...state, mode, actionIndex: 0, handlerIndex: 0 });
+  };
+
+  /**
+   * Select new handler
+   * @param {number} index
+   */
+  const updateHandlerIndex = (index) => {
+    let newIndex;
+
+    if (handlers[index]) {
+      newIndex = index;
+    } else if (handlers.length < 1) {
+      // Reset if there are no actions
+      newIndex = 0;
     } else {
-      updateHandlers(_state.commands, _state);
+      // Set index to last item
+      newIndex = handlers.length - 1;
     }
-  }
 
-  function updateCommandsAndEvents(commands, events, _state = state) {
-    _state = {
-      ..._state,
-      commands: commands || _state.commands,
-      events: events || _state.events,
-    };
+    console.log("Trying to select: " + newIndex);
+    setState({ ...state, handlerIndex: newIndex });
+  };
 
-    if (_state.mode === "event") {
-      updateHandlers(_state.events, _state);
+  /**
+   * Updates selected handler
+   * @param {object} handler
+   */
+  const updateHandler = (newHandler) => {
+    Object.assign(handler, newHandler);
+    setState({ ...state });
+  };
+
+  /**
+   * Adds a new handler
+   * @param {object} handler
+   */
+  const addHandler = (handler) => {
+    handlers.push(handler);
+    setState({ ...state });
+  };
+
+  /**
+   * Remove handler
+   * @param {number} index
+   */
+  const removeHandler = (index) => {
+    handlers.splice(index, 1);
+    setState({ ...state });
+  };
+
+  /**
+   * Updates selected action
+   * @param {number} index - Index of the action
+   * @return {undefined}
+   */
+  function updateActionIndex(index) {
+    let newIndex;
+
+    if (actions[index]) {
+      newIndex = index;
+    } else if (actions.length < 1) {
+      // Reset if there are no actions
+      newIndex = 0;
     } else {
-      updateHandlers(_state.commands, _state);
+      // Set index to last item
+      newIndex = actions.length - 1;
     }
+
+    console.log("Trying to select: " + newIndex);
+    setState({ ...state, actionIndex: newIndex });
   }
 
-  function updateHandlers(handlers, _state = state) {
-    _state = { ..._state, handlers: handlers || [] };
-    updateHandlerIndex(_state.handlerIndex, _state);
-  }
+  /**
+   * Updates selected action
+   * @param {object} action - Action object
+   * @return {undefined}
+   */
+  const updateAction = (newAction) => {
+    Object.assign(action, newAction);
+    setState({ ...state });
+  };
 
-  function updateHandlerIndex(index, _state = state) {
-    const newIndex = _state.handlers[index]
-      ? index
-      : _state.handlers.length
-      ? _state.handlers.length - 1
-      : 0;
-    _state = { ..._state, handlerIndex: newIndex };
-    updateHandler(_state.handlers[newIndex] || {}, _state);
-  }
+  /**
+   * Adds a new action
+   * @param {object} action - Action object
+   * @return {undefined}
+   */
+  const addAction = (action) => {
+    actions.push(action);
+    setState({ ...state });
+  };
 
-  function updateHandler(handler, _state = state) {
-    _state = { ..._state, handler, actions: handler.actions || [] };
-    updateActions(_state.actions, _state);
-  }
-
-  function updateActions(actions, _state = state) {
-    _state = { ..._state, actions };
-    updateActionIndex(_state.actionIndex, _state);
-  }
-
-  useEffect(() => {
-    const actions = [...state.actions, "test"];
-    updateActions(actions);
-  }, []);
-
-  function updateActionIndex(index, _state = state) {
-    const newIndex = _state.actions[index]
-      ? index
-      : _state.actions.length
-      ? _state.actions.length - 1
-      : 0;
-    setState({ ..._state, actionIndex: newIndex });
-  }
+  /**
+   * Removes an action
+   * @param {number} index - Index of the action
+   * @return {undefined}
+   */
+  const removeAction = (index) => {
+    actions.splice(index, 1);
+    setState({ ...state });
+  };
 
   return (
     <DashboardContext.Provider
       value={{
-        updateMode,
-        updateActions,
-        updateActionIndex,
-        updateHandlers,
-        updateHandlerIndex,
+        handlers,
+        handler,
+        actions: actions,
+        action,
         ...state,
+        updateMode,
+        addHandler,
+        removeHandler,
+        updateHandler,
+        updateHandlerIndex,
+        addAction,
+        removeAction,
+        updateAction,
+        updateActionIndex,
       }}
     >
       {children}
