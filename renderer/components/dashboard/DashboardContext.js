@@ -88,6 +88,11 @@ export function DashboardProvider({ children }) {
     updateActionIndex(_state.actionIndex, _state);
   }
 
+  useEffect(() => {
+    const actions = [...state.actions, "test"];
+    updateActions(actions);
+  }, []);
+
   function updateActionIndex(index, _state = state) {
     const newIndex = _state.actions[index]
       ? index

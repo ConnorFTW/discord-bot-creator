@@ -14,11 +14,23 @@ export default function useActions({ force } = {}) {
   });
 
   useEffect(() => {
+    if ((window._loading || window._actions) && !force) {
+      console.log("Not performing expensive read");
+      return;
+    }
+
+    window._loading = true;
+
+    console.log("Window: ", window._actions);
+    console.log("Performing expensive read");
+
     ipcRenderer?.on("getActions", (_event, actions) => {
+      console.log("Received Response");
       window._actions = actions;
+      window._loading = false;
       setActions(actions);
     });
-    if (actions && !force) return;
+
     ipcRenderer?.send("getActions");
 
     return () => {

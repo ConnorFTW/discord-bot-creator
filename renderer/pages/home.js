@@ -32,10 +32,6 @@ export default function Dashboard() {
     ipcRenderer.send("directoryDialog");
   }
 
-  function generateAlphaNumericString() {
-    return Math.random().toString(36).substr(2, 10);
-  }
-
   useEffect(() => {
     ipcRenderer.on("directoryDialog", (event, data) => {
       console.log(data);
@@ -60,7 +56,6 @@ export default function Dashboard() {
     return () => {
       ipcRenderer.removeAllListeners("directoryDialog");
       ipcRenderer.removeAllListeners("getSettings");
-      ipcRenderer.removeAllListeners("getActions");
       ipcRenderer.removeAllListeners("getLastDirectory");
     };
   }, []);
