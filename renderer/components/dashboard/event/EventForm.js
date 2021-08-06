@@ -63,11 +63,6 @@ export default function EventForm({
     const item = "";
     data.messages = [
       `
-      <option></option>
-      `,
-    ];
-    data.messages = [
-      `
     <option value="0">Command Message</option>
     <option value="1">Temp Variable</option>
     <option value="2">Server Variable</option>
@@ -142,7 +137,6 @@ export default function EventForm({
   </div>
     `,
     ];
-    console.log(actionSchema.name);
 
     let htmlFunction = new Function(
       "isEvent",

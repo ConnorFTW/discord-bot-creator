@@ -59,12 +59,12 @@ export default function ActionForm({ show, isEvent, onHide }) {
     const item = "";
     data.messages = [
       `
-      <option></option>
-      `,
-    ];
-    data.messages = [
-      `
     <option value="0">Command Message</option>
+    <option value="1">Temp Variable</option>
+    <option value="2">Server Variable</option>
+    <option value="3">Global Variable</option>
+    `,
+      `
     <option value="1">Temp Variable</option>
     <option value="2">Server Variable</option>
     <option value="3">Global Variable</option>
@@ -183,7 +183,13 @@ export default function ActionForm({ show, isEvent, onHide }) {
       });
     }
     setState({ ...state, html });
-  }, [JSON.stringify(actionSchema), !!action, !!state.html, show]);
+  }, [JSON.stringify(actionSchema), !!action, show]);
+
+  useEffect(() => {
+    if (show) return;
+    setState({ ...state, html: null });
+    console.log("Cleared!");
+  }, [show]);
 
   return (
     <Modal

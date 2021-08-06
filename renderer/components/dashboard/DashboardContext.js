@@ -26,8 +26,18 @@ export function DashboardProvider({ children }) {
 
   useEffect(() => {
     if (!commands || !events) return;
-    //updateCommandsAndEvents(commands, events);
     setState({ ...state, commands, events });
+  }, [JSON.stringify(commands), JSON.stringify(events)]);
+
+  useEffect(() => {
+    // The last context we had here will be used on the save call
+    ipcRenderer?.on("save", () => {
+      save();
+    });
+
+    return () => {
+      ipcRenderer?.removeAllListeners("save");
+    };
   }, [JSON.stringify(commands), JSON.stringify(events)]);
 
   useEffect(() => {
@@ -35,15 +45,11 @@ export function DashboardProvider({ children }) {
     setState({ ...state, actionSchemas });
   }, [JSON.stringify(actionSchemas)]);
 
-  useEffect(() => {
-    ipcRenderer?.on("save", () => save);
-  }, []);
-
   const handlers =
     (state.mode === "event" ? state.events : state.commands) || [];
   const handler = handlers[state.handlerIndex] || {};
-  console.log("HandlerIndex after re-render", state.handlerIndex);
   const actions = handler.actions || [];
+  console.log(state.actionIndex);
   const action = actions[state.actionIndex] || {};
 
   /**
@@ -70,7 +76,6 @@ export function DashboardProvider({ children }) {
       newIndex = handlers.length - 1;
     }
 
-    console.log("Trying to select: " + newIndex);
     setState({ ...state, handlerIndex: newIndex });
   };
 
@@ -106,7 +111,8 @@ export function DashboardProvider({ children }) {
    * @param {number} index - Index of the action
    * @return {undefined}
    */
-  function updateActionIndex(index) {
+  const updateActionIndex = (index) => {
+    console.log("Trying to update action index to: ", index);
     let newIndex;
 
     if (actions[index]) {
@@ -119,9 +125,12 @@ export function DashboardProvider({ children }) {
       newIndex = actions.length - 1;
     }
 
-    console.log("Trying to select: " + newIndex);
-    setState({ ...state, actionIndex: newIndex });
-  }
+    console.log("Trying to select: " + newIndex, index);
+    //   setState({ ...state, actionIndex: newIndex });
+    const sendingToUpdate = { ...state, actionIndex: newIndex };
+    console.log(sendingToUpdate);
+    setState((prevState) => ({ ...prevState, actionIndex: newIndex }));
+  };
 
   /**
    * Updates selected action
@@ -133,12 +142,24 @@ export function DashboardProvider({ children }) {
     setState({ ...state });
   };
 
+  console.log(actionSchemas[1]);
   /**
    * Adds a new action
    * @param {object} action - Action object
    * @return {undefined}
    */
-  const addAction = (action) => {
+  const addAction = () => {
+    const action = {};
+    // actionSchemas[0] is this strange wrexdiv
+    const actionSchema = actionSchemas[1];
+
+    action.name = actionSchema.name;
+
+    for (const key of actionSchema.fields) {
+      action[key] = "";
+    }
+    console.log(action);
+
     actions.push(action);
     setState({ ...state });
   };
@@ -158,10 +179,11 @@ export function DashboardProvider({ children }) {
   };
 
   const showActionModal = () => {
-    setState({ ...state, actionModalVisible: true });
+    setState((prevState) => ({ ...prevState, actionModalVisible: true }));
   };
 
   const save = () => {
+    console.log(state.commands, commands);
     setCommands(state.commands);
     setEvents(state.events);
   };

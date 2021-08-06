@@ -49,12 +49,13 @@ export default function Sidebar({ selected, setSelected }) {
             <Form.Select
               id="command"
               value={selected}
-              onChange={(e) => setSelected(e.target.value)}
+              onChange={(e) => updateHandlerIndex(e.target.value)}
             >
               {commands?.concat(events || []).map((c, i) => (
                 <option
                   key={"select-" + c?.name}
                   onClick={() => updateHandlerIndex(i)}
+                  value={i}
                 >
                   {c?.name}
                 </option>

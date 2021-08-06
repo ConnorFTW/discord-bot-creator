@@ -1,4 +1,4 @@
-import { app, dialog, ipcMain } from "electron";
+import { app, dialog, ipcMain, globalShortcut } from "electron";
 import serve from "electron-serve";
 import { createWindow, Loader } from "./helpers";
 import Store from "electron-store";
@@ -14,7 +14,6 @@ if (isProd) {
 
 (async () => {
   await app.whenReady();
-
   const mainWindow = createWindow("main", {
     width: 1000,
     height: 600,
@@ -27,6 +26,15 @@ if (isProd) {
     await mainWindow.loadURL(`http://localhost:${port}/home`);
     //mainWindow.webContents.openDevTools();
   }
+
+  globalShortcut.register("CommandOrControl+S", () => {
+    const url = mainWindow.webContents.getURL();
+
+    // Emit save event if we are in dashboard
+    if (url.includes("/dashboard")) {
+      mainWindow.webContents.send("save");
+    }
+  });
 })();
 
 app.on("window-all-closed", () => {
@@ -58,7 +66,6 @@ ipcMain.on("getLastDirectory", (event, arg) => {
 
 ipcMain.on("getSettings", async (event, args) => {
   const settings = await loader?.getSettings();
-  console.log(settings);
   event.sender.send("getSettings", settings);
 });
 
@@ -88,9 +95,7 @@ ipcMain.on("saveSettings", async (event, settings) => {
 });
 
 ipcMain.on("saveCommands", async (event, commands) => {
-  console.log(commands);
   await loader?.saveCommands(commands);
-  console.log(commands);
   event.sender.send("saveCommands", { success: true, commands });
 });
 

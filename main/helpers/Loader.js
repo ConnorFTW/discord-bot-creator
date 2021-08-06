@@ -17,7 +17,6 @@ export default class Loader {
   saveSettings(settings) {
     if (!Object.keys(settings).length) return;
 
-    console.log(settings);
     fs.writeFileSync(
       path.resolve(this.filePath, "./data/settings.json"),
       JSON.stringify(settings, null, 2)
@@ -56,7 +55,6 @@ export default class Loader {
     );
   }
   async saveCommands(commands) {
-    console.log(JSON.stringify({ commands }, null, 2));
     if (!Object.keys(commands).length) return;
     fs.writeFileSync(
       path.resolve(this.filePath, "./data/commands.json"),
