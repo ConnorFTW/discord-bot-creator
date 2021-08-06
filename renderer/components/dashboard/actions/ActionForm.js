@@ -208,7 +208,7 @@ export default function ActionForm({ show, isEvent, onHide }) {
       </Modal.Body>
       <Modal.Footer className="d-flex flex-row justify-content-between">
         <Button onClick={onHide}>Close</Button>
-        <Button onClick={onHide} variant="success" className="mt-3">
+        <Button onClick={onHide} variant="success">
           Save
         </Button>
       </Modal.Footer>
