@@ -4,28 +4,20 @@ import parseFunction from "parse-function-string";
 import useActions from "../../../lib/useActions";
 import { useDashboardContext } from "../DashboardContext";
 
-export default function ActionForm({
-  show,
-  isEvent,
-  onHide,
-  update = () => {},
-  actionIndex,
-}) {
-  const [actionSchemas] = useActions();
-  const { action } = useDashboardContext();
-  const actionSchema = actionSchemas.filter(({ name }) => action.name === name);
+export default function ActionForm({ show, isEvent, onHide }) {
+  const { action, actionSchemas, updateAction } = useDashboardContext();
+  const actionSchema = actionSchemas.find(({ name }) => action.name === name);
 
   const [state, setState] = useState({ visible: false, html: "" });
 
   const glob = {
     variableChange(_this, varName) {
-      console.log(_this.value, varName);
-      document.getElementById(varName).style.display = +_this.value
-        ? "block"
-        : "none";
+      const element = document.getElementById(varName);
+      if (!element) return;
+      element.style.display = +_this.value ? "block" : "none";
     },
     sendTargetChange(_this, varName) {
-      if (isNaN(+_this.value)) return;
+      if (isNaN(+_this?.value)) return;
       if (+_this.value < 5) {
         document.getElementById(varName).style.display = "none";
       } else {
@@ -146,7 +138,6 @@ export default function ActionForm({
   </div>
     `,
     ];
-    console.log(actionSchema.name);
 
     let htmlFunction = new Function(
       "isEvent",
@@ -170,7 +161,7 @@ export default function ActionForm({
       },
     };
     context.getHtml();
-    if (state.html) {
+    if (state.html && show) {
       context.init();
 
       actionSchema.fields?.forEach((field) => {
@@ -187,12 +178,12 @@ export default function ActionForm({
         elem.onchange = "";
         elem?.addEventListener("change", (e) => {
           if (onChange) onChange.bind(elem)(glob);
-          update(actionIndex, { ...action, [field]: e.target.value });
+          updateAction({ ...action, [field]: e.target.value });
         });
       });
     }
     setState({ ...state, html });
-  }, [actionSchema?.name, !!action, !!state.html]);
+  }, [JSON.stringify(actionSchema), !!action, !!state.html, show]);
 
   return (
     <Modal

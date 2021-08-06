@@ -1,3 +1,4 @@
+import { ipcRenderer } from "electron";
 import { createContext, useContext, useEffect, useState } from "react";
 import useActions from "../../lib/useActions";
 import useCommands from "../../lib/useCommands";
@@ -11,11 +12,12 @@ export function useDashboardContext() {
 
 export function DashboardProvider({ children }) {
   const [actionSchemas] = useActions();
-  const [events] = useEvents();
-  const [commands] = useCommands();
+  const [events, setEvents] = useEvents();
+  const [commands, setCommands] = useCommands();
   const [state, setState] = useState({
     actionSchemas: actionSchemas,
     mode: "command",
+    actionModalVisible: false,
     commands,
     events,
     handlerIndex: 0,
@@ -27,6 +29,15 @@ export function DashboardProvider({ children }) {
     //updateCommandsAndEvents(commands, events);
     setState({ ...state, commands, events });
   }, [JSON.stringify(commands), JSON.stringify(events)]);
+
+  useEffect(() => {
+    if (!actionSchemas) return;
+    setState({ ...state, actionSchemas });
+  }, [JSON.stringify(actionSchemas)]);
+
+  useEffect(() => {
+    ipcRenderer?.on("save", () => save);
+  }, []);
 
   const handlers =
     (state.mode === "event" ? state.events : state.commands) || [];
@@ -142,6 +153,19 @@ export function DashboardProvider({ children }) {
     setState({ ...state });
   };
 
+  const hideActionModal = () => {
+    setState({ ...state, actionModalVisible: false });
+  };
+
+  const showActionModal = () => {
+    setState({ ...state, actionModalVisible: true });
+  };
+
+  const save = () => {
+    setCommands(state.commands);
+    setEvents(state.events);
+  };
+
   return (
     <DashboardContext.Provider
       value={{
@@ -151,6 +175,8 @@ export function DashboardProvider({ children }) {
         action,
         ...state,
         updateMode,
+        hideActionModal,
+        showActionModal,
         addHandler,
         removeHandler,
         updateHandler,

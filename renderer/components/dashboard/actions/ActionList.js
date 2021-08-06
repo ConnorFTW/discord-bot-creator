@@ -14,7 +14,7 @@ export default function ActionList({ Form: ActionForm }) {
         {actions?.map((action, i) => (
           <>
             {action && <ActionForm action={action} />}
-            <ActionItem action={action} key={i} />
+            <ActionItem action={action} key={i} index={i} />
           </>
         ))}
       </Col>

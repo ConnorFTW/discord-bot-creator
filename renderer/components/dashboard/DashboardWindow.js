@@ -3,10 +3,12 @@ import Sidebar from "./sidebar/index";
 import EventView from "./event/EventView";
 import CommandView from "./command/CommandView";
 import { useDashboardContext } from "./DashboardContext";
+import ActionForm from "./actions/ActionForm";
 
 export default function DashboardWindow() {
   // Component Controls
-  const { mode, handler } = useDashboardContext();
+  const { mode, handler, actionModalVisible, hideActionModal } =
+    useDashboardContext();
 
   let isEvent = mode === "event";
 
@@ -21,6 +23,11 @@ export default function DashboardWindow() {
         >
           {isEvent && <EventView event={handler} />}
           {!isEvent && <CommandView command={handler} />}
+          <ActionForm
+            show={actionModalVisible}
+            onHide={hideActionModal}
+            isEvent={isEvent}
+          />
         </Col>
       </Row>
     </Tab.Container>
