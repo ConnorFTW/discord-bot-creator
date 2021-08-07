@@ -182,6 +182,17 @@ export function DashboardProvider({ children }) {
     setState({ ...state });
   };
 
+  /**
+   * Reorder action
+   * @param {number} to - Destination index
+   */
+  const reorderAction = (from, to) => {
+    const [removed] = actions.splice(from, 1);
+    actions.splice(to, 0, removed);
+
+    setState({ ...state });
+  };
+
   const hideActionModal = () => {
     setState({ ...state, actionModalVisible: false });
   };
@@ -215,6 +226,7 @@ export function DashboardProvider({ children }) {
         removeAction,
         updateAction,
         updateActionIndex,
+        reorderAction,
         actionSchema,
       }}
     >

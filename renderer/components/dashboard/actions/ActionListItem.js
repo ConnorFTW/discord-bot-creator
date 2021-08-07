@@ -2,7 +2,7 @@ import { Button, Col, Form } from "react-bootstrap";
 import { useDashboardContext } from "../DashboardContext";
 
 export default function ActionItem({ action, index, onSelect }) {
-  const { removeAction, updateActionIndex, showActionModal } =
+  const { removeAction, updateActionIndex, showActionModal, reorderAction } =
     useDashboardContext();
 
   const remove = (e) => {
@@ -20,7 +20,7 @@ export default function ActionItem({ action, index, onSelect }) {
       <Form.Group
         className="border p-2 my-2 mx-0 row align-items-center"
         onSelect={() => onSelect(index)}
-        style={{ cursor: "pointer" }}
+        style={{ cursor: "pointer", backgroundColor: "#35393f" }}
         onClick={select}
       >
         <p className="col my-0">{action?.name}</p>
