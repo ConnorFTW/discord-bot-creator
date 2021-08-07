@@ -1,5 +1,6 @@
 import { Col, Form, Row } from "react-bootstrap";
 import { useDashboardContext } from "../DashboardContext";
+import HandlerNameInput from "../handlers/HandlerNameInput";
 
 export default function DashboardWindowHeader() {
   const { handler: command } = useDashboardContext();
@@ -8,8 +9,8 @@ export default function DashboardWindowHeader() {
     <Row>
       <Col sm="8" className="mx-2 command-form">
         <Row>
-          <Col>
-            <h1>{command.name}</h1>
+          <Col className="mb-4">
+            <HandlerNameInput />
           </Col>
           <Col md="auto"></Col>
         </Row>

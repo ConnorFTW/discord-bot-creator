@@ -1,5 +1,6 @@
 import { Col, Form, Row } from "react-bootstrap";
 import { useDashboardContext } from "../DashboardContext";
+import HandlerNameInput from "../handlers/HandlerNameInput";
 
 export default function EventHeader() {
   const { handler: event, setHandler } = useDashboardContext();
@@ -7,8 +8,8 @@ export default function EventHeader() {
     <Row>
       <Col sm="8" className="mx-2 mb-3 command-form">
         <Row>
-          <Col>
-            <h1>{event?.name}</h1>
+          <Col className="mb-4">
+            <HandlerNameInput />
           </Col>
           <Col md="auto"></Col>
         </Row>
