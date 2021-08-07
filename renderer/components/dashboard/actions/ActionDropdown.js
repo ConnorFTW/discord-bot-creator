@@ -7,7 +7,6 @@ export default function ActionDropdown({ name }) {
   const filterByFields = ["name", "section"];
 
   const select = (items) => {
-    console.log("Selected", items[0]);
     const selected = items[0];
     if (!selected) return;
     const newAction = { name: selected.name };

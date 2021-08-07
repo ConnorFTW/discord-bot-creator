@@ -7,7 +7,11 @@ import ActionDropdown from "./ActionDropdown";
 export default function ActionForm({ show, isEvent, onHide }) {
   const { action, actionSchema, updateAction } = useDashboardContext();
 
-  const [state, setState] = useState({ visible: false, html: null });
+  const [state, setState] = useState({
+    visible: false,
+    html: null,
+    name: action?.name,
+  });
   const content = useRef(null);
 
   useEffect(() => {
@@ -33,8 +37,9 @@ export default function ActionForm({ show, isEvent, onHide }) {
       elem.onchange = "";
 
       const listener = (e) => {
-        if (!changeFunction) return;
-        evalListener(changeFunction, action, isEvent, elem);
+        if (changeFunction) {
+          evalListener(changeFunction, action, isEvent, elem);
+        }
         updateAction({ ...action, [field]: e.target.value });
       };
 
@@ -51,7 +56,9 @@ export default function ActionForm({ show, isEvent, onHide }) {
 
   useEffect(() => {
     // !show is important because it otherwise would render and set the html when we have the old action selected
-    if (!actionSchema.html || !action || state.html || !show) return;
+    const isLoading = !actionSchema?.html || !action;
+    if (isLoading || (state.html && state.name === action.name) || !show)
+      return;
 
     const html = evalHTML(actionSchema.html, action, isEvent);
     setState({ ...state, html });
