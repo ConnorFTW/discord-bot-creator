@@ -10,12 +10,11 @@ export default function ActionList({ Form: ActionForm }) {
       <Col sm="8" className="mx-2 mb-3 command-form">
         <Form.Label>Actions</Form.Label>
         <br />
-        <Button onClick={() => addAction({})}>Add Action</Button>
+        <Button onClick={() => addAction({})} className="mb-3">
+          Add Action
+        </Button>
         {actions?.map((action, i) => (
-          <>
-            {action && <ActionForm action={action} />}
             <ActionItem action={action} key={i} index={i} />
-          </>
         ))}
       </Col>
     </Row>

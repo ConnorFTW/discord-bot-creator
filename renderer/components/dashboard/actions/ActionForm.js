@@ -1,202 +1,74 @@
 import { Button, Modal } from "react-bootstrap";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import parseFunction from "parse-function-string";
-import useActions from "../../../lib/useActions";
 import { useDashboardContext } from "../DashboardContext";
+import { evalHTML, evalInit, evalListener } from "../../../lib/runInContext";
 
 export default function ActionForm({ show, isEvent, onHide }) {
-  const { action, actionSchemas, updateAction } = useDashboardContext();
-  const actionSchema = actionSchemas.find(({ name }) => action.name === name);
+  const { action, actionSchema, updateAction } = useDashboardContext();
 
-  const [state, setState] = useState({ visible: false, html: "" });
+  const [state, setState] = useState({ visible: false, html: null });
+  const content = useRef(null);
 
-  const glob = {
-    variableChange(_this, varName) {
-      const element = document.getElementById(varName);
-      if (!element) return;
-      element.style.display = +_this.value ? "block" : "none";
-    },
-    sendTargetChange(_this, varName) {
-      if (isNaN(+_this?.value)) return;
-      if (+_this.value < 5) {
-        document.getElementById(varName).style.display = "none";
-      } else {
-        document.getElementById(varName).style.display = "block";
-      }
-    },
-    memberChange(_this, varName) {
-      document.getElementById(varName).style.display = +_this.value
-        ? "block"
-        : "none";
-      if (isNaN(+_this.value)) return;
-      if (+_this.value < 2) {
-        document.getElementById(varName).style.display = "none";
-      } else {
-        document.getElementById(varName).style.display = "block";
-      }
-    },
-    messageChange(_this, varName) {
-      document.getElementById(varName).style.display = +_this.value
-        ? "block"
-        : "none";
-      if (isNaN(+_this.value)) return;
-      if (+_this.value < 1) {
-        document.getElementById(varName).style.display = "none";
-      } else {
-        document.getElementById(varName).style.display = "block";
-      }
-    },
-    refreshVariableList() {},
-  };
   useEffect(() => {
-    if (!actionSchema?.name || !action) return;
+    if (
+      !actionSchema?.name ||
+      !action ||
+      !state.html ||
+      !content.current?.children
+    )
+      return;
 
-    const data = action || {};
-    const content = "";
-    const val1 = "";
-    const val2 = "";
-    const inputData = "";
-    const item = "";
-    data.messages = [
-      `
-    <option value="0">Command Message</option>
-    <option value="1">Temp Variable</option>
-    <option value="2">Server Variable</option>
-    <option value="3">Global Variable</option>
-    `,
-      `
-    <option value="1">Temp Variable</option>
-    <option value="2">Server Variable</option>
-    <option value="3">Global Variable</option>
-    `,
-    ];
-    data.variables = [
-      `
-    <option value="0">Nothing</option>
-    <option value="1">Temp Variable</option>
-    <option value="2">Server Variable</option>
-    <option value="3">Global Variable</option>
-      `,
-      `
-    <option value="1">Temp Variable</option>
-    <option value="2">Server Variable</option>
-    <option value="3">Global Variable</option>
-      `,
-    ];
-    data.sendTargets = [
-      `
-    <option value="0">Same Channel</option>
-    <option value="1">Command Author</option>
-    <option value="2">Mentioned User</option>
-    <option value="3">Mentioned Channel</option>
-    <option value="4">Default Channel</option>
-    <option value="5">Temp Variable</option>
-    <option value="6">Server Variable</option>
-    <option value="7">Global Variable</option>
-    `,
-    ];
-    data.members = [
-      `
-    <option value="0">Mentioned User</option>
-    <option value="1">Command Author</option>
-    <option value="2">Temp Variable</option>
-    <option value="3">Server Variable</option>
-    <option value="4">Global Variable</option>
-      `,
-    ];
-    data.conditions = [
-      `
-  <div style="padding-top: 8px;">
-    <div style="float: left; width: 35%;">
-      If true:<br>
-      <select id="iftrue" class="round" onchange="glob.onChangeTrue(this)">
-        <option value="0" selected>Continue Actions</option>
-        <option value="1">Stop Action Sequence</option>
-        <option value="2">Jump To Action</option>
-        <option value="3">Skip Next Actions</option>
-        <option value="4">Jump to Anchor</option>
-      </select>
-    </div>
-    <div id="iftrueContainer" style="display: none; float: right; width: 60%;">
-      <span id="iftrueName">Action Number</span>:<br><input id="iftrueVal" class="round" type="text">
-    </div>
-  </div><br><br><br>
-  <div style="padding-top: 18px;">
-    <div style="float: left; width: 35%;">
-      If false:<br>
-      <select id="iffalse" class="round" onchange="glob.onChangeFalse(this)">
-        <option value="0">Continue Actions</option>
-        <option value="1" selected>Stop Action Sequence</option>
-        <option value="2">Jump To Action</option>
-        <option value="3">Skip Next Actions</option>
-        <option value="4">Jump to Anchor</option>
-      </select>
-    </div>
-    <div id="iffalseContainer" style="display: none; float: right; width: 60%;">
-      <span id="iffalseName">Action Number</span>:<br><input id="iffalseVal" class="round" type="text"></div>
-    </div><br><br><br>
-  </div>
-    `,
-    ];
+    // Keep track of all the listeners to remove them later
+    const listeners = [];
 
-    let htmlFunction = new Function(
-      "isEvent",
-      "data",
-      parseFunction(actionSchema.html).body
-    );
-    let initFunction = new Function(
-      "data",
-      parseFunction(actionSchema.init).body
-    );
+    evalInit(actionSchema.init, action, isEvent);
 
-    let html;
-    const context = {
-      glob,
-      document,
-      getHtml() {
-        html = htmlFunction.bind(this)(isEvent, data);
-      },
-      init() {
-        initFunction.bind(this)(data);
-      },
-    };
-    context.getHtml();
-    if (state.html && show) {
-      context.init();
+    actionSchema.fields?.forEach((field) => {
+      let elem = document.getElementById(field);
+      if (!elem) return;
+      elem.value = action[field];
 
-      actionSchema.fields?.forEach((field) => {
-        let elem = document.getElementById(field);
-        if (!elem) return;
-        elem.value = data[field];
-        let onChange = elem.onchange;
-        if (onChange) {
-          onChange = new Function(
-            "glob",
-            parseFunction(elem.onchange || "").body
-          );
-        }
-        elem.onchange = "";
-        elem?.addEventListener("change", (e) => {
-          if (onChange) onChange.bind(elem)(glob);
-          updateAction({ ...action, [field]: e.target.value });
-        });
+      const changeFunction = elem.onchange;
+      elem.onchange = "";
+
+      const listener = (e) => {
+        if (!changeFunction) return;
+        evalListener(changeFunction, action, isEvent, elem);
+        updateAction({ ...action, [field]: e.target.value });
+      };
+
+      elem?.addEventListener("change", listener);
+      listeners.push([elem, "change", listener]);
+    });
+
+    return () => {
+      listeners.forEach(([elem, event, listener]) => {
+        elem?.removeEventListener(event, listener);
       });
-    }
-    setState({ ...state, html });
-  }, [JSON.stringify(actionSchema), !!action, show]);
+    };
+  }, [state.html, show]);
 
   useEffect(() => {
-    if (show) return;
+    // !show is important because it otherwise would render and set the html when we have the old action selected
+    if (!actionSchema.html || !action || state.html || !show) return;
+
+    const html = evalHTML(actionSchema.html, action, isEvent);
+    setState({ ...state, html });
+  }, [actionSchema.html, show, state.html]);
+
+  const hide = () => {
     setState({ ...state, html: null });
-    console.log("Cleared!");
-  }, [show]);
+    content.current = null;
+    onHide();
+  };
 
   return (
     <Modal
       show={show}
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
-      onHide={onHide}
+      onHide={hide}
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
@@ -204,11 +76,11 @@ export default function ActionForm({ show, isEvent, onHide }) {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body style={{ height: "60vh", overflowY: "scroll" }}>
-        <div dangerouslySetInnerHTML={{ __html: state.html }} />
+        <div dangerouslySetInnerHTML={{ __html: state.html }} ref={content} />
       </Modal.Body>
       <Modal.Footer className="d-flex flex-row justify-content-between">
-        <Button onClick={onHide}>Close</Button>
-        <Button onClick={onHide} variant="success">
+        <Button onClick={hide}>Close</Button>
+        <Button onClick={hide} variant="success">
           Save
         </Button>
       </Modal.Footer>

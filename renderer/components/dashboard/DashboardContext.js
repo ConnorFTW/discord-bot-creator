@@ -49,8 +49,9 @@ export function DashboardProvider({ children }) {
     (state.mode === "event" ? state.events : state.commands) || [];
   const handler = handlers[state.handlerIndex] || {};
   const actions = handler.actions || [];
-  console.log(state.actionIndex);
   const action = actions[state.actionIndex] || {};
+  const actionSchema =
+    actionSchemas?.find(({ name }) => action.name === name) || {};
 
   /**
    * @param {string} mode
@@ -112,7 +113,6 @@ export function DashboardProvider({ children }) {
    * @return {undefined}
    */
   const updateActionIndex = (index) => {
-    console.log("Trying to update action index to: ", index);
     let newIndex;
 
     if (actions[index]) {
@@ -125,10 +125,6 @@ export function DashboardProvider({ children }) {
       newIndex = actions.length - 1;
     }
 
-    console.log("Trying to select: " + newIndex, index);
-    //   setState({ ...state, actionIndex: newIndex });
-    const sendingToUpdate = { ...state, actionIndex: newIndex };
-    console.log(sendingToUpdate);
     setState((prevState) => ({ ...prevState, actionIndex: newIndex }));
   };
 
@@ -142,7 +138,6 @@ export function DashboardProvider({ children }) {
     setState({ ...state });
   };
 
-  console.log(actionSchemas[1]);
   /**
    * Adds a new action
    * @param {object} action - Action object
@@ -207,6 +202,7 @@ export function DashboardProvider({ children }) {
         removeAction,
         updateAction,
         updateActionIndex,
+        actionSchema,
       }}
     >
       {children}
