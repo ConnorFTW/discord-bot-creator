@@ -133,9 +133,14 @@ export function DashboardProvider({ children }) {
    * @param {object} action - Action object
    * @return {undefined}
    */
-  const updateAction = (newAction) => {
-    Object.assign(action, newAction);
-    setState({ ...state });
+  const updateAction = (newAction, merge = true) => {
+    if (merge) {
+      Object.assign(action, newAction);
+      setState({ ...state });
+    } else {
+      actions[state.actionIndex] = newAction;
+      setState({ ...state });
+    }
   };
 
   /**

@@ -1,8 +1,8 @@
 import { Button, Modal } from "react-bootstrap";
 import { useEffect, useRef, useState } from "react";
-import parseFunction from "parse-function-string";
 import { useDashboardContext } from "../DashboardContext";
 import { evalHTML, evalInit, evalListener } from "../../../lib/runInContext";
+import ActionDropdown from "./ActionDropdown";
 
 export default function ActionForm({ show, isEvent, onHide }) {
   const { action, actionSchema, updateAction } = useDashboardContext();
@@ -72,7 +72,7 @@ export default function ActionForm({ show, isEvent, onHide }) {
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          {action.name}
+          <ActionDropdown name={action.name} />
         </Modal.Title>
       </Modal.Header>
       <Modal.Body style={{ height: "60vh", overflowY: "scroll" }}>

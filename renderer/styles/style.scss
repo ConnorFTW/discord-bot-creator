@@ -73,6 +73,12 @@ $modal-footer-border-color: $border-color;
 
 // Dropdowns
 $dropdown-bg: $input-bg;
+$dropdown-link-color: $light;
+$dropdown-link-hover-bg: $gray-700;
+
+.rbt-input-hint {
+  color: $gray-400 !important;
+}
 
 // Hr
 $hr-height: $border-width;
