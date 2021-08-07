@@ -12,8 +12,8 @@ export function useDashboardContext() {
 
 export function DashboardProvider({ children }) {
   const [actionSchemas] = useActions();
-  const [events, setEvents] = useEvents();
-  const [commands, setCommands] = useCommands();
+  let [events, setEvents] = useEvents();
+  let [commands, setCommands] = useCommands();
   const [state, setState] = useState({
     actionSchemas: actionSchemas,
     mode: "command",
@@ -93,9 +93,16 @@ export function DashboardProvider({ children }) {
    * Adds a new handler
    * @param {object} handler
    */
-  const addHandler = (handler) => {
-    handlers.push(handler);
-    setState({ ...state });
+  const addHandler = (newHandler) => {
+    const template = {
+      name: "NewCommand",
+      permissions: "NONE",
+      restriction: "1",
+      actions: [],
+    };
+    newHandler = Object.assign(template, newHandler);
+
+    setState({ ...state, commands: [...state.commands, newHandler] });
   };
 
   /**

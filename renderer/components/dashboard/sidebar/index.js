@@ -14,6 +14,7 @@ export default function Sidebar({ selected, setSelected }) {
     events,
     updateHandlerIndex,
     handlerIndex,
+    addHandler,
   } = useDashboardContext();
 
   const setMode = (mode) => () => updateMode(mode);
@@ -67,7 +68,7 @@ export default function Sidebar({ selected, setSelected }) {
           <SidebarBotControls />
         </Card.Footer>
         <Card.Footer className="d-flex flex-row justify-content-between align-items-center flex-wrap gap-2">
-          <Button onClick={() => {}} variant="secondary">
+          <Button onClick={() => addHandler()} variant="secondary">
             Add Command
           </Button>
           <Button

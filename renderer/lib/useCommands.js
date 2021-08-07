@@ -37,6 +37,7 @@ export default function useCommands({ force } = {}) {
 
   const setCommands = (commands) => {
     console.log("Trying to save commands");
+    console.log(commands);
     ipcRenderer?.send("saveCommands", commands);
     ipcRenderer?.once("saveCommands", (event, response) => {
       if (!response.success) return console.error("Failed to save");
