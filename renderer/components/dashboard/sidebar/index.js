@@ -35,9 +35,9 @@ export default function Sidebar({ selected, setSelected }) {
         <Card.Body className="px-2">
           <Nav variant="pills" className="flex-column d-md-block d-none ">
             {handlers.map((d, i) => (
-              <Nav.Item key={d?.name}>
+              <Nav.Item key={d?.name + "-" + i}>
                 <Nav.Link
-                  eventKey={"nav-link-" + d?.name}
+                  eventKey={"nav-link-" + d?.name + "-" + i}
                   active={handlerIndex === i}
                   onClick={() => updateHandlerIndex(i)}
                 >
@@ -54,7 +54,7 @@ export default function Sidebar({ selected, setSelected }) {
             >
               {commands?.concat(events || []).map((c, i) => (
                 <option
-                  key={"select-" + c?.name}
+                  key={"select-" + c?.name + "-" + i}
                   onClick={() => updateHandlerIndex(i)}
                   value={i}
                 >

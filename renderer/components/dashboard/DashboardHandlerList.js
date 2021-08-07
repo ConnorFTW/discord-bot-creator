@@ -24,7 +24,7 @@ export default function DashboardHandlerList({ selected }) {
       <Tab.Content>
         {optionList?.map(({ name, "event-type": eventType } = {}, i) => (
           <Tab.Pane
-            eventKey={name}
+            eventKey={name + "-" + i}
             key={name}
             active={(!selected && i === 0) || selected === name}
           >
