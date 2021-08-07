@@ -102,7 +102,8 @@ export function DashboardProvider({ children }) {
     };
     newHandler = Object.assign(template, newHandler);
 
-    setState({ ...state, commands: [...state.commands, newHandler] });
+    handlers.push(newHandler);
+    setState({ ...state });
   };
 
   /**
