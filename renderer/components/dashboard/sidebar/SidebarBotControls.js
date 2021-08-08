@@ -1,30 +1,43 @@
 import { Button } from "react-bootstrap";
 import { ipcRenderer } from "electron";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useSettings from "../../../lib/useSettings";
 
 export default function SidebarBotControls() {
   const [state, setState] = useState({});
   const [settings] = useSettings();
 
+  useEffect(() => {
+    let hasSaved = false;
+    const saveListener = (event, data) => {
+      console.log("Hey");
+      if (hasSaved) return;
+      setState({
+        ...state,
+        isSaving: true,
+      });
+    };
+    ipcRenderer.on("save", saveListener);
+
+    const savedListener = (event, data) => {
+      hasSaved = true;
+      console.log("Saved");
+      setState({
+        ...state,
+        isSaving: false,
+      });
+    };
+    ipcRenderer.on("saved", savedListener);
+
+    return () => {
+      ipcRenderer.removeListener("save", saveListener);
+      ipcRenderer.removeListener("saved", savedListener);
+    };
+  }, [JSON.stringify(state)]);
+
   const save = () => {
     if (state.isStopping || state.isStarting || state.isSaving) return;
-    setState({ ...state, isSaving: true });
-
-    if (window._commands) {
-      ipcRenderer.send("saveCommands", window._commands);
-      ipcRenderer.on("saveCommands", (_event, _commands) => {
-        console.log(_commands);
-        setState({ ...state, isSaving: false });
-      });
-    }
-    if (window._events) {
-      ipcRenderer.send("saveEvents", window._events);
-      ipcRenderer.on("saveEvents", (_event, _events) => {
-        console.log(_events);
-        setState({ ...state, isSaving: false });
-      });
-    }
+    ipcRenderer.emit("save");
   };
 
   const run = () => {

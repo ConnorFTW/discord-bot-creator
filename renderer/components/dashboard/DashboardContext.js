@@ -38,7 +38,7 @@ export function DashboardProvider({ children }) {
     return () => {
       ipcRenderer?.removeAllListeners("save");
     };
-  }, [JSON.stringify(commands), JSON.stringify(events)]);
+  }, [JSON.stringify(state.commands), JSON.stringify(state.events)]);
 
   useEffect(() => {
     if (!actionSchemas) return;
@@ -205,6 +205,7 @@ export function DashboardProvider({ children }) {
     console.log(state.commands, commands);
     setCommands(state.commands);
     setEvents(state.events);
+    ipcRenderer.emit("saved");
   };
 
   return (
