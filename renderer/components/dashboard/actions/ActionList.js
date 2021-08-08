@@ -41,7 +41,7 @@ export default function ActionList({ Form: ActionForm }) {
                         key={i}
                         index={i}
                       >
-                        <ActionItem action={action} />
+                        <ActionItem action={action} index={i} />
                       </div>
                     )}
                   </Draggable>
