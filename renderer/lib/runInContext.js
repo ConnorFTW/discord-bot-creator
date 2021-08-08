@@ -52,6 +52,12 @@ const runInContext = (
     <option value="6">Server Variable</option>
     <option value="7">Global Variable</option>
     `,
+    `
+    <option value="4">Default Channel</option>
+    <option value="5">Temp Variable</option>
+    <option value="6">Server Variable</option>
+    <option value="7">Global Variable</option>
+    `,
   ];
   data.members = [
     `
@@ -60,7 +66,12 @@ const runInContext = (
     <option value="2">Temp Variable</option>
     <option value="3">Server Variable</option>
     <option value="4">Global Variable</option>
-      `,
+    `,
+    `
+    <option value="2">Temp Variable</option>
+    <option value="3">Server Variable</option>
+    <option value="4">Global Variable</option>
+    `,
   ];
   data.conditions = [
     `
