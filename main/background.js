@@ -1,10 +1,11 @@
 import { app, dialog, ipcMain, globalShortcut } from "electron";
 import serve from "electron-serve";
-import { createWindow, Loader } from "./helpers";
+import { createWindow, createMenu, Loader, Runner } from "./helpers";
 import Store from "electron-store";
 
 const isProd = process.env.NODE_ENV === "production";
 let loader;
+let runner;
 
 if (isProd) {
   serve({ directory: "app" });
@@ -27,6 +28,9 @@ if (isProd) {
     //mainWindow.webContents.openDevTools();
   }
 
+  createMenu(mainWindow);
+
+  // Register shortcuts
   globalShortcut.register("CommandOrControl+S", () => {
     const url = mainWindow.webContents.getURL();
 
@@ -54,6 +58,7 @@ ipcMain.on("directoryDialog", async (event, arg) => {
     properties: ["openDirectory", "createDirectory"],
   });
   loader = new Loader({ filePath: filePaths[0] });
+  runner = new Runner({ filePath: filePaths[0] });
   addDirectory(filePaths[0]);
   event.sender.send("directoryDialog", filePaths[0]);
 });
@@ -62,6 +67,7 @@ ipcMain.on("getLastDirectory", (event, arg) => {
   const lastDirectories = store.get("lastDirectories") || [];
   event.sender.send("getLastDirectory", lastDirectories[0]);
   loader = new Loader({ filePath: lastDirectories[0] });
+  runner = new Runner({ filePath: lastDirectories[0] });
 });
 
 ipcMain.on("getSettings", async (event, args) => {
@@ -102,4 +108,35 @@ ipcMain.on("saveCommands", async (event, commands) => {
 ipcMain.on("saveEvents", async (event, events) => {
   await loader?.saveEvents(events);
   event.sender.send("saveEvents", { success: true, events });
+});
+
+// Runner Events
+
+ipcMain.on("onBotRun", async (event, args) => {
+  try {
+    console.log(`Bot running...`);
+    console.log(runner);
+    await runner?.run();
+    event.sender.send("onBotRun", { success: true });
+  } catch (error) {
+    event.sender.send("onBotRun", { success: false, error });
+  }
+});
+
+ipcMain.on("onBotStop", async (event, args) => {
+  try {
+    await runner?.stop();
+    event.sender.send("onBotStop", { success: true });
+  } catch (error) {
+    event.sender.send("onBotStop", { success: false, error });
+  }
+});
+
+ipcMain.on("onBotError", async (event, args) => {
+  try {
+    await runner?.error();
+    event.sender.send("onBotError", { success: true });
+  } catch (error) {
+    event.sender.send("onBotError", { success: false, error });
+  }
 });

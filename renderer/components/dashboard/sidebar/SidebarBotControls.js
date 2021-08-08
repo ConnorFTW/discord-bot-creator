@@ -30,13 +30,29 @@ export default function SidebarBotControls() {
   const run = () => {
     if (state.isStopping || state.isStarting || state.isSaving) return;
     setState({ ...state, isStarting: true });
-    setState({ ...state, isStarting: false, isRunning: true });
+
+    ipcRenderer.on("onBotRun", (_event, res = {}) => {
+      if (res.success) {
+        setState({ ...state, isStarting: false, isRunning: true });
+      } else {
+        setState({ ...state, isStarting: false, isRunning: false });
+      }
+    });
+    ipcRenderer.send("onBotRun");
   };
 
   const stop = () => {
     if (state.isStopping || state.isStarting || state.isSaving) return;
     setState({ ...state, isStopping: true });
     setState({ ...state, isStopping: false, isRunning: false });
+    ipcRenderer.on("onBotStop", (_event, res = {}) => {
+      if (res.success) {
+        setState({ ...state, isStopping: false, isRunning: false });
+      } else {
+        setState({ ...state, isStopping: false, isRunning: true });
+      }
+    });
+    ipcRenderer.send("onBotStop");
   };
 
   if (!settings?.token) {
@@ -53,7 +69,7 @@ export default function SidebarBotControls() {
             className="mx-1"
             disabled={state.isSaving}
           >
-            {state.isSaving ? "Restarting..." : "Restart"}
+            {state.isSaving ? "Saving..." : "Save"}
           </Button>
           <Button
             onClick={stop}
