@@ -26,7 +26,7 @@ export default function ActionForm({ show, isEvent, onHide }) {
     // Keep track of all the listeners to remove them later
     const listeners = [];
 
-    evalInit(actionSchema.init, action, isEvent);
+    const glob = evalInit(actionSchema.init, action, isEvent);
 
     actionSchema.fields?.forEach((field) => {
       let elem = document.getElementById(field);
@@ -38,7 +38,7 @@ export default function ActionForm({ show, isEvent, onHide }) {
 
       const listener = (e) => {
         if (changeFunction) {
-          evalListener(changeFunction, action, isEvent, elem);
+          evalListener(changeFunction, action, isEvent, elem, glob);
         }
         updateAction({ ...action, [field]: e.target.value });
       };

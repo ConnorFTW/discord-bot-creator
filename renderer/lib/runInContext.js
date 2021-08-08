@@ -1,6 +1,9 @@
 import parseFunction from "parse-function-string";
 
-const runInContext = (type, { functionString, action, isEvent, elem }) => {
+const runInContext = (
+  type,
+  { functionString, action, isEvent, elem, glob: _glob }
+) => {
   if (!["html", "init", "listener"].includes(type)) {
     return console.error("Type has to be 'html', 'init', or 'listener'");
   }
@@ -130,8 +133,21 @@ const runInContext = (type, { functionString, action, isEvent, elem }) => {
         document.getElementById(varName).style.display = "block";
       }
     },
+    onChangeBasic(_this, varName) {
+      document.getElementById(varName).style.display = +_this.value
+        ? "block"
+        : "none";
+      if (isNaN(+_this.value)) return;
+      if (+_this.value < 3) {
+        document.getElementById(varName).style.display = "none";
+      } else {
+        document.getElementById(varName).style.display = "block";
+      }
+    },
     refreshVariableList() {},
   };
+
+  Object.assign(glob, _glob);
 
   if (!functionString) return console.log("No function provided");
 
@@ -147,9 +163,10 @@ const runInContext = (type, { functionString, action, isEvent, elem }) => {
             parseFunction(functionString).body
           ).bind(this)(isEvent, data);
         case "init":
-          return new Function("data", parseFunction(functionString).body).bind(
-            this
-          )(data);
+          new Function("data", parseFunction(functionString).body).bind(this)(
+            data
+          );
+          return glob;
         case "listener":
           return new Function("glob", parseFunction(functionString).body).bind(
             elem
@@ -167,7 +184,13 @@ export let evalHTML = (html, action, isEvent) =>
 export let evalInit = (init, action, isEvent) =>
   runInContext("init", { functionString: init, action, isEvent });
 
-export let evalListener = (listener, action, isEvent, elem) =>
-  runInContext("listener", { functionString: listener, action, isEvent, elem });
+export let evalListener = (listener, action, isEvent, elem, glob) =>
+  runInContext("listener", {
+    functionString: listener,
+    action,
+    isEvent,
+    elem,
+    glob,
+  });
 
 export default runInContext;
