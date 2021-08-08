@@ -30,6 +30,9 @@ export default function Sidebar({ selected, setSelected }) {
             <Button variant="secondary" onClick={setMode("event")}>
               Events
             </Button>
+            <Button variant="secondary" onClick={setMode("logs")}>
+              Logs
+            </Button>
           </ButtonGroup>
         </Card.Header>
         <Card.Body className="px-2">

@@ -6,6 +6,7 @@ import Store from "electron-store";
 const isProd = process.env.NODE_ENV === "production";
 let loader;
 let runner;
+let logs = [];
 
 if (isProd) {
   serve({ directory: "app" });
@@ -38,6 +39,13 @@ if (isProd) {
     if (url.includes("/dashboard")) {
       mainWindow.webContents.send("save");
     }
+  });
+
+  ipcMain.on("onBotLog", (log, _log) => {
+    if (typeof log !== "string") log = _log;
+    console.log({ log });
+    if (log) logs.push(log);
+    mainWindow.webContents.send("onLogsUpdate", logs);
   });
 })();
 
@@ -139,4 +147,13 @@ ipcMain.on("onBotError", async (event, args) => {
   } catch (error) {
     event.sender.send("onBotError", { success: false, error });
   }
+});
+
+ipcMain.on("getLogs", (event, args) => {
+  ipcMain.emit("onBotLog");
+});
+
+ipcMain.on("clearLogs", (event, args) => {
+  logs = [];
+  event.sender.send("clearLogs", { success: true });
 });

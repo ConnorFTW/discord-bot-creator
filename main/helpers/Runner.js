@@ -1,5 +1,6 @@
 import path from "path";
 import { spawn } from "child_process";
+import { ipcMain } from "electron";
 
 export default class Runner {
   constructor(runner = {}) {
@@ -27,6 +28,7 @@ export default class Runner {
         if (message === "Bot is ready!") {
           resolve();
         }
+        ipcMain.emit("onBotLog", message);
       });
     });
   }

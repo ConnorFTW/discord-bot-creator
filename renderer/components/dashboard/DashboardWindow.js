@@ -4,6 +4,7 @@ import EventView from "./event/EventView";
 import CommandView from "./command/CommandView";
 import { useDashboardContext } from "./DashboardContext";
 import ActionForm from "./actions/ActionForm";
+import LogView from "./log/LogView";
 
 export default function DashboardWindow() {
   // Component Controls
@@ -21,8 +22,16 @@ export default function DashboardWindow() {
           className="p-4 command-view"
           style={{ overflowY: "auto", maxHeight: "100vh" }}
         >
-          {isEvent && <EventView event={handler} />}
-          {!isEvent && <CommandView command={handler} />}
+          {(() => {
+            switch (mode) {
+              case "event":
+                return <EventView event={handler} />;
+              case "command":
+                return <CommandView command={handler} />;
+              case "logs":
+                return <LogView />;
+            }
+          })()}
           <ActionForm
             show={actionModalVisible}
             onHide={hideActionModal}
