@@ -130,24 +130,7 @@ module.exports = {
 
     document.getElementById(
       "separator"
-    ).placeholder = `Read the Note below | Default Parameter Separator: "${
-      JSON.parse(
-        require("fs").readFileSync(
-          `${
-            JSON.parse(
-              require("fs").readFileSync(
-                `${__dirname.substr(
-                  0,
-                  __dirname.lastIndexOf("\\") + 1
-                )}settings.json`,
-                "utf8"
-              )
-            )["current-project"]
-          }\\data\\settings.json`,
-          "utf8"
-        )
-      ).separator
-    }"`;
+    ).placeholder = `Read the Note below | Default Parameter Separator will be read from your settings.`;
 
     glob.onChange1 = function onChange1(event) {
       const value = parseInt(event.value, 10);
