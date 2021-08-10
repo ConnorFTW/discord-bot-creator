@@ -31,6 +31,7 @@ export default function EventHeader() {
       tempDescription: "Interval of Time (in seconds)",
     },
     { label: "Bot Join Server", temp: false, tempDescription: "" },
+    { label: "Bot Leave Server", temp: false, tempDescription: "" },
     {
       label: "Member Join Server",
       temp: true,
@@ -266,39 +267,40 @@ export default function EventHeader() {
               <option value="2">Message Sent</option>
               <option value="3">On Interval</option>
               <option value="4">Bot Join Server</option>
-              <option value="5">Member Join Server</option>
-              <option value="6">Member Leave Server</option>
-              <option value="7">Channel Create</option>
-              <option value="8">Channel Delete</option>
-              <option value="9">Role Create</option>
-              <option value="10">Role Delete</option>
-              <option value="11">Member Banned</option>
-              <option value="12">Member Unbanned</option>
-              <option value="13">Voice Channel Create</option>
-              <option value="14">Voice Channel Delete</option>
-              <option value="15">Emoji Create</option>
-              <option value="16">Emoji Delete</option>
-              <option value="17">Message Deleted</option>
-              <option value="18">Server Update</option>
-              <option value="19">Member Update</option>
-              <option value="20">Presence Update</option>
-              <option value="21">Member Voice Update</option>
-              <option value="22">Channel Update</option>
-              <option value="23">Channel Pins Update</option>
-              <option value="24">Role Update</option>
-              <option value="25">Message Update</option>
-              <option value="26">Emoji Update</option>
-              <option value="27">Message Reaction Added</option>
-              <option value="28">Message Reaction Removed</option>
-              <option value="29">All Message Reactions Removed</option>
-              <option value="30">Member Becomes Available</option>
-              <option value="31">Member Chunck Received</option>
-              <option value="32">Member Starts/Stops Speaking</option>
-              <option value="33">Member Typing Starts</option>
-              <option value="34">Member Typing Stops</option>
-              <option value="35">Server Becomes Unavailable</option>
-              <option value="36">On Bot Error</option>
-              <option value="37">On Time Restricted Command</option>
+              <option value="5">Bot Leave Server</option>
+              <option value="6">Member Join Server</option>
+              <option value="7">Member Leave Server</option>
+              <option value="8">Channel Create</option>
+              <option value="9">Channel Delete</option>
+              <option value="10">Role Create</option>
+              <option value="11">Role Delete</option>
+              <option value="12">Member Banned</option>
+              <option value="13">Member Unbanned</option>
+              <option value="14">Voice Channel Create</option>
+              <option value="15">Voice Channel Delete</option>
+              <option value="16">Emoji Create</option>
+              <option value="17">Emoji Delete</option>
+              <option value="18">Message Deleted</option>
+              <option value="19">Server Update</option>
+              <option value="20">Member Update</option>
+              <option value="21">Presence Update</option>
+              <option value="22">Member Voice Update</option>
+              <option value="23">Channel Update</option>
+              <option value="24">Channel Pins Update</option>
+              <option value="25">Role Update</option>
+              <option value="26">Message Update</option>
+              <option value="27">Emoji Update</option>
+              <option value="28">Message Reaction Added</option>
+              <option value="29">Message Reaction Removed</option>
+              <option value="30">All Message Reactions Removed</option>
+              <option value="31">Member Becomes Available</option>
+              <option value="32">Member Chunck Received</option>
+              <option value="33">Member Starts/Stops Speaking</option>
+              <option value="34">Member Typing Starts</option>
+              <option value="35">Member Typing Stops</option>
+              <option value="36">Server Becomes Unavailable</option>
+              <option value="37">On Bot Error</option>
+              <option value="38">On Time Restricted Command</option>
             </Form.Select>
           </Form.Group>
           <Form.Group>
