@@ -1,4 +1,4 @@
-import { Col, Form, Row } from "react-bootstrap";
+import { Col, Form, FormControl, Row } from "react-bootstrap";
 import { useDashboardContext } from "../DashboardContext";
 import HandlerNameInput from "../handlers/HandlerNameInput";
 
@@ -8,6 +8,245 @@ export default function EventHeader() {
   const onSelect = (e) => {
     updateHandler({ ["event-type"]: e.target.value });
   };
+
+  const onChangeTemp = (e) => {
+    updateHandler({ temp: e.target.value });
+  };
+
+  const onChangeTemp2 = (e) => {
+    updateHandler({ temp2: e.target.value });
+  };
+
+  const eventTypeOptions = [
+    { label: "None", temp: false, tempDescription: "" },
+    { label: "Bot Initialization", temp: false, tempDescription: "" },
+    {
+      label: "Message Sent",
+      temp: true,
+      tempDescription: "Temp Variable Name (stores message that was sent)",
+    },
+    {
+      label: "On Interval",
+      temp: true,
+      tempDescription: "Interval of Time (in seconds)",
+    },
+    { label: "Bot Join Server", temp: false, tempDescription: "" },
+    {
+      label: "Member Join Server",
+      temp: true,
+      tempDescription:
+        "Temp Variable Name (stores member that joined the server)",
+    },
+    {
+      label: "Member Leave Server",
+      temp: true,
+      tempDescription:
+        "Temp Variable Name (stores member that left the server)",
+    },
+    {
+      label: "Channel Create",
+      temp: true,
+      tempDescription: "Temp Variable Name (stores channel that was created)",
+    },
+    {
+      label: "Channel Delete",
+      temp: true,
+      tempDescription: "Temp Variable Name (stores channel that was deleted)",
+    },
+    {
+      label: "Role Create",
+      temp: true,
+      tempDescription: "Temp Variable Name (stores role that was created)",
+    },
+    {
+      label: "Role Delete",
+      temp: true,
+      tempDescription: "Temp Variable Name (stores role that was deleted)",
+    },
+    {
+      label: "Member Banned",
+      temp: true,
+      tempDescription: "Temp Variable Name (stores member that was banned)",
+    },
+    {
+      label: "Member Unbanned",
+      temp: true,
+      tempDescription: "Temp Variable Name (stores member that was unbanned)",
+    },
+    {
+      label: "Voice Channel Create",
+      temp: true,
+      tempDescription:
+        "Temp Variable Name (stores voice channel that was created)",
+    },
+    {
+      label: "Voice Channel Delete",
+      temp: true,
+      tempDescription:
+        "Temp Variable Name (stores voice channel that was deleted)",
+    },
+    {
+      label: "Emoji Create",
+      temp: true,
+      tempDescription: "Temp Variable Name (stores emoji that was created)",
+    },
+    {
+      label: "Emoji Delete",
+      temp: true,
+      tempDescription: "Temp Variable Name (stores emoji that was deleted)",
+    },
+    {
+      label: "Message Deleted",
+      temp: true,
+      tempDescription: "Temp Variable Name (stores message that was deleted)",
+    },
+    {
+      label: "Server Update",
+      temp: true,
+      temp2: true,
+      tempDescription: "Temp Variable Name (stores server prior to update)",
+      temp2Description: "Temp Variable Name (stores server after update)",
+    },
+    {
+      label: "Member Update",
+      temp: true,
+      temp2: true,
+      tempDescription: "Temp Variable Name (stores member prior to update)",
+      temp2Description: "Temp Variable Name (stores member after update)",
+    },
+    {
+      label: "Presence Update",
+      temp: true,
+      temp2: true,
+      tempDescription:
+        "Temp Variable Name (stores member prior to their presence update)",
+      temp2Description:
+        "Temp Variable Name (stores member after their presence update)",
+    },
+    {
+      label: "Member Voice Update",
+      temp: true,
+      temp2: true,
+      tempDescription:
+        "Temp Variable Name (stores member prior to their voice update)",
+      temp2Description:
+        "Temp Variable Name (stores member after their voice update)",
+    },
+    {
+      label: "Channel Update",
+      temp: true,
+      temp2: true,
+      tempDescription: "Temp Variable Name (stores channel prior to update)",
+      temp2Description: "Temp Variable Name (stores channel after update)",
+    },
+    {
+      label: "Channel Pins Update",
+      temp: true,
+      tempDescription: "Temp Variable Name (stores channel prior to update)",
+    },
+    {
+      label: "Role Update",
+      temp: true,
+      temp2: true,
+      tempDescription: "Temp Variable Name (stores role prior to update)",
+      temp2Description: "Temp Variable Name (stores role after update)",
+    },
+    {
+      label: "Message Update",
+      temp: true,
+      temp2: true,
+      tempDescription: "Temp Variable Name (stores message prior to update)",
+      temp2Description: "Temp Variable Name (stores message after update)",
+    },
+    {
+      label: "Emoji Update",
+      temp: true,
+      temp2: true,
+      tempDescription: "Temp Variable Name (stores emoji prior to update)",
+      temp2Description: "Temp Variable Name (stores emoji after update)",
+    },
+    {
+      label: "Message Reaction Added",
+      temp: true,
+      tempDescription:
+        "Temp Variable Name (stores message reaction that was added)",
+    },
+    {
+      label: "Message Reaction Removed",
+      temp: true,
+      tempDescription:
+        "Temp Variable Name (stores message reaction that was removed)",
+    },
+    {
+      label: "All Message Reactions Removed",
+      temp: true,
+      tempDescription:
+        "Temp Variable Name (stores message that had all reactions removed)",
+    },
+    {
+      label: "Member Becomes Available",
+      temp: true,
+      tempDescription:
+        "Temp Variable Name (stores member that became available)",
+    },
+    {
+      label: "Member Chunck Received",
+      temp: true,
+      tempDescription: "Temp Variable Name (stores members from chunck)",
+    },
+    {
+      label: "Member Starts/StopsSpeaking",
+      temp: true,
+      temp2: true,
+      tempDescription:
+        "Temp Variable Name (stores member that started/stopped speaking)",
+      temp2Description:
+        "Temp Variable Name (stores boolean of whether they started/stopped speaking)",
+    },
+    {
+      label: "Member Typing Starts",
+      temp: true,
+      temp2: true,
+      tempDescription:
+        "Temp Variable Name (stores channel where member started typing)",
+      temp2Description:
+        "Temp Variable Name (stores member that started typing)",
+    },
+    {
+      label: "Member Typing Stops",
+      temp: true,
+      temp2: true,
+      tempDescription:
+        "Temp Variable Name (stores channel where member stopped typing)",
+      temp2Description:
+        "Temp Variable Name (stores member that stopped typing)",
+    },
+    {
+      label: "Server Becomes Unavailable",
+      temp: true,
+      tempDescription:
+        "Temp Variable Name (stores server that became unavailable)",
+    },
+    {
+      label: "On Bot Error",
+      temp: true,
+      temp2: true,
+      tempDescription:
+        "Temp Variable Name (stores Discord Bot Creator error text)",
+      temp2Description:
+        "Temp Variable Name (stores Discord Bot Creator error code)",
+    },
+    {
+      label: "On Time Restricted Command",
+      temp: true,
+      temp2: true,
+      tempDescription:
+        "Temp Variable Name (stores member that ran the command)",
+      temp2Description: "Temp Variable Name (stores amount of time needed)",
+    },
+  ];
+
+  const option = eventTypeOptions[event?.["event-type"]];
 
   return (
     <Row>
@@ -33,33 +272,56 @@ export default function EventHeader() {
               <option value="8">Channel Delete</option>
               <option value="9">Role Create</option>
               <option value="10">Role Delete</option>
-              <option value="11">Member Unbanned</option>
-              <option value="12">Voice Channel Create</option>
-              <option value="13">Voice Channel Delete</option>
-              <option value="14">Emoji Create</option>
-              <option value="15">Emoji Delete</option>
-              <option value="16">Message Deleted</option>
-              <option value="17">Server Update</option>
-              <option value="18">Member Update</option>
-              <option value="19">Presence Update</option>
-              <option value="20">Member Voice Update</option>
-              <option value="21">Channel Update</option>
-              <option value="22">Channel Pins Update</option>
-              <option value="23">Role Update</option>
-              <option value="24">Message Update</option>
-              <option value="25">Emoji Update</option>
-              <option value="26">Message Reaction Added</option>
-              <option value="27">Message Reaction Removed</option>
-              <option value="28">All Message Reactions Removed</option>
-              <option value="29">Member Becomes Available</option>
-              <option value="30">Member Chunck Received</option>
-              <option value="31">Member Starts/StopsSpeaking</option>
-              <option value="32">User Typing Starts</option>
-              <option value="33">User Typing Stops</option>
-              <option value="34">Server Becomes Unavailable</option>
-              <option value="35">On Bot Error</option>
-              <option value="36">On Time Restricted Command</option>
+              <option value="11">Member Banned</option>
+              <option value="12">Member Unbanned</option>
+              <option value="13">Voice Channel Create</option>
+              <option value="14">Voice Channel Delete</option>
+              <option value="15">Emoji Create</option>
+              <option value="16">Emoji Delete</option>
+              <option value="17">Message Deleted</option>
+              <option value="18">Server Update</option>
+              <option value="19">Member Update</option>
+              <option value="20">Presence Update</option>
+              <option value="21">Member Voice Update</option>
+              <option value="22">Channel Update</option>
+              <option value="23">Channel Pins Update</option>
+              <option value="24">Role Update</option>
+              <option value="25">Message Update</option>
+              <option value="26">Emoji Update</option>
+              <option value="27">Message Reaction Added</option>
+              <option value="28">Message Reaction Removed</option>
+              <option value="29">All Message Reactions Removed</option>
+              <option value="30">Member Becomes Available</option>
+              <option value="31">Member Chunck Received</option>
+              <option value="32">Member Starts/Stops Speaking</option>
+              <option value="33">Member Typing Starts</option>
+              <option value="34">Member Typing Stops</option>
+              <option value="35">Server Becomes Unavailable</option>
+              <option value="36">On Bot Error</option>
+              <option value="37">On Time Restricted Command</option>
             </Form.Select>
+          </Form.Group>
+          <Form.Group>
+            {option?.temp && (
+              <>
+                <Form.Label>{option.tempDescription}</Form.Label>
+                <FormControl
+                  type="text"
+                  value={event?.temp}
+                  onChange={onChangeTemp}
+                />
+              </>
+            )}
+            {option?.temp2 && (
+              <>
+                <Form.Label>{option.temp2Description}</Form.Label>
+                <FormControl
+                  type="text"
+                  value={event?.temp2}
+                  onChange={onChangeTemp2}
+                />
+              </>
+            )}
           </Form.Group>
         </Form>
       </Col>
