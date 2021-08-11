@@ -56,6 +56,16 @@ export default class Loader {
   }
   async saveCommands(commands) {
     if (!Object.keys(commands).length) return;
+    commands = commands.map((command) => {
+      delete command.members;
+      delete command.conditions;
+      delete command.sendTargets;
+      delete command.variables;
+      delete command.messages;
+      delete command.servers;
+      return commands;
+    });
+
     fs.writeFileSync(
       path.resolve(this.filePath, "./data/commands.json"),
       JSON.stringify(commands, null, 2)
@@ -70,6 +80,15 @@ export default class Loader {
 
   async saveEvents(events) {
     if (!Object.keys(events).length) return;
+    events = events.map((event) => {
+      delete event.members;
+      delete event.conditions;
+      delete event.sendTargets;
+      delete event.variables;
+      delete event.messages;
+      delete event.servers;
+      return events;
+    });
     fs.writeFileSync(
       path.resolve(this.filePath, "./data/events.json"),
       JSON.stringify(events, null, 2)

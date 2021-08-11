@@ -31,10 +31,6 @@ export default class Runner {
         console.log("Bot process exited with code:", code);
         reject();
       });
-
-      this.botProcess.addListener("message", (message) => {
-        console.log("Bot process message:", message);
-      });
     });
   }
   stop() {
