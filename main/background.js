@@ -47,6 +47,13 @@ if (isProd) {
     if (log) logs.push(log);
     mainWindow.webContents.send("onLogsUpdate", logs);
   });
+
+  ipcMain.on("onBotError", (error) => {
+    console.error({
+      error,
+    });
+    mainWindow.webContents.send("onErrorsUpdate", error);
+  });
 })();
 
 app.on("window-all-closed", () => {
@@ -137,15 +144,6 @@ ipcMain.on("onBotStop", async (event, args) => {
     event.sender.send("onBotStop", { success: true });
   } catch (error) {
     event.sender.send("onBotStop", { success: false, error });
-  }
-});
-
-ipcMain.on("onBotError", async (event, args) => {
-  try {
-    await runner?.error();
-    event.sender.send("onBotError", { success: true });
-  } catch (error) {
-    event.sender.send("onBotError", { success: false, error });
   }
 });
 

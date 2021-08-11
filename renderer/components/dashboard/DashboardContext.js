@@ -22,7 +22,19 @@ export function DashboardProvider({ children }) {
     events,
     handlerIndex: 0,
     actionIndex: 0,
+    errors: [],
   });
+
+  useEffect(() => {
+    ipcRenderer?.on("onErrorsUpdate", (_event, error) => {
+      console.log("Here");
+      console.log("Here is the error", error);
+      setState((state) => ({ ...state, errors: [...state.errors, error] }));
+    });
+    return () => {
+      ipcRenderer.removeAllListeners("onErrorsUpdate");
+    };
+  }, [JSON.stringify(state.errors)]);
 
   useEffect(() => {
     if (!commands || !events) return;
@@ -206,6 +218,7 @@ export function DashboardProvider({ children }) {
     setCommands(state.commands);
     setEvents(state.events);
     ipcRenderer.emit("saved");
+    setState({ ...state, errors: [] });
   };
 
   return (

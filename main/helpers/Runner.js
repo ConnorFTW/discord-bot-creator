@@ -1,5 +1,6 @@
 import path from "path";
 import { fork } from "child_process";
+import { ipcMain } from "electron";
 
 export default class Runner {
   constructor(runner = {}) {
@@ -23,8 +24,12 @@ export default class Runner {
       });
 
       this.botProcess.on("message", (message) => {
+        if (message === "ready") return resolve();
         console.log(message);
-        resolve();
+        if (message.type === "error") {
+          delete message.type;
+          ipcMain.emit("onBotError", message);
+        }
       });
 
       this.botProcess.on("exit", (code) => {

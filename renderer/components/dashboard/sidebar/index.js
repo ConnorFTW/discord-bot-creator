@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button, ButtonGroup, Card, Form, Nav } from "react-bootstrap";
+import { Badge, Button, ButtonGroup, Card, Form, Nav } from "react-bootstrap";
 import SidebarBotControls from "./SidebarBotControls";
 import SettingsIcon from "../../icons/SettingsIcon";
 import SettingsModal from "../settings/SettingsModal";
@@ -8,6 +8,7 @@ import { useDashboardContext } from "../DashboardContext";
 export default function Sidebar({ selected, setSelected }) {
   const [settingsShow, setSettingsShow] = useState(false);
   const {
+    errors,
     updateMode,
     handlers,
     commands,
@@ -43,8 +44,14 @@ export default function Sidebar({ selected, setSelected }) {
                   eventKey={"nav-link-" + d?.name + "-" + i}
                   active={handlerIndex === i}
                   onClick={() => updateHandlerIndex(i)}
+                  className="d-flex flex-row justify-content-between align-items-center"
                 >
-                  {d?.name}
+                  <span>{d?.name}</span>
+                  {errors.filter((e) => e.handlerIndex === i).length ? (
+                    <Badge bg="danger" text="light">
+                      {errors.filter((e) => e.handlerIndex === i).length}
+                    </Badge>
+                  ) : null}
                 </Nav.Link>
               </Nav.Item>
             ))}
