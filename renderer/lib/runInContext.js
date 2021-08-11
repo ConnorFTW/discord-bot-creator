@@ -73,6 +73,20 @@ const runInContext = (
     <option value="4">Global Variable</option>
     `,
   ];
+  data.servers = [
+    `
+    <option value="0">Current Server</option>
+    <option value="1">Temp Variable</option>
+    <option value="2">Server Variable</option>
+    <option value="3">Global Variable</option>
+    `,
+    `
+    <option value="0">Current Server</option>
+    <option value="1">Temp Variable</option>
+    <option value="2">Server Variable</option>
+    <option value="3">Global Variable</option>
+    `,
+  ];
   data.conditions = [
     `
   <div style="padding-top: 8px;">
@@ -128,6 +142,17 @@ const runInContext = (
         : "none";
       if (isNaN(+_this.value)) return;
       if (+_this.value < 2) {
+        document.getElementById(varName).style.display = "none";
+      } else {
+        document.getElementById(varName).style.display = "block";
+      }
+    },
+    serverChange(_this, varName) {
+      document.getElementById(varName).style.display = +_this.value
+        ? "block"
+        : "none";
+      if (isNaN(+_this.value)) return;
+      if (+_this.value < 1) {
         document.getElementById(varName).style.display = "none";
       } else {
         document.getElementById(varName).style.display = "block";

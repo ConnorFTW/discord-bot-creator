@@ -3,7 +3,19 @@ import { useDashboardContext } from "../DashboardContext";
 import HandlerNameInput from "../handlers/HandlerNameInput";
 
 export default function DashboardWindowHeader() {
-  const { handler: command } = useDashboardContext();
+  const { handler: command, updateHandler } = useDashboardContext();
+
+  const onChangeComType = (e) => {
+    updateHandler({ comType: e.target.value });
+  };
+
+  const onChangeRestriction = (e) => {
+    updateHandler({ restriction: e.target.value });
+  };
+
+  const onChangePermissions = (e) => {
+    updateHandler({ permissions: e.target.value });
+  };
 
   return (
     <Row>
@@ -15,24 +27,35 @@ export default function DashboardWindowHeader() {
           <Col md="auto"></Col>
         </Row>
         <Form>
-          <Form.Group>
+          <Form.Group className="mb-3">
             <Form.Label>Command Type</Form.Label>
-            <Form.Select
-              value={command.comType}
-              onChange={() => update(index, "comType", e.target.value)}
-            >
+            <Form.Select value={command.comType} onChange={onChangeComType}>
               <option value="0">Normal Command</option>
               <option value="1">Includes Word</option>
               <option value="2">Matches Regular Expression</option>
               <option value="3">Any Message</option>
             </Form.Select>
           </Form.Group>
-          <Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Label>Command Restriction</Form.Label>
+            <Form.Select
+              value={command.restriction}
+              onChange={onChangeRestriction}
+            >
+              <option value="0">None</option>
+              <option value="1">Server Only</option>
+              <option value="2">Owner Only</option>
+              <option value="3">DMs Only</option>
+            </Form.Select>
+          </Form.Group>
+          <Form.Group className="mb-3">
             <Form.Label>Permissions</Form.Label>
             <Form.Select
               value={command.permissions}
-              onChange={() => update(index, "permissions", e.target.value)}
+              onChange={onChangePermissions}
+              defaultValue="NONE"
             >
+              <option value="NONE">None</option>
               <option value="ADMINISTRATOR">Administrator</option>
               <option value="CREATE_INSTANT_INVITE">
                 Create Instant Invite
