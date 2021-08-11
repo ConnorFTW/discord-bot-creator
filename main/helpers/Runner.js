@@ -1,6 +1,5 @@
 import path from "path";
-import { spawn } from "child_process";
-import { ipcMain } from "electron";
+import { fork } from "child_process";
 
 export default class Runner {
   constructor(runner = {}) {
@@ -18,17 +17,23 @@ export default class Runner {
       if (this.botProcess) await this.stop();
       const botFile = path.join(this.filePath, "bot.js");
 
-      this.botProcess = spawn("node", [botFile], {
+      this.botProcess = fork(botFile, {
         cwd: this.filePath,
-        detached: false,
+        detached: true,
       });
-      this.botProcess.stdout.on("data", (data) => {
-        const message = data.toString().replace(/\n/g, "");
-        console.log({ message });
-        if (message === "Bot is ready!") {
-          resolve();
-        }
-        ipcMain.emit("onBotLog", message);
+
+      this.botProcess.on("message", (message) => {
+        console.log(message);
+        resolve();
+      });
+
+      this.botProcess.on("exit", (code) => {
+        console.log("Bot process exited with code:", code);
+        reject();
+      });
+
+      this.botProcess.addListener("message", (message) => {
+        console.log("Bot process message:", message);
       });
     });
   }

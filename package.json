@@ -24,7 +24,7 @@
     "serialize-javascript": "^6.0.0"
   },
   "devDependencies": {
-    "electron": "^13.1.7",
+    "electron": "^15.0.0-alpha.5",
     "electron-builder": "^22.11.7",
     "next": "^11.0.1",
     "nextron": "^7.0.0",
