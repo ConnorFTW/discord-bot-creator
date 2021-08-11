@@ -49,21 +49,25 @@ export default class Loader {
     return actions;
   }
   async getCommands() {
-    return fs.readFileSync(
+    const commands = fs.readFileSync(
       path.resolve(this.filePath, "./data/commands.json"),
       "utf8"
     );
+    console.log(commands);
+    return commands;
   }
   async saveCommands(commands) {
     if (!Object.keys(commands).length) return;
     commands = commands.map((command) => {
-      delete command.members;
-      delete command.conditions;
-      delete command.sendTargets;
-      delete command.variables;
-      delete command.messages;
-      delete command.servers;
-      return commands;
+      for (const action of command.actions || []) {
+        delete action.members;
+        delete action.conditions;
+        delete action.sendTargets;
+        delete action.variables;
+        delete action.messages;
+        delete action.servers;
+      }
+      return command;
     });
 
     fs.writeFileSync(
@@ -81,13 +85,15 @@ export default class Loader {
   async saveEvents(events) {
     if (!Object.keys(events).length) return;
     events = events.map((event) => {
-      delete event.members;
-      delete event.conditions;
-      delete event.sendTargets;
-      delete event.variables;
-      delete event.messages;
-      delete event.servers;
-      return events;
+      for (const action of event.actions || []) {
+        delete action.members;
+        delete action.conditions;
+        delete action.sendTargets;
+        delete action.variables;
+        delete action.messages;
+        delete action.servers;
+      }
+      return event;
     });
     fs.writeFileSync(
       path.resolve(this.filePath, "./data/events.json"),
