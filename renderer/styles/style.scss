@@ -9,10 +9,6 @@ $font-family-sans-serif: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto
 $font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas,
   "Liberation Mono", "Courier New", monospace;
 
-@import "~bootstrap/scss/functions";
-@import "~bootstrap/scss/variables";
-@import "~bootstrap/scss/mixins";
-
 $primary: #5865f2;
 $secondary: #4e545c;
 $success: #57f287;
@@ -22,6 +18,10 @@ $danger: #ed4245;
 $dark: #35393f;
 $light: #dddddd;
 $darker: #2e3136;
+
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
 
 $border-width: 1px;
 $border-color: $gray-900;
