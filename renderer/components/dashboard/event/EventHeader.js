@@ -251,7 +251,7 @@ export default function EventHeader() {
 
   return (
     <Row>
-      <Col sm="8" className="mx-2 mb-3 command-form">
+      <Col sm="8" className="mx-2 command-form">
         <Row>
           <Col className="mb-4">
             <HandlerNameInput />
