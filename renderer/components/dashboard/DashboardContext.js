@@ -168,10 +168,12 @@ export function DashboardProvider({ children }) {
    * @param {object} action - Action object
    * @return {undefined}
    */
-  const addAction = () => {
-    const action = {};
+  const addAction = (action) => {
+    action = action || {};
     // actionSchemas[0] is this strange wrexdiv
-    const actionSchema = actionSchemas[1];
+    const actionSchema =
+      actionSchemas.find(({ name }) => name === action.name) ||
+      actionSchemas[1];
 
     action.name = actionSchema.name;
 

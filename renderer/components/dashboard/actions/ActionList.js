@@ -1,10 +1,11 @@
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { useDashboardContext } from "../DashboardContext";
+import ActionDropdown from "./ActionDropdown";
 import ActionItem from "./ActionListItem";
 
 export default function ActionList({ Form: ActionForm }) {
-  const { actions, addAction, reorderAction } = useDashboardContext();
+  const { actions, addAction, reorderAction, action } = useDashboardContext();
 
   const onDragEnd = (result) => {
     if (!result.destination) return;
@@ -20,9 +21,11 @@ export default function ActionList({ Form: ActionForm }) {
       <Col sm="8" className="mx-2 mb-3 command-form">
         <Form.Label>Actions</Form.Label>
         <br />
-        <Button onClick={() => addAction({})} className="mb-3">
-          Add Action
-        </Button>
+        <ActionDropdown
+          name={action.name || ""}
+          className="mb-4"
+          create={true}
+        />
         <DragDropContext onDragEnd={onDragEnd}>
           <Droppable droppableId="droppable" ignoreContainerClipping={true}>
             {(provided) => (

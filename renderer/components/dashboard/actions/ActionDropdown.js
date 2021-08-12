@@ -2,8 +2,8 @@ import { Badge } from "react-bootstrap";
 import { Typeahead } from "react-bootstrap-typeahead";
 import { useDashboardContext } from "../DashboardContext";
 
-export default function ActionDropdown({ name }) {
-  const { actionSchemas, updateAction } = useDashboardContext();
+export default function ActionDropdown({ name, className, create }) {
+  const { actionSchemas, updateAction, addAction } = useDashboardContext();
   const filterByFields = ["name", "section"];
 
   const select = (items) => {
@@ -15,7 +15,11 @@ export default function ActionDropdown({ name }) {
       newAction[field] = "";
     });
 
-    updateAction(newAction, false);
+    if (create) {
+      addAction(newAction);
+    } else {
+      updateAction(newAction, false);
+    }
   };
 
   return (
@@ -29,6 +33,13 @@ export default function ActionDropdown({ name }) {
       size="large"
       defaultSelected={[{ name }]}
       multiple={false}
+      className={className}
+      inputProps={{
+        shouldSelectHint: (shouldSelect, e) => {
+          console.log(e.key);
+          return e.key === "Enter" || shouldSelect;
+        },
+      }}
       renderMenuItemChildren={(option) => (
         <div className="text-white">
           {option.name}
