@@ -1,27 +1,77 @@
 .sidebar {
-  .card-body {
-    background-color: #2e3136;
+  .navbar {
+    flex: 0 0 4rem;
+    padding: 0;
+    gap: 0.5rem;
+    flex-flow: row;
+    justify-content: space-around;
 
-    a {
-      font-weight: 500;
+    div {
+      width: 4rem;
+      height: 4rem;
+      padding: 0.85rem 0.85rem;
+
+      svg {
+        width: 2.3rem;
+        height: 2.3rem;
+        filter: grayscale(100%) opacity(0.5);
+        color: $primary;
+        transition: 0.2s;
+      }
+    }
+
+    div:hover {
+      svg {
+        color: $primary;
+        filter: grayscale(0) opacity(1);
+      }
+    }
+
+    div.active {
+      svg {
+        color: $primary;
+        filter: grayscale(0%) opacity(1);
+      }
+    }
+  }
+  .card {
+    flex: 1 0 15vw;
+
+    .card-body {
+      background-color: #2e3136;
+
+      a {
+        font-weight: 500;
+        color: $light;
+      }
+    }
+    .card-footer {
+      background-color: #282b2f;
+    }
+
+    .settings-button {
+      cursor: pointer;
+      height: 1.5rem;
       color: $light;
     }
   }
-  .card-footer {
-    background-color: #282b2f;
-  }
-
-  .settings-button {
-    cursor: pointer;
-    height: 1.5rem;
-    color: $light;
-  }
 
   @media screen and (min-width: map-get($grid-breakpoints, md)) {
-    height: 100vh;
+    flex-flow: row;
+    max-width: 400px;
+    .card {
+      height: 100vh;
+    }
+    .navbar {
+      height: 100vh;
+      flex-flow: column;
+      justify-content: start;
+    }
   }
 
   max-height: 100vh;
   margin: 0;
   box-sizing: border-box;
+  flex-wrap: nowrap;
+  flex-flow: column;
 }

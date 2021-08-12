@@ -18,7 +18,6 @@ export default function DashboardWindow() {
       <Row className="mx-0">
         <Sidebar />
         <Col
-          md={9}
           className="p-4 command-view"
           style={{ overflowY: "auto", maxHeight: "100vh" }}
         >
