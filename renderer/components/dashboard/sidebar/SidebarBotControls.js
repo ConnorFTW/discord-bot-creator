@@ -1,7 +1,13 @@
-import { Button } from "react-bootstrap";
+import { Button, Spinner } from "react-bootstrap";
 import { ipcRenderer } from "electron";
 import { useEffect, useState } from "react";
 import useSettings from "../../../lib/useSettings";
+import {
+  PauseIcon,
+  PlayIcon,
+  SaveIcon,
+  StopIcon,
+} from "@heroicons/react/solid";
 
 export default function SidebarBotControls() {
   const [state, setState] = useState({});
@@ -73,31 +79,35 @@ export default function SidebarBotControls() {
   }
 
   return (
-    <>
+    <div className="bot-controls d-flex flex-row justify-content-between align-items-center flex-wrap gap-2">
       {state.isRunning ? (
         <>
-          <Button
-            onClick={save}
-            variant="success"
-            className="mx-1"
-            disabled={state.isSaving}
-          >
-            {state.isSaving ? "Saving..." : "Save"}
-          </Button>
-          <Button
-            onClick={stop}
-            variant="danger"
-            className="mx-1"
-            disabled={state.isStopping}
-          >
-            {state.isStopping ? "Stopping..." : "Stop"}
-          </Button>
+          {state.isSaving ? (
+            <Spinner className="mx-1" />
+          ) : (
+            <div onClick={save}>
+              <SaveIcon className="success" />
+            </div>
+          )}
+          {state.isStopping ? (
+            <Spinner className="mx-1" />
+          ) : (
+            <div onClick={stop}>
+              <StopIcon className="danger" />
+            </div>
+          )}
         </>
+      ) : state.isStarting ? (
+        <Spinner
+          style={{ height: "1.5rem", width: "1.5rem", margin: "0.25rem" }}
+          animation="grow"
+          variant="primary"
+        />
       ) : (
-        <Button onClick={run} disabled={state.isStarting}>
-          {state.isStarting ? "Starting..." : "Run"}
-        </Button>
+        <div onClick={run}>
+          <PlayIcon />
+        </div>
       )}
-    </>
+    </div>
   );
 }

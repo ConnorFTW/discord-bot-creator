@@ -88,14 +88,14 @@ export default function Sidebar({ selected, setSelected }) {
           </Col>
           <Card className="px-0">
             <Card.Body className="px-2">
-              <Nav variant="pills" className="flex-column d-md-block d-none ">
+              <Nav variant="pills" className="flex-column d-md-block d-none">
                 {handlers.map((d, i) => (
                   <Nav.Item key={d?.name + "-" + i}>
                     <Nav.Link
                       eventKey={"nav-link-" + d?.name + "-" + i}
                       active={handlerIndex === i}
                       onClick={() => updateHandlerIndex(i)}
-                      className="d-flex flex-row justify-content-between align-items-center"
+                      className="d-flex flex-row justify-content-between align-items-center mb-2"
                     >
                       <span>{d?.name}</span>
                       {errors.filter((e) => e.handlerIndex === i).length ? (
@@ -125,7 +125,7 @@ export default function Sidebar({ selected, setSelected }) {
                 </Form.Select>
               </Form.Group>
             </Card.Body>
-            <Card.Footer className="d-flex flex-row justify-content-between align-items-center flex-wrap gap-2">
+            <Card.Footer>
               <SidebarBotControls />
             </Card.Footer>
             <Card.Footer className="d-flex flex-row justify-content-between align-items-center flex-wrap gap-2">
