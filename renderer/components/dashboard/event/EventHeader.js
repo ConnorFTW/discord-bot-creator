@@ -259,7 +259,7 @@ export default function EventHeader() {
           <Col md="auto"></Col>
         </Row>
         <Form>
-          <Form.Group>
+          <Form.Group className="mb-3">
             <Form.Label>Trigger</Form.Label>
             <Form.Select value={event?.["event-type"]} onChange={onSelect}>
               <option value="0">None</option>
@@ -303,28 +303,26 @@ export default function EventHeader() {
               <option value="38">On Time Restricted Command</option>
             </Form.Select>
           </Form.Group>
-          <Form.Group>
-            {option?.temp && (
-              <>
-                <Form.Label>{option.tempDescription}</Form.Label>
-                <FormControl
-                  type="text"
-                  value={event?.temp}
-                  onChange={onChangeTemp}
-                />
-              </>
-            )}
-            {option?.temp2 && (
-              <>
-                <Form.Label>{option.temp2Description}</Form.Label>
-                <FormControl
-                  type="text"
-                  value={event?.temp2}
-                  onChange={onChangeTemp2}
-                />
-              </>
-            )}
-          </Form.Group>
+          {option?.temp && (
+            <Form.Group className="mb-3">
+              <Form.Label>{option.tempDescription}</Form.Label>
+              <FormControl
+                type="text"
+                value={event?.temp}
+                onChange={onChangeTemp}
+              />
+            </Form.Group>
+          )}
+          {option?.temp2 && (
+            <Form.Group className="mb-3">
+              <Form.Label>{option.temp2Description}</Form.Label>
+              <FormControl
+                type="text"
+                value={event?.temp2}
+                onChange={onChangeTemp2}
+              />
+            </Form.Group>
+          )}
         </Form>
       </Col>
     </Row>
