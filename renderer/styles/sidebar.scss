@@ -43,6 +43,11 @@
       a {
         font-weight: 500;
         color: $light;
+        transition: 0.2s;
+      }
+
+      a:hover {
+        background-color: $gray-800;
       }
     }
     .card-footer {
