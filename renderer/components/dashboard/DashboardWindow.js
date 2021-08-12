@@ -18,8 +18,8 @@ export default function DashboardWindow() {
       <Row className="mx-0">
         <Sidebar />
         <Col
-          className="p-4 command-view"
-          style={{ overflowY: "auto", maxHeight: "100vh" }}
+          className="p-4 command-view overflow-auto"
+          style={{ maxHeight: "100vh" }}
         >
           {(() => {
             switch (mode) {

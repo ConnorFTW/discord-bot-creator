@@ -39,7 +39,7 @@ export default function SettingsModal(props) {
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">Settings</Modal.Title>
       </Modal.Header>
-      <Modal.Body style={{ maxHeight: "80vh", overflowY: "scroll" }}>
+      <Modal.Body style={{ maxHeight: "80vh" }} className="overflow-auto">
         <Form>
           <Form.Group className="mb-3">
             <Form.Label>Prefix</Form.Label>

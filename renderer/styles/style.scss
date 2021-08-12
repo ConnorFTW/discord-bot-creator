@@ -102,6 +102,22 @@ $form-select-color: $light;
 $form-select-border-width: $border-width;
 $form-select-border-color: $border-color;
 
+// Scrollbar
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px $gray-900;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: $gray-700;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+}
+
 @import "./text.scss";
 @import "./input.scss";
 @import "./sidebar.scss";
