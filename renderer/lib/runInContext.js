@@ -28,6 +28,22 @@ const runInContext = (
     <option value="3">Global Variable</option>
     `,
   ];
+  data.channels = [
+    `
+    <option value="0">Same Channel</option>
+    <option value="1">Mentioned Channel</option>
+    <option value="2">Default Channel</option>
+    <option value="3">Temp Variable</option>
+    <option value="4">Server Variable</option>
+    <option value="5">Global Variable</option>
+    `,
+    `
+    <option value="2">Default Channel</option>
+    <option value="3">Temp Variable</option>
+    <option value="4">Server Variable</option>
+    <option value="5">Global Variable</option>
+    `,
+  ];
   data.variables = [
     `
     <option value="0">Nothing</option>
@@ -127,6 +143,14 @@ const runInContext = (
       const element = document.getElementById(varName);
       if (!element) return;
       element.style.display = +_this.value ? "block" : "none";
+    },
+    channelChange(_this, varName) {
+      if (isNaN(+_this?.value)) return;
+      if (+_this.value < 3) {
+        document.getElementById(varName).style.display = "none";
+      } else {
+        document.getElementById(varName).style.display = "block";
+      }
     },
     sendTargetChange(_this, varName) {
       if (isNaN(+_this?.value)) return;
