@@ -216,7 +216,6 @@ export function DashboardProvider({ children }) {
   };
 
   const save = () => {
-    console.log(state.commands, commands);
     setCommands(state.commands);
     setEvents(state.events);
     ipcRenderer.emit("saved");

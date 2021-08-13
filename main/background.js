@@ -135,8 +135,6 @@ ipcMain.on("saveEvents", async (event, events) => {
 
 ipcMain.on("onBotRun", async (event, args) => {
   try {
-    console.log(`Bot running...`);
-    console.log(runner);
     await runner?.run();
     event.sender.send("onBotRun", { success: true });
   } catch (error) {
