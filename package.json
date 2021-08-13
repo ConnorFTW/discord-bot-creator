@@ -22,7 +22,8 @@
     "react-bootstrap": "^2.0.0-beta.4",
     "react-bootstrap-typeahead": "^5.2.0",
     "sass": "^1.37.0",
-    "serialize-javascript": "^6.0.0"
+    "serialize-javascript": "^6.0.0",
+    "youtubei": "^0.0.1-rc.20"
   },
   "devDependencies": {
     "electron": "^15.0.0-alpha.5",

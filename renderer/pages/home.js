@@ -12,53 +12,53 @@ import Link from "next/link";
 import Head from "next/head";
 import electron from "electron";
 import { useRouter } from "next/router";
+import path from "path";
 
 const ipcRenderer = electron.ipcRenderer || false;
 
 export default function Dashboard() {
-  const [folder, setFolder] = useState("");
+  const [folders, setFolders] = useState("");
   const isValidating = false;
-  const bots = [];
   const router = useRouter();
 
   // Can be used to create a bot
-  async function setSettings(e) {
+  const setSettings = (folder) => (e) => {
     e.preventDefault();
+    console.log(folder);
     window._folder = folder;
+    ipcRenderer.send("chooseDirectory", folder);
     router.push(`/dashboard`);
-  }
+  };
 
   function pickFolder() {
     ipcRenderer.send("directoryDialog");
   }
 
   useEffect(() => {
-    ipcRenderer.on("directoryDialog", (event, data) => {
-      console.log(data);
-      setFolder(data);
+    ipcRenderer.on("directoryDialog", (event, folder) => {
+      setFolders([...folders, folder]);
     });
 
-    ipcRenderer.on("getSettings", (event, data) => {
-      if (data?.folder) {
-        window._folder = data.folder;
-        router.push(`dashboard/`);
-      }
+    ipcRenderer.on("getLastDirectories", (event, folders) => {
+      setFolders(folders);
     });
 
-    ipcRenderer.on("getLastDirectory", (event, data) => {
-      if (data) {
-        setFolder(data);
-      }
-    });
-
-    ipcRenderer.send("getLastDirectory");
+    ipcRenderer.send("getLastDirectories");
     ipcRenderer.send("getSettings");
     return () => {
       ipcRenderer.removeAllListeners("directoryDialog");
       ipcRenderer.removeAllListeners("getSettings");
       ipcRenderer.removeAllListeners("getLastDirectory");
     };
-  }, []);
+  }, [JSON.stringify(folders)]);
+
+  const createBot = () => {
+    ipcRenderer.send("directoryDialog");
+  };
+
+  const getName = (folder = "") => {
+    return folder.split(path.sep).pop();
+  };
 
   return (
     <>
@@ -71,36 +71,27 @@ export default function Dashboard() {
         </Container>
       ) : (
         <Container className="mt-4">
-          <Row>
-            {bots?.[0] ? (
-              bots.map((bot) => (
-                <Col key={bot._id}>
+          <Row className="align-items-stretch">
+            {folders?.[0] &&
+              folders.map((folder) => (
+                <Col key={folder} md={6}>
                   <Card className="m-3 p-3">
-                    <h3>{bot.name}</h3>
-                    <p>Prefix: {bot.prefix}</p>
-                    <Link href={`/dashboard/${bot._id}`}>
-                      <Button>Continue</Button>
-                    </Link>
+                    <h3 className="mb-4">{getName(folder)}</h3>
+                    <p className="mb-2 text-muted">{folder}</p>
+                    <Button onClick={setSettings(folder)} variant="secondary">
+                      Open
+                    </Button>
                   </Card>
                 </Col>
-              ))
-            ) : (
-              <Form>
-                {folder ? (
-                  <Button
-                    type="submit"
-                    onClick={setSettings}
-                    className="mt-3 mx-3"
-                  >
-                    Create new bot
-                  </Button>
-                ) : (
-                  <Button onClick={pickFolder} className="mt-3">
-                    Pick a folder
-                  </Button>
-                )}
-              </Form>
-            )}
+              ))}
+            <Form>
+              <Button type="submit" onClick={createBot} className="mt-3 mx-3">
+                Create new bot
+              </Button>
+              <Button onClick={pickFolder} className="mt-3">
+                Add Bot
+              </Button>
+            </Form>
           </Row>
         </Container>
       )}

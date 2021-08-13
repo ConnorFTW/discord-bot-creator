@@ -63,12 +63,13 @@ app.on("window-all-closed", () => {
 const store = new Store({ lastDirectories: [] });
 
 function addDirectory(directory) {
-  const directories = store.get("lastDirectories") || [];
-  directories.push(directory);
+  let directories = store.get("lastDirectories") || [];
+  directories = Array.from(new Set(directories.concat(directory)));
+  console.log({ directories });
   store.set("lastDirectories", directories);
 }
 
-ipcMain.on("directoryDialog", async (event, arg) => {
+ipcMain.on("directoryDialog", async (event) => {
   const { filePaths } = await dialog.showOpenDialog({
     properties: ["openDirectory", "createDirectory"],
   });
@@ -78,11 +79,16 @@ ipcMain.on("directoryDialog", async (event, arg) => {
   event.sender.send("directoryDialog", filePaths[0]);
 });
 
-ipcMain.on("getLastDirectory", (event, arg) => {
+ipcMain.on("getLastDirectories", (event, arg) => {
   const lastDirectories = store.get("lastDirectories") || [];
-  event.sender.send("getLastDirectory", lastDirectories[0]);
-  loader = new Loader({ filePath: lastDirectories[0] });
-  runner = new Runner({ filePath: lastDirectories[0] });
+  event.sender.send("getLastDirectories", lastDirectories);
+});
+
+ipcMain.on("chooseDirectory", async (event, folder) => {
+  if (typeof folder !== "string") return;
+  loader = new Loader({ filePath: folder });
+  runner = new Runner({ filePath: folder });
+  event.sender.send("chooseDirectory", folder);
 });
 
 ipcMain.on("getSettings", async (event, args) => {
