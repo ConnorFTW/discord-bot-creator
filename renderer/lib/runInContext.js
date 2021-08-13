@@ -44,6 +44,23 @@ const runInContext = (
     <option value="5">Global Variable</option>
     `,
   ];
+  data.voiceChannels = [
+    `
+    <option value="0">Command Author's Voice Channel</option>
+    <option value="1">Mentioned User's Voice Channel</option>
+    <option value="2">Default Voice Channel</option>
+    <option value="3">Temp Variable</option>
+    <option value="4">Server Variable</option>
+    <option value="5">Global Variable</option>
+    `,
+
+    `
+    <option value="2">Default Voice Channel</option>
+    <option value="3">Temp Variable</option>
+    <option value="4">Server Variable</option>
+    <option value="5">Global Variable</option>
+    `,
+  ];
   data.variables = [
     `
     <option value="0">Nothing</option>
@@ -145,6 +162,14 @@ const runInContext = (
       element.style.display = +_this.value ? "block" : "none";
     },
     channelChange(_this, varName) {
+      if (isNaN(+_this?.value)) return;
+      if (+_this.value < 3) {
+        document.getElementById(varName).style.display = "none";
+      } else {
+        document.getElementById(varName).style.display = "block";
+      }
+    },
+    voiceChannelChange(_this, varName) {
       if (isNaN(+_this?.value)) return;
       if (+_this.value < 3) {
         document.getElementById(varName).style.display = "none";
