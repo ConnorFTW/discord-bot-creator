@@ -3,6 +3,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 import useActions from "../../lib/useActions";
 import useCommands from "../../lib/useCommands";
 import useEvents from "../../lib/useEvents";
+import useSettings from "../../lib/useSettings";
 
 const DashboardContext = createContext(null);
 
@@ -14,6 +15,8 @@ export function DashboardProvider({ children }) {
   const [actionSchemas] = useActions();
   let [events, setEvents] = useEvents();
   let [commands, setCommands] = useCommands();
+  const [settings] = useSettings();
+
   const [state, setState] = useState({
     actionSchemas: actionSchemas,
     mode: "command",
@@ -218,7 +221,15 @@ export function DashboardProvider({ children }) {
   const save = () => {
     setCommands(state.commands);
     setEvents(state.events);
-    ipcRenderer.emit("saved");
+    if (!settings?.autoRestart) {
+      ipcRenderer.emit("saved");
+    } else {
+      ipcRenderer.send("onBotRun");
+      ipcRenderer.once("onBotRun", () => {
+        ipcRenderer.emit("saved");
+      });
+    }
+
     setState({ ...state, errors: [] });
   };
 

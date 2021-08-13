@@ -84,7 +84,7 @@ export default function SettingsModal(props) {
           </Form.Group>
           <Form.Check
             type="switch"
-            label="Auto Restart"
+            label="Run Bot on Save"
             checked={!!settings?.autoRestart}
             onChange={(e) =>
               setSettings({ ...settings, autoRestart: e.target.checked })
