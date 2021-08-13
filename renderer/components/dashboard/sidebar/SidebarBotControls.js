@@ -83,7 +83,12 @@ export default function SidebarBotControls() {
       {state.isRunning ? (
         <>
           {state.isSaving ? (
-            <Spinner className="mx-1" />
+            <Spinner
+              className="mx-1"
+              style={{ height: "1.5rem", width: "1.5rem", margin: "0.25rem" }}
+              animation="grow"
+              variant="success"
+            />
           ) : (
             <div onClick={save}>
               <SaveIcon className="success" />
