@@ -8,7 +8,6 @@ import {
   Spinner,
 } from "react-bootstrap";
 import { useEffect, useState } from "react";
-import Link from "next/link";
 import Head from "next/head";
 import electron from "electron";
 import { useRouter } from "next/router";
