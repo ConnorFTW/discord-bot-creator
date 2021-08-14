@@ -1,18 +1,10 @@
 import { dialog, ipcMain } from "electron";
 import { Loader, Runner } from "./index";
-import Store from "electron-store";
 import { clearLogs } from "./logs";
+import { addFolder, getFolders } from "./folders";
 
-const store = new Store({ defaults: { lastDirectories: [] } });
 let loader;
 let runner;
-
-function addDirectory(directory) {
-  let directories = store.get("lastDirectories") || [];
-  directories = Array.from(new Set(directories.concat(directory)));
-  console.log({ directories });
-  store.set("lastDirectories", directories);
-}
 
 ipcMain.on("directoryDialog", async (event) => {
   const { filePaths } = await dialog.showOpenDialog({
@@ -20,13 +12,13 @@ ipcMain.on("directoryDialog", async (event) => {
   });
   loader = new Loader({ filePath: filePaths[0] });
   runner = new Runner({ filePath: filePaths[0] });
-  addDirectory(filePaths[0]);
+  addFolder(filePaths[0]);
+
   event.sender.send("directoryDialog", filePaths[0]);
 });
 
 ipcMain.on("getLastDirectories", (event) => {
-  const lastDirectories = store.get("lastDirectories") || [];
-  event.sender.send("getLastDirectories", lastDirectories);
+  event.sender.send("getLastDirectories", getFolders());
 });
 
 ipcMain.on("chooseDirectory", async (event, folder) => {

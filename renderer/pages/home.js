@@ -35,6 +35,7 @@ export default function Dashboard() {
 
   useEffect(() => {
     ipcRenderer.on("directoryDialog", (event, folder) => {
+      if (!folder) return;
       setFolders([...folders, folder]);
     });
 
@@ -55,7 +56,8 @@ export default function Dashboard() {
     ipcRenderer.send("directoryDialog");
   };
 
-  const getName = (folder = "") => {
+  const getName = (folder) => {
+    folder = folder || "";
     return folder.split(path.sep).pop();
   };
 
