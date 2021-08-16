@@ -20,35 +20,25 @@ export const readFile = (pathFragments, fileType = "json") => {
     return false;
   }
 };
+export const validateFile = (externalFolder, fileName) => {
+  let file = readFile([externalFolder, fileName]);
 
-export const validateSettingsFile = (rootFolder) => {
-  let settings = readFile([rootFolder, "data", "settings.json"]);
-  return !!(settings?.token || settings?.clientId);
+  switch (fileName) {
+    case "./data/settings.json":
+      return !!(file?.token || file?.clientId);
+    case "./data/players.json":
+      return !!Object.keys(file).length;
+    case "./data/servers.json":
+      return !!Object.keys(file).length;
+    case "./data/globals.json":
+      return !!Object.keys(file).length;
+    case "./data/commands.json":
+      return !!Object.keys(file).length;
+    case "./data/events.json":
+      return !!Object.keys(file).length;
+    case "./package.json":
+      return !!file;
+    default:
+      return false;
+  }
 };
-
-export const validatePlayersFile = (rootFolder) => {
-  let players = readFile([rootFolder, "data", "players.json"]);
-  return !!Object.keys(players).length;
-};
-
-export const validateServersFile = (rootFolder) => {
-  let servers = readFile([rootFolder, "data", "servers.json"]);
-  return !!Object.keys(servers).length;
-};
-
-export const validateCommandsFile = (rootFolder) => {
-  let commands = readFile([rootFolder, "data", "commands.json"]);
-  return !!Object.keys(commands).length;
-}
-
-export const validateEventsFile = (rootFolder) => {
-  let events = readFile([rootFolder, "data", "events.json"]);
-  return !!Object.keys(events).length;
-}
-
-export const validatePackageFile = (rootFolder) => { 
-  let packageFile = readFile([rootFolder, "package.json"]);
-  return !!packageFile;
-};
-
-export const validate
