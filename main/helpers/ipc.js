@@ -4,9 +4,7 @@ import { clearLogs } from "./logs";
 import { addFolder, getFolders } from "./folders";
 import { validateFile } from "./validate-files";
 import { copyFiles } from "./copy-file";
-import { fork } from "child_process";
 import { exec } from "child_process";
-import { execSync } from "child_process";
 
 let loader;
 let runner;

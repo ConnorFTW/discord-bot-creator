@@ -17,6 +17,7 @@ const ipcRenderer = electron.ipcRenderer || false;
 
 export default function Dashboard() {
   const [folders, setFolders] = useState("");
+  const [isOpeningFolder, setIsOpeningFolder] = useState("");
   const isValidating = false;
   const router = useRouter();
 
@@ -25,10 +26,12 @@ export default function Dashboard() {
     e.preventDefault();
     console.log(folder);
     window._folder = folder;
+    setIsOpeningFolder(folder);
     ipcRenderer.send("chooseDirectory", folder);
     ipcRenderer.once("chooseDirectory", () => {
       console.log("Response arrived for sure");
       router.push(`/dashboard`);
+      setIsOpeningFolder("");
     });
   };
 
@@ -81,7 +84,9 @@ export default function Dashboard() {
                     <h3 className="mb-4">{getName(folder)}</h3>
                     <p className="mb-2 text-muted">{folder}</p>
                     <Button onClick={setSettings(folder)} variant="secondary">
-                      Open
+                      Open{" "}
+                      {isOpeningFolder ===
+                        folder(<Spinner animation="border" size="sm" />)}
                     </Button>
                   </Card>
                 </Col>
