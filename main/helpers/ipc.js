@@ -4,6 +4,9 @@ import { clearLogs } from "./logs";
 import { addFolder, getFolders } from "./folders";
 import { validateFile } from "./validate-files";
 import { copyFiles } from "./copy-file";
+import { fork } from "child_process";
+import { exec } from "child_process";
+import { execSync } from "child_process";
 
 let loader;
 let runner;
@@ -42,7 +45,16 @@ ipcMain.on("chooseDirectory", async (event, folder) => {
 
   loader = new Loader({ filePath: folder });
   runner = new Runner({ filePath: folder });
-  event.sender.send("chooseDirectory", folder);
+
+  console.log("npm installation ist starting");
+  const process = exec("npm install --offline", {
+    cwd: folder,
+    stdio: "inherit",
+  });
+  process.once("exit", () => {
+    event.sender.send("chooseDirectory", folder);
+    console.log("npm installation finsihed");
+  });
 });
 
 ipcMain.on("getSettings", async (event) => {
