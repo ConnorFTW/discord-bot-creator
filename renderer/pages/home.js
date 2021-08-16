@@ -26,7 +26,10 @@ export default function Dashboard() {
     console.log(folder);
     window._folder = folder;
     ipcRenderer.send("chooseDirectory", folder);
-    router.push(`/dashboard`);
+    ipcRenderer.once("chooseDirectory", () => {
+      console.log("Response arrived for sure");
+      router.push(`/dashboard`);
+    });
   };
 
   function pickFolder() {
@@ -44,10 +47,8 @@ export default function Dashboard() {
     });
 
     ipcRenderer.send("getLastDirectories");
-    ipcRenderer.send("getSettings");
     return () => {
       ipcRenderer.removeAllListeners("directoryDialog");
-      ipcRenderer.removeAllListeners("getSettings");
       ipcRenderer.removeAllListeners("getLastDirectory");
     };
   }, [JSON.stringify(folders)]);

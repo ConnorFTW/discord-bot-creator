@@ -53,7 +53,6 @@ export default class Loader {
       path.resolve(this.filePath, "./data/commands.json"),
       "utf8"
     );
-    console.log(commands);
     return commands;
   }
   async saveCommands(commands) {

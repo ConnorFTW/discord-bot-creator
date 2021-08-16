@@ -2,9 +2,20 @@ import { dialog, ipcMain } from "electron";
 import { Loader, Runner } from "./index";
 import { clearLogs } from "./logs";
 import { addFolder, getFolders } from "./folders";
+import { validateFile } from "./validate-files";
+import { copyFiles } from "./copy-file";
 
 let loader;
 let runner;
+
+const BOT_FILES = [
+  "./data/settings.json",
+  "./data/players.json",
+  "./data/servers.json",
+  "./data/commands.json",
+  "./data/events.json",
+  "./package.json",
+];
 
 ipcMain.on("directoryDialog", async (event) => {
   const { filePaths } = await dialog.showOpenDialog({
@@ -23,6 +34,12 @@ ipcMain.on("getLastDirectories", (event) => {
 
 ipcMain.on("chooseDirectory", async (event, folder) => {
   if (typeof folder !== "string") return;
+
+  // Populate with files
+  const invalidFiles = BOT_FILES.filter((file) => !validateFile(folder, file));
+  console.log(invalidFiles);
+  copyFiles(folder, invalidFiles);
+
   loader = new Loader({ filePath: folder });
   runner = new Runner({ filePath: folder });
   event.sender.send("chooseDirectory", folder);
