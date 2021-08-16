@@ -46,4 +46,9 @@ export const validateEventsFile = (rootFolder) => {
   return !!Object.keys(events).length;
 }
 
+export const validatePackageFile = (rootFolder) => { 
+  let packageFile = readFile([rootFolder, "package.json"]);
+  return !!packageFile;
+};
+
 export const validate
