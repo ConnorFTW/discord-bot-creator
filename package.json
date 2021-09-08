@@ -24,6 +24,7 @@
     "react-bootstrap-typeahead": "^5.2.0",
     "sass": "^1.37.0",
     "serialize-javascript": "^6.0.0",
+    "steam-user": "^4.19.12",
     "youtubei": "^0.0.1-rc.20"
   },
   "devDependencies": {

@@ -1,7 +1,7 @@
 const SteamUser = require("steam-user");
 
 // Setup client
-const client = new SteamUser({
+export const client = new SteamUser({
   picsCacheAll: true,
 });
 
