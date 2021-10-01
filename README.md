@@ -8,5 +8,6 @@ Currently it's still in development but you can check out the early version usin
 ```
 $ git clone git@github.com:Michael55555/dbc.git
 $ cd dbc
+$ npm install
 $ npm run dev
 ```
