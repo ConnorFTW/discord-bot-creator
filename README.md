@@ -1,5 +1,3 @@
-<p align="center"><img src="https://i.imgur.com/X7dSE68.png"></p>
-
 ## Usage
 
 ### Get started
