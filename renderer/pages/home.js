@@ -80,19 +80,20 @@ export default function Dashboard() {
             {folders?.[0] &&
               folders.map((folder) => (
                 <Col key={folder} md={6}>
-                  <Card className="m-3 p-3">
+                  <Card className="p-3 m-3">
                     <h3 className="mb-4">{getName(folder)}</h3>
                     <p className="mb-2 text-muted">{folder}</p>
                     <Button onClick={setSettings(folder)} variant="secondary">
                       Open{" "}
-                      {isOpeningFolder ===
-                        folder(<Spinner animation="border" size="sm" />)}
+                      {isOpeningFolder === folder ? (
+                        <Spinner animation="border" size="sm" />
+                      ) : null}
                     </Button>
                   </Card>
                 </Col>
               ))}
             <Form>
-              <Button type="submit" onClick={createBot} className="mt-3 mx-3">
+              <Button type="submit" onClick={createBot} className="mx-3 mt-3">
                 Create new bot
               </Button>
               <Button onClick={pickFolder} className="mt-3">
