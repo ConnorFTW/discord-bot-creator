@@ -1,5 +1,5 @@
 Welcome to Discord Bot Creator, a free open source discord bot creator which is much more powerful than the alternatives.
-Currently it's still in development but you can check out the early version using the commands below. Also feel free to join us on [Discord](https://discord.gg/Z7ybzt2KRr)
+Currently it's still in development but you can check out the early version using the commands below. Also feel free to join us on [Discord](https://discord.gg/Z7ybzt2KRr).
 
 ## Prerequisites
 - [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
