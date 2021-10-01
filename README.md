@@ -1,38 +1,17 @@
-<p align="center"><img src="https://i.imgur.com/X7dSE68.png"></p>
+Welcome to Discord Bot Creator, a free open source discord bot creator which is much more powerful than the alternatives.
+Currently it's still in development but you can check out the early version using the commands below. Also feel free to join us on [Discord](https://discord.gg/Z7ybzt2KRr).
+
+## Prerequisites
+- [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
+- [Node.js](https://nodejs.org/en/download/)
 
 ## Usage
 
-### Create an App
+### Get started
 
 ```
-# with npx
-$ npx create-nextron-app my-app --example with-javascript
-
-# with yarn
-$ yarn create nextron-app my-app --example with-javascript
-
-# with pnpx
-$ pnpx create-nextron-app my-app --example with-javascript
-```
-
-### Install Dependencies
-
-```
-$ cd my-app
-
-# using yarn or npm
-$ yarn (or `npm install`)
-
-# using pnpm
-$ pnpm install --shamefully-hoist
-```
-
-### Use it
-
-```
-# development mode
-$ yarn dev (or `npm run dev` or `pnpm run dev`)
-
-# production build
-$ yarn build (or `npm run build` or `pnpm run build`)
+$ git clone git@github.com:Michael55555/dbc.git
+$ cd dbc
+$ npm install
+$ npm run dev
 ```
