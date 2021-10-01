@@ -10,8 +10,12 @@ import {
 import { useEffect, useState } from "react";
 import Head from "next/head";
 import electron from "electron";
+<<<<<<< Updated upstream
 import { useRouter } from "next/router";
 import path from "path";
+=======
+import Folder from "../components/home/Folder/Item";
+>>>>>>> Stashed changes
 
 const ipcRenderer = electron.ipcRenderer || false;
 

@@ -1,25 +1,17 @@
 import { ipcRenderer } from "electron";
-<<<<<<< Updated upstream:renderer/components/dashboard/DashboardContext.js
-import { createContext, useContext, useEffect, useState } from "react";
-=======
 import {
-  Context,
   createContext,
   PropsWithChildren,
   useContext,
   useEffect,
   useState,
 } from "react";
->>>>>>> Stashed changes:renderer/components/dashboard/DashboardContext.tsx
 import useActions from "../../lib/useActions";
 import useCommands from "../../lib/useCommands";
 import useEvents from "../../lib/useEvents";
 import useSettings from "../../lib/useSettings";
 import { useModeContext } from "./ModeContext";
 
-<<<<<<< Updated upstream:renderer/components/dashboard/DashboardContext.js
-const DashboardContext = createContext(null);
-=======
 type Action = {
   name: string;
 };
@@ -54,41 +46,41 @@ type Functions = {
 
 type DashboardContextValue = Dashboard & Functions;
 
-export const DashboardContext = createContext(
-  {}
-) as Context<DashboardContextValue>;
->>>>>>> Stashed changes:renderer/components/dashboard/DashboardContext.tsx
+export const DashboardContext = createContext<DashboardContextValue>({
+  events: [],
+  commands: [],
+  actionSchemas: [],
+  actionModalVisible: false,
+  handlerIndex: 0,
+  actionIndex: 0,
+  errors: [],
+  handlers: [],
+});
 
 export function useDashboardContext() {
-  return useContext<DashboardContextValue>(DashboardContext);
+  return useContext(DashboardContext);
 }
 
-export function DashboardProvider({ children }) {
+export function DashboardProvider({ children }: PropsWithChildren<{}>) {
   const [actionSchemas] = useActions();
   let [events, setEvents] = useEvents();
   let [commands, setCommands] = useCommands();
   const [settings] = useSettings();
   const [mode] = useModeContext();
 
-<<<<<<< Updated upstream:renderer/components/dashboard/DashboardContext.js
-  const [state, setState] = useState({
-    actionSchemas: actionSchemas,
-    mode: "command",
-=======
   const [state, setState] = useState<Dashboard>({
     actionSchemas,
->>>>>>> Stashed changes:renderer/components/dashboard/DashboardContext.tsx
     actionModalVisible: false,
     commands,
     events,
     handlerIndex: 0,
     actionIndex: 0,
     errors: [],
+    handlers: [],
   });
 
   useEffect(() => {
     ipcRenderer?.on("onErrorsUpdate", (_event, error) => {
-      console.log("Here");
       console.log("Here is the error", error);
       setState((state) => ({ ...state, errors: [...state.errors, error] }));
     });
@@ -118,38 +110,15 @@ export function DashboardProvider({ children }) {
     setState({ ...state, actionSchemas });
   }, [JSON.stringify(actionSchemas)]);
 
-<<<<<<< Updated upstream:renderer/components/dashboard/DashboardContext.js
-  const handlers =
-    (state.mode === "event" ? state.events : state.commands) || [];
-  const handler = handlers[state.handlerIndex] || {};
-  const actions = handler.actions || [];
-=======
   const handlers = (mode === "event" ? state.events : state.commands) || [];
   const handler = handlers[state.handlerIndex] || { actions: [] };
   const actions = handler.actions;
->>>>>>> Stashed changes:renderer/components/dashboard/DashboardContext.tsx
   const action = actions[state.actionIndex] || {};
   const actionSchema =
     actionSchemas?.find(({ name }) => action.name === name) || {};
 
-<<<<<<< Updated upstream:renderer/components/dashboard/DashboardContext.js
-  /**
-   * @param {string} mode
-   */
-  const updateMode = (mode) => {
-    setState({ ...state, mode, actionIndex: 0, handlerIndex: 0 });
-  };
-
-  /**
-   * Select new handler
-   * @param {number} index
-   */
-  const updateHandlerIndex = (index) => {
-    let newIndex;
-=======
   const updateHandlerIndex: UpdateHandlerIndex = (index) => {
     let newIndex: number;
->>>>>>> Stashed changes:renderer/components/dashboard/DashboardContext.tsx
 
     if (handlers[index]) {
       newIndex = index;
@@ -258,21 +227,12 @@ export function DashboardProvider({ children }) {
     setState({ ...state });
   };
 
-  /**
-   * Removes an action
-   * @param {number} index - Index of the action
-   * @return {undefined}
-   */
-  const removeAction = (index) => {
+  const removeAction: RemoveAction = (index) => {
     actions.splice(index, 1);
     setState({ ...state });
   };
 
-  /**
-   * Reorder action
-   * @param {number} to - Destination index
-   */
-  const reorderAction = (from, to) => {
+  const reorderAction: ReorderAction = (from, to) => {
     const [removed] = actions.splice(from, 1);
     actions.splice(to, 0, removed);
 
@@ -305,30 +265,11 @@ export function DashboardProvider({ children }) {
   return (
     <DashboardContext.Provider
       value={{
-        handlers,
-        handler,
-        actions: actions,
-        action,
         ...state,
-<<<<<<< Updated upstream:renderer/components/dashboard/DashboardContext.js
-        updateMode,
-        hideActionModal,
-        showActionModal,
-        addHandler,
-        removeHandler,
-        updateHandler,
-        updateHandlerIndex,
-        addAction,
-        removeAction,
-        updateAction,
-        updateActionIndex,
-        reorderAction,
-=======
         reorderAction,
         updateHandlerIndex,
         removeAction,
         addHandler,
->>>>>>> Stashed changes:renderer/components/dashboard/DashboardContext.tsx
         actionSchema,
       }}
     >
