@@ -94,7 +94,8 @@ export default function Sidebar({ selected, setSelected }) {
                       eventKey={"nav-link-" + d?.name + "-" + i}
                       active={handlerIndex === i}
                       onClick={() => updateHandlerIndex(i)}
-                      className="d-flex flex-row justify-content-between align-items-center mb-2"
+                      className="d-flex flex-row justify-content-between align-items-center mb-2 cursor-pointer"
+                      style={{ cursor: "pointer" }}
                     >
                       <span
                         dangerouslySetInnerHTML={{ __html: d?.name }}

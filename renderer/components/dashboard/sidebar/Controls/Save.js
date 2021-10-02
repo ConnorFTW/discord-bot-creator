@@ -50,7 +50,7 @@ export default function ControlsSave() {
     );
   } else {
     return (
-      <div onClick={save}>
+      <div onClick={save} style={{ cursor: "pointer" }}>
         <SaveIcon className="success" />
       </div>
     );

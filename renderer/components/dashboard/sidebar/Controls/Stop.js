@@ -24,7 +24,7 @@ export default function ControlsStop() {
     return <Spinner className="mx-1" />;
   } else {
     return (
-      <div onClick={stop}>
+      <div onClick={stop} style={{ cursor: "pointer" }}>
         <StopIcon className="danger" />
       </div>
     );

@@ -32,7 +32,7 @@ export default function ControlsStart() {
     );
   } else {
     return (
-      <div onClick={run}>
+      <div onClick={run} style={{ cursor: "pointer" }}>
         <PlayIcon />
       </div>
     );
