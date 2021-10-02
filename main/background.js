@@ -1,8 +1,8 @@
-import { app, ipcMain, globalShortcut } from "electron";
+import { app, globalShortcut, ipcMain, shell } from "electron";
 import serve from "electron-serve";
-import { createWindow, createMenu } from "./helpers";
-import { addLog, getLogs } from "./helpers/logs";
+import { createMenu, createWindow } from "./helpers";
 import "./helpers/ipc";
+import { addLog, getLogs } from "./helpers/logs";
 
 const isProd = process.env.NODE_ENV === "production";
 
@@ -36,6 +36,12 @@ if (isProd) {
     if (url.includes("/dashboard")) {
       mainWindow.webContents.send("save");
     }
+  });
+
+  // Open links in the browser instead
+  mainWindow.webContents.setWindowOpenHandler((details) => {
+    shell.openExternal(details.url);
+    return false;
   });
 
   ipcMain.on("onBotLog", (log, _log) => {

@@ -1,32 +1,12 @@
-import { useState } from "react";
-import {
-  Badge,
-  Button,
-  Card,
-  Col,
-  Form,
-  Nav,
-  Row,
-  Tooltip,
-} from "react-bootstrap";
+import { Badge, Button, Card, Col, Form, Nav, Row } from "react-bootstrap";
 import { useDashboardContext } from "../DashboardContext";
 import SidebarBotControls from "./Controls";
 import ControlsContextProvider from "./Controls/Context";
 import SidebarItems from "./Items";
 
-const renderTooltip = (text) => (props) =>
-  (
-    <Tooltip id="tab-tooltip" {...props}>
-      {text}
-    </Tooltip>
-  );
-
-export default function Sidebar({ selected, setSelected }) {
-  const [settingsShow, setSettingsShow] = useState(false);
+export default function Sidebar({ selected }) {
   const {
     errors,
-    updateMode,
-    mode,
     handlers,
     commands,
     events,
@@ -34,8 +14,6 @@ export default function Sidebar({ selected, setSelected }) {
     handlerIndex,
     addHandler,
   } = useDashboardContext();
-
-  const setMode = (mode) => () => updateMode(mode);
 
   return (
     <>
