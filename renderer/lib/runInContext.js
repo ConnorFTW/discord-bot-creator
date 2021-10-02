@@ -120,6 +120,22 @@ const runInContext = (
     <option value="3">Global Variable</option>
     `,
   ];
+  data.roles = [
+    `
+    <option value="0">Mentioned Role</option>
+    <option value="1">1st Author Role</option>
+    <option value="2">1st Server Role</option>
+    <option value="3">Temp Variable</option>
+    <option value="4">Server Variable</option>
+    <option value="5">Global Variable</option>
+    `,
+    `
+    <option value="2">1st Server Role</option>
+    <option value="3">Temp Variable</option>
+    <option value="4">Server Variable</option>
+    <option value="5">Global Variable</option>
+    `,
+  ];
   data.conditions = [
     `
   <div style="padding-top: 8px;">
@@ -208,6 +224,17 @@ const runInContext = (
       }
     },
     messageChange(_this, varName) {
+      document.getElementById(varName).style.display = +_this.value
+        ? "block"
+        : "none";
+      if (isNaN(+_this.value)) return;
+      if (+_this.value < 1) {
+        document.getElementById(varName).style.display = "none";
+      } else {
+        document.getElementById(varName).style.display = "block";
+      }
+    },
+    roleChange(_this, varName) {
       document.getElementById(varName).style.display = +_this.value
         ? "block"
         : "none";
