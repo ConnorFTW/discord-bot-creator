@@ -24,8 +24,8 @@ export default class Runner {
       });
 
       this.botProcess.on("message", (message) => {
-        if (message === "ready") return resolve();
-        console.log(message);
+        console.log("from script: " + message);
+        if (message === "BotReady") return resolve();
         if (message.type === "error") {
           delete message.type;
           ipcMain.emit("onBotError", message);

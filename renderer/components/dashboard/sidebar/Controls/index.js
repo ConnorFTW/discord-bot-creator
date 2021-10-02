@@ -1,21 +1,22 @@
 import { Button, Spinner } from "react-bootstrap";
 import { ipcRenderer } from "electron";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { SaveIcon, StopIcon } from "@heroicons/react/solid";
-import ControlsContextProvider, { ControlsContext } from "./Context";
+import { useControls } from "./Context";
 import ControlsStart from "./Start";
+import useSettings from "../../../../lib/useSettings";
 
 export default function SidebarBotControls() {
-  const [state, setState] = useState({});
-  const settings = { token: "d" };
+  const [controls, setControls] = useControls();
+  const [settings] = useSettings();
 
+  console.log({ controls });
   useEffect(() => {
     let hasSaved = false;
     const saveListener = (event, data) => {
-      console.log("Hey");
       if (hasSaved) return;
-      setState({
-        ...state,
+      setControls({
+        ...controls,
         isSaving: true,
       });
     };
@@ -24,8 +25,8 @@ export default function SidebarBotControls() {
     const savedListener = (event, data) => {
       hasSaved = true;
       console.log("Saved");
-      setState({
-        ...state,
+      setControls({
+        ...controls,
         isSaving: false,
       });
     };
@@ -35,36 +36,22 @@ export default function SidebarBotControls() {
       ipcRenderer.removeListener("save", saveListener);
       ipcRenderer.removeListener("saved", savedListener);
     };
-  }, [JSON.stringify(state)]);
+  }, [JSON.stringify(controls)]);
 
   const save = () => {
-    if (state.isStopping || state.isStarting || state.isSaving) return;
+    if (controls.isStopping || controls.isStarting || controls.isSaving) return;
     ipcRenderer.emit("save");
   };
 
-  const run = () => {
-    if (state.isStopping || state.isStarting || state.isSaving) return;
-    setState({ ...state, isStarting: true });
-
-    ipcRenderer.on("onBotRun", (_event, res = {}) => {
-      if (res.success) {
-        setState({ ...state, isStarting: false, isRunning: true });
-      } else {
-        setState({ ...state, isStarting: false, isRunning: false });
-      }
-    });
-    ipcRenderer.send("onBotRun");
-  };
-
   const stop = () => {
-    if (state.isStopping || state.isStarting || state.isSaving) return;
-    setState({ ...state, isStopping: true });
-    setState({ ...state, isStopping: false, isRunning: false });
+    if (controls.isStopping || controls.isStarting || controls.isSaving) return;
+    setControls({ ...controls, isStopping: true });
+    setControls({ ...controls, isStopping: false, isRunning: false });
     ipcRenderer.on("onBotStop", (_event, res = {}) => {
       if (res.success) {
-        setState({ ...state, isStopping: false, isRunning: false });
+        setControls({ ...controls, isStopping: false, isRunning: false });
       } else {
-        setState({ ...state, isStopping: false, isRunning: true });
+        setControls({ ...controls, isStopping: false, isRunning: true });
       }
     });
     ipcRenderer.send("onBotStop");
@@ -75,34 +62,32 @@ export default function SidebarBotControls() {
   }
 
   return (
-    <ControlsContextProvider>
-      <div className="bot-controls d-flex flex-row justify-content-between align-items-center flex-wrap gap-2">
-        {state.isRunning ? (
-          <>
-            {state.isSaving ? (
-              <Spinner
-                className="mx-1"
-                style={{ height: "1.5rem", width: "1.5rem", margin: "0.25rem" }}
-                animation="grow"
-                variant="success"
-              />
-            ) : (
-              <div onClick={save}>
-                <SaveIcon className="success" />
-              </div>
-            )}
-            {state.isStopping ? (
-              <Spinner className="mx-1" />
-            ) : (
-              <div onClick={stop}>
-                <StopIcon className="danger" />
-              </div>
-            )}
-          </>
-        ) : (
-          <ControlsStart />
-        )}
-      </div>
-    </ControlsContextProvider>
+    <div className="bot-controls d-flex flex-row justify-content-between align-items-center flex-wrap gap-2">
+      {controls.isRunning ? (
+        <>
+          {controls.isSaving ? (
+            <Spinner
+              className="mx-1"
+              style={{ height: "1.5rem", width: "1.5rem", margin: "0.25rem" }}
+              animation="grow"
+              variant="success"
+            />
+          ) : (
+            <div onClick={save}>
+              <SaveIcon className="success" />
+            </div>
+          )}
+          {controls.isStopping ? (
+            <Spinner className="mx-1" />
+          ) : (
+            <div onClick={stop}>
+              <StopIcon className="danger" />
+            </div>
+          )}
+        </>
+      ) : (
+        <ControlsStart />
+      )}
+    </div>
   );
 }

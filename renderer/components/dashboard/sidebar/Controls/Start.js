@@ -1,6 +1,6 @@
 import { Spinner } from "react-bootstrap";
 import { ipcRenderer } from "electron";
-import { PlayIcon } from "@heroicons/react/solid";
+import { PauseIcon, PlayIcon } from "@heroicons/react/solid";
 import { useControls } from "./Context";
 
 export default function ControlsStart() {
@@ -9,13 +9,14 @@ export default function ControlsStart() {
 
   const run = () => {
     if (isStopping || isStarting || isSaving) return;
-    setControls({ ...state, isStarting: true });
+    setControls({ ...controls, isStarting: true });
 
     ipcRenderer.on("onBotRun", (_event, res = {}) => {
+      console.log({ res });
       if (res.success) {
-        setControls({ ...state, isStarting: false, isRunning: true });
+        setControls({ ...controls, isStarting: false, isRunning: true });
       } else {
-        setControls({ ...state, isStarting: false, isRunning: false });
+        setControls({ ...controls, isStarting: false, isRunning: false });
       }
     });
     ipcRenderer.send("onBotRun");

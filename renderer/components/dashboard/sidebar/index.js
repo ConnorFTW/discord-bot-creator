@@ -20,6 +20,7 @@ import {
   TerminalIcon,
   CogIcon,
 } from "@heroicons/react/solid";
+import ControlsContextProvider from "./Controls/Context";
 
 const renderTooltip = (text) => (props) =>
   (
@@ -125,7 +126,9 @@ export default function Sidebar({ selected, setSelected }) {
               </Form.Group>
             </Card.Body>
             <Card.Footer>
-              <SidebarBotControls />
+              <ControlsContextProvider>
+                <SidebarBotControls />
+              </ControlsContextProvider>
             </Card.Footer>
             <Card.Footer className="d-flex flex-row justify-content-between align-items-center flex-wrap gap-2">
               <Button onClick={() => addHandler()} variant="secondary">

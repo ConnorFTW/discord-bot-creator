@@ -1,11 +1,11 @@
-import { createContext, useContext } from "react";
+import { createContext, useContext, useState } from "react";
 
 export const ControlsContext = createContext(null);
 export const useControls = () => useContext(ControlsContext);
 
 export default function ControlsContextProvider({ children }) {
   const [state, setState] = useState({
-    isRunning: false,
+    isStarting: false,
     isStopping: false,
     isSaving: false,
   });
