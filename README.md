@@ -1,4 +1,4 @@
-<img src="https://media.discordapp.net/attachments/804630995126845461/875112318239907870/Screenshot_from_2021-08-11_22-22-43.png?width=1076&height=663">
+![image](https://user-images.githubusercontent.com/30301026/135710086-ccc1bf54-088d-49b4-9aa6-9f6d2dfda84b.png)
 
 ---
 
