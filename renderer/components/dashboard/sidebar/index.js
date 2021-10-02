@@ -12,7 +12,7 @@ import {
   Row,
   Tooltip,
 } from "react-bootstrap";
-import SidebarBotControls from "./SidebarBotControls";
+import SidebarBotControls from "./BotControls";
 import SettingsModal from "../settings/SettingsModal";
 import { useDashboardContext } from "../DashboardContext";
 import {
