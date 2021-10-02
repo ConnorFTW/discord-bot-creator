@@ -1,6 +1,6 @@
-import { Spinner } from "react-bootstrap";
+import { PlayIcon } from "@heroicons/react/solid";
 import { ipcRenderer } from "electron";
-import { PauseIcon, PlayIcon } from "@heroicons/react/solid";
+import { Spinner } from "react-bootstrap";
 import { useControls } from "./Context";
 
 export default function ControlsStart() {

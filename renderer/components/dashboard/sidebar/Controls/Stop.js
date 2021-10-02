@@ -1,6 +1,6 @@
-import { Spinner } from "react-bootstrap";
-import { ipcRenderer } from "electron";
 import { StopIcon } from "@heroicons/react/solid";
+import { ipcRenderer } from "electron";
+import { Spinner } from "react-bootstrap";
 import { useControls } from "./Context";
 
 export default function ControlsStop() {

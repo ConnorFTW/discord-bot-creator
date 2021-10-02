@@ -1,11 +1,11 @@
+import { exec } from "child_process";
 import { dialog, ipcMain } from "electron";
+import { copyFiles } from "./copy-file";
+import { addFolder, getFolders } from "./folders";
 import { Loader, Runner } from "./index";
 import { clearLogs } from "./logs";
-import { addFolder, getFolders } from "./folders";
-import { validateFile } from "./validate-files";
-import { copyFiles } from "./copy-file";
-import { exec } from "child_process";
 import { logOn } from "./steam";
+import { validateFile } from "./validate-files";
 
 let loader;
 let runner;
