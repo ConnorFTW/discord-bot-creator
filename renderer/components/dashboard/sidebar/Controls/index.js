@@ -1,17 +1,13 @@
 import { Button, Spinner } from "react-bootstrap";
 import { ipcRenderer } from "electron";
 import { useEffect, useState } from "react";
-import useSettings from "../../../lib/useSettings";
-import {
-  PauseIcon,
-  PlayIcon,
-  SaveIcon,
-  StopIcon,
-} from "@heroicons/react/solid";
+import { SaveIcon, StopIcon } from "@heroicons/react/solid";
+import ControlsContextProvider, { ControlsContext } from "./Context";
+import ControlsStart from "./Start";
 
 export default function SidebarBotControls() {
   const [state, setState] = useState({});
-  const [settings] = useSettings();
+  const settings = { token: "d" };
 
   useEffect(() => {
     let hasSaved = false;
@@ -79,40 +75,34 @@ export default function SidebarBotControls() {
   }
 
   return (
-    <div className="bot-controls d-flex flex-row justify-content-between align-items-center flex-wrap gap-2">
-      {state.isRunning ? (
-        <>
-          {state.isSaving ? (
-            <Spinner
-              className="mx-1"
-              style={{ height: "1.5rem", width: "1.5rem", margin: "0.25rem" }}
-              animation="grow"
-              variant="success"
-            />
-          ) : (
-            <div onClick={save}>
-              <SaveIcon className="success" />
-            </div>
-          )}
-          {state.isStopping ? (
-            <Spinner className="mx-1" />
-          ) : (
-            <div onClick={stop}>
-              <StopIcon className="danger" />
-            </div>
-          )}
-        </>
-      ) : state.isStarting ? (
-        <Spinner
-          style={{ height: "1.5rem", width: "1.5rem", margin: "0.25rem" }}
-          animation="grow"
-          variant="primary"
-        />
-      ) : (
-        <div onClick={run}>
-          <PlayIcon />
-        </div>
-      )}
-    </div>
+    <ControlsContextProvider>
+      <div className="bot-controls d-flex flex-row justify-content-between align-items-center flex-wrap gap-2">
+        {state.isRunning ? (
+          <>
+            {state.isSaving ? (
+              <Spinner
+                className="mx-1"
+                style={{ height: "1.5rem", width: "1.5rem", margin: "0.25rem" }}
+                animation="grow"
+                variant="success"
+              />
+            ) : (
+              <div onClick={save}>
+                <SaveIcon className="success" />
+              </div>
+            )}
+            {state.isStopping ? (
+              <Spinner className="mx-1" />
+            ) : (
+              <div onClick={stop}>
+                <StopIcon className="danger" />
+              </div>
+            )}
+          </>
+        ) : (
+          <ControlsStart />
+        )}
+      </div>
+    </ControlsContextProvider>
   );
 }

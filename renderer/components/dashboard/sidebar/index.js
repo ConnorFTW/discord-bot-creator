@@ -7,12 +7,11 @@ import {
   Col,
   Form,
   Nav,
-  Overlay,
   OverlayTrigger,
   Row,
   Tooltip,
 } from "react-bootstrap";
-import SidebarBotControls from "./BotControls";
+import SidebarBotControls from "./Controls";
 import SettingsModal from "../settings/SettingsModal";
 import { useDashboardContext } from "../DashboardContext";
 import {
