@@ -1,26 +1,25 @@
+import {
+  ChatAlt2Icon,
+  CogIcon,
+  LightningBoltIcon,
+  TerminalIcon,
+} from "@heroicons/react/solid";
 import { useState } from "react";
 import {
   Badge,
   Button,
-  ButtonGroup,
   Card,
   Col,
   Form,
   Nav,
-  Overlay,
   OverlayTrigger,
   Row,
   Tooltip,
 } from "react-bootstrap";
-import SidebarBotControls from "./BotControls";
-import SettingsModal from "../settings/SettingsModal";
 import { useDashboardContext } from "../DashboardContext";
-import {
-  ChatAlt2Icon,
-  LightningBoltIcon,
-  TerminalIcon,
-  CogIcon,
-} from "@heroicons/react/solid";
+import SettingsModal from "../settings/SettingsModal";
+import SidebarBotControls from "./Controls";
+import ControlsContextProvider from "./Controls/Context";
 
 const renderTooltip = (text) => (props) =>
   (
@@ -126,7 +125,9 @@ export default function Sidebar({ selected, setSelected }) {
               </Form.Group>
             </Card.Body>
             <Card.Footer>
-              <SidebarBotControls />
+              <ControlsContextProvider>
+                <SidebarBotControls />
+              </ControlsContextProvider>
             </Card.Footer>
             <Card.Footer className="d-flex flex-row justify-content-between align-items-center flex-wrap gap-2">
               <Button onClick={() => addHandler()} variant="secondary">
