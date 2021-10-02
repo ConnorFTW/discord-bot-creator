@@ -1,9 +1,3 @@
-import {
-  ChatAlt2Icon,
-  CogIcon,
-  LightningBoltIcon,
-  TerminalIcon,
-} from "@heroicons/react/solid";
 import { useState } from "react";
 import {
   Badge,
@@ -12,14 +6,13 @@ import {
   Col,
   Form,
   Nav,
-  OverlayTrigger,
   Row,
   Tooltip,
 } from "react-bootstrap";
 import { useDashboardContext } from "../DashboardContext";
-import SettingsModal from "../settings/SettingsModal";
 import SidebarBotControls from "./Controls";
 import ControlsContextProvider from "./Controls/Context";
+import SidebarItems from "./Items";
 
 const renderTooltip = (text) => (props) =>
   (
@@ -49,41 +42,7 @@ export default function Sidebar({ selected, setSelected }) {
       <Col md={4}>
         <Row className="sidebar px-0">
           <Col className="navbar align-items-start nowrap">
-            <OverlayTrigger
-              placement="auto"
-              overlay={renderTooltip("Commands")}
-            >
-              <div
-                className={mode === "command" ? "active" : ""}
-                onClick={setMode("command")}
-              >
-                <ChatAlt2Icon />
-              </div>
-            </OverlayTrigger>
-            <OverlayTrigger placement="auto" overlay={renderTooltip("Events")}>
-              <div
-                className={mode === "event" ? "active" : ""}
-                onClick={setMode("event")}
-              >
-                <LightningBoltIcon />
-              </div>
-            </OverlayTrigger>
-            <OverlayTrigger placement="auto" overlay={renderTooltip("Logs")}>
-              <div
-                className={mode === "logs" ? "active" : ""}
-                onClick={setMode("logs")}
-              >
-                <TerminalIcon />
-              </div>
-            </OverlayTrigger>
-            <OverlayTrigger
-              placement="auto"
-              overlay={renderTooltip("Settings")}
-            >
-              <div onClick={() => setSettingsShow(true)} className="mt-auto">
-                <CogIcon />
-              </div>
-            </OverlayTrigger>
+            <SidebarItems />
           </Col>
           <Card className="px-0">
             <Card.Body className="px-2">
@@ -141,10 +100,6 @@ export default function Sidebar({ selected, setSelected }) {
           </Card>
         </Row>
       </Col>
-      <SettingsModal
-        show={settingsShow}
-        onHide={() => setSettingsShow(false)}
-      />
     </>
   );
 }
