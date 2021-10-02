@@ -96,7 +96,10 @@ export default function Sidebar({ selected, setSelected }) {
                       onClick={() => updateHandlerIndex(i)}
                       className="d-flex flex-row justify-content-between align-items-center mb-2"
                     >
-                      <span>{d?.name}</span>
+                      <span
+                        dangerouslySetInnerHTML={{ __html: d?.name }}
+                        className="w-100"
+                      />
                       {errors.filter((e) => e.handlerIndex === i).length ? (
                         <Badge bg="danger" text="light">
                           {errors.filter((e) => e.handlerIndex === i).length}
