@@ -15,11 +15,15 @@ export default function SettingsModal(props) {
   }
 
   const changePrefix = (e) => {
-    setSettings({ ...settings, prefix: e.target.value });
+    setSettings({ ...settings, tag: e.target.value });
   };
 
   const changeToken = (e) => {
     setSettings({ ...settings, token: e.target.value });
+  };
+
+  const changeSeparator = (e) => {
+    setSettings({ ...settings, separator: e.target.value });
   };
 
   const saveSettings = () => {
@@ -72,7 +76,7 @@ export default function SettingsModal(props) {
             <FormControl
               type="text"
               value={settings?.separator || ""}
-              onChange={changeToken}
+              onChange={changeSeparator}
               placeholder="\\s+"
             />
             <Form.Text>
