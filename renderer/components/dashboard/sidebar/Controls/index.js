@@ -10,10 +10,9 @@ export default function SidebarBotControls() {
   const [controls, setControls] = useControls();
   const [settings] = useSettings();
 
-  console.log({ controls });
   useEffect(() => {
     let hasSaved = false;
-    const saveListener = (event, data) => {
+    const saveListener = () => {
       if (hasSaved) return;
       setControls({
         ...controls,
@@ -22,7 +21,7 @@ export default function SidebarBotControls() {
     };
     ipcRenderer.on("save", saveListener);
 
-    const savedListener = (event, data) => {
+    const savedListener = () => {
       hasSaved = true;
       console.log("Saved");
       setControls({
@@ -41,20 +40,6 @@ export default function SidebarBotControls() {
   const save = () => {
     if (controls.isStopping || controls.isStarting || controls.isSaving) return;
     ipcRenderer.emit("save");
-  };
-
-  const stop = () => {
-    if (controls.isStopping || controls.isStarting || controls.isSaving) return;
-    setControls({ ...controls, isStopping: true });
-    setControls({ ...controls, isStopping: false, isRunning: false });
-    ipcRenderer.on("onBotStop", (_event, res = {}) => {
-      if (res.success) {
-        setControls({ ...controls, isStopping: false, isRunning: false });
-      } else {
-        setControls({ ...controls, isStopping: false, isRunning: true });
-      }
-    });
-    ipcRenderer.send("onBotStop");
   };
 
   if (!settings?.token) {
@@ -77,13 +62,7 @@ export default function SidebarBotControls() {
               <SaveIcon className="success" />
             </div>
           )}
-          {controls.isStopping ? (
-            <Spinner className="mx-1" />
-          ) : (
-            <div onClick={stop}>
-              <StopIcon className="danger" />
-            </div>
-          )}
+          <ControlsStart />
         </>
       ) : (
         <ControlsStart />
