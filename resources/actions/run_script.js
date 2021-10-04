@@ -243,12 +243,12 @@ module.exports = {
         .dispatchEvent(new Event("_load"));
     });
 
-    document
-      .getElementById("createAction")
-      .setAttribute(
-        "onclick",
-        'if(document.getElementById("JSEditor").contentWindow.document.getElementById("hideCode").value) document.getElementById("code").value = document.getElementById("JSEditor").contentWindow.document.getElementById("hideCode").value; finish()'
-      );
+    // document
+    //   .getElementById("createAction")
+    //   .setAttribute(
+    //     "onclick",
+    //     'if(document.getElementById("JSEditor").contentWindow.document.getElementById("hideCode").value) document.getElementById("code").value = document.getElementById("JSEditor").contentWindow.document.getElementById("hideCode").value; finish()'
+    //   );
 
     glob.onChangeVTypeSelect1 = function onChangeVTypeSelect1() {
       if (document.getElementById("storage").value === "0") {
