@@ -1,23 +1,23 @@
 import "@uiw/react-textarea-code-editor/dist.css";
 import dynamic from "next/dynamic";
 import React from "react";
+import { useDashboardContext } from "../../DashboardContext";
 
 const CodeEditor = dynamic(
   () => import("@uiw/react-textarea-code-editor").then((mod) => mod.default),
   { ssr: false }
 );
 
-function Editor() {
-  const [code, setCode] = React.useState(
-    `function add(a, b) {\n  return a + b;\n}`
-  );
+function Editor({ value }) {
+  const { updateField } = useDashboardContext();
+
   return (
     <div style={{ width: "100%" }}>
       <CodeEditor
-        value={code}
+        value={value}
         language="js"
         placeholder="Please enter JS code."
-        onChange={(evn) => setCode(evn.target.value)}
+        onChange={(e) => updateField("code", e.target.value)}
         padding={15}
         style={{
           fontSize: 16,
