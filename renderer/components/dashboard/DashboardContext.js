@@ -166,6 +166,10 @@ export function DashboardProvider({ children }) {
     }
   };
 
+  const updateField = (field, value) => {
+    updateAction({ ...action, [field]: value });
+  };
+
   /**
    * Adds a new action
    * @param {object} action - Action object
@@ -254,6 +258,7 @@ export function DashboardProvider({ children }) {
         updateActionIndex,
         reorderAction,
         actionSchema,
+        updateField,
       }}
     >
       {children}
