@@ -1,7 +1,7 @@
 const path = require("path");
-const withTM = require("next-transpile-modules")(["monaco-editor"]);
+const removeImports = require("next-remove-imports")();
 
-module.exports = withTM({
+module.exports = removeImports({
   webpack: (config, { isServer }) => {
     if (!isServer) {
       config.target = "electron-renderer";
@@ -14,4 +14,5 @@ module.exports = withTM({
     includePaths: [path.join(__dirname, "styles")],
   },
   reactStrictMode: false,
+  experimental: { esmExternals: true },
 });

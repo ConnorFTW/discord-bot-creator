@@ -1,10 +1,9 @@
-import dynamic from "next/dynamic";
 import { useEffect, useRef, useState } from "react";
 import { Button, Modal } from "react-bootstrap";
 import { evalHTML, evalInit, evalListener } from "../../../lib/runInContext";
 import { useDashboardContext } from "../DashboardContext";
 import ActionDropdown from "./ActionDropdown";
-const CodeField = dynamic(() => import("./Fields/Code"), { ssr: false });
+import FieldManager, { fieldsSupported } from "./Fields";
 
 export default function ActionForm({ show, isEvent, onHide }) {
   const { action, actionSchema, updateAction } = useDashboardContext();
@@ -85,8 +84,11 @@ export default function ActionForm({ show, isEvent, onHide }) {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body style={{ height: "60vh", overflowY: "scroll" }}>
-        <div dangerouslySetInnerHTML={{ __html: state.html }} ref={content} />
-        <CodeField show={show} />
+        {fieldsSupported(actionSchema?.fields) ? (
+          <FieldManager fieldValues={action} fields={actionSchema?.fields} />
+        ) : (
+          <div dangerouslySetInnerHTML={{ __html: state.html }} ref={content} />
+        )}
       </Modal.Body>
       <Modal.Footer className="flex-row d-flex justify-content-between">
         <Button onClick={hide}>Close</Button>
