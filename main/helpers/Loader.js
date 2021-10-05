@@ -1,7 +1,7 @@
-import fs from "fs";
-import fg from "fast-glob";
-import path from "path";
 import _eval from "eval";
+import fg from "fast-glob";
+import fs from "fs";
+import path from "path";
 
 export default class Loader {
   constructor({ filePath }) {
