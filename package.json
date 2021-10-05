@@ -13,10 +13,7 @@
   },
   "dependencies": {
     "@heroicons/react": "^1.0.3",
-    "@monaco-editor/react": "^4.2.2",
-    "@uiw/react-monacoeditor": "^3.4.4",
     "@uiw/react-textarea-code-editor": "^1.4.13",
-    "ace-builds": "^1.4.13",
     "bootstrap": "^5.0.2",
     "electron-serve": "^1.1.0",
     "electron-store": "^8.0.0",
@@ -29,7 +26,6 @@
     "next-remove-imports": "^1.0.6",
     "next-transpile-modules": "^8.0.0",
     "parse-function-string": "^0.1.1",
-    "prismjs": "^1.25.0",
     "react-ace": "^9.4.4",
     "react-beautiful-dnd": "^13.1.0",
     "react-bootstrap": "^2.0.0-beta.4",
