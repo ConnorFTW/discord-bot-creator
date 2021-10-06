@@ -39,5 +39,4 @@ export default {
 
     this.callNextAction(cache);
   },
-  mod() {},
 };
