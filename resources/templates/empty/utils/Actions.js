@@ -1,8 +1,6 @@
-import path from "path";
+import { GuildMember, Message, User } from "discord.js";
 import fs from "fs";
-import { GuildMember } from "discord.js";
-import { User } from "discord.js";
-import { Message } from "discord.js";
+import path from "path";
 import Logger from "./Logger.js";
 
 /**
@@ -132,7 +130,13 @@ export default class Actions extends Logger {
         fs.readdirSync(dir).forEach(
           (async (file) => {
             if (file.match(/\.js/i)) {
-              const action = (await import(path.join(dir, file))).default;
+              let filePath = path
+                .join(dir, file)
+                .split(path.sep)
+                .slice(-2)
+                .join("/");
+              filePath = "../" + filePath;
+              const action = (await import(filePath)).default;
               if (action?.action) {
                 this[action.name] = action.action;
               }

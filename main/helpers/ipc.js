@@ -17,6 +17,7 @@ const BOT_FILES = [
   "./data/commands.json",
   "./data/events.json",
   "./package.json",
+  "./bot.js",
 ];
 
 ipcMain.on("directoryDialog", async (event) => {

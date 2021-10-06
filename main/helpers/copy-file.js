@@ -1,20 +1,21 @@
-import path from "path";
+import fg from "fast-glob";
 import fs from "fs";
+import path from "path";
 
-export const copyFiles = (externalFolder, files) => {
-  console.log(`Copying files from ${externalFolder} to ${files}`);
-  const localFiles = files.map((file) => {
-    return path.join("./resources/templates/empty", file);
-  });
-  console.log(localFiles);
+export const copyFiles = (externalFolder, _files) => {
+  const localFiles = fg.sync("./resources/templates/empty/**/*.*");
 
-  const externalFiles = files.map((file) => {
+  const externalFiles = localFiles.map((file) => {
     console.log(file);
-    return path.join(externalFolder, file);
+    return path.join(
+      externalFolder,
+      file.split("./resources/templates/empty")[1]
+    );
   });
+  console.log({ externalFiles, localFiles });
 
   try {
-    for (let i in files) {
+    for (let i in localFiles) {
       const localFile = localFiles[i];
       const externalFile = externalFiles[i];
 
@@ -24,7 +25,39 @@ export const copyFiles = (externalFolder, files) => {
         console.log(dataFolder);
         fs.mkdirSync(dataFolder);
       }
-      console.log(fs.readFileSync(localFile, "utf-8"));
+
+      // Create actions folder if it doesn't exist
+      const actionsFolder = path.join(externalFolder, "actions");
+      if (!fs.existsSync(actionsFolder)) {
+        console.log(actionsFolder);
+        fs.mkdirSync(actionsFolder);
+      }
+
+      // Create fonts folder if it doesn't exist
+      const fontsFolder = path.join(externalFolder, "fonts");
+      if (!fs.existsSync(fontsFolder)) {
+        console.log(fontsFolder);
+        fs.mkdirSync(fontsFolder);
+      }
+
+      // Create utils folder if it doesn't exist
+      const utilsFolder = path.join(externalFolder, "utils");
+      if (!fs.existsSync(utilsFolder)) {
+        console.log(utilsFolder);
+        fs.mkdirSync(utilsFolder);
+      }
+
+      console.log(localFile, externalFile);
+      console.log(fs.readFileSync(localFile, "utf-8"), {
+        localFile,
+        externalFile,
+      });
+
+      // Don't write data files if they already exist
+      if (externalFile.includes("data") && fs.existsSync(externalFile)) {
+        continue;
+      }
+
       fs.copyFileSync(localFile, externalFile);
     }
 
