@@ -47,7 +47,7 @@ ipcMain.on("chooseDirectory", async (event, folder) => {
   runner = new Runner({ filePath: folder });
 
   console.log("npm installation ist starting");
-  const process = exec("npm install --offline", {
+  const process = exec("npm install", {
     cwd: folder,
     stdio: "inherit",
   });
