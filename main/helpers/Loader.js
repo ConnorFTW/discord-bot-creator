@@ -23,7 +23,12 @@ export default class Loader {
     );
   }
   async getLocalActions() {
-    const files = await fg("./resources/actions/*.js");
+    console.log(path.join(__dirname, "../resources/actions/*.js"));
+    const directory = path
+      .join(__dirname, "../resources/actions/*.js")
+      .replace(/\\/g, "/");
+    const files = await fg(directory);
+    console.log(files);
     // Remove strange dev file
     files.unshift();
     const actions = files
