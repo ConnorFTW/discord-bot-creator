@@ -27,8 +27,8 @@
 #### Build it on your own
 
 ```
-$ git clone git@github.com:Michael55555/dbc.git
-$ cd dbc
+$ git clone git@github.com:Michael55555/discord-bot-creator.git
+$ cd discord-bot-creator
 $ npm install
 $ npm run dev
 ```
