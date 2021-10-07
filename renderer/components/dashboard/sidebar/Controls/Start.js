@@ -22,19 +22,11 @@ export default function ControlsStart() {
     ipcRenderer.send("onBotRun");
   };
 
-  if (isStarting) {
-    return (
-      <Spinner
+  return isStarting ? (<Spinner
         style={{ height: "1.5rem", width: "1.5rem", margin: "0.25rem" }}
         animation="grow"
         variant="primary"
-      />
-    );
-  } else {
-    return (
-      <div onClick={run} style={{ cursor: "pointer" }}>
+      />) : (<div onClick={run} style={{ cursor: "pointer" }}>
         <PlayIcon />
-      </div>
-    );
-  }
+      </div>);
 }

@@ -37,11 +37,7 @@ export default {
     const obj = this.evalMessage(data.url, cache);
 
     let gif;
-    if (!obj.startsWith("http")) {
-      gif = this.getLocalFile(obj);
-    } else {
-      gif = obj;
-    }
+    gif = !obj.startsWith("http") ? this.getLocalFile(obj) : obj;
 
     if (!gif.includes(".gif")) return this.callNextAction(cache);
 

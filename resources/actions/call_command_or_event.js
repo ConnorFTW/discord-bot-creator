@@ -5,11 +5,7 @@ module.exports = {
 
   subtitle(data) {
     let source;
-    if (parseInt(data.sourcetype, 10) === 1) {
-      source = data.source2.toString();
-    } else {
-      source = data.source.toString();
-    }
+    source = parseInt(data.sourcetype, 10) === 1 ? data.source2.toString() : data.source.toString();
     return `Call Command/Event ID "${source}"`;
   },
 
@@ -98,11 +94,7 @@ module.exports = {
     const { Files } = this.getDBM();
 
     let id;
-    if (parseInt(data.sourcetype, 10) === 1) {
-      id = this.evalMessage(data.source2, cache);
-    } else {
-      id = data.source;
-    }
+    id = parseInt(data.sourcetype, 10) === 1 ? this.evalMessage(data.source2, cache) : data.source;
     if (!id) return console.log("Please insert a Command/Event ID!");
 
     let actions;

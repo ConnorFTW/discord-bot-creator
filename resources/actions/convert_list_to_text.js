@@ -103,11 +103,7 @@ module.exports = {
     let result = "";
 
     for (let i = 0; i < list.length; i++) {
-      if (i === 0) {
-        result += start + String(list[i]) + end;
-      } else {
-        result += start + middle + String(list[i]) + end;
-      }
+      result += i === 0 ? start + String(list[i]) + end : start + middle + String(list[i]) + end;
     }
 
     if (result) {

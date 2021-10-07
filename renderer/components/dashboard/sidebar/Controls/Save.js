@@ -39,20 +39,12 @@ export default function ControlsSave() {
     ipcRenderer.emit("save");
   };
 
-  if (controls.isSaving) {
-    return (
-      <Spinner
+  return controls.isSaving ? (<Spinner
         className="mx-1"
         style={{ height: "1.5rem", width: "1.5rem", margin: "0.25rem" }}
         animation="grow"
         variant="success"
-      />
-    );
-  } else {
-    return (
-      <div onClick={save} style={{ cursor: "pointer" }}>
+      />) : (<div onClick={save} style={{ cursor: "pointer" }}>
         <SaveIcon className="success" />
-      </div>
-    );
-  }
+      </div>);
 }

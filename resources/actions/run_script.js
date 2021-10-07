@@ -304,11 +304,7 @@ module.exports = {
     const data = cache.actions[cache.index];
 
     let code;
-    if (data.interpretation === "0") {
-      code = this.evalMessage(data.code, cache);
-    } else {
-      code = data.code;
-    }
+    code = data.interpretation === "0" ? this.evalMessage(data.code, cache) : data.code;
 
     if (data.storage !== "0") {
       const result = this.eval(code, cache);

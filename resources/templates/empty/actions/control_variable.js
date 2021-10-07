@@ -65,11 +65,7 @@ export default {
     if (val !== undefined) {
       if (isAdd) {
         let result;
-        if (storage === undefined) {
-          result = val;
-        } else {
-          result = storage + val;
-        }
+        result = storage === undefined ? val : storage + val;
         this.storeValue(result, type, varName, cache);
       } else {
         this.storeValue(val, type, varName, cache);

@@ -126,11 +126,7 @@ export default {
     infoList2.push(`from ${infoName2} ${infoName1} "${data.input.toString()}"`);
     infoList2.push("");
 
-    if (info4 > 2 && sourceType === 3) {
-      infoNum2 = 1;
-    } else {
-      infoNum2 = 0;
-    }
+    infoNum2 = info4 > 2 && sourceType === 3 ? 1 : 0;
 
     return `Get "${infoList1[parseInt(infoNum1, 10)]}" ${
       infoList2[parseInt(infoNum2, 10)]
@@ -564,11 +560,7 @@ export default {
             result = "ID";
             break;
           case 1:
-            if (id2 > 0) {
-              result = "Login Name";
-            } else {
-              result = "ID";
-            }
+            result = id2 > 0 ? "Login Name" : "ID";
             break;
           default:
             break;
@@ -777,11 +769,7 @@ export default {
         }
         break;
       case 1: // Stream
-        if (inputType === 0) {
-          url += `streams?user_id=${input}`;
-        } else {
-          url += `streams?user_login=${input}`;
-        }
+        url += inputType === 0 ? `streams?user_id=${input}` : `streams?user_login=${input}`;
         json = await getApi.call(this, url);
         if (json && json.data.length !== 0) {
           let result;

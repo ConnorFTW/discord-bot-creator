@@ -51,11 +51,7 @@ module.exports = {
     const time = this.evalMessage(data.time, cache);
 
     let result;
-    if (/^\d+(?:\.\d*)?$/.exec(time)) {
-      result = toDate(Number(time).toFixed(3));
-    } else {
-      result = toDate(time);
-    }
+    result = /^\d+(?:\.\d*)?$/.exec(time) ? toDate(Number(time).toFixed(3)) : toDate(time);
     if (result.toString() === "Invalid Date") result = undefined;
 
     if (result !== undefined) {
