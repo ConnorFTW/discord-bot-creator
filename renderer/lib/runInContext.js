@@ -9,11 +9,6 @@ const runInContext = (
   }
 
   const data = action || {};
-  const content = "";
-  const val1 = "";
-  const val2 = "";
-  const inputData = "";
-  const item = "";
 
   data.messages = [
     `

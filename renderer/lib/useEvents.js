@@ -35,23 +35,6 @@ export default function useEvents({ force } = {}) {
     ipcRenderer?.send("getEvents");
   }, [typeof window]);
 
-  const setCommands = async (commands) => {
-    return new Promise((resolve, reject) => {
-      console.log("Trying to save commands");
-      console.log(commands);
-      ipcRenderer?.send("saveCommands", commands);
-      ipcRenderer?.once("saveCommands", (event, response) => {
-        if (!response.success) {
-          console.error("Failed to save");
-          return reject("Failed to save");
-        }
-        let commands = response.commands;
-        window._commands = commands || [];
-        _setCommands(commands);
-        resolve(commands);
-      });
-    });
-  };
 
   const setEvents = async (events) => {
     return new Promise((resolve, reject) => {
