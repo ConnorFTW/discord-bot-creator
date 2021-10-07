@@ -50,13 +50,8 @@ export default {
           "data",
           "multiple_bot_owners.json"
         );
-        if (!fs.existsSync(filePath)) {
-          result = member.id === Files.data.settings.ownerId;
-        } else {
-          result =
-            JSON.parse(fs.readFileSync(filePath, "utf8")).includes(member.id) ||
+        result = !fs.existsSync(filePath) ? member.id === Files.data.settings.ownerId : JSON.parse(fs.readFileSync(filePath, "utf8")).includes(member.id) ||
             member.id === Files.data.settings.ownerId;
-        }
         break;
       }
       case 7:

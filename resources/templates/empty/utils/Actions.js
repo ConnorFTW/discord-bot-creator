@@ -177,11 +177,7 @@ export default class Actions extends Logger {
     const permissions = cmd.permissions;
     switch (restriction) {
       case 0:
-        if (isServer) {
-          return this.checkPermissions(msg, permissions);
-        } else {
-          return true;
-        }
+        return isServer ? this.checkPermissions(msg, permissions) : true;
       case 1:
         return isServer && this.checkPermissions(msg, permissions);
       case 2:

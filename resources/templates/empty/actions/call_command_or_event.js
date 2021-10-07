@@ -10,11 +10,7 @@ export default {
     const { Files } = this.getDBM();
 
     let id;
-    if (parseInt(data.sourcetype, 10) === 1) {
-      id = this.evalMessage(data.source2, cache);
-    } else {
-      id = data.source;
-    }
+    id = parseInt(data.sourcetype, 10) === 1 ? this.evalMessage(data.source2, cache) : data.source;
     if (!id) return console.log("Please insert a Command/Event ID!");
 
     let actions;

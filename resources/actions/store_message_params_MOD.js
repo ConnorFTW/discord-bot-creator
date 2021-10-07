@@ -241,20 +241,14 @@ module.exports = {
         result = msg.content.split(new RegExp(separator))[ParamN] || undefined;
         break;
       case 1:
-        if (data.count) {
-          result =
-            msg.content
+        result = data.count ? msg.content
               .split(new RegExp(separator, "g"))
               .slice(ParamN)
               .slice(0, count)
-              .join(" ") || undefined;
-        } else {
-          result =
-            msg.content
+              .join(" ") || undefined : msg.content
               .split(new RegExp(separator, "g"))
               .slice(ParamN)
               .join(" ") || undefined;
-        }
         break;
       case 2:
         result =

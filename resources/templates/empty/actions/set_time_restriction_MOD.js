@@ -285,11 +285,7 @@ export default {
           return false;
         case 1: {
           let channelId;
-          if (typeof cache.server !== "undefined") {
-            channelId = cache.server.id;
-          } else {
-            channelId = msg.channel.id;
-          }
+          channelId = typeof cache.server !== "undefined" ? cache.server.id : msg.channel.id;
           if (typeof Cooldown[cmd.name][msg.author.id] !== "object") {
             Cooldown[cmd.name][msg.author.id] = {};
           }

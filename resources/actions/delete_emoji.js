@@ -119,11 +119,7 @@ module.exports = {
     const reason = this.evalMessage(data.reason, cache);
     const varName = this.evalMessage(data.varName, cache);
     let emoji;
-    if (type === 0) {
-      emoji = server.emojis.cache.find((e) => e.name === varName);
-    } else {
-      emoji = this.getVariable(type, varName, cache);
-    }
+    emoji = type === 0 ? server.emojis.cache.find((e) => e.name === varName) : this.getVariable(type, varName, cache);
     if (!emoji) {
       this.callNextAction(cache);
       return;

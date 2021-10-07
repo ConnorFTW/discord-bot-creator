@@ -20,13 +20,7 @@ export default function ControlsStop() {
     setControls({ ...controls, isStopping: false, isRunning: true });
   };
 
-  if (controls.isStopping) {
-    return <Spinner className="mx-1" />;
-  } else {
-    return (
-      <div onClick={stop} style={{ cursor: "pointer" }}>
+  return controls.isStopping ? <Spinner className="mx-1" /> : (<div onClick={stop} style={{ cursor: "pointer" }}>
         <StopIcon className="danger" />
-      </div>
-    );
-  }
+      </div>);
 }

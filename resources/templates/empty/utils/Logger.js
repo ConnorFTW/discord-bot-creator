@@ -14,11 +14,7 @@ export default class Logger {
         ? "command"
         : "event";
 
-    if (cache.handlerIndex) {
-      return `[err:${this.getLogPosition(data, cache)}]`;
-    } else {
-      return `Error with ${type} "${data.name}"`;
-    }
+    return cache.handlerIndex ? `[err:${this.getLogPosition(data, cache)}]` : `Error with ${type} "${data.name}"`;
   }
 
   /**

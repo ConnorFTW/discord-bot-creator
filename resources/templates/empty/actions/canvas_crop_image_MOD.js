@@ -124,16 +124,8 @@ export default {
     image.src = imagedata;
     let cropw = this.evalMessage(data.width, cache);
     let croph = this.evalMessage(data.height, cache);
-    if (cropw.endsWith("%")) {
-      cropw = (image.width * parseFloat(cropw)) / 100;
-    } else {
-      cropw = parseFloat(cropw);
-    }
-    if (croph.endsWith("%")) {
-      croph = (image.height * parseFloat(croph)) / 100;
-    } else {
-      croph = parseFloat(croph);
-    }
+    cropw = cropw.endsWith("%") ? (image.width * parseFloat(cropw)) / 100 : parseFloat(cropw);
+    croph = croph.endsWith("%") ? (image.height * parseFloat(croph)) / 100 : parseFloat(croph);
     const align = parseInt(data.align, 10);
     let positionx;
     let positiony;

@@ -165,11 +165,7 @@ module.exports = {
         result = server.members.cache.get(auditLog.executor.id);
         break;
       case 3:
-        if (auditLog.target.constructor.name === "User") {
-          result = server.members.cache.get(auditLog.executor.id);
-        } else {
-          result = auditLog.target;
-        }
+        result = auditLog.target.constructor.name === "User" ? server.members.cache.get(auditLog.executor.id) : auditLog.target;
         break;
       case 4:
         result = auditLog.targetType;
@@ -181,11 +177,7 @@ module.exports = {
         result = auditLog.createdTimestamp;
         break;
       case 7:
-        if (auditLog.changes !== null) {
-          result = auditLog.changes.length;
-        } else {
-          result = undefined;
-        }
+        result = auditLog.changes !== null ? auditLog.changes.length : undefined;
         break;
       case 8:
         position = parseInt(this.evalMessage(data.position, cache), 10);
@@ -218,18 +210,10 @@ module.exports = {
         }
         break;
       case 11:
-        if (auditLog.reason !== null) {
-          result = auditLog.reason;
-        } else {
-          result = undefined;
-        }
+        result = auditLog.reason !== null ? auditLog.reason : undefined;
         break;
       case 12:
-        if (auditLog.reason !== null) {
-          result = auditLog.extra;
-        } else {
-          result = undefined;
-        }
+        result = auditLog.reason !== null ? auditLog.extra : undefined;
         break;
       default:
         break;

@@ -7,11 +7,7 @@ export default function SettingsModal(props) {
   let checked = false;
 
   if (settings?.checked) {
-    if (settings.checked === "false") {
-      checked = false;
-    } else {
-      checked = true;
-    }
+    checked = settings.checked === "false" ? false : true;
   }
 
   const changePrefix = (e) => {

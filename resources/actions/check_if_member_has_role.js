@@ -139,11 +139,7 @@ module.exports = {
     if (role) {
       if (Array.isArray(member)) {
         result = member.every(function (mem) {
-          if (this.dest(mem, "roles", "cache")) {
-            return mem.roles.cache.has(role.id);
-          } else {
-            return false;
-          }
+          return this.dest(mem, "roles", "cache") ? mem.roles.cache.has(role.id) : false;
         });
       } else if (this.dest(member, "roles", "cache")) {
         result = member.roles.cache.has(role.id);
