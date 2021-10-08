@@ -1,2 +1,0 @@
-- name: npm unused packages checker
-  uses: Amr-Reda/npm-unused-packages-checker@v1
