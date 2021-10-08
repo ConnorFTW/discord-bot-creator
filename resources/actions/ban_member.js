@@ -104,9 +104,8 @@ module.exports = {
         .then(() => this.callNextAction(cache))
         .catch(this.displayError.bind(this, data, cache));
     } else {
+      this.displayError(data, cache, "Ban Target Not Found");
       this.callNextAction(cache);
     }
   },
-
-  mod() {},
 };
