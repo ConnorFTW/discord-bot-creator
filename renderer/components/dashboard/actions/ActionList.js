@@ -24,10 +24,10 @@ export default function ActionList({ Form: ActionForm }) {
         <ActionDropdown
           name={action.name || ""}
           className="mb-4"
-          create={true}
+          create
         />
         <DragDropContext onDragEnd={onDragEnd}>
-          <Droppable droppableId="droppable" ignoreContainerClipping={true}>
+          <Droppable droppableId="droppable" ignoreContainerClipping>
             {(provided) => (
               <div {...provided.droppableProps} ref={provided.innerRef}>
                 {actions.map((action, i) => (
