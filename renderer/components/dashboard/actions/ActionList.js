@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { useDashboardContext } from "../DashboardContext";
@@ -58,3 +59,7 @@ export default function ActionList({ Form: ActionForm }) {
     </Row>
   );
 }
+
+ActionList.propTypes = {
+  Form: PropTypes.element
+};

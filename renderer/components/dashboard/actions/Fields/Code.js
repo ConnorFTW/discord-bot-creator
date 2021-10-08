@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import "@uiw/react-textarea-code-editor/dist.css";
 import dynamic from "next/dynamic";
 import React from "react";
@@ -33,3 +34,7 @@ function Editor({ value }) {
 }
 
 export default Editor;
+
+Editor.propTypes = {
+  value: PropTypes.string
+};

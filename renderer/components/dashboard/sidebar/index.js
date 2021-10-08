@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { Badge, Button, Card, Col, Form, Nav, Row } from "react-bootstrap";
 import { useDashboardContext } from "../DashboardContext";
 import SidebarBotControls from "./Controls";
@@ -81,3 +82,7 @@ export default function Sidebar({ selected }) {
     </>
   );
 }
+
+Sidebar.propTypes = {
+  selected: PropTypes.any
+};

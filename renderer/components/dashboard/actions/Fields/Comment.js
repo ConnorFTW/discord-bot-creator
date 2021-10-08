@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from "react";
 import { Form, FormGroup } from "react-bootstrap";
 import { useDashboardContext } from "../../DashboardContext";
@@ -22,3 +23,7 @@ export default function CommentField({ value }) {
     </FormGroup>
   );
 }
+
+CommentField.propTypes = {
+  value: PropTypes.string
+};

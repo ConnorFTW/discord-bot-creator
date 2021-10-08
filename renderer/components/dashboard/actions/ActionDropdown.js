@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { Badge } from "react-bootstrap";
 import { Typeahead } from "react-bootstrap-typeahead";
 import { useDashboardContext } from "../DashboardContext";
@@ -51,3 +52,9 @@ export default function ActionDropdown({ name, className, create }) {
     />
   );
 }
+
+ActionDropdown.propTypes = {
+  name: PropTypes.string,
+  className: PropTypes.string,
+  create: PropTypes.bool
+};
