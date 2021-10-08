@@ -28,7 +28,7 @@ export default {
       case 0:
         player._forceEnd = true;
         player.stop();
-        player;
+        
         break;
       case 1:
         player.pause();
