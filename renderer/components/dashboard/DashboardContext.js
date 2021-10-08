@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { ipcRenderer } from "electron";
 import { createContext, useContext, useEffect, useState } from "react";
 import useActions from "../../lib/useActions";
@@ -264,4 +265,8 @@ export function DashboardProvider({ children }) {
       {children}
     </DashboardContext.Provider>
   );
+}
+
+DashboardProvider.propTypes = {
+  children: PropTypes.element
 }

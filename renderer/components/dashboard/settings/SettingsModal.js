@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { ipcRenderer } from "electron";
 import { Button, Form, FormControl, Modal } from "react-bootstrap";
 import useSettings from "../../../lib/useSettings";
@@ -123,3 +124,8 @@ export default function SettingsModal(props) {
     </Modal>
   );
 }
+
+SettingsModal.propTypes = {
+  show: PropTypes.bool,
+  onHide: PropTypes.func,
+};

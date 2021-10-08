@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import Editor from "./Code";
 import ColorField from "./Color";
 import CommentField from "./Comment";
@@ -24,3 +25,8 @@ export default function FieldManager({ fields, fieldValues }) {
     </>
   );
 }
+
+FieldManager.propTypes = {
+  fields: PropTypes.arrayOf(PropTypes.string),
+  fieldValues: PropTypes.object
+};

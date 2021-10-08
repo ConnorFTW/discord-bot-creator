@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { Button, Col, Form, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useDashboardContext } from "../DashboardContext";
 
@@ -55,3 +56,9 @@ export default function ActionItem({ action, index, onSelect }) {
     </Col>
   );
 }
+
+ActionItem.propTypes = {
+  action: PropTypes.object,
+  index: PropTypes.number,
+  onSelect: PropTypes.func
+};
