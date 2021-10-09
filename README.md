@@ -1,4 +1,5 @@
-![image](https://user-images.githubusercontent.com/30301026/136653659-df183903-aee0-43aa-a866-bdb181667c81.png)
+![image](https://user-images.githubusercontent.com/30301026/136669993-0219904e-c967-4b4f-8903-df43fb35f44b.png)
+
 ---
 
 <a href="https://discord.gg/Z7ybzt2KRr"><img src="https://img.shields.io/badge/Discord%20Bot%20Creator%20-%237289DA.svg?&style=for-the-badge&logo=discord&logoColor=white"/></a><img src="https://img.shields.io/badge/react%20-%2320232a.svg?&style=for-the-badge&logo=react&logoColor=%2361DAFB"/>
