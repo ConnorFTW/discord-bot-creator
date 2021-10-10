@@ -1,4 +1,5 @@
 import { app, Menu } from "electron";
+import { log } from "./logger";
 
 export default function createMenu(mainWindow) {
   const isMac = process.platform === "darwin";
@@ -78,7 +79,7 @@ export default function createMenu(mainWindow) {
           type: "checkbox",
           checked: false,
           click: (res) => {
-            console.log(res.checked);
+            log(res.checked);
             mainWindow.setAlwaysOnTop(res.checked);
           },
         },

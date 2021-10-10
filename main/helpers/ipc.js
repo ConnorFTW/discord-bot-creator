@@ -3,6 +3,7 @@ import { dialog, ipcMain } from "electron";
 import { copyFiles } from "./copy-file";
 import { addFolder, getFolders } from "./folders";
 import { Loader, Runner } from "./index";
+import { log } from "./logger";
 import { clearLogs } from "./logs";
 import { logOn } from "./steam";
 import { validateFile } from "./validate-files";
@@ -40,20 +41,20 @@ ipcMain.on("chooseDirectory", async (event, folder) => {
 
   // Populate with files
   const invalidFiles = BOT_FILES.filter((file) => !validateFile(folder, file));
-  console.log(invalidFiles);
+  log(invalidFiles);
   copyFiles(folder, invalidFiles);
 
   loader = new Loader({ filePath: folder });
   runner = new Runner({ filePath: folder });
 
-  console.log("npm installation ist starting");
+  log("npm installation ist starting");
   const process = exec("npm install", {
     cwd: folder,
     stdio: "inherit",
   });
   process.once("exit", () => {
     event.sender.send("chooseDirectory", folder);
-    console.log("npm installation finsihed");
+    log("npm installation finsihed");
   });
 });
 

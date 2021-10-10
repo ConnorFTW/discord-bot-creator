@@ -2,6 +2,7 @@ import _eval from "eval";
 import fg from "fast-glob";
 import fs from "fs";
 import path from "path";
+import { log } from "./logger";
 
 export default class Loader {
   constructor({ filePath }) {
@@ -23,12 +24,11 @@ export default class Loader {
     );
   }
   async getLocalActions() {
-    console.log(path.join(__dirname, "../resources/actions/*.js"));
+    log(`Action Path: ${path.join(__dirname, "../resources/actions/*.js")}`);
     const directory = path
       .join(__dirname, "../resources/actions/*.js")
       .replace(/\\/g, "/");
     const files = await fg(directory);
-    console.log(files);
     // Remove strange dev file
     files.unshift();
     const actions = files
@@ -50,6 +50,8 @@ export default class Loader {
           commandOnly: content.commandOnly + "",
         };
       });
+
+    log(`${actions.length} actions loaded`);
 
     return actions;
   }

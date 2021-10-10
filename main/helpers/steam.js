@@ -1,3 +1,5 @@
+import { log } from "./logger";
+
 const SteamUser = require("steam-user");
 
 // Setup client
@@ -10,7 +12,7 @@ let ownedApps = [];
 
 // Setup listeners
 client.on("loggedOn", () => {
-  console.log("Logged in!");
+  log("Logged in!");
 });
 
 client.on("appOwnershipCached", () => {
@@ -18,7 +20,7 @@ client.on("appOwnershipCached", () => {
 });
 
 client.on("steamGuard", () => {
-  console.log("Steam Guard");
+  log("Steam Guard");
 });
 
 export const ownsApp = (appId) => {
