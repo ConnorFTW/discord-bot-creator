@@ -1,9 +1,9 @@
 import { exec } from "child_process";
 import { dialog, ipcMain } from "electron";
+import { log } from "electron-log";
 import { copyFiles } from "./copy-file";
 import { addFolder, getFolders } from "./folders";
 import { Loader, Runner } from "./index";
-import { log } from "./logger";
 import { clearLogs } from "./logs";
 import { logOn } from "./steam";
 import { validateFile } from "./validate-files";

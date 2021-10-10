@@ -1,8 +1,8 @@
+import { log } from "electron-log";
 import _eval from "eval";
 import fg from "fast-glob";
 import fs from "fs";
 import path from "path";
-import { log } from "./logger";
 
 export default class Loader {
   constructor({ filePath }) {

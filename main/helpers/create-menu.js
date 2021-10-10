@@ -1,5 +1,5 @@
 import { app, Menu } from "electron";
-import { log } from "./logger";
+import { log } from "electron-log";
 
 export default function createMenu(mainWindow) {
   const isMac = process.platform === "darwin";

@@ -1,7 +1,7 @@
+import { log } from "electron-log";
 import fg from "fast-glob";
 import fs from "fs";
 import path from "path";
-import { log } from "./logger";
 
 export const copyFiles = (externalFolder, _files) => {
   const localFiles = fg.sync("./resources/templates/empty/**/*.*");

@@ -1,7 +1,7 @@
 import { fork } from "child_process";
 import { ipcMain } from "electron";
+import { log } from "electron-log";
 import path from "path";
-import { log } from "./logger";
 
 export default class Runner {
   constructor(runner = {}) {

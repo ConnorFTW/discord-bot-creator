@@ -1,4 +1,4 @@
-import { log } from "./logger";
+import { log } from "electron-log";
 
 const SteamUser = require("steam-user");
 
