@@ -44,7 +44,7 @@ export default function ActionItem({ action, index, onSelect }) {
             "border p-2 my-2 mx-0 row align-items-center " +
             (error ? "border-danger" : "")
           }
-          onSelect={() => onSelect(index)}
+          onSelect={onSelect(index)}
           style={{ cursor: "pointer", backgroundColor: "#35393f" }}
           onClick={select}
         >
