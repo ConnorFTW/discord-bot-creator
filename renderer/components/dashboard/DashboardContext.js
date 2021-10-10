@@ -1,4 +1,5 @@
 import { ipcRenderer } from "electron";
+import { log } from "electron-timber";
 import { createContext, useContext, useEffect, useState } from "react";
 import useActions from "../../lib/useActions";
 import useCommands from "../../lib/useCommands";
@@ -30,8 +31,8 @@ export function DashboardProvider({ children }) {
 
   useEffect(() => {
     ipcRenderer?.on("onErrorsUpdate", (_event, error) => {
-      console.log("Here");
-      console.log("Here is the error", error);
+      log("Here");
+      log("Here is the error", error);
       setState((state) => ({ ...state, errors: [...state.errors, error] }));
     });
     return () => {
@@ -187,7 +188,7 @@ export function DashboardProvider({ children }) {
     for (const key of actionSchema.fields) {
       action[key] = "";
     }
-    console.log(action);
+    log(action);
 
     actions.push(action);
     setState({ ...state });

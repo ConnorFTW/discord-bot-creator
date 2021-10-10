@@ -1,5 +1,6 @@
 import { SaveIcon } from "@heroicons/react/solid";
 import { ipcRenderer } from "electron";
+import { log } from "electron-log";
 import { useEffect } from "react";
 import { Spinner } from "react-bootstrap";
 import { useControls } from "./Context";
@@ -20,7 +21,7 @@ export default function ControlsSave() {
 
     const savedListener = () => {
       hasSaved = true;
-      console.log("Saved");
+      log("Saved");
       setControls({
         ...controls,
         isSaving: false,
@@ -39,12 +40,16 @@ export default function ControlsSave() {
     ipcRenderer.emit("save");
   };
 
-  return controls.isSaving ? (<Spinner
-        className="mx-1"
-        style={{ height: "1.5rem", width: "1.5rem", margin: "0.25rem" }}
-        animation="grow"
-        variant="success"
-      />) : (<div onClick={save} style={{ cursor: "pointer" }}>
-        <SaveIcon className="success" />
-      </div>);
+  return controls.isSaving ? (
+    <Spinner
+      className="mx-1"
+      style={{ height: "1.5rem", width: "1.5rem", margin: "0.25rem" }}
+      animation="grow"
+      variant="success"
+    />
+  ) : (
+    <div onClick={save} style={{ cursor: "pointer" }}>
+      <SaveIcon className="success" />
+    </div>
+  );
 }
