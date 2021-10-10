@@ -1,5 +1,6 @@
 import { PlayIcon } from "@heroicons/react/solid";
 import { ipcRenderer } from "electron";
+import { log } from "electron-log";
 import { Spinner } from "react-bootstrap";
 import { useControls } from "./Context";
 
@@ -12,7 +13,7 @@ export default function ControlsStart() {
     setControls({ ...controls, isStarting: true });
 
     ipcRenderer.on("onBotRun", (_event, res = {}) => {
-      console.log({ res });
+      log({ res });
       if (res.success) {
         setControls({ ...controls, isStarting: false, isRunning: true });
       } else {
@@ -22,11 +23,15 @@ export default function ControlsStart() {
     ipcRenderer.send("onBotRun");
   };
 
-  return isStarting ? (<Spinner
-        style={{ height: "1.5rem", width: "1.5rem", margin: "0.25rem" }}
-        animation="grow"
-        variant="primary"
-      />) : (<div onClick={run} style={{ cursor: "pointer" }}>
-        <PlayIcon />
-      </div>);
+  return isStarting ? (
+    <Spinner
+      style={{ height: "1.5rem", width: "1.5rem", margin: "0.25rem" }}
+      animation="grow"
+      variant="primary"
+    />
+  ) : (
+    <div onClick={run} style={{ cursor: "pointer" }}>
+      <PlayIcon />
+    </div>
+  );
 }

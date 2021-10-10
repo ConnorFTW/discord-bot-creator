@@ -1,5 +1,6 @@
+import { log } from "electron-timber";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
-import { Button, Col, Form, Row } from "react-bootstrap";
+import { Col, Form, Row } from "react-bootstrap";
 import { useDashboardContext } from "../DashboardContext";
 import ActionDropdown from "./ActionDropdown";
 import ActionItem from "./ActionListItem";
@@ -10,9 +11,9 @@ export default function ActionList({ Form: ActionForm }) {
   const onDragEnd = (result) => {
     if (!result.destination) return;
     if (result.destination.index === result.source.index) return;
-    console.log(result.destination);
+    log(result.destination);
 
-    console.log("Here");
+    log("Here");
     reorderAction(result.source.index, result.destination.index);
   };
 
