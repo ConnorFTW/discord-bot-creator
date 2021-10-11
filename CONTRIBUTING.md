@@ -22,7 +22,7 @@ There are multiple sections in the project that require different knowledge. You
 
 ### Template Files
 To edit template files, which will be copied to a user-chosen folder later an understanding of discord.js@13 is needed.
-You will need to look into the different classes from ``templates/empty/utils`` to understand what the separate files in ``templates/empty/actions`` are doing.
+You will need to look into the different classes from ``/resources/bot`` to understand what the separate files in ``/resources/bot/actions`` are doing.
 
 ### Renderer
 The renderer folder contains all Next.js components and frontend logic.

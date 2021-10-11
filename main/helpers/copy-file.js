@@ -4,13 +4,10 @@ import fs from "fs";
 import path from "path";
 
 export const copyFiles = (externalFolder, _files) => {
-  const localFiles = fg.sync("./resources/templates/empty/**/*.*");
+  const localFiles = fg.sync("./resources/bot/**/*.*");
 
   const externalFiles = localFiles.map((file) => {
-    return path.join(
-      externalFolder,
-      file.split("./resources/templates/empty")[1]
-    );
+    return path.join(externalFolder, file.split("./resources/bot")[1]);
   });
   log(`${localFiles.length} files found`);
   log(`Files converted to something like ${externalFiles[0]}`);
