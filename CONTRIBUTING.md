@@ -15,6 +15,8 @@ Thanks for choosing to contribute to Discord Bot Creator. 🎉
 
 [Styleguide](#styleguide)
   * [Git Commit Messages](#git-commit-messages)
+
+[Structure](#structure)
   
 
 ## Requirements
@@ -73,3 +75,6 @@ You're interested in coding? Good choice! There are a few things that you'd need
     * :arrow_up: `:arrow_up:` when upgrading dependencies
     * :arrow_down: `:arrow_down:` when downgrading dependencies
     * :shirt: `:shirt:` when removing linter warnings
+
+## Structure
+![Code Structure](https://user-images.githubusercontent.com/30301026/136775115-22fe1842-b56d-434d-8639-46eecc51d014.jpg)
