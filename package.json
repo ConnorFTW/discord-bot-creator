@@ -1,8 +1,8 @@
 {
   "private": true,
   "name": "discord-bot-creator",
-  "description": "My application description",
-  "version": "1.0.0",
+  "description": "Create your Discord bot in less than 30 minutes. ",
+  "version": "0.0.2-alpha",
   "author": "Michael Peters <michaelpeters5647@gmail.com>",
   "main": "app/background.js",
   "scripts": {
