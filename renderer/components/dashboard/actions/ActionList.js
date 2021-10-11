@@ -1,12 +1,11 @@
-import PropTypes from "prop-types";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { Col, Form, Row } from "react-bootstrap";
 import { useDashboardContext } from "../DashboardContext";
 import ActionDropdown from "./ActionDropdown";
 import ActionItem from "./ActionListItem";
 
-export default function ActionList({ Form: ActionForm }) {
-  const { actions, addAction, reorderAction, action } = useDashboardContext();
+export default function ActionList() {
+  const { actions, reorderAction, action } = useDashboardContext();
 
   const onDragEnd = (result) => {
     if (!result.destination) return;
@@ -55,7 +54,3 @@ export default function ActionList({ Form: ActionForm }) {
     </Row>
   );
 }
-
-ActionList.propTypes = {
-  Form: PropTypes.element,
-};
