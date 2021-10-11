@@ -40,5 +40,22 @@
     "nextron": "^7.0.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
+  },
+  "build": {
+    "appId": "com.michaelpeters.discord-bot-creator",
+    "productName": "Discord Bot Creator",
+    "copyright": "Copyright © 2020 Michael Peters",
+    "directories": {
+      "output": "dist",
+      "buildResources": "resources"
+    },
+    "files": [
+      "package.json",
+      "app",
+      "resources"
+    ],
+    "publish": false,
+    "asar": true,
+    "asarUnpack": "resources"
   }
 }

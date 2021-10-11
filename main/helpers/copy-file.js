@@ -1,18 +1,23 @@
-import { log } from "electron-log";
+import { error, log } from "electron-log";
 import fg from "fast-glob";
 import fs from "fs";
 import path from "path";
 
-export const copyFiles = (externalFolder, _files) => {
-  const localFiles = fg.sync("./resources/bot/**/*.*");
-
-  const externalFiles = localFiles.map((file) => {
-    return path.join(externalFolder, file.split("./resources/bot")[1]);
-  });
-  log(`${localFiles.length} files found`);
-  log(`Files converted to something like ${externalFiles[0]}`);
-
+export const copyFiles = async (externalFolder, _files) => {
   try {
+    log("copy-file __dirname", __dirname);
+    const directory = path
+      .join(__dirname, "../resources/bot/**/*.*")
+      .replace(/\\/g, "/");
+    const localFiles = await fg(directory);
+    log(`${localFiles.length} files found`);
+    log(`file example ${localFiles[0]}`);
+    const externalFiles = localFiles.map((file) => {
+      return path.join(externalFolder, file.split("/resources/bot")[1]);
+    });
+
+    log(`Files converted to something like ${externalFiles[0]}`);
+
     for (let i in localFiles) {
       const localFile = localFiles[i];
       const externalFile = externalFiles[i];
@@ -55,6 +60,6 @@ export const copyFiles = (externalFolder, _files) => {
 
     return true;
   } catch (e) {
-    console.error(e);
+    error(e);
   }
 };

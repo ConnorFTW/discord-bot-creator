@@ -25,6 +25,7 @@ export default class Loader {
   }
   async getLocalActions() {
     log(`Action Path: ${path.join(__dirname, "../resources/actions/*.js")}`);
+    log("Loader __dirname:", __dirname);
     const directory = path
       .join(__dirname, "../resources/actions/*.js")
       .replace(/\\/g, "/");
