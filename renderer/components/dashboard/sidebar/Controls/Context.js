@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { createContext, useContext, useState } from "react";
 
 export const ControlsContext = createContext(null);
@@ -16,3 +17,7 @@ export default function ControlsContextProvider({ children }) {
     </ControlsContext.Provider>
   );
 }
+
+ControlsContextProvider.propTypes = {
+  children: PropTypes.element
+};

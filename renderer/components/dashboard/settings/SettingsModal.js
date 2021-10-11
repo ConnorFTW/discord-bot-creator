@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { ipcRenderer } from "electron";
 import { Button, Form, FormControl, Modal } from "react-bootstrap";
 import useSettings from "../../../lib/useSettings";
@@ -5,6 +6,8 @@ import useSettings from "../../../lib/useSettings";
 export default function SettingsModal(props) {
   const [settings, setSettings] = useSettings();
   let checked = false;
+
+  const { show, onHide } = props;
 
   if (settings?.checked) {
     checked = settings.checked === "false" ? false : true;
@@ -31,8 +34,8 @@ export default function SettingsModal(props) {
 
   return (
     <Modal
-      show={props.show}
-      onHide={props.onHide}
+      show={show}
+      onHide={onHide}
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
     >
@@ -115,7 +118,7 @@ export default function SettingsModal(props) {
         </Form>
       </Modal.Body>
       <Modal.Footer className="d-flex flex-row justify-content-between">
-        <Button onClick={props.onHide}>Close</Button>
+        <Button onClick={onHide}>Close</Button>
         <Button onClick={saveSettings} variant="success" className="mt-3">
           Save
         </Button>
@@ -123,3 +126,8 @@ export default function SettingsModal(props) {
     </Modal>
   );
 }
+
+SettingsModal.propTypes = {
+  show: PropTypes.bool,
+  onHide: PropTypes.func,
+};

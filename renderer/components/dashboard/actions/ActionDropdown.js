@@ -1,4 +1,4 @@
-import { log } from "electron-timber";
+import PropTypes from "prop-types";
 import { Badge } from "react-bootstrap";
 import { Typeahead } from "react-bootstrap-typeahead";
 import { useDashboardContext } from "../DashboardContext";
@@ -37,7 +37,7 @@ export default function ActionDropdown({ name, className, create }) {
       className={className}
       inputProps={{
         shouldSelectHint: (shouldSelect, e) => {
-          log(e.key);
+          console.log(e.key);
           return e.key === "Enter" || shouldSelect;
         },
       }}
@@ -52,3 +52,9 @@ export default function ActionDropdown({ name, className, create }) {
     />
   );
 }
+
+ActionDropdown.propTypes = {
+  name: PropTypes.string,
+  className: PropTypes.string,
+  create: PropTypes.bool,
+};

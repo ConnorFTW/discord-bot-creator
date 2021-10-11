@@ -1,4 +1,4 @@
-import { log } from "electron-timber";
+import PropTypes from "prop-types";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { Col, Form, Row } from "react-bootstrap";
 import { useDashboardContext } from "../DashboardContext";
@@ -11,9 +11,9 @@ export default function ActionList({ Form: ActionForm }) {
   const onDragEnd = (result) => {
     if (!result.destination) return;
     if (result.destination.index === result.source.index) return;
-    log(result.destination);
+    console.log(result.destination);
 
-    log("Here");
+    console.log("Here");
     reorderAction(result.source.index, result.destination.index);
   };
 
@@ -22,13 +22,9 @@ export default function ActionList({ Form: ActionForm }) {
       <Col sm="8" className="mx-2 mb-3 command-form">
         <Form.Label>Actions</Form.Label>
         <br />
-        <ActionDropdown
-          name={action.name || ""}
-          className="mb-4"
-          create={true}
-        />
+        <ActionDropdown name={action.name || ""} className="mb-4" create />
         <DragDropContext onDragEnd={onDragEnd}>
-          <Droppable droppableId="droppable" ignoreContainerClipping={true}>
+          <Droppable droppableId="droppable" ignoreContainerClipping>
             {(provided) => (
               <div {...provided.droppableProps} ref={provided.innerRef}>
                 {actions.map((action, i) => (
@@ -59,3 +55,7 @@ export default function ActionList({ Form: ActionForm }) {
     </Row>
   );
 }
+
+ActionList.propTypes = {
+  Form: PropTypes.element,
+};

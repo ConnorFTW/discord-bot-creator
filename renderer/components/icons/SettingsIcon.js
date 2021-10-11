@@ -1,4 +1,6 @@
-export default function SettingsIcon({ style, onClick = () => {}, className }) {
+import PropTypes from 'prop-types';
+
+export default function SettingsIcon({ style, onClick = () => { }, className }) {
   return (
     <svg
       style={style}
@@ -18,3 +20,9 @@ export default function SettingsIcon({ style, onClick = () => {}, className }) {
     </svg>
   );
 }
+
+SettingsIcon.propTypes = {
+  style: PropTypes.object,
+  onClick: PropTypes.func,
+  className: PropTypes.string
+};
