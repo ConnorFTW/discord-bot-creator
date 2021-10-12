@@ -5,7 +5,6 @@ import { copyFiles } from "./copy-file";
 import { addFolder, getFolders } from "./folders";
 import { Loader, Runner } from "./index";
 import { clearLogs } from "./logs";
-import { logOn } from "./steam";
 import { validateFile } from "./validate-files";
 
 let loader;
@@ -125,12 +124,6 @@ ipcMain.on("getLogs", () => {
 ipcMain.on("clearLogs", (event) => {
   clearLogs();
   event.sender.send("clearLogs", { success: true });
-});
-
-// Steam
-ipcMain.on("logOn", (event) => {
-  logOn(accountName, pasword);
-  event.sender.send("logOn", { message: "Trying to log in." });
 });
 
 ipcMain.on("", () => {});
