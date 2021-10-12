@@ -2,9 +2,12 @@ import PropTypes from "prop-types";
 import Editor from "./Code";
 import ColorField from "./Color";
 import CommentField from "./Comment";
+import DaysField from "./Days";
 import FindField from "./Find";
 import FindServerField from "./FindServer";
+import GuildField from "./Guild";
 import MemberField from "./Member";
+import ReasonField from "./Reason";
 import ServerInfoField from "./ServerInfo";
 import StorageField from "./Storage";
 
@@ -19,6 +22,10 @@ export const SUPPORTED_FIELDS = [
   "member",
   "member2",
   "varName2",
+  "guild",
+  "guild2",
+  "days",
+  "reason",
 ];
 export const fieldsSupported = (fields = []) => {
   fields.forEach((field) => {
@@ -41,6 +48,12 @@ export default function FieldManager({ fields, fieldValues }) {
         }
         if (field === "color") {
           return <ColorField value={fieldValues[field]} />;
+        }
+        if (field === "days") {
+          return <DaysField value={fieldValues[field]} />;
+        }
+        if (field === "reason") {
+          return <ReasonField value={fieldValues[field]} />;
         }
 
         // If serverInfo AND find are present we render the FindServerField
@@ -67,6 +80,11 @@ export default function FieldManager({ fields, fieldValues }) {
           // varName field is included here
           return (
             <MemberField fields={fields} index={index} memberField={field} />
+          );
+        }
+        if (field.startsWith("guild")) {
+          return (
+            <GuildField fields={fields} index={index} guildField={field} />
           );
         }
       })}

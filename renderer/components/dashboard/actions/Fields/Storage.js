@@ -24,10 +24,12 @@ export default function StorageField({ fields, storageField }) {
       <div className={varNameVisible && "w-auto"}>
         <FormLabel>Storage</FormLabel>
         <FormSelect value={storage} onChange={onChangeStorage}>
-          <option value={0}>None</option>
-          <option value={1}>Temp Variable</option>
-          <option value={2}>Server Variable</option>
-          <option value={3}>Local Variable</option>
+          <option value="0">None</option>
+          <option value="1" defaultValue>
+            Temp Variable
+          </option>
+          <option value="2">Server Variable</option>
+          <option value="3">Global Variable</option>
         </FormSelect>
       </div>
       {varNameVisible ? (
