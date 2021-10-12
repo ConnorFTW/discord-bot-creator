@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import { useEffect, useRef, useState } from "react";
 import { Button, Modal } from "react-bootstrap";
 import { evalHTML, evalInit, evalListener } from "../../../lib/runInContext";
@@ -9,6 +8,7 @@ import FieldManager, { fieldsSupported } from "./Fields";
 export default function ActionForm({ show, isEvent, onHide }) {
   const { action, actionSchema, updateAction } = useDashboardContext();
 
+  const supported = fieldsSupported(actionSchema?.fields);
   const [state, setState] = useState({
     visible: false,
     html: null,
@@ -21,7 +21,8 @@ export default function ActionForm({ show, isEvent, onHide }) {
       !actionSchema?.name ||
       !action ||
       !state.html ||
-      !content.current?.children
+      !content.current?.children ||
+      supported
     )
       return;
 
@@ -59,7 +60,12 @@ export default function ActionForm({ show, isEvent, onHide }) {
   useEffect(() => {
     // !show is important because it otherwise would render and set the html when we have the old action selected
     const isLoading = !actionSchema?.html || !action;
-    if (isLoading || (state.html && state.name === action.name) || !show)
+    if (
+      isLoading ||
+      (state.html && state.name === action.name) ||
+      !show ||
+      supported
+    )
       return;
 
     const html = evalHTML(actionSchema.html, action, isEvent);
@@ -101,9 +107,3 @@ export default function ActionForm({ show, isEvent, onHide }) {
     </Modal>
   );
 }
-
-ActionForm.propTypes = {
-  show: PropTypes.bool,
-  isEvent: PropTypes.bool,
-  onHide: PropTypes.func,
-};
