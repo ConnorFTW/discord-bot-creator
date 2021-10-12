@@ -46,14 +46,14 @@ ipcMain.on("chooseDirectory", async (event, folder) => {
   loader = new Loader({ filePath: folder });
   runner = new Runner({ filePath: folder });
 
-  log("npm installation ist starting");
+  log("npm installation is starting");
   const process = exec("npm install", {
     cwd: folder,
     stdio: "inherit",
   });
   process.once("exit", () => {
     event.sender.send("chooseDirectory", folder);
-    log("npm installation finsihed");
+    log("npm installation finished");
   });
 });
 
