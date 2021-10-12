@@ -4,6 +4,7 @@ export default {
     if (type !== varType) return;
     return [data.varName, "Server"];
   },
+  fields: ["serverInfo", "find", "storage", "varName"],
 
   /** @this {import("../utils/Actions.js").default} */
   action(cache) {

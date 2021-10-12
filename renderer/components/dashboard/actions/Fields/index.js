@@ -4,6 +4,7 @@ import ColorField from "./Color";
 import CommentField from "./Comment";
 import FindField from "./Find";
 import FindServerField from "./FindServer";
+import MemberField from "./Member";
 import ServerInfoField from "./ServerInfo";
 import StorageField from "./Storage";
 
@@ -15,15 +16,23 @@ export const SUPPORTED_FIELDS = [
   "serverInfo",
   "storage",
   "varName",
+  "member",
+  "member2",
+  "varName2",
 ];
 export const fieldsSupported = (fields = []) => {
+  fields.forEach((field) => {
+    if (!SUPPORTED_FIELDS.includes(field)) {
+      console.log(`Field ${field} is not supported`);
+    }
+  });
   return fields.every((field) => SUPPORTED_FIELDS.includes(field));
 };
 
 export default function FieldManager({ fields, fieldValues }) {
   return (
     <>
-      {fields.map((field) => {
+      {fields.map((field, index) => {
         if (field === "code") {
           return <Editor key={field} value={fieldValues[field]} />;
         }
@@ -46,9 +55,19 @@ export default function FieldManager({ fields, fieldValues }) {
         if (field === "find") {
           return <FindField value={fieldValues[field]} />;
         }
-        if (field === "storage") {
+
+        // These actions contain two or more fields
+        if (field.startsWith("storage")) {
           // varName field is included here
-          return <StorageField value={fieldValues[field]} />;
+          return (
+            <StorageField fields={fields} index={index} storageField={field} />
+          );
+        }
+        if (field.startsWith("member")) {
+          // varName field is included here
+          return (
+            <MemberField fields={fields} index={index} memberField={field} />
+          );
         }
       })}
     </>
