@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 import { useEffect, useRef, useState } from "react";
 import { Button, Modal } from "react-bootstrap";
 import { evalHTML, evalInit, evalListener } from "../../../lib/runInContext";
@@ -72,6 +72,7 @@ export default function ActionForm({ show, isEvent, onHide }) {
     onHide();
   };
 
+  console.log(actionSchema?.fields);
   return (
     <Modal
       show={show}
@@ -104,5 +105,5 @@ export default function ActionForm({ show, isEvent, onHide }) {
 ActionForm.propTypes = {
   show: PropTypes.bool,
   isEvent: PropTypes.bool,
-  onHide: PropTypes.func
+  onHide: PropTypes.func,
 };
