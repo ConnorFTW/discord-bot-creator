@@ -8,6 +8,7 @@ import FindServerField from "./FindServer";
 import GuildField from "./Guild";
 import MemberField from "./Member";
 import ReasonField from "./Reason";
+import ServerField from "./Server";
 import ServerInfoField from "./ServerInfo";
 import StorageField from "./Storage";
 
@@ -26,6 +27,7 @@ export const SUPPORTED_FIELDS = [
   "guild2",
   "days",
   "reason",
+  "server",
 ];
 export const fieldsSupported = (fields = []) => {
   fields.forEach((field) => {
@@ -85,6 +87,11 @@ export default function FieldManager({ fields, fieldValues }) {
         if (field.startsWith("guild")) {
           return (
             <GuildField fields={fields} index={index} guildField={field} />
+          );
+        }
+        if (field.startsWith("server")) {
+          return (
+            <ServerField fields={fields} index={index} guildField={field} />
           );
         }
       })}
