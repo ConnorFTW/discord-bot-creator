@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 import React from "react";
 import { Form, FormGroup } from "react-bootstrap";
 import { useDashboardContext } from "../../DashboardContext";
@@ -25,5 +25,5 @@ export default function ColorField({ value }) {
 }
 
 ColorField.propTypes = {
-  value: PropTypes.string
+  value: PropTypes.string,
 };

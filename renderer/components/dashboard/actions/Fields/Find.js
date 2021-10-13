@@ -1,24 +1,24 @@
 import PropTypes from "prop-types";
 import React from "react";
-import { Form, FormGroup } from "react-bootstrap";
+import { Form, FormControl, FormGroup } from "react-bootstrap";
 import { useDashboardContext } from "../../DashboardContext";
 
-export default function CommentField({ value }) {
+export default function FindField({ value }) {
   const { updateField } = useDashboardContext();
 
   const onChange = (e) => {
-    updateField("comment", e.target.value);
+    updateField("find", e.target.value);
   };
 
   return (
     <FormGroup className="mb-3">
-      <Form.Label>Comment</Form.Label>
+      <Form.Label>Search Value</Form.Label>
       <br />
-      <textarea value={value} onChange={onChange} className="p-0 border-none" />
+      <FormControl type="text" value={value} onChange={onChange} />
     </FormGroup>
   );
 }
 
-CommentField.propTypes = {
+FindField.propTypes = {
   value: PropTypes.string,
 };

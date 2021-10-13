@@ -1,73 +1,17 @@
 export default {
-  name: "Find Server",
-
-  section: "Server Control",
-
-  subtitle: function (data) {
-    const info = [
-      "Server ID",
-      "Server Name",
-      "Server Name Acronym",
-      "Server Member Count",
-      "Server Region",
-      "Server Owner ID",
-      "Server Verification Level",
-      "Server Is Available",
-    ];
-    return `Find Server by ${info[parseInt(data.info)]}`;
-  },
-
   variableStorage: function (data, varType) {
     const type = parseInt(data.storage);
     if (type !== varType) return;
     return [data.varName, "Server"];
   },
-
-  fields: ["info", "find", "storage", "varName"],
-
-  html: function (isEvent, data) {
-    return `
-<div>
-	<div style="float: left; width: 40%;">
-		Source Field:<br>
-		<select id="info" class="round">
-			<option value="0" selected>Server ID</option>
-			<option value="1">Server Name</option>
-			<option value="2">Server Name Acronym</option>
-			<option value="3">Server Member Count</option>
-			<option value="4">Server Region</option>
-			<option value="5">Server Owner ID</option>
-			<option value="6">Server Verification Level</option>
-			<option value="7">Server Is Available</option>
-		</select>
-	</div>
-	<div style="float: right; width: 55%;">
-		Search Value:<br>
-		<input id="find" class="round" type="text">
-	</div>
-</div><br><br><br>
-<div style="padding-top: 8px;">
-	<div style="float: left; width: 35%;">
-		Store In:<br>
-		<select id="storage" class="round">
-			${data.variables[1]}
-		</select>
-	</div>
-	<div id="varNameContainer" style="float: right; width: 60%;">
-		Variable Name:<br>
-		<input id="varName" class="round" type="text">
-	</div>
-</div>`;
-  },
-
-  init: function () {},
+  fields: ["serverInfo", "find", "storage", "varName"],
 
   /** @this {import("../utils/Actions.js").default} */
   action(cache) {
     const bot = this.getDBM().Bot.bot;
     const servers = bot.guilds.cache;
     const data = cache.actions[cache.index];
-    const info = parseInt(data.info);
+    const info = parseInt(data.serverInfo);
     const find = this.evalMessage(data.find, cache);
     let result;
     switch (info) {
@@ -107,6 +51,4 @@ export default {
       this.callNextAction(cache);
     }
   },
-
-  mod: function () {},
 };
