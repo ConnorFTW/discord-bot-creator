@@ -11,7 +11,7 @@ export default function GuildField({ fields, guildField }) {
   const guild = action[guildField];
 
   const onChangeGuild = (e) => {
-    updateField("guild", e.target.value);
+    updateField("server", e.target.value);
   };
   const onChangeVarName = (e) => {
     updateField(varNameField, e.target.value);
@@ -24,7 +24,7 @@ export default function GuildField({ fields, guildField }) {
       <div className={varNameVisible && "w-auto"}>
         <FormLabel>Server</FormLabel>
         <FormSelect value={guild} onChange={onChangeGuild}>
-          <option value={0}>Current Server</option>
+          <option value={0}>None</option>
           <option value={1}>Temp Variable</option>
           <option value={2}>Server Variable</option>
           <option value={3}>Global Variable</option>
