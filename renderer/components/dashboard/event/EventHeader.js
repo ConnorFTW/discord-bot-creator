@@ -231,10 +231,9 @@ export default function EventHeader() {
     <Row>
       <Col sm="8" className="mx-2 command-form">
         <Row>
-          <Col className="mb-4">
+          <Col className="mb-3">
             <HandlerNameInput />
           </Col>
-          <Col md="auto"></Col>
         </Row>
         <Form>
           <Form.Group className="mb-3">

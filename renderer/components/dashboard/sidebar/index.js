@@ -24,7 +24,7 @@ export default function Sidebar({ selected }) {
             <SidebarItems />
           </Col>
           <Card className="px-0">
-            <Card.Body className="px-2">
+            <Card.Body className="px-2 overflow-auto">
               <Nav variant="pills" className="flex-column d-md-block d-none">
                 {handlers.map((d, i) => (
                   <Nav.Item key={d?.name + "-" + i}>
