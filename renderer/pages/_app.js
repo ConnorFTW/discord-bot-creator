@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 import "react-bootstrap-typeahead/css/Typeahead.css";
 import "../styles/style.scss";
 
