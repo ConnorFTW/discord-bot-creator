@@ -5,7 +5,6 @@ import { copyFiles } from "./copy-file";
 import { addFolder, getFolders } from "./folders";
 import { Loader, Runner } from "./index";
 import { clearLogs } from "./logs";
-import { logOn } from "./steam";
 import { validateFile } from "./validate-files";
 
 let loader;
@@ -47,14 +46,14 @@ ipcMain.on("chooseDirectory", async (event, folder) => {
   loader = new Loader({ filePath: folder });
   runner = new Runner({ filePath: folder });
 
-  log("npm installation ist starting");
+  log("npm installation is starting");
   const process = exec("npm install", {
     cwd: folder,
     stdio: "inherit",
   });
   process.once("exit", () => {
     event.sender.send("chooseDirectory", folder);
-    log("npm installation finsihed");
+    log("npm installation finished");
   });
 });
 
@@ -125,12 +124,6 @@ ipcMain.on("getLogs", () => {
 ipcMain.on("clearLogs", (event) => {
   clearLogs();
   event.sender.send("clearLogs", { success: true });
-});
-
-// Steam
-ipcMain.on("logOn", (event) => {
-  logOn(accountName, pasword);
-  event.sender.send("logOn", { message: "Trying to log in." });
 });
 
 ipcMain.on("", () => {});
