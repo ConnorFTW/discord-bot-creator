@@ -17,6 +17,7 @@
     "@heroicons/react": "^1.0.3",
     "@uiw/react-textarea-code-editor": "^1.4.13",
     "bootstrap": "^5.0.2",
+    "discord.js": "^13.2.0",
     "electron-log": "^4.4.1",
     "electron-serve": "^1.1.0",
     "electron-store": "^8.0.0",

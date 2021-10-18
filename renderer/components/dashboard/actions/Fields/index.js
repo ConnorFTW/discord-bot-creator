@@ -7,6 +7,7 @@ import FindField from "./Find";
 import FindServerField from "./FindServer";
 import GuildField from "./Guild";
 import MemberField from "./Member";
+import Options from "./Options";
 import ReasonField from "./Reason";
 import ServerField from "./Server";
 import ServerInfoField from "./ServerInfo";
@@ -29,6 +30,9 @@ export const SUPPORTED_FIELDS = [
   "days",
   "reason",
   "server",
+  "nameField",
+  "description",
+  "options"
 ];
 export const fieldsSupported = (fields = []) => {
   fields.forEach((field) => {
@@ -58,14 +62,14 @@ export default function FieldManager({ fields, fieldValues }) {
         if (field === "reason") {
           return <ReasonField value={fieldValues[field]} />;
         }
-        if (field == 'name'){
+        if (field == 'nameField') {
           return <TextBox type={field} value={fieldValues[field]} />
         }
-        if (field == 'description'){
+        if (field == 'description') {
           return <TextBox type={field} value={fieldValues[field]} />
         }
-        if (field == 'options'){
-          return <div></div>;
+        if (field == 'options') {
+          return <Options type={field} value={fieldValues[field]} />
         }
 
         // If serverInfo AND find are present we render the FindServerField

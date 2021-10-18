@@ -31,7 +31,7 @@ export default class Loader {
       .replace(/\\/g, "/");
     const files = await fg(directory);
     // Remove strange dev file
-    // files.unshift();
+    files.unshift();
     const actions = files
       .map((file) => _eval(fs.readFileSync(file, "utf-8")))
       .map((content) => {
