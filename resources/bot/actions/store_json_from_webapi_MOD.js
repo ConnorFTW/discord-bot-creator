@@ -168,15 +168,7 @@ export default {
                   `WebAPI: Error: ${errorJson} NO JSON data returned. Check the URL: ${url}`
                 );
               }
-            } else if (outData.success != null) {
-              errorJson = JSON.stringify({ error, statusCode, success: false });
-              Actions.storeValue(errorJson, storage, varName, cache);
-              if (debugMode) {
-                console.log(
-                  `WebAPI: Error Invalid JSON, is the Path and/or URL set correctly? [${path}]`
-                );
-              }
-            } else if (outValue.success != null || !outValue) {
+            } else if (outData.success !== null || !outValue) {
               errorJson = JSON.stringify({ error, statusCode, success: false });
               Actions.storeValue(errorJson, storage, varName, cache);
               if (debugMode) {
