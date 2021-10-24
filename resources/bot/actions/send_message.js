@@ -14,6 +14,7 @@ export default {
     'varName2',
     'iffalse',
     'iffalseVal',
+    'text',
   ],
 
   /** @this {import("../utils/Actions.js").default} */
@@ -22,16 +23,28 @@ export default {
     const channel = parseInt(data.channel, 10)
     const varName = this.evalMessage(data.varName, cache)
     const target = this.getSendTarget(channel, varName, cache)
+    const buttonName = this.evalMessage(data.text, cache)
+    console.log({ buttonName })
     const { message } = data
-    const { MessageActionRow, MessageButton } = (await import('discord.js')).default;
+    const { MessageActionRow, MessageButton } = (await import('discord.js'))
+      .default
     //const { MessageActionRow, MessageButton } = require('discord.js')
 
-    const row = new MessageActionRow().addComponents(
-      new MessageButton()
-        .setCustomId('primary')
-        .setLabel('Primary')
-        .setStyle('PRIMARY')
-    )
+    let row
+    if (buttonName && typeof buttonName === 'string') {
+      row = new MessageActionRow().addComponents(
+        new MessageButton()
+          .setCustomId('primary')
+          .setLabel(buttonName)
+          .setStyle('PRIMARY')
+      )
+    } else if (buttonName) {
+      this.displayError(
+        data,
+        cache,
+        `"${buttonName}" is not a valid button name.`
+      )
+    }
 
     if (!target) {
       this.displayError(data, cache, 'You have to select a target channel')
@@ -55,8 +68,9 @@ export default {
         this.callNextAction(cache)
       })
     } else if (target && target.send) {
+      const components = row ? [row] : undefined
       target
-        .send({ content: this.evalMessage(message, cache), components: [row] })
+        .send({ content: this.evalMessage(message, cache), components })
         .then(msg => {
           const varName2 = this.evalMessage(data.varName2, cache)
           const storage = parseInt(data.storage, 10)

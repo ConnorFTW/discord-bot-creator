@@ -2,28 +2,6 @@ module.exports = {
   name: "Send Message",
   section: "Messaging",
 
-  subtitle(data) {
-    const channels = [
-      "Same Channel",
-      "Command Author",
-      "Mentioned User",
-      "Mentioned Channel",
-      "Default Channel (Top Channel)",
-      "Temp Variable",
-      "Server Variable",
-      "Global Variable",
-    ];
-    return `${channels[parseInt(data.channel, 10)]}: "${data.message.replace(
-      /[\n\r]+/,
-      ""
-    )}"`;
-  },
-
-  variableStorage(data, varType) {
-    if (parseInt(data.storage, 10) !== varType) return;
-    return [data.varName2, "Message"];
-  },
-
   fields: [
     "channel",
     "varName",
@@ -32,11 +10,11 @@ module.exports = {
     "varName2",
     "iffalse",
     "iffalseVal",
+    "text"
   ],
 
   html(isEvent, data) {
     return `
-  <div></div><br>
   <div>
     <div style="float: left; width: 35%;">
       Send To:<br>
@@ -80,6 +58,13 @@ module.exports = {
       <span id="iffalseName">Action Number</span>:<br>
       <input id="iffalseVal" class="round" type="text">
     </div>
+    </div><br /><br /> <br />
+  <div style="padding-top: 8px; margin-top:8px;">
+  <div style="float: left; width: 100%; padding-top:8px;">
+    Button Name:<br>
+    <textarea id="text" rows="9" style="width: 100%;" placeholder="Button Name, leave blank for nothing"></textarea>
+    </div>
+  </div>
 </div>`;
   },
 
@@ -119,39 +104,4 @@ module.exports = {
     );
     glob.onChangeFalse(document.getElementById("iffalse"));
   },
-
-  action(cache) {
-    const data = cache.actions[cache.index];
-    const channel = parseInt(data.channel, 10);
-    const varName = this.evalMessage(data.varName, cache);
-    const target = this.getSendTarget(channel, varName, cache);
-    const { message } = data;
-
-    if (!target || !message) return;
-
-    if (Array.isArray(target)) {
-      this.callListFunc(target, "send", [
-        this.evalMessage(message, cache),
-      ]).then((msg) => {
-        const varName2 = this.evalMessage(data.varName2, cache);
-        const storage = parseInt(data.storage, 10);
-        this.storeValue(msg, storage, varName2, cache);
-        this.callNextAction(cache);
-      });
-    } else if (target && target.send) {
-      target
-        .send(this.evalMessage(message, cache))
-        .then((msg) => {
-          const varName2 = this.evalMessage(data.varName2, cache);
-          const storage = parseInt(data.storage, 10);
-          this.storeValue(msg, storage, varName2, cache);
-          this.callNextAction(cache);
-        })
-        .catch(() => this.executeResults(false, data, cache));
-    } else {
-      this.callNextAction(cache);
-    }
-  },
-
-  mod() {},
 };
