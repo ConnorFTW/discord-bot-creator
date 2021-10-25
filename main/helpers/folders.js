@@ -1,4 +1,5 @@
 import Store from "electron-store";
+import { statSync } from "fs";
 
 const store = new Store({ defaults: { lastDirectories: [] } });
 
@@ -20,5 +21,17 @@ export const addFolder = (folder) => {
  * @returns {string[]}
  */
 export const getFolders = () => {
-  return store.get("folders") || [];
+  let folders = store.get("folders") || [];
+  folders = removeInvalidFolders(folders);
+  return folders;
 };
+
+export const removeInvalidFolders = (folders) => {
+  return folders.filter((folder) => {
+    try {
+      return folder?.length && statSync(folder).isDirectory();
+    } catch (e) {
+      return false;
+    }
+  });
+}
