@@ -53,7 +53,7 @@ export default function SidebarItems() {
       </OverlayTrigger>
       <OverlayTrigger placement="auto" overlay={renderTooltip("Settings")}>
         <div
-          onClick={() => setShowSettings(true)}
+          onClick={()=>setShowSettings(true)}
           className="mt-auto"
           style={{ cursor: "pointer" }}
         >
@@ -62,7 +62,7 @@ export default function SidebarItems() {
       </OverlayTrigger>
       <SettingsModal
         show={showSettings}
-        onHide={() => setShowSettings(false)}
+        onHide={()=>setShowSettings(false)}
       />
     </>
   );
