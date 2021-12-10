@@ -4,18 +4,12 @@
     {
       "type": "npm",
       "script": "dev",
-      "isBackground": true,
-      "problemMatcher": {
-        "owner": "custom",
-        "pattern": {
-          "regexp": ""
-        },
-        "background": {
-          "beginsPattern": "started server",
-          "endsPattern": "Debugger listening on"
-        }
-      },
-      "label": "dev"
+      "isBackground": false,
+      "label": "development",
+      "detail": "Start app in development mode",
+      "runOptions": {
+        "runOn": "folderOpen"
+      }
     }
   ]
 }

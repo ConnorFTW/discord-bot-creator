@@ -1,10 +1,10 @@
-import { ipcRenderer } from "electron";
-import PropTypes from "prop-types";
-import { createContext, useContext, useEffect, useState } from "react";
-import useActions from "../../lib/useActions";
-import useCommands from "../../lib/useCommands";
-import useEvents from "../../lib/useEvents";
-import useSettings from "../../lib/useSettings";
+import { ipcRenderer } from 'electron';
+import PropTypes from 'prop-types';
+import { createContext, useContext, useEffect, useState } from 'react';
+import useActions from '../../lib/useActions';
+import useCommands from '../../lib/useCommands';
+import useEvents from '../../lib/useEvents';
+import useSettings from '../../lib/useSettings';
 
 const DashboardContext = createContext(null);
 
@@ -20,7 +20,7 @@ export function DashboardProvider({ children }) {
 
   const [state, setState] = useState({
     actionSchemas: actionSchemas,
-    mode: "command",
+    mode: 'command',
     actionModalVisible: false,
     commands,
     events,
@@ -30,13 +30,11 @@ export function DashboardProvider({ children }) {
   });
 
   useEffect(() => {
-    ipcRenderer?.on("onErrorsUpdate", (_event, error) => {
-      console.log("Here");
-      console.log("Here is the error", error);
+    ipcRenderer?.on('onErrorsUpdate', (_event, error) => {
       setState((state) => ({ ...state, errors: [...state.errors, error] }));
     });
     return () => {
-      ipcRenderer.removeAllListeners("onErrorsUpdate");
+      ipcRenderer.removeAllListeners('onErrorsUpdate');
     };
   }, [JSON.stringify(state.errors)]);
 
@@ -47,12 +45,12 @@ export function DashboardProvider({ children }) {
 
   useEffect(() => {
     // The last context we had here will be used on the save call
-    ipcRenderer?.on("save", () => {
+    ipcRenderer?.on('save', () => {
       save();
     });
 
     return () => {
-      ipcRenderer?.removeAllListeners("save");
+      ipcRenderer?.removeAllListeners('save');
     };
   }, [JSON.stringify(state.commands), JSON.stringify(state.events)]);
 
@@ -62,7 +60,7 @@ export function DashboardProvider({ children }) {
   }, [JSON.stringify(actionSchemas)]);
 
   const handlers =
-    (state.mode === "event" ? state.events : state.commands) || [];
+    (state.mode === 'event' ? state.events : state.commands) || [];
   const handler = handlers[state.handlerIndex] || {};
   const actions = handler.actions || [];
   const action = actions[state.actionIndex] || {};
@@ -111,9 +109,9 @@ export function DashboardProvider({ children }) {
    */
   const addHandler = (newHandler) => {
     const template = {
-      name: "NewCommand",
-      permissions: "NONE",
-      restriction: "1",
+      name: 'NewCommand',
+      permissions: 'NONE',
+      restriction: '1',
       actions: [],
     };
     newHandler = Object.assign(template, newHandler);
@@ -186,7 +184,7 @@ export function DashboardProvider({ children }) {
     action.name = actionSchema.name;
 
     for (const key of actionSchema.fields) {
-      action[key] = "";
+      action[key] = '';
     }
     console.log(action);
 
@@ -227,11 +225,11 @@ export function DashboardProvider({ children }) {
     setCommands(state.commands);
     setEvents(state.events);
     if (!settings?.autoRestart) {
-      ipcRenderer.emit("saved");
+      ipcRenderer.emit('saved');
     } else {
-      ipcRenderer.send("onBotRun");
-      ipcRenderer.once("onBotRun", () => {
-        ipcRenderer.emit("saved");
+      ipcRenderer.send('onBotRun');
+      ipcRenderer.once('onBotRun', () => {
+        ipcRenderer.emit('saved');
       });
     }
 

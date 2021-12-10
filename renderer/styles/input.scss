@@ -1,11 +1,52 @@
 $input-color: #222;
+$input-bg: #2f3136;
+$input-focus-bg: $input-bg;
+$input-border-color: #555;
+$input-focus-color: $light;
+$input-color: $light;
+$input-plaintext-color: $light;
+$input-placeholder-color: $gray-700;
+$input-group-addon-color: $input-color;
+$input-border-color: $border-color;
+$input-border-width: $border-width;
+$input-font-family: 'Open Sans';
+$input-padding-y: 0.7rem !important;
+.form-control {
+  color: $input-color !important;
+}
+
+// Select
+$form-select-bg: $input-bg;
+$form-select-indicator-color: $light;
+$form-select-indicator: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='none' stroke='#{$form-select-indicator-color}' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/></svg>");
+$form-select-color: $light;
+$form-select-border-width: $border-width;
+$form-select-border-color: $border-color;
+
+.rbt-input-hint {
+  color: $gray-400 !important;
+}
 
 select {
   @extend .form-select;
 }
 
-input[type="text"],
-input[type="number"] {
+select:focus,
+input:focus {
+  border-color: none;
+  box-shadow: none !important;
+  outline: none;
+}
+
+select:focus-within,
+input:focus-within {
+  border-color: $link !important;
+  box-shadow: none !important;
+  outline: none;
+}
+
+input[type='text'],
+input[type='number'] {
   @extend .form-control;
 }
 

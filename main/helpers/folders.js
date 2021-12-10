@@ -1,5 +1,5 @@
-import Store from "electron-store";
-import { statSync } from "fs";
+import Store from 'electron-store';
+import { statSync } from 'fs';
 
 const store = new Store({ defaults: { lastDirectories: [] } });
 
@@ -14,14 +14,14 @@ export const addFolder = (folder) => {
   folders = Array.from(new Set(folders));
   folders = folders.filter((f) => f);
 
-  store.set("folders", folders);
+  store.set('folders', folders);
 };
 
 /**
  * @returns {string[]}
  */
 export const getFolders = () => {
-  let folders = store.get("folders") || [];
+  let folders = store.get('folders') || [];
   folders = removeInvalidFolders(folders);
   return folders;
 };
@@ -34,4 +34,4 @@ export const removeInvalidFolders = (folders) => {
       return false;
     }
   });
-}
+};
