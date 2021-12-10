@@ -1,54 +1,56 @@
-import { log } from "electron-log";
-import _eval from "eval";
-import fg from "fast-glob";
-import fs from "fs";
-import path from "path";
+import { log } from 'electron-log';
+import _eval from 'eval';
+import fg from 'fast-glob';
+import fs from 'fs';
+import path from 'path';
 
 export default class Loader {
+  filePath: string;
+  actions: any;
   constructor({ filePath }) {
     this.filePath = filePath;
     this.actions = {};
   }
-  getSettings() {
+  static getSettings(folder: string) {
     return fs.readFileSync(
-      path.resolve(this.filePath, "./data/settings.json"),
-      "utf8"
+      path.resolve(folder, './data/settings.json'),
+      'utf8'
     );
   }
   saveSettings(settings) {
     if (!Object.keys(settings).length) return;
 
     fs.writeFileSync(
-      path.resolve(this.filePath, "./data/settings.json"),
+      path.resolve(this.filePath, './data/settings.json'),
       JSON.stringify(settings, null, 2)
     );
   }
   async getLocalActions() {
-    log(`Action Path: ${path.join(__dirname, "../resources/actions/*.js")}`);
-    log("Loader __dirname:", __dirname);
+    log(`Action Path: ${path.join(__dirname, '../resources/actions/*.js')}`);
+    log('Loader __dirname:', __dirname);
     const directory = path
-      .join(__dirname, "../resources/actions/*.js")
-      .replace(/\\/g, "/");
+      .join(__dirname, '../resources/actions/*.js')
+      .replace(/\\/g, '/');
     const files = await fg(directory);
     // Remove strange dev file
     files.unshift();
     const actions = files
-      .map((file) => _eval(fs.readFileSync(file, "utf-8")))
+      .map((file) => _eval(fs.readFileSync(file, 'utf-8')))
       .map((content) => {
         return {
-          name: content.name + "",
-          section: content.section + "",
-          html: content.html + "",
-          mod: content.mod + "",
-          getMods: content.getMods + "",
-          subtitle: content.subtitle + "",
+          name: content.name + '',
+          section: content.section + '',
+          html: content.html + '',
+          mod: content.mod + '',
+          getMods: content.getMods + '',
+          subtitle: content.subtitle + '',
           fields: content.fields,
-          init: content.init + "",
-          displayName: content.displayName + "",
-          variableStorage: content.variableStorage + "",
-          requiresAudioLibraries: content.requiresAudioLibraries + "",
-          version: content.version + "",
-          commandOnly: content.commandOnly + "",
+          init: content.init + '',
+          displayName: content.displayName + '',
+          variableStorage: content.variableStorage + '',
+          requiresAudioLibraries: content.requiresAudioLibraries + '',
+          version: content.version + '',
+          commandOnly: content.commandOnly + '',
         };
       });
 
@@ -58,8 +60,8 @@ export default class Loader {
   }
   async getCommands() {
     const commands = fs.readFileSync(
-      path.resolve(this.filePath, "./data/commands.json"),
-      "utf8"
+      path.resolve(this.filePath, './data/commands.json'),
+      'utf8'
     );
     return commands;
   }
@@ -78,14 +80,14 @@ export default class Loader {
     });
 
     fs.writeFileSync(
-      path.resolve(this.filePath, "./data/commands.json"),
+      path.resolve(this.filePath, './data/commands.json'),
       JSON.stringify(commands, null, 2)
     );
   }
   async getEvents() {
     return fs.readFileSync(
-      path.resolve(this.filePath, "./data/events.json"),
-      "utf8"
+      path.resolve(this.filePath, './data/events.json'),
+      'utf8'
     );
   }
 
@@ -103,7 +105,7 @@ export default class Loader {
       return event;
     });
     fs.writeFileSync(
-      path.resolve(this.filePath, "./data/events.json"),
+      path.resolve(this.filePath, './data/events.json'),
       JSON.stringify(events, null, 2)
     );
   }

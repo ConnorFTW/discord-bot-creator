@@ -1,15 +1,29 @@
 import { ipcRenderer } from 'electron';
 import { useEffect } from 'react';
+import { styled } from '../../../stitches.config';
 import { useHomeContext } from '../HomeContext';
 import FolderCard from './Card';
 
-type FolderListType = {
+const List = styled('div', {
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'start',
+  justifyContent: 'start',
+  width: '100%',
+  height: '100%',
+  backgroundColor: '$gray-200',
+  overflow: 'auto',
+  padding: '0px',
+  margin: '0px',
+  listStyle: 'none',
+  gap: '3rem',
+});
+
+type FolderListProps = {
   setSettings: (folder: any) => void;
 };
 
-export default function FolderList({
-  setSettings,
-}: FolderListType): JSX.Element {
+export default function FolderList({ setSettings }: FolderListProps) {
   const { addFolder, setFolders, folders } = useHomeContext();
   useEffect(() => {
     ipcRenderer.on('directoryDialog', (_e, folder) => {
@@ -32,9 +46,11 @@ export default function FolderList({
 
   return (
     <>
-      {folders.map((folder) => (
-        <FolderCard folder={folder} key={folder} setSettings={setSettings} />
-      ))}
+      <List>
+        {folders.map((folder) => (
+          <FolderCard folder={folder} key={folder} setSettings={setSettings} />
+        ))}
+      </List>
     </>
   );
 }
