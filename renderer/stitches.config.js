@@ -6,8 +6,30 @@ export const { styled, getCssText } = createStitches({
       system: 'system-ui',
     },
     colors: {
-      hiContrast: 'hsl(206,10%,5%)',
-      loContrast: 'white',
+      primary: '#5865f2',
+      secondary: '#4e545c',
+      success: '#57f287',
+      info: '#5865f2',
+      warning: '#fee75c',
+      danger: '#ed4245',
+      dark: '#36393f',
+      light: '#dddddd',
+      darker: '#2e3136',
+      link: '#2d81ff',
+
+      // Dark
+      primaryDark: '#5259d7',
+
+      // Grays
+      gray100: '#fafafa',
+      gray200: '#f5f5f5',
+      gray300: '#eeeeee',
+      gray400: '#e0e0e0',
+      gray500: '#bdbdbd',
+      gray600: '#9e9e9e',
+      gray700: '#757575',
+      gray800: '#616161',
+      gray900: '#424242',
     },
     fontSizes: {
       1: '13px',
