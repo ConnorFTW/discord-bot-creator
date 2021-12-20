@@ -3,8 +3,8 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { Container, Form, Row, Spinner } from 'react-bootstrap';
+import Button from '../components/core/Button';
 import FolderList from '../components/home/folder/List';
-import Button from '../components/super/Button';
 
 export default function Dashboard() {
   const [openingFolder, setOpeningFolder] = useState('');

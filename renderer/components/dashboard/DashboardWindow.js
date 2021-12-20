@@ -1,33 +1,92 @@
-import { Col, Row, Tab } from "react-bootstrap";
-import Sidebar from "./sidebar/index";
-import EventView from "./event/EventView";
-import CommandView from "./command/CommandView";
-import { useDashboardContext } from "./DashboardContext";
-import ActionForm from "./actions/ActionForm";
-import LogView from "./log/LogView";
+import { Col, Tab } from 'react-bootstrap';
+import { styled } from '../../stitches.config';
+import ActionForm from './actions/ActionForm';
+import CommandView from './command/CommandView';
+import { useDashboardContext } from './DashboardContext';
+import EventView from './event/EventView';
+import LogView from './log/LogView';
+import Sidebar from './sidebar/index';
+
+const Container = styled('div', {
+  display: 'flex',
+  flexFlow: 'column',
+  margin: '0',
+  '>.navbar': {
+    flexFlow: 'row',
+    width: '4rem',
+    flexBasis: 'content',
+    display: 'flex',
+    alignSelf: 'start',
+    padding: '0',
+  },
+  '>.items': {
+    maxWidth: '100vw',
+    flexBasis: 'content',
+    flex: '1 0 15vw',
+    '>.card-body': {
+      backgroundColor: '#2e3136',
+      a: {
+        fontWeight: '500',
+        color: '$light',
+        transition: '0.2s',
+      },
+      'a:hover': {
+        backgroundColor: '$gray-800',
+      },
+    },
+    '>.card-footer': {
+      backgroundColor: '#282b2f',
+    },
+    '>.settings-button': {
+      cursor: 'pointer',
+      height: '1.5rem',
+      color: '$light',
+    },
+  },
+  '>.command-view': {
+    overflow: 'scroll',
+  },
+  '@bp1': {
+    flexFlow: 'row',
+    padding: 'inherit',
+    '>.card': {
+      height: '100vh',
+    },
+    '>.items': {
+      width: 'auto',
+      maxWidth: 'calc(20% - 4rem)',
+      flexBasis: 'content',
+    },
+    '>.navbar': {
+      height: '100vh',
+      flexFlow: 'column',
+      justifyContent: 'start',
+    },
+  },
+});
 
 export default function DashboardWindow() {
   // Component Controls
   const { mode, handler, actionModalVisible, hideActionModal } =
     useDashboardContext();
 
-  let isEvent = mode === "event";
+  let isEvent = mode === 'event';
 
   return (
     <Tab.Container>
-      <Row className="mx-0">
+      <Container>
         <Sidebar />
         <Col
           className="p-4 command-view overflow-auto"
-          style={{ maxHeight: "100vh" }}
+          style={{ maxHeight: '100vh' }}
         >
           {(() => {
             switch (mode) {
-              case "event":
+              case 'event':
                 return <EventView event={handler} />;
-              case "command":
+              case 'command':
                 return <CommandView command={handler} />;
-              case "logs":
+              case 'logs':
                 return <LogView />;
             }
           })()}
@@ -37,7 +96,7 @@ export default function DashboardWindow() {
             isEvent={isEvent}
           />
         </Col>
-      </Row>
+      </Container>
     </Tab.Container>
   );
 }

@@ -12,6 +12,6 @@ const Container = styled('button', {
   },
 });
 
-export default function Button({ children }) {
-  return <Container>{children}</Container>;
+export default function Button({ children, ...props }) {
+  return <Container {...props}>{children}</Container>;
 }
