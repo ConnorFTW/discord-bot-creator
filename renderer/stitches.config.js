@@ -4,6 +4,7 @@ export const { styled, getCssText } = createStitches({
   theme: {
     fonts: {
       system: 'system-ui',
+      sans: 'Open Sans',
     },
     colors: {
       primary: '#5865f2',
@@ -35,6 +36,11 @@ export const { styled, getCssText } = createStitches({
       1: '13px',
       2: '15px',
       3: '17px',
+    },
+    radii: {
+      1: '0.3rem',
+      2: '0.5rem',
+      3: '0.7rem',
     },
   },
   media: {

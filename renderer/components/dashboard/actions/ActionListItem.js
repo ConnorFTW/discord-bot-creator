@@ -5,6 +5,7 @@ import { useDashboardContext } from '../DashboardContext';
 
 const Container = styled('div', {
   borderRadius: '0.3rem',
+  fontFamily: 'Open Sans',
 });
 
 const renderTooltip = (error) => (props) =>

@@ -1,12 +1,13 @@
-import { Col, Form, FormControl, Row } from "react-bootstrap";
-import { useDashboardContext } from "../DashboardContext";
-import HandlerNameInput from "../handlers/HandlerNameInput";
+import { Col, Form, FormControl, Row } from 'react-bootstrap';
+import Input from '../../core/Input';
+import { useDashboardContext } from '../DashboardContext';
+import HandlerNameInput from '../handlers/HandlerNameInput';
 
 export default function EventHeader() {
   const { handler: event, updateHandler } = useDashboardContext();
 
   const onSelect = (e) => {
-    updateHandler({ ["event-type"]: e.target.value });
+    updateHandler({ ['event-type']: e.target.value });
   };
 
   const onChangeTemp = (e) => {
@@ -18,214 +19,214 @@ export default function EventHeader() {
   };
 
   const eventTypeOptions = [
-    { label: "None", temp: false, tempDescription: "" },
-    { label: "Bot Initialization", temp: false, tempDescription: "" },
+    { label: 'None', temp: false, tempDescription: '' },
+    { label: 'Bot Initialization', temp: false, tempDescription: '' },
     {
-      label: "Message Sent",
+      label: 'Message Sent',
       temp: true,
-      tempDescription: "Stores the message that was sent",
+      tempDescription: 'Stores the message that was sent',
     },
     {
-      label: "On Interval",
+      label: 'On Interval',
       temp: true,
-      tempLabel: "Interval of Time (in seconds)",
+      tempLabel: 'Interval of Time (in seconds)',
     },
-    { label: "Bot Join Server", temp: false, tempDescription: "" },
-    { label: "Bot Leave Server", temp: false, tempDescription: "" },
+    { label: 'Bot Join Server', temp: false, tempDescription: '' },
+    { label: 'Bot Leave Server', temp: false, tempDescription: '' },
     {
-      label: "Member Join Server",
+      label: 'Member Join Server',
       temp: true,
-      tempDescription: "Stores the member that joined the server",
-    },
-    {
-      label: "Member Leave Server",
-      temp: true,
-      tempDescription: "Stores the member that left the server",
+      tempDescription: 'Stores the member that joined the server',
     },
     {
-      label: "Channel Create",
+      label: 'Member Leave Server',
       temp: true,
-      tempDescription: "Stores the channel that was created",
+      tempDescription: 'Stores the member that left the server',
     },
     {
-      label: "Channel Delete",
+      label: 'Channel Create',
       temp: true,
-      tempDescription: "Stores the channel that was deleted",
+      tempDescription: 'Stores the channel that was created',
     },
     {
-      label: "Role Create",
+      label: 'Channel Delete',
       temp: true,
-      tempDescription: "Stores the role that was created",
+      tempDescription: 'Stores the channel that was deleted',
     },
     {
-      label: "Role Delete",
+      label: 'Role Create',
       temp: true,
-      tempDescription: "Stores the role that was deleted",
+      tempDescription: 'Stores the role that was created',
     },
     {
-      label: "Member Banned",
+      label: 'Role Delete',
       temp: true,
-      tempDescription: "Stores the member that was banned",
+      tempDescription: 'Stores the role that was deleted',
     },
     {
-      label: "Member Unbanned",
+      label: 'Member Banned',
       temp: true,
-      tempDescription: "Stores the member that was unbanned",
+      tempDescription: 'Stores the member that was banned',
     },
     {
-      label: "Voice Channel Create",
+      label: 'Member Unbanned',
       temp: true,
-      tempDescription: "Stores the voice channel that was created",
+      tempDescription: 'Stores the member that was unbanned',
     },
     {
-      label: "Voice Channel Delete",
+      label: 'Voice Channel Create',
       temp: true,
-      tempDescription: "Stores the voice channel that was deleted",
+      tempDescription: 'Stores the voice channel that was created',
     },
     {
-      label: "Emoji Create",
+      label: 'Voice Channel Delete',
       temp: true,
-      tempDescription: "Stores the emoji that was created",
+      tempDescription: 'Stores the voice channel that was deleted',
     },
     {
-      label: "Emoji Delete",
+      label: 'Emoji Create',
       temp: true,
-      tempDescription: "Stores the emoji that was deleted",
+      tempDescription: 'Stores the emoji that was created',
     },
     {
-      label: "Message Deleted",
+      label: 'Emoji Delete',
       temp: true,
-      tempDescription: "Stores the message that was deleted",
+      tempDescription: 'Stores the emoji that was deleted',
     },
     {
-      label: "Server Update",
+      label: 'Message Deleted',
+      temp: true,
+      tempDescription: 'Stores the message that was deleted',
+    },
+    {
+      label: 'Server Update',
       temp: true,
       temp2: true,
-      temp2Description: "Stores the server after update",
+      temp2Description: 'Stores the server after update',
     },
     {
-      label: "Member Update",
+      label: 'Member Update',
       temp: true,
       temp2: true,
-      tempDescription: "Stores the member prior to update",
-      temp2Description: "Stores the member after update",
+      tempDescription: 'Stores the member prior to update',
+      temp2Description: 'Stores the member after update',
     },
     {
-      label: "Presence Update",
+      label: 'Presence Update',
       temp: true,
       temp2: true,
-      tempDescription: "Stores the member prior to their presence update",
-      temp2Description: "Stores the member after their presence update",
+      tempDescription: 'Stores the member prior to their presence update',
+      temp2Description: 'Stores the member after their presence update',
     },
     {
-      label: "Member Voice Update",
+      label: 'Member Voice Update',
       temp: true,
       temp2: true,
-      tempDescription: "Stores the member prior to their voice update",
-      temp2Description: "Stores the member after their voice update",
+      tempDescription: 'Stores the member prior to their voice update',
+      temp2Description: 'Stores the member after their voice update',
     },
     {
-      label: "Channel Update",
+      label: 'Channel Update',
       temp: true,
       temp2: true,
-      tempDescription: "Stores the channel prior to update",
-      temp2Description: "Stores the channel after update",
+      tempDescription: 'Stores the channel prior to update',
+      temp2Description: 'Stores the channel after update',
     },
     {
-      label: "Channel Pins Update",
+      label: 'Channel Pins Update',
       temp: true,
-      tempDescription: "Stores the channel prior to update",
+      tempDescription: 'Stores the channel prior to update',
     },
     {
-      label: "Role Update",
-      temp: true,
-      temp2: true,
-      tempDescription: "Stores the role prior to update",
-      temp2Description: "Stores the role after update",
-    },
-    {
-      label: "Message Update",
+      label: 'Role Update',
       temp: true,
       temp2: true,
-      tempDescription: "Stores the message prior to update",
-      temp2Description: "Stores the message after update",
+      tempDescription: 'Stores the role prior to update',
+      temp2Description: 'Stores the role after update',
     },
     {
-      label: "Emoji Update",
+      label: 'Message Update',
       temp: true,
       temp2: true,
-      tempDescription: "Stores the emoji prior to update",
-      temp2Description: "Stores the emoji after update",
+      tempDescription: 'Stores the message prior to update',
+      temp2Description: 'Stores the message after update',
     },
     {
-      label: "Message Reaction Added",
-      temp: true,
-      tempDescription: "Stores the message reaction that was added",
-    },
-    {
-      label: "Message Reaction Removed",
-      temp: true,
-      tempDescription: "Stores the message reaction that was removed",
-    },
-    {
-      label: "All Message Reactions Removed",
-      temp: true,
-      tempDescription: "Stores the message that had all reactions removed",
-    },
-    {
-      label: "Member Becomes Available",
-      temp: true,
-      tempDescription: "Stores the member that became available",
-    },
-    {
-      label: "Member Chunck Received",
-      temp: true,
-      tempDescription: "Stores the members from chunck",
-    },
-    {
-      label: "Member Starts/StopsSpeaking",
+      label: 'Emoji Update',
       temp: true,
       temp2: true,
-      tempDescription: "Stores the member that started/stopped speaking",
+      tempDescription: 'Stores the emoji prior to update',
+      temp2Description: 'Stores the emoji after update',
+    },
+    {
+      label: 'Message Reaction Added',
+      temp: true,
+      tempDescription: 'Stores the message reaction that was added',
+    },
+    {
+      label: 'Message Reaction Removed',
+      temp: true,
+      tempDescription: 'Stores the message reaction that was removed',
+    },
+    {
+      label: 'All Message Reactions Removed',
+      temp: true,
+      tempDescription: 'Stores the message that had all reactions removed',
+    },
+    {
+      label: 'Member Becomes Available',
+      temp: true,
+      tempDescription: 'Stores the member that became available',
+    },
+    {
+      label: 'Member Chunck Received',
+      temp: true,
+      tempDescription: 'Stores the members from chunck',
+    },
+    {
+      label: 'Member Starts/StopsSpeaking',
+      temp: true,
+      temp2: true,
+      tempDescription: 'Stores the member that started/stopped speaking',
       temp2Description:
-        "Stores the boolean of whether they started/stopped speaking",
+        'Stores the boolean of whether they started/stopped speaking',
     },
     {
-      label: "Member Typing Starts",
+      label: 'Member Typing Starts',
       temp: true,
       temp2: true,
-      tempDescription: "Stores the channel where member started typing",
-      temp2Description: "Stores the member that started typing",
+      tempDescription: 'Stores the channel where member started typing',
+      temp2Description: 'Stores the member that started typing',
     },
     {
-      label: "Member Typing Stops",
+      label: 'Member Typing Stops',
       temp: true,
       temp2: true,
-      tempDescription: "Stores the channel where member stopped typing",
-      temp2Description: "Stores the member that stopped typing",
+      tempDescription: 'Stores the channel where member stopped typing',
+      temp2Description: 'Stores the member that stopped typing',
     },
     {
-      label: "Server Becomes Unavailable",
+      label: 'Server Becomes Unavailable',
       temp: true,
-      tempDescription: "Stores the server that became unavailable",
+      tempDescription: 'Stores the server that became unavailable',
     },
     {
-      label: "On Bot Error",
-      temp: true,
-      temp2: true,
-      tempDescription: "Discord Bot Creator error text",
-      temp2Description: "Discord Bot Creator error code",
-    },
-    {
-      label: "On Time Restricted Command",
+      label: 'On Bot Error',
       temp: true,
       temp2: true,
-      tempDescription: "Member that ran the command",
-      temp2Description: "Amount of time needed",
+      tempDescription: 'Discord Bot Creator error text',
+      temp2Description: 'Discord Bot Creator error code',
+    },
+    {
+      label: 'On Time Restricted Command',
+      temp: true,
+      temp2: true,
+      tempDescription: 'Member that ran the command',
+      temp2Description: 'Amount of time needed',
     },
   ];
 
-  const option = eventTypeOptions[event?.["event-type"]];
+  const option = eventTypeOptions[event?.['event-type']];
 
   return (
     <Row>
@@ -238,7 +239,7 @@ export default function EventHeader() {
         <Form>
           <Form.Group className="mb-3">
             <Form.Label>Trigger</Form.Label>
-            <Form.Select value={event?.["event-type"]} onChange={onSelect}>
+            <Form.Select value={event?.['event-type']} onChange={onSelect}>
               <option value="0">None</option>
               <option value="1">Bot Initialization</option>
               <option value="2">Message Sent</option>
@@ -283,14 +284,10 @@ export default function EventHeader() {
           {option?.temp && (
             <Form.Group className="mb-3">
               <Form.Label>
-                {option.tempLabel || "Temp Variable Name"}
+                {option.tempLabel || 'Temp Variable Name'}
               </Form.Label>
-              <FormControl
-                type="text"
-                value={event?.temp}
-                onChange={onChangeTemp}
-              />
-              <Form.Text>{option.tempDescription || ""}</Form.Text>
+              <Input type="text" value={event?.temp} onChange={onChangeTemp} />
+              <Form.Text>{option.tempDescription || ''}</Form.Text>
             </Form.Group>
           )}
           {option?.temp2 && (

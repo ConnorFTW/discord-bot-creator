@@ -6,36 +6,28 @@ import SidebarBotControls from './Controls';
 import ControlsContextProvider from './Controls/Context';
 import SidebarItems from './Items';
 
-const Bar = styled('div', {
-  flex: '0 0 4rem',
-  padding: '0',
-  gap: '0.5rem',
-  '>div': {
-    width: '4rem',
-    height: '4rem',
-    padding: '0.85rem 0.85rem',
-    '>svg': {
-      width: '2.3rem',
-      height: '2.3rem',
-      filter: 'grayscale(100%) opacity(0.5)',
-      color: '$primary',
-      transition: '0.2s',
-    },
-    '&:hover': {
-      '>svg': {
-        color: '$primary',
-        filter: 'grayscale(0) opacity(1)',
-      },
-    },
-    '>.active': {
-      '>svg': {
-        color: '$primary',
-        filter: 'grayscale(0%) opacity(1)',
-      },
-    },
+const Item = styled('div', {
+  fontFamily: '$sans',
+  cursor: 'pointer',
+  display: 'flex',
+  flexFlow: 'row',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  margin: '0',
+  padding: '0.5rem 1rem',
+  borderRadius: '$1',
+  '&:hover': {
+    filter: 'opacity(0.7)',
   },
-  '>.navbar': {
-    flex: '0 0 4rem',
+  variants: {
+    color: {
+      active: {
+        backgroundColor: '$secondary',
+      },
+      initial: {
+        color: '$light',
+      },
+    },
   },
 });
 
@@ -52,32 +44,25 @@ export default function Sidebar({ selected }) {
 
   return (
     <>
-      <Bar className="navbar">
-        <SidebarItems />
-      </Bar>
+      <SidebarItems />
       <Card className="items">
         <Card.Body className="px-2 overflow-auto">
           <Nav variant="pills" className="flex-column d-md-block d-none">
             {handlers.map((d, i) => (
-              <Nav.Item key={d?.name + '-' + i}>
-                <Nav.Link
-                  eventKey={'nav-link-' + d?.name + '-' + i}
-                  active={handlerIndex === i}
-                  onClick={() => updateHandlerIndex(i)}
-                  className="d-flex flex-row justify-content-between align-items-center mb-2 cursor-pointer"
-                  style={{ cursor: 'pointer' }}
-                >
-                  <span
-                    dangerouslySetInnerHTML={{ __html: d?.name }}
-                    className="w-100"
-                  />
-                  {errors.filter((e) => e.handlerIndex === i).length ? (
-                    <Badge bg="danger" text="light">
-                      {errors.filter((e) => e.handlerIndex === i).length}
-                    </Badge>
-                  ) : null}
-                </Nav.Link>
-              </Nav.Item>
+              <Item
+                color={handlerIndex === i ? 'active' : 'initial'}
+                onClick={() => updateHandlerIndex(i)}
+              >
+                <span
+                  dangerouslySetInnerHTML={{ __html: d?.name }}
+                  className="w-100"
+                />
+                {errors.filter((e) => e.handlerIndex === i).length ? (
+                  <Badge bg="danger" text="light">
+                    {errors.filter((e) => e.handlerIndex === i).length}
+                  </Badge>
+                ) : null}
+              </Item>
             ))}
           </Nav>
           <Form.Group className="d-md-none">
