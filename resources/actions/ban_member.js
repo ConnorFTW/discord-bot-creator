@@ -1,28 +1,79 @@
 module.exports = {
-  name: "Ban Member",
-  section: "Member Control",
+  name: 'Ban Member',
+  section: 'Member Control',
+  form: {
+    member: {
+      type: 'member',
+      title: 'Member',
+      description: 'The member to ban.',
+      placeholder: 'Select a member...',
+      inline: true,
+    },
+    varName: {
+      type: 'variable',
+      variableType: 'member',
+      title: 'Variable Name',
+      description: 'Name of the variable to store the member in.',
+      placeholder: 'Variable Name',
+      if: {
+        field: 'member',
+        greaterThan: 1,
+      },
+      inline: true,
+    },
+    reason: {
+      type: 'text',
+      title: 'Reason',
+      description: 'Reason for the ban.',
+    },
+    guild: {
+      type: 'guild',
+      title: 'Server',
+      description: 'Server to ban the member from.',
+      placeholder: 'Select a server...',
+      inline: true,
+    },
+    varName2: {
+      type: 'variable',
+      variableType: 'guild',
+      title: 'Variable Name',
+      description: 'Name of the variable to get the server from.',
+      placeholder: 'Variable Name',
+      inline: true,
+      if: {
+        field: 'guild',
+        greaterThan: 0,
+      },
+    },
+    days: {
+      type: 'number',
+      title: 'Days',
+      description: 'Number of days to ban the member for.',
+      placeholder: 'Days',
+    },
+  },
 
   subtitle(data) {
     const users = [
-      "Mentioned User",
-      "Command Author",
-      "Temp Variable",
-      "Server Variable",
-      "Global Variable",
-      "By ID",
+      'Mentioned User',
+      'Command Author',
+      'Temp Variable',
+      'Server Variable',
+      'Global Variable',
+      'By ID',
     ];
     const guilds = [
-      "Current Server",
-      "Temp Variable",
-      "Server Variable",
-      "Global Variable",
+      'Current Server',
+      'Temp Variable',
+      'Server Variable',
+      'Global Variable',
     ];
     return `${users[parseInt(data.member, 10)]} - ${
       guilds[parseInt(data.guild, 10)]
     }`;
   },
 
-  fields: ["member", "varName", "reason", "guild", "varName2", "days"],
+  fields: ['member', 'varName', 'reason', 'guild', 'varName2', 'days'],
 
   html(isEvent, data) {
     return `
@@ -65,17 +116,17 @@ module.exports = {
     const { glob, document } = this;
 
     glob.user = function user(element, container) {
-      if (element.value === "5") {
-        document.getElementById(container).childNodes[0].nodeValue = "User ID:";
+      if (element.value === '5') {
+        document.getElementById(container).childNodes[0].nodeValue = 'User ID:';
       } else {
         document.getElementById(container).childNodes[0].nodeValue =
-          "Variable Name:";
+          'Variable Name:';
       }
       glob.memberChange(element, container);
     };
 
-    glob.user(document.getElementById("member"), "varNameContainer");
-    glob.serverChange(document.getElementById("guild"), "varNameContainer2");
+    glob.user(document.getElementById('member'), 'varNameContainer');
+    glob.serverChange(document.getElementById('guild'), 'varNameContainer2');
   },
 
   action(cache) {
@@ -85,7 +136,7 @@ module.exports = {
     const varName2 = this.evalMessage(data.varName2, cache);
     const guildType = parseInt(data.guild, 10);
     const server = this.getServer(guildType, varName2, cache);
-    const reason = this.evalMessage(data.reason, cache) || "";
+    const reason = this.evalMessage(data.reason, cache) || '';
     const days = parseInt(this.evalMessage(data.days, cache), 10);
     const member =
       type === 5
@@ -95,7 +146,7 @@ module.exports = {
       cache.server = server;
     }
     if (Array.isArray(member)) {
-      this.callListFunc(member, "ban", [{ days, reason }]).then(() =>
+      this.callListFunc(member, 'ban', [{ days, reason }]).then(() =>
         this.callNextAction(cache)
       );
     } else if (member) {
@@ -104,7 +155,7 @@ module.exports = {
         .then(() => this.callNextAction(cache))
         .catch(this.displayError.bind(this, data, cache));
     } else {
-      this.displayError(data, cache, "Ban Target Not Found");
+      this.displayError(data, cache, 'Ban Target Not Found');
       this.callNextAction(cache);
     }
   },

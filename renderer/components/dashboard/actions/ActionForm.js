@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types';
-import { useEffect, useRef, useState } from "react";
-import { Button, Modal } from "react-bootstrap";
-import { evalHTML, evalInit, evalListener } from "../../../lib/runInContext";
-import { useDashboardContext } from "../DashboardContext";
-import ActionDropdown from "./ActionDropdown";
-import FieldManager, { fieldsSupported } from "./Fields";
+import { useEffect, useRef, useState } from 'react';
+import { Button, Modal } from 'react-bootstrap';
+import { evalHTML, evalInit, evalListener } from '../../../lib/runInContext';
+import { useDashboardContext } from '../DashboardContext';
+import ActionDropdown from './ActionDropdown';
+import FieldManager, { fieldsSupported } from './Fields';
 
 export default function ActionForm({ show, isEvent, onHide }) {
   const { action, actionSchema, updateAction } = useDashboardContext();
@@ -36,7 +36,7 @@ export default function ActionForm({ show, isEvent, onHide }) {
       elem.value = action[field];
 
       const changeFunction = elem.onchange;
-      elem.onchange = "";
+      elem.onchange = '';
 
       const listener = (e) => {
         if (changeFunction) {
@@ -45,8 +45,8 @@ export default function ActionForm({ show, isEvent, onHide }) {
         updateAction({ ...action, [field]: e.target.value });
       };
 
-      elem?.addEventListener("change", listener);
-      listeners.push([elem, "change", listener]);
+      elem?.addEventListener('change', listener);
+      listeners.push([elem, 'change', listener]);
     });
 
     return () => {
@@ -57,7 +57,7 @@ export default function ActionForm({ show, isEvent, onHide }) {
   }, [state.html, show]);
 
   useEffect(() => {
-    // !show is important because it otherwise would render and set the html when we have the old action selected
+    // show is important because it otherwise would render and set the html when we have the old action selected
     const isLoading = !actionSchema?.html || !action;
     if (isLoading || (state.html && state.name === action.name) || !show)
       return;
@@ -84,9 +84,13 @@ export default function ActionForm({ show, isEvent, onHide }) {
           <ActionDropdown name={action.name} />
         </Modal.Title>
       </Modal.Header>
-      <Modal.Body style={{ height: "60vh", overflowY: "scroll" }}>
+      <Modal.Body style={{ height: '60vh', overflowY: 'scroll' }}>
         {fieldsSupported(actionSchema?.fields) ? (
-          <FieldManager fieldValues={action} fields={actionSchema?.fields} />
+          <FieldManager
+            fieldValues={action}
+            fields={actionSchema?.fields}
+            form={actionSchema?.form}
+          />
         ) : (
           <div dangerouslySetInnerHTML={{ __html: state.html }} ref={content} />
         )}
@@ -104,5 +108,5 @@ export default function ActionForm({ show, isEvent, onHide }) {
 ActionForm.propTypes = {
   show: PropTypes.bool,
   isEvent: PropTypes.bool,
-  onHide: PropTypes.func
+  onHide: PropTypes.func,
 };

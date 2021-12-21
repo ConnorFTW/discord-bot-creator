@@ -1,37 +1,78 @@
 module.exports = {
-  name: "Send Message",
-  section: "Messaging",
+  name: 'Send Message',
+  section: 'Messaging',
+  form: {
+    channel: {
+      type: 'channel',
+      title: 'Channel',
+      description: 'The channel to send the message to.',
+      inline: true,
+    },
+    varName: {
+      type: 'variable',
+      title: 'Variable Name',
+      description: 'The variable to get the channel from.',
+      placeholder: 'Variable Name',
+      inline: true,
+      if: {
+        field: 'channel',
+        greaterThan: 1,
+      },
+    },
+    message: {
+      type: 'textarea',
+      title: 'Message',
+      placeholder: 'Message',
+    },
+    varName2: {
+      type: 'variable',
+      title: 'Variable Name',
+      description: 'The variable to store the message in.',
+      placeholder: 'Variable Name',
+      inline: true,
+    },
+    iffalse: {
+      type: 'iffalse',
+      title: 'If False',
+      description: 'If the message is not sent, run this code.',
+    },
+    iffalseVal: {
+      type: 'text',
+      title: 'If False Value',
+      placeholder: 'Value',
+    },
+  },
 
   subtitle(data) {
     const channels = [
-      "Same Channel",
-      "Command Author",
-      "Mentioned User",
-      "Mentioned Channel",
-      "Default Channel (Top Channel)",
-      "Temp Variable",
-      "Server Variable",
-      "Global Variable",
+      'Same Channel',
+      'Command Author',
+      'Mentioned User',
+      'Mentioned Channel',
+      'Default Channel (Top Channel)',
+      'Temp Variable',
+      'Server Variable',
+      'Global Variable',
     ];
     return `${channels[parseInt(data.channel, 10)]}: "${data.message.replace(
       /[\n\r]+/,
-      ""
+      ''
     )}"`;
   },
 
   variableStorage(data, varType) {
     if (parseInt(data.storage, 10) !== varType) return;
-    return [data.varName2, "Message"];
+    return [data.varName2, 'Message'];
   },
 
   fields: [
-    "channel",
-    "varName",
-    "message",
-    "storage",
-    "varName2",
-    "iffalse",
-    "iffalseVal",
+    'channel',
+    'varName',
+    'message',
+    'storage',
+    'varName2',
+    'iffalse',
+    'iffalseVal',
   ],
 
   html(isEvent, data) {
@@ -90,34 +131,34 @@ module.exports = {
       switch (parseInt(event.value, 10)) {
         case 0:
         case 1:
-          document.getElementById("iffalseContainer").style.display = "none";
+          document.getElementById('iffalseContainer').style.display = 'none';
           break;
         case 2:
-          document.getElementById("iffalseName").innerHTML = "Action Number";
-          document.getElementById("iffalseContainer").style.display = null;
+          document.getElementById('iffalseName').innerHTML = 'Action Number';
+          document.getElementById('iffalseContainer').style.display = null;
           break;
         case 3:
-          document.getElementById("iffalseName").innerHTML =
-            "Number of Actions to Skip";
-          document.getElementById("iffalseContainer").style.display = null;
+          document.getElementById('iffalseName').innerHTML =
+            'Number of Actions to Skip';
+          document.getElementById('iffalseContainer').style.display = null;
           break;
         case 4:
-          document.getElementById("iffalseName").innerHTML = "Anchor ID";
-          document.getElementById("iffalseContainer").style.display = null;
+          document.getElementById('iffalseName').innerHTML = 'Anchor ID';
+          document.getElementById('iffalseContainer').style.display = null;
           break;
         default:
           break;
       }
     };
     glob.sendTargetChange(
-      document.getElementById("channel"),
-      "varNameContainer"
+      document.getElementById('channel'),
+      'varNameContainer'
     );
     glob.variableChange(
-      document.getElementById("storage"),
-      "varNameContainer2"
+      document.getElementById('storage'),
+      'varNameContainer2'
     );
-    glob.onChangeFalse(document.getElementById("iffalse"));
+    glob.onChangeFalse(document.getElementById('iffalse'));
   },
 
   action(cache) {
@@ -130,7 +171,7 @@ module.exports = {
     if (!target || !message) return;
 
     if (Array.isArray(target)) {
-      this.callListFunc(target, "send", [
+      this.callListFunc(target, 'send', [
         this.evalMessage(message, cache),
       ]).then((msg) => {
         const varName2 = this.evalMessage(data.varName2, cache);

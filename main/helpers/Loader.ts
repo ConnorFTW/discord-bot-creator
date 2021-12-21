@@ -39,6 +39,7 @@ export default class Loader {
       .map((content) => {
         return {
           name: content.name + '',
+          form: JSON.stringify(content.form) + '',
           section: content.section + '',
           html: content.html + '',
           mod: content.mod + '',

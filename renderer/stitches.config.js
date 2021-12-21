@@ -29,8 +29,8 @@ export const { styled, getCssText } = createStitches({
       gray500: '#bdbdbd',
       gray600: '#9e9e9e',
       gray700: '#757575',
-      gray800: '#616161',
-      gray900: '#424242',
+      gray800: '#2f3136',
+      gray900: '#212529',
     },
     fontSizes: {
       1: '13px',

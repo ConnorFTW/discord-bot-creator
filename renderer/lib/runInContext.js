@@ -1,18 +1,18 @@
-import parseFunction from "parse-function-string";
+import parseFunction from 'parse-function-string';
 
 const runInContext = (
   type,
   { functionString, action, isEvent, elem, glob: _glob }
 ) => {
-  if (!["html", "init", "listener"].includes(type)) {
+  if (!['html', 'init', 'listener'].includes(type)) {
     return console.error("Type has to be 'html', 'init', or 'listener'");
   }
 
   const data = action || {};
-  const content = "";
-  const val1 = "";
-  const val2 = "";
-  const inputData = "";
+  const content = '';
+  const val1 = '';
+  const val2 = '';
+  const inputData = '';
 
   data.messages = [
     `
@@ -174,85 +174,85 @@ const runInContext = (
     variableChange(_this, varName) {
       const element = document.getElementById(varName);
       if (!element) return;
-      element.style.display = +_this.value ? "block" : "none";
+      element.style.display = +_this.value ? 'block' : 'none';
     },
     channelChange(_this, varName) {
       if (isNaN(+_this?.value)) return;
       if (+_this.value < 3) {
-        document.getElementById(varName).style.display = "none";
+        document.getElementById(varName).style.display = 'none';
       } else {
-        document.getElementById(varName).style.display = "block";
+        document.getElementById(varName).style.display = 'block';
       }
     },
     voiceChannelChange(_this, varName) {
       if (isNaN(+_this?.value)) return;
       if (+_this.value < 3) {
-        document.getElementById(varName).style.display = "none";
+        document.getElementById(varName).style.display = 'none';
       } else {
-        document.getElementById(varName).style.display = "block";
+        document.getElementById(varName).style.display = 'block';
       }
     },
     sendTargetChange(_this, varName) {
       if (isNaN(+_this?.value)) return;
       if (+_this.value < 5) {
-        document.getElementById(varName).style.display = "none";
+        document.getElementById(varName).style.display = 'none';
       } else {
-        document.getElementById(varName).style.display = "block";
+        document.getElementById(varName).style.display = 'block';
       }
     },
     memberChange(_this, varName) {
       document.getElementById(varName).style.display = +_this.value
-        ? "block"
-        : "none";
+        ? 'block'
+        : 'none';
       if (isNaN(+_this.value)) return;
       if (+_this.value < 2) {
-        document.getElementById(varName).style.display = "none";
+        document.getElementById(varName).style.display = 'none';
       } else {
-        document.getElementById(varName).style.display = "block";
+        document.getElementById(varName).style.display = 'block';
       }
     },
     serverChange(_this, varName) {
       document.getElementById(varName).style.display = +_this.value
-        ? "block"
-        : "none";
+        ? 'block'
+        : 'none';
       if (isNaN(+_this.value)) return;
       if (+_this.value < 1) {
-        document.getElementById(varName).style.display = "none";
+        document.getElementById(varName).style.display = 'none';
       } else {
-        document.getElementById(varName).style.display = "block";
+        document.getElementById(varName).style.display = 'block';
       }
     },
     messageChange(_this, varName) {
       document.getElementById(varName).style.display = +_this.value
-        ? "block"
-        : "none";
+        ? 'block'
+        : 'none';
       if (isNaN(+_this.value)) return;
       if (+_this.value < 1) {
-        document.getElementById(varName).style.display = "none";
+        document.getElementById(varName).style.display = 'none';
       } else {
-        document.getElementById(varName).style.display = "block";
+        document.getElementById(varName).style.display = 'block';
       }
     },
     roleChange(_this, varName) {
       document.getElementById(varName).style.display = +_this.value
-        ? "block"
-        : "none";
+        ? 'block'
+        : 'none';
       if (isNaN(+_this.value)) return;
       if (+_this.value < 1) {
-        document.getElementById(varName).style.display = "none";
+        document.getElementById(varName).style.display = 'none';
       } else {
-        document.getElementById(varName).style.display = "block";
+        document.getElementById(varName).style.display = 'block';
       }
     },
     onChangeBasic(_this, varName) {
       document.getElementById(varName).style.display = +_this.value
-        ? "block"
-        : "none";
+        ? 'block'
+        : 'none';
       if (isNaN(+_this.value)) return;
       if (+_this.value < 3) {
-        document.getElementById(varName).style.display = "none";
+        document.getElementById(varName).style.display = 'none';
       } else {
-        document.getElementById(varName).style.display = "block";
+        document.getElementById(varName).style.display = 'block';
       }
     },
     refreshVariableList() {},
@@ -260,26 +260,26 @@ const runInContext = (
 
   Object.assign(glob, _glob);
 
-  if (!functionString) return console.log("No function provided");
+  if (!functionString) return console.log('No function provided');
 
   const context = {
     glob,
     document,
     call() {
       switch (type) {
-        case "html":
+        case 'html':
           return new Function(
-            "isEvent",
-            "data",
+            'isEvent',
+            'data',
             parseFunction(functionString).body
           ).bind(this)(isEvent, data);
-        case "init":
-          new Function("data", parseFunction(functionString).body).bind(this)(
+        case 'init':
+          new Function('data', parseFunction(functionString).body).bind(this)(
             data
           );
           return glob;
-        case "listener":
-          return new Function("glob", parseFunction(functionString).body).bind(
+        case 'listener':
+          return new Function('glob', parseFunction(functionString).body).bind(
             elem
           )(glob);
       }
@@ -290,13 +290,13 @@ const runInContext = (
 };
 
 export let evalHTML = (html, action, isEvent) =>
-  runInContext("html", { functionString: html, action, isEvent });
+  runInContext('html', { functionString: html, action, isEvent });
 
 export let evalInit = (init, action, isEvent) =>
-  runInContext("init", { functionString: init, action, isEvent });
+  runInContext('init', { functionString: init, action, isEvent });
 
 export let evalListener = (listener, action, isEvent, elem, glob) =>
-  runInContext("listener", {
+  runInContext('listener', {
     functionString: listener,
     action,
     isEvent,

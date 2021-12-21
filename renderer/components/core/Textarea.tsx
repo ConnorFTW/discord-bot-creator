@@ -1,6 +1,6 @@
 import { styled } from '../../stitches.config';
 
-const Container = styled('input', {
+const Container = styled('textarea', {
   fontFamily: '$sans',
   select: 'focus-within',
   padding: '0.45rem 0.8rem',
@@ -22,6 +22,6 @@ const Container = styled('input', {
   },
 });
 
-export default function Input(props) {
+export default function Textarea(props) {
   return <Container {...props} />;
 }
