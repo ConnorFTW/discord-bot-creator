@@ -35,7 +35,7 @@
     "youtubei": "^0.0.1-rc.20"
   },
   "devDependencies": {
-    "electron": "^15.0.0-alpha.5",
+    "electron": "^15.3.5",
     "electron-builder": "^22.11.7",
     "next": "^11.0.1",
     "nextron": "^7.0.0",
